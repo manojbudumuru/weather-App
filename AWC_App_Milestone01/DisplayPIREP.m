@@ -219,10 +219,12 @@
     cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if(cell == nil)
     {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
     }
     
     cell.textLabel.text = self.titles[indexPath.row];
+    UIFont * categoryFont = [UIFont fontWithName:@"Helvetica" size:20];
+    cell.textLabel.font = categoryFont;
     cell.detailTextLabel.text = self.values[indexPath.row];
     cell.detailTextLabel.lineBreakMode=NSLineBreakByCharWrapping;
     cell.detailTextLabel.numberOfLines=4;
