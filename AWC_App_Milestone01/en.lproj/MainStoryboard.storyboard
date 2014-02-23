@@ -902,7 +902,7 @@ ATC OR FSS</string>
         <image name="OrangeBack.png" width="140" height="75"/>
         <image name="RedBack.png" width="140" height="75"/>
         <image name="YelloBack.png" width="140" height="75"/>
-        <image name="first" width="16" height="16"/>
+        <image name="first" width="140" height="75"/>
         <image name="first.png" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

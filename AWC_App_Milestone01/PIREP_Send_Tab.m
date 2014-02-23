@@ -1010,6 +1010,13 @@
     self.mtn.enabled = YES;
     self.ice.enabled = YES;
     [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
+    [self.clear setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
+    [self.rime setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
+    [self.mixed setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
+    [self.trace setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
+    [self.lightIce setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
+    [self.modIce setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
+    [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
     
     self.sendPirep.enabled = YES;
 }
