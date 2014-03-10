@@ -22,6 +22,9 @@
 @property NSMutableArray * metarsWithSixPriority;
 @property NSMutableArray * metarsWithSevenPriority;
 
+@property BOOL mapLoaded;
+@property BOOL annotationsAdded;
+
 @end
 
 @implementation Metar_View_Tab
@@ -42,26 +45,84 @@
     self.displayMetar.delegate = self;
     self.displayMetar.mapType = MKMapTypeStandard;
     
-    self.metars = [[NSMutableArray alloc]init];
-    self.metarsWithZeroPriority = [[NSMutableArray alloc]init];
-    self.metarsWithOnePriority = [[NSMutableArray alloc]init];
-    self.metarsWithTwoPriority = [[NSMutableArray alloc]init];
-    self.metarsWithThreePriority = [[NSMutableArray alloc]init];
-    self.metarsWithFourPriority = [[NSMutableArray alloc]init];
-    self.metarsWithFivePriority = [[NSMutableArray alloc]init];
-    self.metarsWithSixPriority = [[NSMutableArray alloc]init];
-    self.metarsWithSevenPriority = [[NSMutableArray alloc]init];
+    self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
+    
 
     
-    NSDate * now = [NSDate date];
-    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"HH:mm:ss"];
-    NSString * updateTime = [dateFormatter stringFromDate:now];
-    self.lastUpdate.text = [@"Last updated at: " stringByAppendingString: updateTime];
-    
-    [self viewMetars];
     
 	// Do any additional setup after loading the view.
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    self.mapLoaded = NO;
+    self.annotationsAdded = NO;
+    [self initializeData];
+}
+
+-(void)initializeData
+{
+    AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    
+    if([appDelegate isConnectedToInternet])
+    {
+    
+    
+        [self.displayMetar removeAnnotations:self.displayMetar.annotations];
+        
+        self.metars = [[NSMutableArray alloc]init];
+        self.metarsWithZeroPriority = [[NSMutableArray alloc]init];
+        self.metarsWithOnePriority = [[NSMutableArray alloc]init];
+        self.metarsWithTwoPriority = [[NSMutableArray alloc]init];
+        self.metarsWithThreePriority = [[NSMutableArray alloc]init];
+        self.metarsWithFourPriority = [[NSMutableArray alloc]init];
+        self.metarsWithFivePriority = [[NSMutableArray alloc]init];
+        self.metarsWithSixPriority = [[NSMutableArray alloc]init];
+        self.metarsWithSevenPriority = [[NSMutableArray alloc]init];
+        
+        NSDate * now = [NSDate date];
+        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateFormat:@"HH:mm:ss"];
+        NSString * updateTime = [dateFormatter stringFromDate:now];
+        self.lastUpdate.text = [@"Last updated at: " stringByAppendingString: updateTime];
+        
+        [self viewMetars];
+    }
+    else
+    {
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"No internet!!" message:@"Make sure you have a working internet connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+-(void)mapViewWillStartRenderingMap:(MKMapView *)mapView
+{
+    self.mapLoaded = NO;
+    [self.activityStatus startAnimating];
+    self.activityStatus.hidden = NO;
+    self.loadingImage.hidden = NO;
+}
+
+-(void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
+{
+    self.mapLoaded = YES;
+    [self stopStatusIndicator];
+}
+
+-(void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
+{
+    self.annotationsAdded = YES;
+    [self stopStatusIndicator];
+}
+
+-(void)stopStatusIndicator
+{
+    if(self.mapLoaded && self.annotationsAdded)
+    {
+        [self.activityStatus stopAnimating];
+        self.activityStatus.hidden = YES;
+        self.loadingImage.hidden = YES;
+    }
 }
 
 -(void)viewMetars
@@ -157,6 +218,7 @@
     }
     
     [self.displayMetar addAnnotations:self.metarsWithZeroPriority];
+    [self findZoom];
 }
 
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
@@ -381,7 +443,6 @@
     [super viewDidUnload];
 }
 - (IBAction)refreshMetars:(id)sender {
-    [self.displayMetar removeAnnotations:self.displayMetar.annotations];
-    [self viewDidLoad];
+    [self initializeData];
 }
 @end

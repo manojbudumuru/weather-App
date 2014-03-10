@@ -155,6 +155,12 @@
             [self.values addObject:self.userPirep.timeOfReport];
         }
         
+        if(self.userPirep.pilotReport!=nil)
+        {
+            [self.titles addObject:@"Pilot Report"];
+            [self.values addObject:self.userPirep.pilotReport];
+        }
+        
         if(self.userPirep.aircraftType!=nil)
         {
             [self.titles addObject:@"Aircraft Type"];
@@ -187,11 +193,7 @@
             [self.values addObject:location];
         }
         
-        if(self.userPirep.pilotReport!=nil)
-        {
-            [self.titles addObject:@"Pilot Report"];
-            [self.values addObject:self.userPirep.pilotReport];
-        }
+        
     }
 }
 

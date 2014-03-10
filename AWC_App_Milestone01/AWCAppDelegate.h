@@ -15,4 +15,6 @@
 @property (strong, nonatomic) UIWindow *window;
 @property NSMutableArray *flightInformation;
 
+-(BOOL)isConnectedToInternet;
+
 @end

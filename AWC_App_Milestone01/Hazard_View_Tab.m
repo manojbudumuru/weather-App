@@ -27,6 +27,10 @@
 @property BOOL genericValidate;
 @property NSMutableArray * hazardOverlays;
 
+@property BOOL mapLoaded;
+@property BOOL annotationsAdded;
+@property BOOL overlaysAdded;
+
 @end
 
 @implementation Hazard_View_Tab
@@ -44,38 +48,105 @@
 {
     [super viewDidLoad];
     
-    _myHazardsParser = [[HazardsParser alloc]init];
-    
-    self.hazardOverlays = [_myHazardsParser GetHazards];
-    
     _mapView.delegate = self;
+    _mapView.mapType = MKMapTypeStandard;
     
+    self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    self.mapLoaded = NO;
+    self.annotationsAdded = NO;
+    self.overlaysAdded = NO;
+    [self initializeData];
+}
+
+-(void)mapViewWillStartRenderingMap:(MKMapView *)mapView
+{
+    self.mapLoaded = NO;
+    [self.activityStatus startAnimating];
+    self.activityStatus.hidden = NO;
+    self.loadingImage.hidden = NO;
+}
+
+-(void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
+{
+    self.mapLoaded = YES;
+    [self stopStatusIndicator];
+}
+
+-(void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
+{
+    self.annotationsAdded = YES;
+    [self stopStatusIndicator];
+}
+
+-(void)mapView:(MKMapView *)mapView didAddOverlayViews:(NSArray *)overlayViews
+{
+    self.overlaysAdded = YES;
+    [self stopStatusIndicator];
+}
+
+-(void)stopStatusIndicator
+{
+    if(self.mapLoaded && self.annotationsAdded && self.overlaysAdded)
+    {
+        [self.activityStatus stopAnimating];
+        self.activityStatus.hidden = YES;
+        self.loadingImage.hidden = YES;
+    }
+}
+
+-(void)initializeData
+{
+
+    AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
     
-    [self showHazards];
+    if([appDelegate isConnectedToInternet])
     
-    _mtnObsn = [[UIBarButtonItem alloc] initWithTitle:@"mtn obscn" style:UIBarButtonItemStyleBordered target:self action:@selector(mtnObsnButton:)];
+    {
     
+        [self.mapView removeAnnotations:self.mapView.annotations];
+        [self.mapView removeOverlays:self.mapView.overlays];
+        
+        _myHazardsParser = [[HazardsParser alloc]init];
+        
+        self.hazardOverlays = [_myHazardsParser GetHazards];
+        
+        
+        
+        [self showHazards];
+        
+        _mtnObsn = [[UIBarButtonItem alloc] initWithTitle:@"mtn obscn" style:UIBarButtonItemStyleBordered target:self action:@selector(mtnObsnButton:)];
+        
+        
+        _turbulence = [[UIBarButtonItem alloc] initWithTitle:@"turbulence" style:UIBarButtonItemStyleBordered target:self action:@selector(turbulenceButton:)];
+        
+        
+        _icing = [[UIBarButtonItem alloc] initWithTitle:@"icing" style:UIBarButtonItemStyleBordered target:self action:@selector(icingButton:)];
+        
+        
+        _convective = [[UIBarButtonItem alloc] initWithTitle:@"convective" style:UIBarButtonItemStyleBordered target:self action:@selector(convectiveButton:)];
+        
+        
+        _ash = [[UIBarButtonItem alloc] initWithTitle:@"ash" style:UIBarButtonItemStyleBordered target:self action:@selector(ashButton:)];
+        
+        _ifr = [[UIBarButtonItem alloc] initWithTitle:@"ifr" style:UIBarButtonItemStyleBordered target:self action:@selector(ifrButton:)];
+        
+        _generic = [[UIBarButtonItem alloc] initWithTitle:@"all" style:UIBarButtonItemStyleBordered target:self action:@selector(genericButton:)];
+        
+        
+        NSArray * Hazarditems = [NSArray arrayWithObjects:_generic, _mtnObsn,_turbulence,_icing,_convective,_ash,_ifr,nil];
+        
+        self.hazardsBar.items = Hazarditems;
     
-    _turbulence = [[UIBarButtonItem alloc] initWithTitle:@"turbulence" style:UIBarButtonItemStyleBordered target:self action:@selector(turbulenceButton:)];
-    
-    
-    _icing = [[UIBarButtonItem alloc] initWithTitle:@"icing" style:UIBarButtonItemStyleBordered target:self action:@selector(icingButton:)];
-    
-    
-    _convective = [[UIBarButtonItem alloc] initWithTitle:@"convective" style:UIBarButtonItemStyleBordered target:self action:@selector(convectiveButton:)];
-    
-    
-    _ash = [[UIBarButtonItem alloc] initWithTitle:@"ash" style:UIBarButtonItemStyleBordered target:self action:@selector(ashButton:)];
-    
-    _ifr = [[UIBarButtonItem alloc] initWithTitle:@"ifr" style:UIBarButtonItemStyleBordered target:self action:@selector(ifrButton:)];
-    
-    _generic = [[UIBarButtonItem alloc] initWithTitle:@"all" style:UIBarButtonItemStyleBordered target:self action:@selector(genericButton:)];
-    
-    
-    NSArray * Hazarditems = [NSArray arrayWithObjects:_generic, _mtnObsn,_turbulence,_icing,_convective,_ash,_ifr,nil];
-    
-    self.hazardsBar.items = Hazarditems;
-    
+    }
+    else
+    {
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"No internet!!" message:@"Make sure you have a working internet connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
 	// Do any additional setup after loading the view.
 }
 

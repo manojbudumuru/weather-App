@@ -20,6 +20,14 @@
     
     return YES;
 }
+
+-(BOOL)isConnectedToInternet
+{
+    //        http://aviationweather.gov/
+    NSString * replyFromURL = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://aviationweather.gov/"] encoding:NSStringEncodingConversionAllowLossy error:nil];
+    
+    return (replyFromURL!=NULL)?YES:NO;
+}
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {

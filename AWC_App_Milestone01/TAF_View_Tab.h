@@ -17,4 +17,6 @@
 @property (strong,nonatomic) IBOutlet UILabel * lastUpdateLabel;
 @property UIPopoverController * popUp;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityStatus;
+@property (weak, nonatomic) IBOutlet UIImageView *loadingImage;
 @end

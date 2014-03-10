@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MapKit/MapKit.h"
+#import "AWCAppDelegate.h"
 
 @interface Metar_View_Tab : UIViewController <MKMapViewDelegate>
 
@@ -16,6 +17,8 @@
 - (IBAction)refreshMetars:(id)sender;
 -(float)findZoom;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityStatus;
+@property (weak, nonatomic) IBOutlet UIImageView *loadingImage;
 @property UIPopoverController * popUp;
 
 @end

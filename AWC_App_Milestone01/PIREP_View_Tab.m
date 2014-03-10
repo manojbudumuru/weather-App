@@ -15,10 +15,9 @@
 @interface PIREP_View_Tab ()
 
 @property NSMutableArray * pireps;
-//@property NSMutableArray * metars;
 
-//State detectors for buttons
-
+@property BOOL mapLoaded;
+@property BOOL annotationsAdded;
 
 @end
 
@@ -31,6 +30,9 @@
     //Setting map type and delegate
     _displayMap.mapType = MKMapTypeStandard;
     _displayMap.delegate = self;
+    
+    self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
+    
     
 //    //Linking the buttons on the view with their respective methods
 //    [self.PIREPsButton setTarget:self];
@@ -54,30 +56,84 @@
 //    self.ifrButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(ifrBAction)];
     
     
-    
-    
-    
-    
-    
-    //Initializing the arrays that store the annotation data
-    self.pireps = [[NSMutableArray alloc]init];
-    //self.metars = [[NSMutableArray alloc]init];
-	// Do any additional setup after loading the view, typically from a nib.
-    
-    NSDate * now = [NSDate date];
-    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"HH:mm:ss"];
-    NSString * updateTime = [dateFormatter stringFromDate:now];
-    self.lastUpdateInfoLabel.text = [@"Last updated at: " stringByAppendingString: updateTime];
+}
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    self.mapLoaded = NO;
+    self.annotationsAdded = NO;
+    [self initializeData];
+}
+
+-(void)initializeData
+{
+   
+    AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    
+    if([appDelegate isConnectedToInternet])
+    {
     
     
-    [self viewPireps];
+        
+        [self.displayMap removeAnnotations:self.displayMap.annotations];
+        
+        //Initializing the arrays that store the annotation data
+        self.pireps = [[NSMutableArray alloc]init];
+        //self.metars = [[NSMutableArray alloc]init];
+        // Do any additional setup after loading the view, typically from a nib.
+        
+        NSDate * now = [NSDate date];
+        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateFormat:@"HH:mm:ss"];
+        NSString * updateTime = [dateFormatter stringFromDate:now];
+        self.lastUpdateInfoLabel.text = [@"Last updated at: " stringByAppendingString: updateTime];
+        
+        
+        
+        [self viewPireps];
+        
+    }
+    else
+    {
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"No internet!!" message:@"Make sure you have a working internet connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+-(void)mapViewWillStartRenderingMap:(MKMapView *)mapView
+{
+    self.mapLoaded = NO;
+    [self.activityStatus startAnimating];
+    self.activityStatus.hidden = NO;
+    self.loadingImage.hidden = NO;
+}
+
+-(void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
+{
+    self.mapLoaded = YES;
+    [self stopStatusIndicator];
+}
+
+-(void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
+{
+    self.annotationsAdded = YES;
+    [self stopStatusIndicator];
+}
+
+-(void)stopStatusIndicator
+{
+    if(self.mapLoaded && self.annotationsAdded)
+    {
+        [self.activityStatus stopAnimating];
+        self.activityStatus.hidden = YES;
+        self.loadingImage.hidden = YES;
+    }
 }
 
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
@@ -131,6 +187,12 @@
 -(MKAnnotationView *)mapView:(MKMapView *)sender viewForAnnotation:(id<MKAnnotation>)annotation
 {
     static NSString * identifier = @"Annotation";
+    
+    if([annotation isKindOfClass:[Pirep class]])
+        identifier = @"PIREP";
+    else if([annotation isKindOfClass:[UserPirep class]])
+        identifier = @"UserPIREP";
+    
     MKPinAnnotationView * annotView = (MKPinAnnotationView *)[sender dequeueReusableAnnotationViewWithIdentifier:identifier];
     
     if([annotation isKindOfClass:[Pirep class]])
@@ -155,10 +217,7 @@
 }
 
 - (IBAction)refreshPirep:(id)sender {
-    [self.displayMap removeAnnotations:self.pireps];
-    [self viewDidLoad];
-    
-    
+    [self initializeData];
 }
 - (void)viewDidUnload {
 //    [self setPIREPsButton:nil];

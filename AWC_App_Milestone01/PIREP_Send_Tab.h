@@ -11,7 +11,7 @@
 #import "FlightInfo.h"
 #import "AWCAppDelegate.h"
 
-@interface PIREP_Send_Tab : UIViewController <CLLocationManagerDelegate, MKAnnotation, UITextFieldDelegate, UIAlertViewDelegate>
+@interface PIREP_Send_Tab : UIViewController <CLLocationManagerDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 // Display the title for Pirep Send
 @property (strong, nonatomic) IBOutlet UILabel *titleInfo;

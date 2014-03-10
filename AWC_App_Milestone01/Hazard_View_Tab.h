@@ -10,11 +10,14 @@
 #import <MapKit/MapKit.h>
 #import "HazardsParser.h"
 #import "Hazards.h"
+#import "AWCAppDelegate.h"
 
 @interface Hazard_View_Tab : UIViewController <MKMapViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIToolbar *hazardsBar;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityStatus;
+@property (weak, nonatomic) IBOutlet UIImageView *loadingImage;
 
 @end

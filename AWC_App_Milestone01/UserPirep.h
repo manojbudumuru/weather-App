@@ -23,7 +23,7 @@
 @property NSString * locationLatitude;
 @property NSString * locationLongitude;
 @property NSString * pilotReport;
-@property NSString * pageURL;
+//@property NSString * pageURL;
 
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,copy) NSString * subtitle;

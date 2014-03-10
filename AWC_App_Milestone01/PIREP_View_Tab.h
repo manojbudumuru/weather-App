@@ -18,6 +18,8 @@
 - (IBAction)refreshPirep:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UILabel *lastUpdateInfoLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityStatus;
+@property (weak, nonatomic) IBOutlet UIImageView *loadingImage;
 
 @property UIPopoverController *popUp;
 

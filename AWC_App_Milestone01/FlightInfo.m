@@ -99,7 +99,7 @@
     
     if([self.fData isEqualToString:@"(null)"] || [self.fData isEqualToString:@""])
     {
-        self.welcomeText.text = @"This is the first time you are using this application. This application need some information from you inorder to send reports to the ground station. Please press 'OK' to fill in the required information and start using the application.";
+        self.welcomeText.text = @"This is the first time you are using this application. This application needs some information from you inorder to send reports to the ground station. Please press 'OK' to fill in the required information and start using the application.";
         self.enterData.hidden = NO;
     }
     else
@@ -156,6 +156,7 @@
 }
 
 - (void)saveData:(id)sender {
+    
     if([self.name.text isEqualToString:@""])
     {
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Enter Information" message:@"Name cannot be empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -201,14 +202,14 @@
 -(void)presentTabs
 {
     
-    //        http://aviationweather.gov/
-    NSString * replyFromURL = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://aviationweather.gov/"] encoding:NSStringEncodingConversionAllowLossy error:nil];
-    
-    BOOL result = (replyFromURL!=NULL)?YES:NO;
-    
-    //NSLog(@"Internet Connection: %c",result);
+//    //        http://aviationweather.gov/
+//    NSString * replyFromURL = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://aviationweather.gov/"] encoding:NSStringEncodingConversionAllowLossy error:nil];
+//    
+//    BOOL result = (replyFromURL!=NULL)?YES:NO;
+//    
+//    //NSLog(@"Internet Connection: %c",result);
    
-    if(result)
+    if([self.appDelegate isConnectedToInternet])
     {
     
         TabBarVC * mainView = [self.storyboard instantiateViewControllerWithIdentifier:@"tabBar"];

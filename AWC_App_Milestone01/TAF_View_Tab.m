@@ -13,6 +13,9 @@
 
 @interface TAF_View_Tab ()
 
+@property BOOL mapLoaded;
+@property BOOL annotationsAdded;
+
 @end
 
 @implementation TAF_View_Tab
@@ -33,21 +36,78 @@
     self.displayTAF.mapType = MKMapTypeStandard;
     self.displayTAF.delegate = self;
     
-    NSDate * now = [NSDate date];
-    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"HH:mm:ss"];
-    NSString * updateTime = [dateFormatter stringFromDate:now];
-    self.lastUpdateLabel.text = [@"Last updated at: " stringByAppendingString:updateTime];
+    self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
     
-    [self getTafs];
     
 	// Do any additional setup after loading the view.
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    self.mapLoaded = NO;
+    self.annotationsAdded = NO;
+    [self initializeData];
+}
+
+-(void)initializeData
+{
+    
+    AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    
+    if([appDelegate isConnectedToInternet])
+    {
+    
+        [self.displayTAF removeAnnotations:self.displayTAF.annotations];
+        
+        NSDate * now = [NSDate date];
+        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateFormat:@"HH:mm:ss"];
+        NSString * updateTime = [dateFormatter stringFromDate:now];
+        self.lastUpdateLabel.text = [@"Last updated at: " stringByAppendingString:updateTime];
+        
+        [self getTafs];
+    }
+    else
+    {
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"No internet!!" message:@"Make sure you have a working internet connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)mapViewWillStartRenderingMap:(MKMapView *)mapView
+{
+    self.mapLoaded = NO;
+    [self.activityStatus startAnimating];
+    self.activityStatus.hidden = NO;
+    self.loadingImage.hidden = NO;
+}
+
+-(void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
+{
+    self.mapLoaded = YES;
+    [self stopStatusIndicator];
+}
+
+-(void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
+{
+    self.annotationsAdded = YES;
+    [self stopStatusIndicator];
+}
+
+-(void)stopStatusIndicator
+{
+    if(self.mapLoaded && self.annotationsAdded)
+    {
+        [self.activityStatus stopAnimating];
+        self.activityStatus.hidden = YES;
+        self.loadingImage.hidden = YES;
+    }
 }
 
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
@@ -101,8 +161,7 @@
 
 -(IBAction)refreshTAF:(id)sender
 {
-    [self.displayTAF removeAnnotations:self.displayTAF.annotations];
-    [self viewDidLoad];
+    [self initializeData];
 }
 
 -(void)getTafs
