@@ -14,6 +14,7 @@
 
 @property NSString * fPath;
 @property NSString * fData;
+@property BOOL hasPilotInfo;
 
 @end
 
@@ -33,6 +34,7 @@
     [super viewDidLoad];
     self.appDelegate = [[UIApplication sharedApplication] delegate];
     self.info = [[NSMutableArray alloc]init];
+    self.hasPilotInfo = NO;
     
     self.welcomeText.numberOfLines = 10;
     self.welcomeText.lineBreakMode = NSLineBreakByWordWrapping;
@@ -53,12 +55,13 @@
     self.changeData.hidden = YES;
     self.cancel.hidden = YES;
     self.enterData.hidden = YES;
-    
+    self.cancelDataCollection.hidden = YES;
     
     [self.saveData addTarget:self action:@selector(saveData:) forControlEvents:UIControlEventTouchUpInside];
     [self.enterData addTarget:self action:@selector(displayButtons:) forControlEvents:UIControlEventTouchUpInside];
     [self.changeData addTarget:self action:@selector(displayButtons:) forControlEvents:UIControlEventTouchUpInside];
     [self.cancel addTarget:self action:@selector(presentTabs) forControlEvents:UIControlEventTouchUpInside];
+    [self.cancelDataCollection addTarget:self action:@selector(presentTabs) forControlEvents:UIControlEventTouchUpInside];
     
     
     self.existingInfo.hidden = YES;
@@ -108,6 +111,7 @@
         self.appDelegate.flightInformation = data;
         self.changeData.hidden = NO;
         self.cancel.hidden = NO;
+        self.hasPilotInfo = YES;
         
         self.existingInfo.hidden = NO;
         self.existingInfo.textAlignment = NSTextAlignmentCenter;
@@ -242,6 +246,9 @@
     self.enterData.hidden = YES;
     self.saveData.hidden = NO;
     self.existingInfo.hidden = YES;
+    
+    if(self.hasPilotInfo)
+        self.cancelDataCollection.hidden = NO;
 }
 - (void)viewDidUnload {
     [self setHeaderProvideInfo:nil];

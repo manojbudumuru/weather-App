@@ -42,6 +42,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *enterData;
 @property (strong, nonatomic) IBOutlet UIButton *changeData;
 @property (strong, nonatomic) IBOutlet UIButton *cancel;
+@property (weak, nonatomic) IBOutlet UIButton *cancelDataCollection;
 
 - (void)saveData:(id)sender;
 - (void)displayButtons:(id)sender;
