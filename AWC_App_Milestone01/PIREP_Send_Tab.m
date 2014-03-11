@@ -8,6 +8,8 @@
 
 #import "PIREP_Send_Tab.h"
 
+#define PIREP_CONFIRMATION_TAG 524
+
 @interface PIREP_Send_Tab ()
 
 @property NSMutableArray * flightData;
@@ -49,6 +51,8 @@
 {
     [super viewDidLoad];
     
+    
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -58,7 +62,7 @@
 
 -(void)initializeData
 {
-    [self setDefaults];
+    //[self setDefaults];
     
     self.appDelegate = [[UIApplication sharedApplication] delegate];
     
@@ -112,33 +116,14 @@
         //NSLog(@"Lat: %f, Long: %f",self.myLoc.location.coordinate.latitude,
               //self.myLoc.location.coordinate.longitude);
         
-        //Getting system time
-        
-        NSDate *date = [NSDate date];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-        [dateFormatter setDateFormat:@"HH:mm:ss MM-dd-YYYY"];
-        [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-        NSString *presentTime = [dateFormatter stringFromDate:date];
-
-        
-        
-        self.pirepInit = [NSString stringWithFormat:@"%@/TM %@/FL %@/TP %@/SK UNKN/WX UNKN/[%0.2f,%0.2f]/",
-                          [self.flightData objectAtIndex:3], presentTime,
-                          [self.flightData objectAtIndex:2],
-                          [self.flightData objectAtIndex:1],
-                          self.myLoc.location.coordinate.latitude,
-                          self.myLoc.location.coordinate.longitude];
-        [self setPirep];
+    
     
         //Initializing the server variables' values
     self.lisenceNum = self.flightData[3];
-    self.timeOfReport = presentTime;
     self.aircraftType = self.flightData[1];
     self.tailNumber = self.flightData[2];
     self.skyCondition = @"UNKNWN";
     self.weatherCondition = @"UNKNWN";
-    self.locationLatitude = [NSString stringWithFormat:@"%.4f",self.myLoc.location.coordinate.latitude];
-    self.locationLongitude =[NSString stringWithFormat:@"%.4f",self.myLoc.location.coordinate.longitude];
     self.pageURL = @"http://csgrad06.nwmissouri.edu/SaveDataToServer.php";
     
     
@@ -186,6 +171,29 @@
         
         // Do any additional setup after loading the view, typically from a nib.
     
+}
+
+-(NSString *)updateTime
+{
+    //Getting system time
+    
+    NSDate *date = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"HH:mm:ss MM-dd-YYYY"];
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    NSString *presentTime = [dateFormatter stringFromDate:date];
+    
+    
+    
+    self.pirepInit = [NSString stringWithFormat:@"%@/TM %@/FL %@/TP %@/SK UNKN/WX UNKN/[%0.2f,%0.2f]/",
+                      [self.flightData objectAtIndex:3], presentTime,
+                      [self.flightData objectAtIndex:2],
+                      [self.flightData objectAtIndex:1],
+                      self.myLoc.location.coordinate.latitude,
+                      self.myLoc.location.coordinate.longitude];
+    [self setPirep];
+    
+    return presentTime;
 }
 
 - (void)didReceiveMemoryWarning
@@ -1225,15 +1233,17 @@
         str = @"";
     }
     
-    self.pirepSend = [self.pirepInit stringByAppendingString:self.presentPirep];
-    
+//    self.timeOfReport = [self updateTime];
+//    
+//    self.pirepSend = [self.pirepInit stringByAppendingString:self.presentPirep];
+//    
     addData = [NSString stringWithFormat:@"%@",str];
     
     
     
     
     alert = [[UIAlertView alloc]initWithTitle:@"Send PIREP?" message:self.presentPirep delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
-    [alert setTag:524];
+    [alert setTag:PIREP_CONFIRMATION_TAG];
     [alert show];
     
     
@@ -1244,12 +1254,18 @@
     int tag = alertView.tag;
     
     //NSLog(@"Tag = %d",tag);
-    if(tag == 524)
+    if(tag == PIREP_CONFIRMATION_TAG)
     {
         if(buttonIndex == 0)
         {
+            self.timeOfReport = [self updateTime];
+            self.pirepSend = [self.pirepInit stringByAppendingString:self.presentPirep];
+            self.locationLatitude = [NSString stringWithFormat:@"%.4f",self.myLoc.location.coordinate.latitude];
+            self.locationLongitude =[NSString stringWithFormat:@"%.4f",self.myLoc.location.coordinate.longitude];
+            
             addData = [NSString stringWithFormat:@"%@%@\n",addData,self.pirepSend];
             [addData writeToFile:filePath atomically:NO encoding:NSUTF8StringEncoding error:nil];
+            
             
             self.pilotReport = self.presentPirep;
             NSMutableString * sendURL = [NSMutableString stringWithString:self.pageURL];
@@ -1313,22 +1329,22 @@
 //Set button backgrounds to actual color
 -(void)setDefaults
 {
-    [self.chop setBackgroundImage:[UIImage imageNamed:@"GreenBack.png"] forState:UIControlStateNormal];
+    [self.chop setBackgroundImage:[UIImage imageNamed:@"CHOP.png"] forState:UIControlStateNormal];
     [self.lightChop setBackgroundImage:[UIImage imageNamed:@"CHOP_LGT.png"] forState:UIControlStateNormal];
     [self.modChop setBackgroundImage:[UIImage imageNamed:@"CHOP_MOD.png"] forState:UIControlStateNormal];
     [self.greaterChop setBackgroundImage:[UIImage imageNamed:@"CHOP_GRT.png"] forState:UIControlStateNormal];
     
-    [self.turb setBackgroundImage:[UIImage imageNamed:@"YelloBack.png"] forState:UIControlStateNormal];
+    [self.turb setBackgroundImage:[UIImage imageNamed:@"TURB.png"] forState:UIControlStateNormal];
     [self.lightTurb setBackgroundImage:[UIImage imageNamed:@"TURB_LGT.png"] forState:UIControlStateNormal];
     [self.modTurb setBackgroundImage:[UIImage imageNamed:@"TURB_MOD.png"] forState:UIControlStateNormal];
     [self.greaterTurb setBackgroundImage:[UIImage imageNamed:@"TURB_GRT.png"] forState:UIControlStateNormal];
     
-    [self.mtn setBackgroundImage:[UIImage imageNamed:@"OrangeBack.png"] forState:UIControlStateNormal];
+    [self.mtn setBackgroundImage:[UIImage imageNamed:@"MTNWV.png"] forState:UIControlStateNormal];
     [self.lightMtn setBackgroundImage:[UIImage imageNamed:@"MTNWV_LGT.png"] forState:UIControlStateNormal];
     [self.modMtn setBackgroundImage:[UIImage imageNamed:@"MTNWV_MOD.png"] forState:UIControlStateNormal];
     [self.greaterMtn setBackgroundImage:[UIImage imageNamed:@"MTNWV_GRT.png"] forState:UIControlStateNormal];
     
-    [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
+    [self.ice setBackgroundImage:[UIImage imageNamed:@"ICING.png"] forState:UIControlStateNormal];
     [self.clear setBackgroundImage:[UIImage imageNamed:@"ICING_CLEAR.png"] forState:UIControlStateNormal];
     [self.rime setBackgroundImage:[UIImage imageNamed:@"ICING_RIME.png"] forState:UIControlStateNormal];
     [self.mixed setBackgroundImage:[UIImage imageNamed:@"ICING_MIXED.png"] forState:UIControlStateNormal];

@@ -307,14 +307,14 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="Ye0-iI-x3b">
                                 <rect key="frame" x="20" y="159" width="125" height="72"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <state key="normal" title="CHOP" backgroundImage="GreenBack.png">
+                                <state key="normal" backgroundImage="CHOP.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Qef-z1-7Rb">
                                 <rect key="frame" x="163" y="159" width="125" height="72"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <state key="normal" title="TURB" backgroundImage="YelloBack.png">
+                                <state key="normal" backgroundImage="TURB.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -322,7 +322,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nU6-IA-JbD">
                                 <rect key="frame" x="543" y="159" width="125" height="72"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <state key="normal" title="ICING" backgroundImage="RedBack.png">
+                                <state key="normal" backgroundImage="ICING.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -410,7 +410,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" id="oOL-J4-zcg">
                                 <rect key="frame" x="312" y="159" width="125" height="72"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <state key="normal" title="MTN WAVE" backgroundImage="OrangeBack.png">
+                                <state key="normal" backgroundImage="MTNWV.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -473,6 +473,7 @@
                             <navigationBar contentMode="scaleToFill" id="J6V-y0-ybd">
                                 <rect key="frame" x="0.0" y="20" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" red="0.96195652170000001" green="0.96195652170000001" blue="0.96195652170000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="PIREP Send" id="zFJ-Aj-B4d">
                                         <barButtonItem key="rightBarButtonItem" title="Edit Flight Information" id="faj-Z7-8Xo">
@@ -502,16 +503,13 @@
                                 <rect key="frame" x="20" y="282" width="125" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                <state key="normal" title="NONE" backgroundImage="GreenBack.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <state key="normal" backgroundImage="CHOP_NONE.png"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4H6-aN-aB4">
                                 <rect key="frame" x="163" y="282" width="125" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                <state key="normal" title="NONE" backgroundImage="YelloBack.png">
+                                <state key="normal" backgroundImage="TURB_NONE.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -520,7 +518,7 @@
                                 <rect key="frame" x="312" y="282" width="125" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                <state key="normal" title="NONE" backgroundImage="OrangeBack.png">
+                                <state key="normal" backgroundImage="MTNWV_NONE.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -529,7 +527,7 @@
                                 <rect key="frame" x="543" y="282" width="125" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                <state key="normal" title="NONE" backgroundImage="RedBack.png">
+                                <state key="normal" backgroundImage="ICING_NONE.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -926,27 +924,31 @@
         </scene>
     </scenes>
     <resources>
+        <image name="CHOP.png" width="400" height="200"/>
         <image name="CHOP_GRT.png" width="400" height="200"/>
         <image name="CHOP_LGT.png" width="400" height="200"/>
         <image name="CHOP_MOD.png" width="400" height="200"/>
-        <image name="GreenBack.png" width="140" height="75"/>
+        <image name="CHOP_NONE.png" width="400" height="200"/>
+        <image name="ICING.png" width="400" height="200"/>
         <image name="ICING_CLEAR.png" width="400" height="200"/>
         <image name="ICING_GRT.png" width="400" height="200"/>
         <image name="ICING_LGT.png" width="400" height="200"/>
         <image name="ICING_MIXED.png" width="400" height="200"/>
         <image name="ICING_MOD.png" width="400" height="200"/>
+        <image name="ICING_NONE.png" width="400" height="200"/>
         <image name="ICING_RIME.png" width="400" height="200"/>
         <image name="ICING_TRACE.png" width="400" height="200"/>
         <image name="Loading 02.png" width="100" height="100"/>
+        <image name="MTNWV.png" width="400" height="200"/>
         <image name="MTNWV_GRT.png" width="400" height="200"/>
         <image name="MTNWV_LGT.png" width="400" height="200"/>
         <image name="MTNWV_MOD.png" width="400" height="200"/>
-        <image name="OrangeBack.png" width="140" height="75"/>
-        <image name="RedBack.png" width="140" height="75"/>
+        <image name="MTNWV_NONE.png" width="400" height="200"/>
+        <image name="TURB.png" width="400" height="200"/>
         <image name="TURB_GRT.png" width="400" height="200"/>
         <image name="TURB_LGT.png" width="400" height="200"/>
         <image name="TURB_MOD.png" width="400" height="200"/>
-        <image name="YelloBack.png" width="140" height="75"/>
+        <image name="TURB_NONE.png" width="400" height="200"/>
         <image name="first" width="140" height="75"/>
         <image name="first.png" width="30" height="30"/>
     </resources>
