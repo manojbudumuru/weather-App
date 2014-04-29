@@ -23,4 +23,5 @@
 
 @property UIPopoverController *popUp;
 
+@property (weak, nonatomic) IBOutlet UINavigationBar *header;
 @end

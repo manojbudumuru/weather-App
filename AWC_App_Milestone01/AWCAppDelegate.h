@@ -17,4 +17,12 @@
 
 -(BOOL)isConnectedToInternet;
 
+//Color for headers and tab bar
+@property UIColor * awcColor;
+
+//To convert a given time to local time
+-(NSString *)convertToLocalTime:(NSString *)serverTime;
+
+@property NSMutableArray * timeGroups;
+
 @end

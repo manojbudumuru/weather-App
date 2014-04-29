@@ -66,6 +66,12 @@
     
     self.appDelegate = [[UIApplication sharedApplication] delegate];
     
+    self.view.backgroundColor = self.appDelegate.awcColor;
+    [self.header setBarTintColor:self.appDelegate.awcColor];
+    [self.header setTintColor:[UIColor whiteColor]];
+    self.header.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+
+    
     self.flightData = self.appDelegate.flightInformation;
     
     self.presentPirep = @"";
@@ -355,12 +361,12 @@
     
     if(self.chopPosition==-1)
     {
-        [self.pirepData addObject:@"CHOP GRT"];
+        [self.pirepData addObject:@"CHOP SEV/GRT"];
         self.chopPosition = [self.pirepData count]-1;
     }
     else
     {
-        [self.pirepData setObject:@"CHOP GRT" atIndexedSubscript:self.chopPosition];
+        [self.pirepData setObject:@"CHOP SEV/GRT" atIndexedSubscript:self.chopPosition];
     }
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
@@ -550,11 +556,11 @@
     
     if(self.turbPosition==-1)
     {
-        [self.pirepData addObject:@"TURB GRT"];
+        [self.pirepData addObject:@"TURB SEV/GRT"];
         self.turbPosition = [self.pirepData count]-1;
     }
     else
-        [self.pirepData setObject:@"TURB GRT" atIndexedSubscript:self.turbPosition];
+        [self.pirepData setObject:@"TURB SEV/GRT" atIndexedSubscript:self.turbPosition];
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
     
@@ -732,11 +738,11 @@
     
     if(self.mtnPosition==-1)
     {
-        [self.pirepData addObject:@"MTN WAVE GRT"];
+        [self.pirepData addObject:@"MTN WAVE SEV/GRT"];
         self.mtnPosition = [self.pirepData count]-1;
     }
     else
-        [self.pirepData setObject:@"MTN WAVE GRT" atIndexedSubscript:self.mtnPosition];
+        [self.pirepData setObject:@"MTN WAVE SEV/GRT" atIndexedSubscript:self.mtnPosition];
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
     
@@ -1117,9 +1123,9 @@
     NSString * iceInfo = nil;
     
     if(![self.iceLevel isEqualToString:@""])
-        iceInfo = [NSString stringWithFormat:@"%@ GRT",self.iceLevel];
+        iceInfo = [NSString stringWithFormat:@"%@ SEV/GRT",self.iceLevel];
     else
-        iceInfo = @"ICE GRT";
+        iceInfo = @"ICE SEV/GRT";
     
     if(self.icePosition==-1)
     {
@@ -1249,6 +1255,10 @@
     
 }
 
+- (IBAction)cancelPirep:(id)sender {
+    [self resetButtons];
+}
+
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     int tag = alertView.tag;
@@ -1320,7 +1330,7 @@
         [self setPirep];
         
         //Set button backgrounds to actual color
-    [self setDefaults];
+    //[self setDefaults];
     
         [self initializeData];
     

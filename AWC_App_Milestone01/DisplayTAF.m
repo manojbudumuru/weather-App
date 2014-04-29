@@ -7,11 +7,18 @@
 //
 
 #import "DisplayTAF.h"
+#import "AWCAppDelegate.h"
+
+#define CELL_HEIGHT 45
+#define RAWDATACELL_HEIGHT 90
+#define SECTIONHEADER_HEIGHT 50
 
 @interface DisplayTAF ()
 
 @property NSMutableArray * titles;
 @property NSMutableArray * values;
+@property AWCAppDelegate * appDelegate;
+@property NSString * tafId;
 
 @end
 
@@ -34,11 +41,16 @@
     self.titles = [[NSMutableArray alloc]init];
     self.values = [[NSMutableArray alloc]init];
     
+    self.appDelegate = [UIApplication sharedApplication].delegate;
+    
     if(self.taf.idType!=nil)
     {
-        [self.titles addObject:@"Id"];
-        [self.values addObject:self.taf.idType];
+        self.tafId = self.taf.idType;
+        //[self.titles addObject:@"Id"];
+        //[self.values addObject:self.taf.idType];
     }
+    else
+        self.tafId = @"Unknown";
     
     NSString * location = [NSString stringWithFormat:@"%0.2fN %0.2fW",[self.taf.coordinatePoints[1] doubleValue], [self.taf.coordinatePoints[0] doubleValue]];
     [self.titles addObject:@"Location"];
@@ -52,7 +64,7 @@
     
     if(self.taf.rawTAF!=nil)
     {
-        [self.titles addObject:@"Raw TAF"];
+        [self.titles addObject:@"Raw Data"];
         [self.values addObject:self.taf.rawTAF];
     }
     
@@ -65,6 +77,7 @@
         
         NSString * time = [self.taf.issueTime substringFromIndex:length];
         time = [time substringToIndex:[time length]-1];
+        time = [self.appDelegate convertToLocalTime:time];
         
         NSString * info = [NSString stringWithFormat:@"%@ %@",date,time];
         
@@ -82,6 +95,7 @@
         
         NSString * time = [self.taf.validTimeFrom substringFromIndex:length];
         time = [time substringToIndex:[time length]-1];
+        time = [self.appDelegate convertToLocalTime:time];
         
         NSString * info = [NSString stringWithFormat:@"%@ %@",date,time];
         
@@ -98,6 +112,7 @@
         
         NSString * time = [self.taf.validTimeTo substringFromIndex:length];
         time = [time substringToIndex:[time length]-1];
+        time = [self.appDelegate convertToLocalTime:time];
         
         NSString * info = [NSString stringWithFormat:@"%@ %@",date,time];
         
@@ -112,6 +127,7 @@
         
         NSString * time = [self.taf.validTime substringFromIndex:length];
         time = [time substringToIndex:[time length]-1];
+        //time = [self.appDelegate convertToLocalTime:time];
         
         NSString * info = [NSString stringWithFormat:@"%@",time];
         
@@ -134,7 +150,7 @@
     if(self.taf.wspd!=nil)
     {
         [self.titles addObject:@"Wind Speed"];
-        [self.values addObject:self.taf.wspd];
+        [self.values addObject:[NSString stringWithFormat:@"%@ Kts",self.taf.wspd]];
     }
     
     if(self.taf.wdir!=nil)
@@ -234,9 +250,30 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 3)
-        return 90;
-    return 40;
+    if(indexPath.row == 2)
+        return RAWDATACELL_HEIGHT;
+    return CELL_HEIGHT;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return SECTIONHEADER_HEIGHT;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView * sectionHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 400, 50)];
+    sectionHeader.backgroundColor = self.appDelegate.awcColor;
+    
+    UILabel * sectionTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
+    sectionTitle.text = self.tafId;
+    sectionTitle.textColor = [UIColor whiteColor];
+    sectionTitle.textAlignment = NSTextAlignmentCenter;
+    
+    [sectionHeader addSubview:sectionTitle];
+    sectionTitle.center = sectionHeader.center;
+    
+    return sectionHeader;
 }
 
 @end

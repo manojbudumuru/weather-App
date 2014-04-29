@@ -54,6 +54,16 @@
     self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    self.view.backgroundColor = appDelegate.awcColor;
+    [self.header setBarTintColor:appDelegate.awcColor];
+    [self.header setTintColor:[UIColor whiteColor]];
+    self.header.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    [self updateTimeLabel];
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
     self.mapLoaded = NO;
@@ -106,6 +116,8 @@
     if([appDelegate isConnectedToInternet])
     
     {
+        
+        [self updateTimeLabel];
     
         [self.mapView removeAnnotations:self.mapView.annotations];
         [self.mapView removeOverlays:self.mapView.overlays];
@@ -140,6 +152,9 @@
         NSArray * Hazarditems = [NSArray arrayWithObjects:_generic, _mtnObsn,_turbulence,_icing,_convective,_ash,_ifr,nil];
         
         self.hazardsBar.items = Hazarditems;
+        
+        [self.hazardsSegmentedControl addTarget:self action:@selector(segmentActions:) forControlEvents:UIControlEventValueChanged];
+        [self.hazardsSegmentedControl setBackgroundColor:[UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:0.72]];
     
     }
     else
@@ -148,6 +163,47 @@
         [alert show];
     }
 	// Do any additional setup after loading the view.
+}
+
+-(void)updateTimeLabel
+{
+    NSDate * now = [NSDate date];
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    NSString * updateTime = [dateFormatter stringFromDate:now];
+    self.lastUpdateLabel.text = [@"Last updated at: " stringByAppendingString:updateTime];
+}
+
+-(IBAction)segmentActions:(id)sender
+{
+    int selectedIndex = self.hazardsSegmentedControl.selectedSegmentIndex;
+    NSLog(@"Selected: %d",selectedIndex);
+    switch (selectedIndex) {
+        case 0: [self genericButton:nil];
+                break;
+            
+        case 1: [self mtnObsnButton:nil];
+                break;
+            
+        case 2: [self turbulenceButton:nil];
+                break;
+            
+        case 3: [self icingButton:nil];
+                break;
+            
+        case 4: [self convectiveButton:nil];
+                break;
+            
+        case 5: [self ashButton:nil];
+                break;
+            
+        case 6: [self ifrButton:nil];
+                break;
+            
+        default:
+                break;
+    }
+    
 }
 
 -(void)showHazards
@@ -176,6 +232,9 @@
 
 -(void)mtnObsnButton:(id)sender
 {
+    
+    [self.mapView removeOverlays:self.mapView.overlays];
+    [self.mapView removeAnnotations:self.mapView.annotations];
     
     if (self.mtnValidate == NO) {
         if(self.genericValidate==YES)
@@ -218,6 +277,9 @@
 
 -(void)turbulenceButton:(id)sender
 {
+    [self.mapView removeOverlays:self.mapView.overlays];
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    
     if (self.turbValidate == NO) {
         if(self.genericValidate==YES)
         {
@@ -260,6 +322,8 @@
 
 -(void)icingButton:(id)sender
 {
+    [self.mapView removeOverlays:self.mapView.overlays];
+    [self.mapView removeAnnotations:self.mapView.annotations];
     
     if (self.icingValidate == NO) {
         if(self.genericValidate==YES)
@@ -310,6 +374,9 @@
 
 -(void)convectiveButton:(id)sender
 {
+    [self.mapView removeOverlays:self.mapView.overlays];
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    
     if (self.convectiveValidate == NO) {
         if(self.genericValidate==YES)
         {
@@ -354,6 +421,8 @@
 
 -(void)ashButton:(id)sender
 {
+    [self.mapView removeOverlays:self.mapView.overlays];
+    [self.mapView removeAnnotations:self.mapView.annotations];
     
     if (self.ashValidate == NO) {
         if(self.genericValidate==YES)
@@ -399,6 +468,8 @@
 
 -(void)ifrButton:(id)sender
 {
+    [self.mapView removeOverlays:self.mapView.overlays];
+    [self.mapView removeAnnotations:self.mapView.annotations];
     
     if (self.ifrValidate == NO) {
         if(self.genericValidate==YES)
@@ -445,6 +516,8 @@
 
 -(void)genericButton:(id)sender
 {
+    [self.mapView removeOverlays:self.mapView.overlays];
+    [self.mapView removeAnnotations:self.mapView.annotations];
     
     if (self.genericValidate == NO) {
         _generic.tintColor=[UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];

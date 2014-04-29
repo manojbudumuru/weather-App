@@ -30,6 +30,12 @@
 {
     [super viewDidLoad];
     self.appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    self.view.backgroundColor = self.appDelegate.awcColor;
+    [self.header setBarTintColor:self.appDelegate.awcColor];
+    [self.header setTintColor:[UIColor whiteColor]];
+    self.header.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    
     self.info = [[NSMutableArray alloc]init];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

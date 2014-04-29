@@ -11,6 +11,7 @@
 #import "DisplayPIREP.h"
 #import "UserPirep.h"
 #import <CoreLocation/CoreLocation.h>
+#import "AWCAppDelegate.h"
 
 @interface PIREP_View_Tab ()
 
@@ -18,6 +19,7 @@
 
 @property BOOL mapLoaded;
 @property BOOL annotationsAdded;
+@property AWCAppDelegate * appDelegate;
 
 @end
 
@@ -30,6 +32,9 @@
     //Setting map type and delegate
     _displayMap.mapType = MKMapTypeStandard;
     _displayMap.delegate = self;
+    
+    self.appDelegate = [UIApplication sharedApplication].delegate;
+
     
     self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
     
@@ -58,6 +63,17 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    
+    self.view.backgroundColor = appDelegate.awcColor;
+    [self.header setBarTintColor:appDelegate.awcColor];
+    [self.header setTintColor:[UIColor whiteColor]];
+    self.header.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    [self updateTimeLabel];
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
     self.mapLoaded = NO;
@@ -82,11 +98,7 @@
         //self.metars = [[NSMutableArray alloc]init];
         // Do any additional setup after loading the view, typically from a nib.
         
-        NSDate * now = [NSDate date];
-        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
-        [dateFormatter setDateFormat:@"HH:mm:ss"];
-        NSString * updateTime = [dateFormatter stringFromDate:now];
-        self.lastUpdateInfoLabel.text = [@"Last updated at: " stringByAppendingString: updateTime];
+        [self updateTimeLabel];
         
         
         
@@ -99,6 +111,15 @@
         [alert show];
     }
     
+}
+
+-(void)updateTimeLabel
+{
+    NSDate * now = [NSDate date];
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    NSString * updateTime = [dateFormatter stringFromDate:now];
+    self.lastUpdateInfoLabel.text = [@"Last updated at: " stringByAppendingString: updateTime];
 }
 
 - (void)didReceiveMemoryWarning
@@ -208,7 +229,7 @@
         if(annotView == nil)
         {
             annotView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:identifier];
-            annotView.image = [UIImage imageNamed:@"UserPirep.png"];
+            annotView.image = [UIImage imageNamed:@"User.png"];
         }
     }
     

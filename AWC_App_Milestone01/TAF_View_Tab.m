@@ -15,6 +15,9 @@
 
 @property BOOL mapLoaded;
 @property BOOL annotationsAdded;
+@property NSMutableArray * timeGroups;
+@property NSMutableArray * tafAnnotations;
+@property AWCAppDelegate * appDelegate;
 
 @end
 
@@ -33,13 +36,34 @@
 {
     [super viewDidLoad];
     
+    self.appDelegate = [UIApplication sharedApplication].delegate;
+    
     self.displayTAF.mapType = MKMapTypeStandard;
     self.displayTAF.delegate = self;
     
     self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
     
+    self.timeGroups = [[NSMutableArray alloc]initWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7"]];
+    
+    self.timeGroupsVC = [[TimeGroupsVC alloc]initWithStyle:UITableViewStylePlain];
+    self.timeGroupsVC.delegate = self;
+    
+    self.popOverController = [[UIPopoverController alloc]initWithContentViewController:self.timeGroupsVC];
+    
+    //Assigning target and action for the bar button item
+    [self.presentButtons setTarget:self];
+    [self.presentButtons setAction:@selector(selectTimeGroups:)];
     
 	// Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.view.backgroundColor = self.appDelegate.awcColor;
+    [self.header setBarTintColor:self.appDelegate.awcColor];
+    [self.header setTintColor:[UIColor whiteColor]];
+    self.header.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    [self updateTimeLabel];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -49,21 +73,28 @@
     [self initializeData];
 }
 
+-(void)updateTimeLabel
+{
+    NSDate * now = [NSDate date];
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    NSString * updateTime = [dateFormatter stringFromDate:now];
+    self.lastUpdateLabel.text = [@"Last updated at: " stringByAppendingString:updateTime];
+}
+
 -(void)initializeData
 {
     
-    AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    //AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    self.tafAnnotations = [[NSMutableArray alloc]init];
     
-    if([appDelegate isConnectedToInternet])
+    if([self.appDelegate isConnectedToInternet])
     {
     
-        [self.displayTAF removeAnnotations:self.displayTAF.annotations];
         
-        NSDate * now = [NSDate date];
-        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
-        [dateFormatter setDateFormat:@"HH:mm:ss"];
-        NSString * updateTime = [dateFormatter stringFromDate:now];
-        self.lastUpdateLabel.text = [@"Last updated at: " stringByAppendingString:updateTime];
+        [self updateTimeLabel];
+        
+        [self.displayTAF removeAnnotations:self.displayTAF.annotations];
         
         [self getTafs];
     }
@@ -162,6 +193,7 @@
 -(IBAction)refreshTAF:(id)sender
 {
     [self initializeData];
+    //[self getTafs];
 }
 
 -(void)getTafs
@@ -195,8 +227,57 @@
         CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([taf.coordinatePoints[1] doubleValue], [taf.coordinatePoints[0] doubleValue]);
         taf.coordinate = coord;
         
-        [self.displayTAF addAnnotation:taf];
+        [self.tafAnnotations addObject:taf];
+        //[self.displayTAF addAnnotation:taf];
     }
+    [self updateTAFsOnMap];
 }
 
+-(void)updateTAFsOnMap
+{
+    [self updateTimeLabel];
+    //[self.displayTAF removeAnnotations:self.displayTAF.annotations];
+    
+    NSMutableArray * tafsAlreadyOnMap = [[NSMutableArray alloc]initWithArray:self.displayTAF.annotations];
+    NSMutableArray * tafsToBeRemoved = [[NSMutableArray alloc]init];
+    
+    NSMutableArray * timeGroupsAlreadyOnMap = [[NSMutableArray alloc]init];
+    
+    for(TAF * taf in tafsAlreadyOnMap)
+    {
+        if(![self.timeGroups containsObject:taf.timeGroup])
+            [tafsToBeRemoved addObject:taf];
+        else if(![timeGroupsAlreadyOnMap containsObject:taf.timeGroup])
+        {
+            [timeGroupsAlreadyOnMap addObject:taf.timeGroup];
+        }
+    }
+    
+    [self.displayTAF removeAnnotations:tafsToBeRemoved];
+    
+    for(TAF * taf in self.tafAnnotations)
+    {
+        if([self.timeGroups containsObject:taf.timeGroup] && ![timeGroupsAlreadyOnMap containsObject:taf.timeGroup])
+           [self.displayTAF addAnnotation:taf];
+    }
+    
+}
+
+-(void)selectedTimeGroup:(NSString *)timeGroup
+{
+    [self.timeGroups addObject:timeGroup];
+    NSLog(@"Added: %@",self.timeGroups);
+    [self updateTAFsOnMap];
+}
+
+-(void)deselectedTimeGroup:(NSString *)timeGroup
+{
+    [self.timeGroups removeObject:timeGroup];
+    NSLog(@"Added: %@",self.timeGroups);
+    [self updateTAFsOnMap];
+}
+
+- (IBAction)selectTimeGroups:(id)sender {
+    [self.popOverController presentPopoverFromBarButtonItem:self.presentButtons permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+}
 @end

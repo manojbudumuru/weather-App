@@ -53,6 +53,16 @@
 	// Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    self.view.backgroundColor = appDelegate.awcColor;
+    [self.header setBarTintColor:appDelegate.awcColor];
+    [self.header setTintColor:[UIColor whiteColor]];
+    self.header.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    [self updateTimeLabel];
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
     self.mapLoaded = NO;
@@ -80,11 +90,7 @@
         self.metarsWithSixPriority = [[NSMutableArray alloc]init];
         self.metarsWithSevenPriority = [[NSMutableArray alloc]init];
         
-        NSDate * now = [NSDate date];
-        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
-        [dateFormatter setDateFormat:@"HH:mm:ss"];
-        NSString * updateTime = [dateFormatter stringFromDate:now];
-        self.lastUpdate.text = [@"Last updated at: " stringByAppendingString: updateTime];
+        [self updateTimeLabel];
         
         [self viewMetars];
     }
@@ -93,6 +99,15 @@
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"No internet!!" message:@"Make sure you have a working internet connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
+}
+
+-(void)updateTimeLabel
+{
+    NSDate * now = [NSDate date];
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    NSString * updateTime = [dateFormatter stringFromDate:now];
+    self.lastUpdate.text = [@"Last updated at: " stringByAppendingString: updateTime];
 }
 
 -(void)mapViewWillStartRenderingMap:(MKMapView *)mapView
@@ -235,7 +250,7 @@
             DisplayMetars * myTable = [[DisplayMetars alloc]initWithStyle:UITableViewStylePlain incomingMetar:metarObject];
             
             self.popUp = [[UIPopoverController alloc]initWithContentViewController:myTable];
-            self.popUp.popoverContentSize = CGSizeMake(400, 350);
+            self.popUp.popoverContentSize = CGSizeMake(400, 400);
             [self.popUp presentPopoverFromRect:view.bounds inView:view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         }
         
@@ -327,7 +342,7 @@
         //NSLog(@" 1 ");
     }
     
-    else if(currentZoomLevel < 5.0 )
+    else if(currentZoomLevel < 4.5 )
     {
         [self.displayMetar removeAnnotations:self.displayMetar.annotations];
         [self.displayMetar addAnnotations:self.metarsWithOnePriority];
@@ -337,7 +352,7 @@
         //NSLog(@" 2 ");
     }
     
-    else if(currentZoomLevel < 7.5 )
+    else if(currentZoomLevel < 5.5 )
     {[self.displayMetar removeAnnotations:self.displayMetar.annotations];
         [self.displayMetar addAnnotations:self.metarsWithZeroPriority];
         [self.displayMetar addAnnotations:self.metarsWithOnePriority];
@@ -347,7 +362,7 @@
         //NSLog(@" 3 ");
     }
     
-    else if(currentZoomLevel < 10.0 )
+    else if(currentZoomLevel < 6.5 )
     {[self.displayMetar removeAnnotations:self.displayMetar.annotations];
         [self.displayMetar addAnnotations:self.metarsWithZeroPriority];
         [self.displayMetar addAnnotations:self.metarsWithOnePriority];
@@ -359,7 +374,7 @@
         //NSLog(@" 4 ");
     }
     
-    else if(currentZoomLevel < 12.5  )
+    else if(currentZoomLevel < 7.0  )
     {[self.displayMetar removeAnnotations:self.displayMetar.annotations];
         [self.displayMetar addAnnotations:self.metarsWithZeroPriority];
         [self.displayMetar addAnnotations:self.metarsWithOnePriority];
@@ -372,7 +387,7 @@
         //NSLog(@" 5 ");
     }
     
-    else if(currentZoomLevel < 15.0  )
+    else if(currentZoomLevel < 7.5  )
     {[self.displayMetar removeAnnotations:self.displayMetar.annotations];
         [self.displayMetar addAnnotations:self.metarsWithZeroPriority];
         [self.displayMetar addAnnotations:self.metarsWithOnePriority];
@@ -386,7 +401,7 @@
         //NSLog(@" 6 ");
     }
     
-    else if(currentZoomLevel < 17.5 )
+    else if(currentZoomLevel < 8.0 )
     {[self.displayMetar removeAnnotations:self.displayMetar.annotations];
         
         [self.displayMetar addAnnotations:self.metarsWithZeroPriority];

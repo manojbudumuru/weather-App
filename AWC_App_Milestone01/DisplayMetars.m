@@ -8,13 +8,19 @@
 
 #import "DisplayMetars.h"
 #import "Metar.h"
+#import "AWCAppDelegate.h"
 
+#define CELL_HEIGHT 45
+#define RAWDATACELL_HEIGHT 90
+#define SECTIONHEADER_HEIGHT 50
 
 @interface DisplayMetars ()
 
 @property Metar * myMetar;
 @property NSMutableArray * key;
 @property NSMutableArray * value;
+@property AWCAppDelegate * appDelegate;
+@property NSString * metarId;
 
 @end
 
@@ -38,12 +44,18 @@
     self.key = [[NSMutableArray alloc]init];
     self.value = [[NSMutableArray alloc]init];
     
+    self.appDelegate = [UIApplication sharedApplication].delegate;
+    
     if(self.myMetar.idType!=nil)
     {
-        [self.key addObject:@"Id"];
-        [self.value addObject:self.myMetar.idType];
+        self.metarId = self.myMetar.idType;
+//        [self.key addObject:@"Id"];
+//        [self.value addObject:self.myMetar.idType];
         
     }
+    else
+        self.myMetar.idType = @"Unknown";
+    
     if(self.myMetar.site!=nil)
     {
         [self.key addObject:@"Site"];
@@ -63,7 +75,7 @@
         NSInteger length = [self.myMetar.obsTime length]-9;
         NSString * date = [self.myMetar.obsTime substringFromIndex:length];
         date = [date substringToIndex:[date length]-1];
-        [self.value addObject:date];
+        [self.value addObject:[self.appDelegate convertToLocalTime:date]];
         
     }
     
@@ -76,7 +88,7 @@
     
     if(self.myMetar.rawOb!=nil)
     {
-        [self.key addObject:@"RawOb"];
+        [self.key addObject:@"Raw Data"];
         [self.value addObject:self.myMetar.rawOb];
         
     }
@@ -98,7 +110,7 @@
     if(self.myMetar.windspeed!=nil)
     {
         [self.key addObject:@"Wind Speed"];
-        [self.value addObject:self.myMetar.windspeed];
+        [self.value addObject:[NSString stringWithFormat:@"%@ Kts",self.myMetar.windspeed]];
         
     }
     if(self.myMetar.windDir!=nil)
@@ -237,9 +249,30 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 4)
-        return 76;
-    return 40;
+    if(indexPath.row == 3)
+        return RAWDATACELL_HEIGHT;
+    return CELL_HEIGHT;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return SECTIONHEADER_HEIGHT;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView * sectionHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 400, 50)];
+    sectionHeader.backgroundColor = self.appDelegate.awcColor;
+    
+    UILabel * sectionTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
+    sectionTitle.text = self.metarId;
+    sectionTitle.textColor = [UIColor whiteColor];
+    sectionTitle.textAlignment = NSTextAlignmentCenter;
+    
+    [sectionHeader addSubview:sectionTitle];
+    sectionTitle.center = sectionHeader.center;
+    
+    return sectionHeader;
 }
 
 @end

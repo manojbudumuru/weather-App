@@ -21,4 +21,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *loadingImage;
 @property UIPopoverController * popUp;
 
+@property (weak, nonatomic) IBOutlet UINavigationBar *header;
 @end

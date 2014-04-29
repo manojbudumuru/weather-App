@@ -36,6 +36,12 @@
     self.info = [[NSMutableArray alloc]init];
     self.hasPilotInfo = NO;
     
+    self.view.backgroundColor = self.appDelegate.awcColor;
+    [self.header setBarTintColor:self.appDelegate.awcColor];
+    [self.header setTintColor:[UIColor whiteColor]];
+    self.header.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+
+    
     self.welcomeText.numberOfLines = 10;
     self.welcomeText.lineBreakMode = NSLineBreakByWordWrapping;
     

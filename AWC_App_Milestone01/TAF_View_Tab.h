@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "MapKit/MapKit.h"
 #import "AWCAppDelegate.h"
+#import "TimeGroupsVC.h"
 
-@interface TAF_View_Tab : UIViewController <MKMapViewDelegate>
+@interface TAF_View_Tab : UIViewController <MKMapViewDelegate, TimeGroupDelegate>
 
 @property (strong,nonatomic) IBOutlet MKMapView * displayTAF;
 -(IBAction)refreshTAF:(id)sender;
@@ -19,4 +20,12 @@
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityStatus;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingImage;
+
+@property (weak, nonatomic) IBOutlet UINavigationBar *header;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *presentButtons;
+
+@property TimeGroupsVC * timeGroupsVC;
+@property UIPopoverController * popOverController;
+
 @end

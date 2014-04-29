@@ -14,7 +14,7 @@
 @interface PIREP_Send_Tab : UIViewController <CLLocationManagerDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 // Display the title for Pirep Send
-@property (strong, nonatomic) IBOutlet UILabel *titleInfo;
+@property (weak, nonatomic) IBOutlet UIButton *titleInfo;
 
 // Buttons for CHOP
 @property (strong, nonatomic) IBOutlet UIButton *chop;
@@ -56,6 +56,7 @@
 //- (IBAction)sendPirep:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *sendPirep;
 -(void)saveToFile;
+- (IBAction)cancelPirep:(id)sender;
 
 
 // Property to get the location
@@ -63,6 +64,7 @@
 @property AWCAppDelegate * appDelegate;
 
 
+@property (weak, nonatomic) IBOutlet UINavigationBar *header;
 
 
 

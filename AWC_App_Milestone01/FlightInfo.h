@@ -49,4 +49,7 @@
 -(void)checkData;
 -(void)presentTabs;
 
+
+@property (weak, nonatomic) IBOutlet UINavigationBar *header;
+
 @end

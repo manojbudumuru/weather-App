@@ -18,6 +18,13 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
+    // #42D4FE
+    self.awcColor = [UIColor colorWithRed:66/255.0 green:212/255.0 blue:254/255.0 alpha:1.0];
+    
+    //Initialize time groups
+    self.timeGroups = [[NSMutableArray alloc]initWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7"]];
+    [self loadTimeGroups];
+    
     return YES;
 }
 
@@ -28,7 +35,57 @@
     
     return (replyFromURL!=NULL)?YES:NO;
 }
-							
+
+-(NSString *)convertToLocalTime:(NSString *)serverTime
+{
+    double timeZoneHours = ([[NSTimeZone localTimeZone] secondsFromGMT])/3600.0;
+    
+    double localTime = [[[serverTime substringWithRange:NSMakeRange(0, 5)] stringByReplacingOccurrencesOfString:@":" withString:@"."] doubleValue];
+    //NSLog(@"Server Time: %.2f",localTime);
+    
+    int quotient = timeZoneHours/0.5;
+    
+    double extraSeconds = 0;
+    
+    if(abs(quotient%2)==1)
+    {
+        if(timeZoneHours>=0)
+            timeZoneHours -= 0.2;
+        else
+        {
+            timeZoneHours += 0.2;
+            extraSeconds = 0.40;
+        }
+    }
+
+    
+    localTime += timeZoneHours-extraSeconds;
+    if(localTime<0)
+        localTime = 24 + localTime;
+    else if(localTime>=24)
+        localTime = localTime - 24;
+    
+    if((localTime-(int)localTime)*100>=60)
+    {
+        localTime -= 0.60;
+        localTime++;
+    }
+
+    return [NSString stringWithFormat:@"%0.2f.00",localTime];
+}
+
+-(void)loadTimeGroups
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString * filePath = [documentsDirectory stringByAppendingPathComponent:@"TAF_TimeGroups.txt"];
+    
+    if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
+        [[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
+    else
+        self.timeGroups = [[NSMutableArray alloc]initWithContentsOfFile:filePath];
+}
+				
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -54,6 +111,16 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    //Save selected time groups when the application exits
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString * filePath = [documentsDirectory stringByAppendingPathComponent:@"TAF_TimeGroups.txt"];
+    
+    if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
+        [[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
+
+    [self.timeGroups writeToFile:filePath atomically:YES];
 }
 
 @end

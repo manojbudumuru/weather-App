@@ -20,4 +20,6 @@
 - (IBAction)saveData:(id)sender;
 @property AWCAppDelegate * appDelegate;
 @property NSMutableArray * info;
+
+@property (weak, nonatomic) IBOutlet UINavigationBar *header;
 @end

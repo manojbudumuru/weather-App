@@ -7,12 +7,19 @@
 //
 
 #import "DisplayPIREP.h"
+#import "AWCAppDelegate.h"
+
+#define CELL_HEIGHT 45
+#define RAWDATA_CELL_HEIGHT 90
+#define SECTIONHEADER_HEIGHT 50
 
 @interface DisplayPIREP ()
 
 @property NSMutableArray * titles;
 @property NSMutableArray * values;
 @property NSString * pirepType;
+@property AWCAppDelegate * appDelegate;
+@property NSString * icaoId;
 
 @end
 
@@ -43,13 +50,18 @@
     self.titles = [[NSMutableArray alloc]init];
     self.values = [[NSMutableArray alloc]init];
     
+    self.appDelegate = [UIApplication sharedApplication].delegate;
+    
     if([self.pirepType isEqualToString:@"Pirep"])
     {
         if(self.pirep.icaoId!=nil)
         {
-            [self.titles addObject:@"ICAO Id"];
-            [self.values addObject:self.pirep.icaoId];
+            self.icaoId = self.pirep.icaoId;
+            //[self.titles addObject:@"ICAO Id"];
+            //[self.values addObject:self.pirep.icaoId];
         }
+        else
+            self.icaoId = @"Unknown";
         
         NSString * location = [NSString stringWithFormat:@"%0.2fN %0.2fW",
                                [self.pirep.coordinatePoints[1] doubleValue], [self.pirep.coordinatePoints[0]doubleValue]];
@@ -58,7 +70,7 @@
         
         if(self.pirep.rawOb!=nil)
         {
-            [self.titles addObject:@"Raw Text"];
+            [self.titles addObject:@"Raw Data"];
             [self.values addObject:self.pirep.rawOb];
         }
         
@@ -68,7 +80,7 @@
             NSInteger length = [self.pirep.obsTime length]-9;
             NSString * date = [self.pirep.obsTime substringFromIndex:length];
             date = [date substringToIndex:[date length]-1];
-            [self.values addObject:date];
+            [self.values addObject:[self.appDelegate convertToLocalTime:date]];
         }
         if(self.pirep.acType!=nil)
         {
@@ -125,7 +137,7 @@
         if(self.pirep.wspd!=nil)
         {
             [self.titles addObject:@"Wind Speed"];
-            [self.values addObject:self.pirep.wspd];
+            [self.values addObject:[NSString stringWithFormat:@"%@ Kts",self.pirep.wspd]];
         }
         if(self.pirep.fltlv1!=nil)
         {
@@ -145,9 +157,12 @@
         
         if(self.userPirep.lisenceNum!=nil)
         {
-            [self.titles addObject:@"License Number"];
-            [self.values addObject:self.userPirep.lisenceNum];
+            self.icaoId = self.userPirep.lisenceNum;
+            //[self.titles addObject:@"License Number"];
+            //[self.values addObject:self.userPirep.lisenceNum];
         }
+        else
+            self.icaoId = @"Unknown";
         
         if(self.userPirep.timeOfReport!=nil)
         {
@@ -237,11 +252,32 @@
 {
 
     
-    if (indexPath.row == 2) {
-        return 90;
+    if (indexPath.row == 1) {
+        return RAWDATA_CELL_HEIGHT;
     }
     
-    return 45;
+    return CELL_HEIGHT;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return SECTIONHEADER_HEIGHT;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView * sectionHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 400, 50)];
+    sectionHeader.backgroundColor = self.appDelegate.awcColor;
+    
+    UILabel * sectionTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
+    sectionTitle.text = self.icaoId;
+    sectionTitle.textColor = [UIColor whiteColor];
+    sectionTitle.textAlignment = NSTextAlignmentCenter;
+    
+    [sectionHeader addSubview:sectionTitle];
+    sectionTitle.center = sectionHeader.center;
+    
+    return sectionHeader;
 }
 
 @end
