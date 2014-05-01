@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "MapKit/MapKit.h"
 
+//This class is used to store the information about TAF objects.
+//Each property defines the TAF.
+
 @interface TAF : NSObject <MKAnnotation>
 
 @property NSString * idType;

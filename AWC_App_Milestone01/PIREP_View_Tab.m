@@ -25,6 +25,7 @@
 
 @implementation PIREP_View_Tab
 
+//Initialize the appDelegate, mapView and the loading activity indicator.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -37,32 +38,9 @@
 
     
     self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
-    
-    
-//    //Linking the buttons on the view with their respective methods
-//    [self.PIREPsButton setTarget:self];
-//    [self.PIREPsButton setAction:@selector(PIREPsBAction)];
-//    
-//    [self.metarsButon setTarget:self];
-//    [self.metarsButon setAction:@selector(metarsBAction)];
-//    
-//    
-//    self.hazardsButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(hazardsBAction)];
-//    self.tafsButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(tafsBAction)];
-//    self.imageryButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(tafsBAction)];
-//    self.flightPathButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(flightPathBAction)];
-//    
-//    self.allHazardsButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(allHazardsBAction)];
-//    self.mtnobscnButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(mtnobscnBAction)];
-//    self.turbButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(turbBAction)];
-//    self.icingButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(icingBAction)];
-//    self.convectiveButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(convectiveBAction)];
-//    self.ashButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(ashBAction)];
-//    self.ifrButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(ifrBAction)];
-    
-    
 }
 
+//Change the background of the view and header to reflect the theme of the application. Update the time label.
 -(void)viewWillAppear:(BOOL)animated
 {
     AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
@@ -74,6 +52,7 @@
     [self updateTimeLabel];
 }
 
+//Load PIREPs after the view has appeared so that the user can switch faster between the tabs.
 -(void)viewDidAppear:(BOOL)animated
 {
     self.mapLoaded = NO;
@@ -81,6 +60,7 @@
     [self initializeData];
 }
 
+//If the user has no internet connection, display an alert. Else, parse the json from database and add PIREPs on the map.
 -(void)initializeData
 {
    
@@ -113,6 +93,7 @@
     
 }
 
+//Updates the time label by getting the user's local time.
 -(void)updateTimeLabel
 {
     NSDate * now = [NSDate date];
@@ -127,6 +108,7 @@
     [super didReceiveMemoryWarning];
 }
 
+//This will start the loading activity indicator when the map loads.
 -(void)mapViewWillStartRenderingMap:(MKMapView *)mapView
 {
     self.mapLoaded = NO;
@@ -135,18 +117,21 @@
     self.loadingImage.hidden = NO;
 }
 
+//If the map is completely loaded, then set mapLoaded to yes and check if the loading activity indicator needs to be stopped.
 -(void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
 {
     self.mapLoaded = YES;
     [self stopStatusIndicator];
 }
 
+//If the annotations are completely loaded, then set annotationsAdded to yes and check if the loading activity indicator needs to be stopped.
 -(void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
 {
     self.annotationsAdded = YES;
     [self stopStatusIndicator];
 }
 
+//If the map is loaded and all the PIREPs are added, then stop and hide the loading activity indicator.
 -(void)stopStatusIndicator
 {
     if(self.mapLoaded && self.annotationsAdded)
@@ -157,6 +142,7 @@
     }
 }
 
+//Display a popover when a PIREP is clicked. The popover contains the details of the PIREP listed in a table format.
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
     if([view.annotation isKindOfClass:[Pirep class]])
@@ -186,25 +172,10 @@
             [self.popUp presentPopoverFromRect:view.bounds inView:view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         }
     }
-//    if([view.annotation isKindOfClass : [Metar class]])
-//    {
-//        
-//        [self.displayMap deselectAnnotation:view.annotation animated:YES];
-//        
-//        
-//        Metar * metarObject = (Metar *)view.annotation;
-//        if(![self.popUp isPopoverVisible])
-//        {
-//            tableOfAnnotationViewController * myTable = [[tableOfAnnotationViewController alloc]initWithStyle:UITableViewStylePlain incomingMetar:metarObject];
-//            
-//            self.popUp = [[UIPopoverController alloc]initWithContentViewController:myTable];
-//            self.popUp.popoverContentSize = CGSizeMake(400, 350);
-//            [self.popUp presentPopoverFromRect:view.bounds inView:view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-//        }
-//        
-//    }
 }
 
+//Display appropriate pins on the map for each annotation. If the annotation if of a PIREP from the database, display a symbol.
+//Else, if the annotation is of a UserPIREP, dispay a user icon.
 -(MKAnnotationView *)mapView:(MKMapView *)sender viewForAnnotation:(id<MKAnnotation>)annotation
 {
     static NSString * identifier = @"Annotation";
@@ -237,26 +208,15 @@
     return annotView;
 }
 
+//Reload the entire data on the map when the refresh button is tapped.
 - (IBAction)refreshPirep:(id)sender {
     [self initializeData];
 }
 - (void)viewDidUnload {
-//    [self setPIREPsButton:nil];
-//    [self setMetarsButon:nil];
-//    [self setHazardsButton:nil];
-//    [self setTafsButton:nil];
-//    [self setImageryButton:nil];
-//    [self setFlightPathButton:nil];
-//    [self setAllHazardsButton:nil];
-//    [self setMtnobscnButton:nil];
-//    [self setTurbButton:nil];
-//    [self setIcingButton:nil];
-//    [self setConvectiveButton:nil];
-//    [self setAshButton:nil];
-//    [self setIfrButton:nil];
     [super viewDidUnload];
 }
 
+//Parse and display the PIREPs on the map.
 - (void)viewPireps{
     
     NSURL *URL = [NSURL URLWithString:@"http://new.aviationweather.gov/gis/scripts/PirepJSON.php"];
@@ -338,8 +298,6 @@
     }
     
     [self.displayMap addAnnotations:self.pireps];
-
-    
 }
 
 @end

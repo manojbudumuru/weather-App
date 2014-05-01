@@ -38,6 +38,7 @@
     return self;
 }
 
+//Initialize the mapView and the loading activity indicator.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -53,6 +54,7 @@
 	// Do any additional setup after loading the view.
 }
 
+//Change the background of the view and header to reflect the theme of the application. Update the time label.
 -(void)viewWillAppear:(BOOL)animated
 {
     AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
@@ -63,6 +65,7 @@
     [self updateTimeLabel];
 }
 
+//Load Metars after the view has appeared so that the user can switch faster between the tabs.
 -(void)viewDidAppear:(BOOL)animated
 {
     self.mapLoaded = NO;
@@ -70,6 +73,7 @@
     [self initializeData];
 }
 
+//If the user has no internet connection, display an alert. Else, parse the json from database and add Metars on the map.
 -(void)initializeData
 {
     AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
@@ -101,6 +105,7 @@
     }
 }
 
+//Updates the time label by getting the user's local time.
 -(void)updateTimeLabel
 {
     NSDate * now = [NSDate date];
@@ -110,6 +115,7 @@
     self.lastUpdate.text = [@"Last updated at: " stringByAppendingString: updateTime];
 }
 
+//This will start the loading activity indicator when the map loads.
 -(void)mapViewWillStartRenderingMap:(MKMapView *)mapView
 {
     self.mapLoaded = NO;
@@ -118,18 +124,21 @@
     self.loadingImage.hidden = NO;
 }
 
+//If the map is completely loaded, then set mapLoaded to yes and check if the loading activity indicator needs to be stopped.
 -(void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
 {
     self.mapLoaded = YES;
     [self stopStatusIndicator];
 }
 
+//If the annotations are completely loaded, then set annotationsAdded to yes and check if the loading activity indicator needs to be stopped.
 -(void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
 {
     self.annotationsAdded = YES;
     [self stopStatusIndicator];
 }
 
+//If the map is loaded and all the Metars are added, then stop and hide the loading activity indicator.
 -(void)stopStatusIndicator
 {
     if(self.mapLoaded && self.annotationsAdded)
@@ -140,6 +149,7 @@
     }
 }
 
+//Parse and display the Metars on the map.
 -(void)viewMetars
 {
     NSURL * myURL = [NSURL URLWithString:@"http://new.aviationweather.gov/gis/scripts/MetarJSON.php?priority=7"];
@@ -236,6 +246,7 @@
     [self findZoom];
 }
 
+//Display a popover when a Metar is clicked. The popover contains the details of the Metar listed in a table format.
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
     if([view.annotation isKindOfClass : [Metar class]])
@@ -257,7 +268,8 @@
     }
 }
 
-
+//Display appropriate pins on the map for each annotation based on the value of WX property.
+//If there is no WX property for a Metar, it indicates that the weather over there is clear and is indicated with a hollow circle.
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
     Metar * thisMetar = (Metar *)annotation;
@@ -287,6 +299,7 @@
     return annotView;
 }
 
+//Previous method used to display the views for annotation.
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation_Working:(id<MKAnnotation>)annotation
 {
     static NSString * identifier = @"Annotation";
@@ -318,11 +331,13 @@
     return annotView;
 }
 
+//Dynamically change the pins on the map when the user zooms in/out.
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
     [self findZoom];
 }
 
+//Find the current zoom level based on the amount the user has zoomed in.
 -(float)findZoom {
     
     float currentZoomLevel = 21 - (log2(self.displayMetar.region.span.longitudeDelta *
@@ -457,6 +472,8 @@
     [self setLastUpdate:nil];
     [super viewDidUnload];
 }
+
+//Reload the pins on the map.
 - (IBAction)refreshMetars:(id)sender {
     [self initializeData];
 }

@@ -12,6 +12,7 @@
 
 @implementation HazardsParser
 
+//Fetch Hazards information from the database and parse them.
 -(void)fetchData
 {
     NSString * airmetURL = @"http://new.aviationweather.gov/gis/scripts/AirmetJSON.php";
@@ -43,6 +44,7 @@
 
 }
 
+//Fetch, parse and returns Harards.
 -(NSMutableArray *)GetHazards
 {
     [self fetchData];
@@ -51,7 +53,7 @@
     return self.hazardsArray;
 }
 
-
+//Parse Airmet Hazards and add them to the hazards array.
 -(void)parseDataAirmet
 {
     for(int i = 0; i < [self.airmetPropertiesArray count]; i++)
@@ -92,6 +94,7 @@
 
 }
 
+//Parse Sigmet Hazards and add them to the hazards array.
 -(void)parseDataSigmet
 {
     for(int i = 0; i < [self.sigmetPropertiesArray count]; i++)
@@ -132,6 +135,7 @@
 
 }
 
+//Define a color to the hazard based on its type.
 -(UIColor *)colorToPolygon:(NSString *)hazard airSigmetType:(NSString *)airSigmet{
     // Initializing UIColor to nil
     UIColor * color = nil;

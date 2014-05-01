@@ -10,6 +10,9 @@
 #import<MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+//This class is used to store the information about Metar objects.
+//Each property defines the Metar.
+
 @interface Metar : NSObject<MKAnnotation>
 
 @property NSString * idType;

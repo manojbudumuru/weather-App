@@ -55,11 +55,13 @@
     
 }
 
+//Initialize the data after the view appears to enable faster switching between tabs.
 -(void)viewDidAppear:(BOOL)animated
 {
     [self initializeData];
 }
 
+//Initialize the variables used to save the PIREP Report.
 -(void)initializeData
 {
     //[self setDefaults];
@@ -179,6 +181,7 @@
     
 }
 
+//Update and return the present time to the program for including it in the PIREP.
 -(NSString *)updateTime
 {
     //Getting system time
@@ -208,11 +211,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+//Initialize the property pirepSend
 -(void)setPirep
 {
     self.pirepSend = self.pirepInit;
 }
 
+//Each time the user selects a category on the screen, the presentPirep is updated which is used to display the information to the user on the screen.
 -(void)setPresentPirepData
 {
     if([self.pirepData count]>0)
@@ -227,6 +232,7 @@
         self.presentPirep = @"";
 }
 
+//Update report when user clicks on Chop button.
 - (void)Chop {
 
 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@"/CHOP"];
@@ -272,6 +278,7 @@
     //self.sendPirep.enabled = NO;
 }
 
+//Update report when user clicks on lightChop button.
 -(void)lChop
 {
 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];
@@ -312,6 +319,7 @@
     //self.sendPirep.enabled = YES;
 }
 
+//Update report when user clicks on modChop button.
 -(void)mChop
 {
 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];
@@ -354,6 +362,7 @@
     //self.sendPirep.enabled = YES;
 }
 
+//Update report when user clicks on greatChop button.
 -(void)gChop
 {
 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];
@@ -394,6 +403,7 @@
     //[self saveToFile:@" GRT"];
 }
 
+//Update report when user clicks on noneChop button.
 -(void)nChop
 {
     if(self.chopPosition!=-1)
@@ -429,6 +439,7 @@
     }
 }
 
+//Update report when user clicks on Turb button.
 - (void)Turb
 {
 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@"/TURB"];
@@ -472,6 +483,7 @@
 //    self.sendPirep.enabled = NO;
 }
 
+//Update report when user clicks on lightTurb button.
 - (void) lTurb
 {
 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];
@@ -511,6 +523,7 @@
 //    self.sendPirep.enabled = YES;
 }
 
+//Update report when user clicks on modTurb button.
 -(void) mTurb
 {
 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];
@@ -549,6 +562,7 @@
 //    self.sendPirep.enabled = YES;
 }
 
+//Update report when user clicks on greatTurb button.
 - (void) gTurb
 {
 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];
@@ -587,6 +601,7 @@
 //    self.sendPirep.enabled = YES;
 }
 
+//Update report when user clicks on noneTurb button.
 -(void)nTurb
 {
     if(self.turbPosition!=-1)
@@ -622,7 +637,7 @@
     }
 }
 
-
+//Update report when user clicks on MtnWave button.
 -(void)mtnWave
 {
 //    if(![self.presentPirep isEqualToString:@""])
@@ -662,6 +677,7 @@
 //    self.sendPirep.enabled = NO;
 }
 
+//Update report when user clicks on lightMtnWave button.
 -(void)lMtn
 {
 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];
@@ -697,6 +713,7 @@
 //    self.sendPirep.enabled = YES;
 }
 
+//Update report when user clicks on modMtnWave button.
 -(void)mMtn
 {
 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];
@@ -732,6 +749,7 @@
 //    self.sendPirep.enabled = YES;
 }
 
+//Update report when user clicks on greatMtnWave button.
 -(void)gMtn
 {
 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];
@@ -767,6 +785,7 @@
 //    self.sendPirep.enabled = YES;
 }
 
+//Update report when user clicks on noneMtnWave button.
 -(void)nMtn
 {
     if(self.mtnPosition!=-1)
@@ -802,9 +821,7 @@
     }
 }
 
-
-
-
+//Update report when user clicks on Icing button.
 - (void)Ice
 {
 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@"/ICE"];
@@ -852,6 +869,7 @@
 //    self.sendPirep.enabled = NO;
 }
 
+//Update report when user clicks on clearIcing button.
 - (void)clearIce
 {
 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" CLEAR"];
@@ -892,6 +910,7 @@
     
 }
 
+//Update report when user clicks on rimeIcing button.
 - (void)rimeIce
 {
 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" RIME"];
@@ -929,6 +948,7 @@
     
 }
 
+//Update report when user clicks on mixedIcing button.
 - (void)mixedIce
 {
 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" MIXED"];
@@ -966,6 +986,7 @@
     
 }
 
+//Update report when user clicks on traceIcing button.
 - (void)traceIce
 {
 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" TRACE"];
@@ -1016,6 +1037,7 @@
 //    self.sendPirep.enabled = YES;
 }
 
+//Update report when user clicks on lightIcing button.
 - (void)lIce
 {
 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];
@@ -1066,6 +1088,7 @@
 //    self.sendPirep.enabled = YES;
 }
 
+//Update report when user clicks on modIcing button.
 - (void)mIce
 {
 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];
@@ -1115,6 +1138,7 @@
 //    self.sendPirep.enabled = YES;
 }
 
+//Update report when user clicks on greatIcing button.
 -(void)gIce
 {
 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];
@@ -1164,6 +1188,7 @@
 //    self.sendPirep.enabled = YES;
 }
 
+//Update report when user clicks on noneIcing button.
 -(void)nIce
 {
     if(self.icePosition!=-1)
@@ -1211,6 +1236,7 @@
     }
 }
 
+//Hide keyboard if the user is editing and touches outside the textfiled
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     UITouch *touch = [[event allTouches] anyObject];
@@ -1221,6 +1247,7 @@
     [super touchesBegan:touches withEvent:event];
 }
 
+//Save the data to file if the user has a report selected. Before saving, ask for user's confirmation.
 -(void)saveToFile
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -1255,10 +1282,13 @@
     
 }
 
+//Cancel the present pirep and clear the pirepSelected.
 - (IBAction)cancelPirep:(id)sender {
     [self resetButtons];
 }
 
+//If the app needs user's confirmation to send the report, it'll come here. If the user clicks yes, a report in the format required by database
+//is generated and sent to database and saved. Else, if he clicks no, the report is cleared.
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     int tag = alertView.tag;
@@ -1312,6 +1342,7 @@
     }
 }
 
+//Reset all buttons once the report is sent or cancelled.
 -(void)resetButtons
 {
 
@@ -1336,7 +1367,7 @@
     
 }
 
-//Set button backgrounds to actual color
+//Set button backgrounds to actual color. Not currently in use.
 -(void)setDefaults
 {
     [self.chop setBackgroundImage:[UIImage imageNamed:@"CHOP.png"] forState:UIControlStateNormal];
@@ -1364,6 +1395,7 @@
     [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"ICING_GRT.png"] forState:UIControlStateNormal];
 }
 
+//Remove the alert after the report is sent or cancelled.
 -(void)remAlert:(UIAlertView *)alertV
 {
     [alertV dismissWithClickedButtonIndex:-1 animated:YES];
@@ -1379,18 +1411,19 @@
     [super viewDidUnload];
 }
 
+//Send PIREP if there is a report. Else, display an alert.
 - (void)sendPirep:(id)sender {
     
-    self.chop.enabled = YES;
-    self.turb.enabled = YES;
-    self.mtn.enabled = YES;
-    self.ice.enabled = YES;
-    
-    self.chopPosition = YES;
-    self.turbPosition = YES;
-    self.mtnPosition = YES;
-    self.icePosition = YES;
-    
+//    self.chop.enabled = YES;
+//    self.turb.enabled = YES;
+//    self.mtn.enabled = YES;
+//    self.ice.enabled = YES;
+//    
+//    self.chopPosition = YES;
+//    self.turbPosition = YES;
+//    self.mtnPosition = YES;
+//    self.icePosition = YES;
+//    
     //NSLog(@"Present: %@\nSelected: %@",self.presentPirep,self.pirepSelected.text);
     
     if(![self.pirepSelected.text isEqualToString:@""])

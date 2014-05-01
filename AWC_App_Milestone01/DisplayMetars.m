@@ -26,6 +26,7 @@
 
 @implementation DisplayMetars
 
+//Initialize the Metar.
 - (id)initWithStyle:(UITableViewStyle)style incomingMetar : (Metar *)newMetar
 {
     self = [super initWithStyle:style];
@@ -38,6 +39,7 @@
     return self;
 }
 
+//Initialize the key and value arrays which display the properties of the Metar.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -215,17 +217,20 @@
     [super didReceiveMemoryWarning];
 }
 
+//Set number of sections to 1.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
+//Set number of rows depending upon the number of properties valid for this Metar.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
     return [self.key count];
 }
 
+//Configure each cell by setting the name of the property to text label and the information contained in the property to detail text label.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
@@ -247,6 +252,7 @@
     return cell;
 }
 
+//If the current row contains raw data, display height pertaining to it, else display normal cell height.
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row == 3)
@@ -254,11 +260,13 @@
     return CELL_HEIGHT;
 }
 
+//Set the height for the section header.
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return SECTIONHEADER_HEIGHT;
 }
 
+//Configure a view for the section header and display the id of the station in the header.
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView * sectionHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 400, 50)];

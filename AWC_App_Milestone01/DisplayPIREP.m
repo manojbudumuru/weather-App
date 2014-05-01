@@ -25,6 +25,7 @@
 
 @implementation DisplayPIREP
 
+//Here, we will check if the PIREP to be displayed is an actual PIREP or a UserPIREP.
 - (id)initWithStyle:(UITableViewStyle)style pirep:(Pirep *)pirepObj userPirep:(UserPirep *)userPirepObj
 {
     self = [super initWithStyle:style];
@@ -43,6 +44,7 @@
     return self;
 }
 
+//Initialize the titles and values arrays which display the properties of the PIREP.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -217,17 +219,19 @@
     [super didReceiveMemoryWarning];
 }
 
-
+//Set number of sections to 1.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
+//Set number of rows depending upon the number of properties valid for this PIREP.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.titles count];
 }
 
+//Configure each cell by setting the name of the property to text label and the information contained in the property to detail text label.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell;
@@ -248,6 +252,7 @@
     return cell;
 }
 
+//If the current row contains raw data, display height pertaining to it, else display normal cell height.
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
@@ -259,11 +264,13 @@
     return CELL_HEIGHT;
 }
 
+//Set the height for the section header.
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return SECTIONHEADER_HEIGHT;
 }
 
+//Configure a view for the section header and display the id of the station in the header.
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView * sectionHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 400, 50)];

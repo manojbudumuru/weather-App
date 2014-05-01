@@ -7,6 +7,7 @@
 //
 
 #import "SettingsVC.h"
+#import "UserManualVC.h"
 
 @interface SettingsVC ()
 
@@ -26,6 +27,7 @@
     return self;
 }
 
+//Set the view background color and header color to reflect the theme of the app.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -69,6 +71,8 @@
     [self setExistingInfo:nil];
     [super viewDidUnload];
 }
+
+//Save the pilot information if all the fields are filled and present the tabs. Else, display an alert.
 - (IBAction)saveData:(id)sender {
     
     if([self.name.text isEqualToString:@""])
@@ -115,6 +119,7 @@
     }
 }
 
+//Hide the keyboard if the user clicks on the view while editing.
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     UITouch *touch = [[event allTouches] anyObject];
@@ -125,4 +130,9 @@
     [super touchesBegan:touches withEvent:event];
 }
 
+//Present user manual to the user when this button is clicked.
+- (IBAction)showUserManual:(id)sender {
+    UserManualVC * userManualVC = [self.storyboard instantiateViewControllerWithIdentifier:@"userManualVC"];
+    [self presentViewController:userManualVC animated:YES completion:nil];
+}
 @end

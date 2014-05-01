@@ -26,6 +26,7 @@
     return self;
 }
 
+//Set the view background and the navigation bar header color to reflect the theme of the app.
 -(void)viewWillAppear:(BOOL)animated
 {
     self.appDelegate = [[UIApplication sharedApplication] delegate];
@@ -36,6 +37,7 @@
     self.header.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
 }
 
+//Present the user with exisiting information and enable him to change it.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -84,6 +86,7 @@
     [super viewDidUnload];
 }
 
+//Save the pilot information if all the fields are filled and present the tabs. Else, display an alert.
 - (IBAction)saveData:(id)sender {
     
     
@@ -138,6 +141,8 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
+
+//Dismiss this view and get back to the previous view.
 - (IBAction)cancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

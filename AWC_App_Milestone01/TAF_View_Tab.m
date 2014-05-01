@@ -32,6 +32,7 @@
     return self;
 }
 
+//Initialize the mapView, the loading activity indicator and the time groups.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -57,6 +58,7 @@
 	// Do any additional setup after loading the view.
 }
 
+//Set the view background color and header color to reflect the theme of the app.
 -(void)viewWillAppear:(BOOL)animated
 {
     self.view.backgroundColor = self.appDelegate.awcColor;
@@ -66,6 +68,7 @@
     [self updateTimeLabel];
 }
 
+//Load TAFs after the view has appeared so that the user can switch faster between the tabs.
 -(void)viewDidAppear:(BOOL)animated
 {
     self.mapLoaded = NO;
@@ -73,6 +76,7 @@
     [self initializeData];
 }
 
+//Updates the time label by getting the user's local time.
 -(void)updateTimeLabel
 {
     NSDate * now = [NSDate date];
@@ -82,6 +86,7 @@
     self.lastUpdateLabel.text = [@"Last updated at: " stringByAppendingString:updateTime];
 }
 
+//If the user has no internet connection, display an alert. Else, parse the json from database and add TAFs on the map.
 -(void)initializeData
 {
     
@@ -111,6 +116,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+//This will start the loading activity indicator when the map loads.
 -(void)mapViewWillStartRenderingMap:(MKMapView *)mapView
 {
     self.mapLoaded = NO;
@@ -119,18 +125,21 @@
     self.loadingImage.hidden = NO;
 }
 
+//If the map is completely loaded, then set mapLoaded to yes and check if the loading activity indicator needs to be stopped.
 -(void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
 {
     self.mapLoaded = YES;
     [self stopStatusIndicator];
 }
 
+//If the annotations are completely loaded, then set annotationsAdded to yes and check if the loading activity indicator needs to be stopped.
 -(void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
 {
     self.annotationsAdded = YES;
     [self stopStatusIndicator];
 }
 
+//If the map is loaded and all the TAFs are added, then stop and hide the loading activity indicator.
 -(void)stopStatusIndicator
 {
     if(self.mapLoaded && self.annotationsAdded)
@@ -141,6 +150,7 @@
     }
 }
 
+//Display a popover when a TAF is clicked. The popover contains the details of the TAF listed in a table format.
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
     if([view.annotation isKindOfClass:[TAF class]])
@@ -157,6 +167,7 @@
     }
 }
 
+//Display appropriate pins on the map for each annotation based on the value of fltcat property.
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
     static NSString * identifier = @"Annotation";
@@ -190,12 +201,14 @@
     return annotView;
 }
 
+//Reload all the pins when this button is clicked.
 -(IBAction)refreshTAF:(id)sender
 {
     [self initializeData];
     //[self getTafs];
 }
 
+//Parse and display the TAFs on the map.
 -(void)getTafs
 {
     NSURL * URL = [NSURL URLWithString:@"http://new.aviationweather.gov/gis/scripts/TafJSON.php"];
@@ -233,6 +246,7 @@
     [self updateTAFsOnMap];
 }
 
+//Update the pins on the map based on the timegroups selected.
 -(void)updateTAFsOnMap
 {
     [self updateTimeLabel];
@@ -263,6 +277,7 @@
     
 }
 
+//Add the selected time group to the enabled timegroups list.
 -(void)selectedTimeGroup:(NSString *)timeGroup
 {
     [self.timeGroups addObject:timeGroup];
@@ -270,6 +285,7 @@
     [self updateTAFsOnMap];
 }
 
+//Remove the selected time group from the enabled timegroups list.
 -(void)deselectedTimeGroup:(NSString *)timeGroup
 {
     [self.timeGroups removeObject:timeGroup];
@@ -277,6 +293,7 @@
     [self updateTAFsOnMap];
 }
 
+//Display a popover with all the timegroups enabling the user to select his desired timegroups.
 - (IBAction)selectTimeGroups:(id)sender {
     [self.popOverController presentPopoverFromBarButtonItem:self.presentButtons permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }

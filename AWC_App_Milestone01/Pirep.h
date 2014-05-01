@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "MapKit/MapKit.h"
 
-//This class is used to store the information about Pirep objects
+//This class is used to store the information about Pirep objects.
+//Each property defines the Pirep.
 
 @interface Pirep : NSObject <MKAnnotation>
 

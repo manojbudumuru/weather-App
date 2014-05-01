@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "MapKit/MapKit.h"
 
+//This class is used to store the information about UserPirep objects.
+//Each property defines the UserPirep.
+
 @interface UserPirep : NSObject <MKAnnotation>
 
 //{"LicenseNum":"AB524","TimeOfReport":"12:45:00","AircraftType":"Boeing 777","TailNumber":"SD 12345","SkyCondition":"UNKNWN","WeatherCondition":"UNKNWN","LocationLatitude":"40.34","LocationLongitude":"-94.87","PilotReport":"CHOP MOD\/TURB LGT\/MTN WAVE LGT\/ICE CLEAR TRACE"}

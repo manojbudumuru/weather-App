@@ -17,6 +17,7 @@
 
 @implementation TimeGroupsVC
 
+//Initialize the appDelegate and the timegroups array.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -32,19 +33,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+//Set the number of sections to 1.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
     return 1;
 }
 
+//Set the number of rows to the size of the timegroups array.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     return self.timeGroups.count;
 }
 
-
+//Each is displayed with a timegroup number ranging from 0 to 7.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeGroup"];
@@ -99,7 +102,9 @@
 }
 */
 
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
+
+//When an unselected timegroup is selected, trigger the delegate method to add this timegroup to the list of enabled timegroups.
+//When a selected timegroup is selected, trigger the delegate method to remove this timegroup from the list of enabled timegroups.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //NSLog(@"TimeGroup: %@",self.timeGroups[indexPath.row]);

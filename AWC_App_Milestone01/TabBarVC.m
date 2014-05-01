@@ -23,6 +23,7 @@
     return self;
 }
 
+//Set the tab bar background image and selection indicator image to reflect the theme of the app.
 -(void)viewWillAppear:(BOOL)animated
 {
     AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;

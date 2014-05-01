@@ -22,4 +22,7 @@
 @property NSMutableArray * info;
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *header;
+
+- (IBAction)showUserManual:(id)sender;
+
 @end

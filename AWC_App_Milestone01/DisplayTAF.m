@@ -24,6 +24,7 @@
 
 @implementation DisplayTAF
 
+//Initialize the TAF.
 - (id)initWithStyle:(UITableViewStyle)style taf:(TAF *)tafObj
 {
     self = [super initWithStyle:style];
@@ -34,6 +35,7 @@
     return self;
 }
 
+//Initialize the titles and values arrays which display the properties of the TAF.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -216,19 +218,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+//Set number of sections to 1.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
     return 1;
 }
 
+//Set number of rows depending upon the number of properties valid for this TAF.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     return [self.titles count];
 }
 
+//Configure each cell by setting the name of the property to text label and the information contained in the property to detail text label.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
@@ -248,6 +252,7 @@
     return cell;
 }
 
+//If the current row contains raw data, display height pertaining to it, else display normal cell height.
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row == 2)
@@ -255,11 +260,13 @@
     return CELL_HEIGHT;
 }
 
+//Set the height for the section header.
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return SECTIONHEADER_HEIGHT;
 }
 
+//Configure a view for the section header and display the id of the station in the header.
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView * sectionHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 400, 50)];

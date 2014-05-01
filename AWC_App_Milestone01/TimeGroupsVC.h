@@ -10,8 +10,10 @@
 
 @protocol TimeGroupDelegate <NSObject>
 
+//Delegate methods to handle when a time group is selected or deselected.
 @required
 -(void)selectedTimeGroup:(NSString *)timeGroup;
+@required
 -(void)deselectedTimeGroup:(NSString *)timeGroup;
 
 @end

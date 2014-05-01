@@ -28,6 +28,7 @@
     return YES;
 }
 
+//This method checks if the user has internet connection to his iPad. If yes, it retuns yes, else returns no.
 -(BOOL)isConnectedToInternet
 {
     //        http://aviationweather.gov/
@@ -36,6 +37,7 @@
     return (replyFromURL!=NULL)?YES:NO;
 }
 
+//This method converts the report time which is in GMT +0 to the user's local time.
 -(NSString *)convertToLocalTime:(NSString *)serverTime
 {
     double timeZoneHours = ([[NSTimeZone localTimeZone] secondsFromGMT])/3600.0;
@@ -74,6 +76,7 @@
     return [NSString stringWithFormat:@"%0.2f.00",localTime];
 }
 
+//This method loads the time groups which the user has selected in his previous use of the application
 -(void)loadTimeGroups
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

@@ -29,6 +29,8 @@
     return self;
 }
 
+//Initialize the properties to figure out what needs to be displayed on the screen
+//based on who the user is: a new user or a returning user
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -87,6 +89,8 @@
 	// Do any additional setup after loading the view.
 }
 
+//Check if the app has any exisiting data. If yes, present him with the options to change or continue with the same.
+//Else, ask him to enter the information.
 -(void)checkData
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -165,6 +169,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+//Save the pilot information if all the fields are filled and present the tabs. Else, display an alert.
 - (void)saveData:(id)sender {
     
     if([self.name.text isEqualToString:@""])
@@ -209,6 +214,7 @@
     }
 }
 
+//If the device has internet, present tabs. Else, prompt the user to connect to internet.
 -(void)presentTabs
 {
     
@@ -233,6 +239,7 @@
     }
 }
 
+//Display a specific set of buttons based on the state of the user.
 - (void)displayButtons:(id)sender {
     self.headerProvideInfo.hidden = NO;
     self.welcomeText.hidden = YES;
