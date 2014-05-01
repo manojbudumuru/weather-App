@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MapKit/MapKit.h"
-#import "AWCAppDelegate.h"
+#import "AppDelegate.h"
 #import "TimeGroupsVC.h"
 
 @interface TAF_View_Tab : UIViewController <MKMapViewDelegate, TimeGroupDelegate>

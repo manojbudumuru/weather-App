@@ -7,7 +7,7 @@
 //
 
 #import "DisplayTAF.h"
-#import "AWCAppDelegate.h"
+#import "AppDelegate.h"
 
 #define CELL_HEIGHT 45
 #define RAWDATACELL_HEIGHT 90
@@ -17,7 +17,7 @@
 
 @property NSMutableArray * titles;
 @property NSMutableArray * values;
-@property AWCAppDelegate * appDelegate;
+@property AppDelegate * appDelegate;
 @property NSString * tafId;
 
 @end

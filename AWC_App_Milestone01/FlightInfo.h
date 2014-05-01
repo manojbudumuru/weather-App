@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AWCAppDelegate.h"
+#import "AppDelegate.h"
 
 //This class accepts the flight information which is required before giving, the pilot, access to the PIREP and PIREP Send Tab.
 
@@ -35,7 +35,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *license;
 
 
-@property AWCAppDelegate * appDelegate;
+@property AppDelegate * appDelegate;
 @property NSMutableArray * info;
 
 @property (strong, nonatomic) IBOutlet UIButton *saveData;
@@ -51,5 +51,7 @@
 
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *header;
+
+@property (weak, nonatomic) IBOutlet UITextField *passwordTF;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AWCAppDelegate.h"
+#import "AppDelegate.h"
 
 @interface TabBarVC : UITabBarController
 

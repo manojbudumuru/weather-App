@@ -7,11 +7,11 @@
 //
 
 #import "TimeGroupsVC.h"
-#import "AWCAppDelegate.h"
+#import "AppDelegate.h"
 
 @interface TimeGroupsVC ()
 
-@property AWCAppDelegate * appDelegate;
+@property AppDelegate * appDelegate;
 
 @end
 

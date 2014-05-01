@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "HazardsParser.h"
 #import "Hazards.h"
-#import "AWCAppDelegate.h"
+#import "AppDelegate.h"
 
 @interface Hazard_View_Tab : UIViewController <MKMapViewDelegate>
 

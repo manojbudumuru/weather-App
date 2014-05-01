@@ -7,7 +7,7 @@
 //
 
 #import "DisplayPIREP.h"
-#import "AWCAppDelegate.h"
+#import "AppDelegate.h"
 
 #define CELL_HEIGHT 45
 #define RAWDATA_CELL_HEIGHT 90
@@ -18,7 +18,7 @@
 @property NSMutableArray * titles;
 @property NSMutableArray * values;
 @property NSString * pirepType;
-@property AWCAppDelegate * appDelegate;
+@property AppDelegate * appDelegate;
 @property NSString * icaoId;
 
 @end

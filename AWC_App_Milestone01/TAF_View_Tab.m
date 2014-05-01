@@ -17,7 +17,7 @@
 @property BOOL annotationsAdded;
 @property NSMutableArray * timeGroups;
 @property NSMutableArray * tafAnnotations;
-@property AWCAppDelegate * appDelegate;
+@property AppDelegate * appDelegate;
 
 @end
 

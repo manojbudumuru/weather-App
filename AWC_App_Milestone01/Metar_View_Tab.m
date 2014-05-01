@@ -57,7 +57,7 @@
 //Change the background of the view and header to reflect the theme of the application. Update the time label.
 -(void)viewWillAppear:(BOOL)animated
 {
-    AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
     self.view.backgroundColor = appDelegate.awcColor;
     [self.header setBarTintColor:appDelegate.awcColor];
     [self.header setTintColor:[UIColor whiteColor]];
@@ -76,7 +76,7 @@
 //If the user has no internet connection, display an alert. Else, parse the json from database and add Metars on the map.
 -(void)initializeData
 {
-    AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
     
     if([appDelegate isConnectedToInternet])
     {

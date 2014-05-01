@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MapKit/MapKit.h"
 #import "FlightInfo.h"
-#import "AWCAppDelegate.h"
+#import "AppDelegate.h"
 
 @interface PIREP_Send_Tab : UIViewController <CLLocationManagerDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
@@ -61,7 +61,7 @@
 
 // Property to get the location
 @property (nonatomic,strong) CLLocationManager * myLoc;
-@property AWCAppDelegate * appDelegate;
+@property AppDelegate * appDelegate;
 
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *header;

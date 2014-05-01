@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AWCAppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property NSMutableArray *flightInformation;
@@ -24,5 +24,8 @@
 -(NSString *)convertToLocalTime:(NSString *)serverTime;
 
 @property NSMutableArray * timeGroups;
+
+//To get the application password which will validate a user
+-(NSString *)getApplicationPassword;
 
 @end

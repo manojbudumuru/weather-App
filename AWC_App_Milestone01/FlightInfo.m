@@ -15,6 +15,7 @@
 @property NSString * fPath;
 @property NSString * fData;
 @property BOOL hasPilotInfo;
+@property NSString * actualPassword;
 
 @end
 
@@ -68,8 +69,8 @@
     [self.saveData addTarget:self action:@selector(saveData:) forControlEvents:UIControlEventTouchUpInside];
     [self.enterData addTarget:self action:@selector(displayButtons:) forControlEvents:UIControlEventTouchUpInside];
     [self.changeData addTarget:self action:@selector(displayButtons:) forControlEvents:UIControlEventTouchUpInside];
-    [self.cancel addTarget:self action:@selector(presentTabs) forControlEvents:UIControlEventTouchUpInside];
-    [self.cancelDataCollection addTarget:self action:@selector(presentTabs) forControlEvents:UIControlEventTouchUpInside];
+    [self.cancel addTarget:self action:@selector(validateUser) forControlEvents:UIControlEventTouchUpInside];
+    [self.cancelDataCollection addTarget:self action:@selector(validateUser) forControlEvents:UIControlEventTouchUpInside];
     
     
     self.existingInfo.hidden = YES;
@@ -114,6 +115,7 @@
     {
         self.welcomeText.text = @"This is the first time you are using this application. This application needs some information from you inorder to send reports to the ground station. Please press 'OK' to fill in the required information and start using the application.";
         self.enterData.hidden = NO;
+        self.passwordTF.hidden = YES;
     }
     else
     {
@@ -209,7 +211,7 @@
         self.appDelegate.flightInformation = self.info;
         
         
-        [self presentTabs];
+        [self validateUser];
         
     }
 }
@@ -254,6 +256,8 @@
     self.tailNumber.hidden = NO;
     self.license.hidden = NO;
     
+    self.passwordTF.hidden = NO;
+    
     self.changeData.hidden = YES;
     self.cancel.hidden = YES;
     self.enterData.hidden = YES;
@@ -263,6 +267,39 @@
     if(self.hasPilotInfo)
         self.cancelDataCollection.hidden = NO;
 }
+
+-(void)validateUser
+{
+    
+    if([self.appDelegate isConnectedToInternet])
+    {
+        static BOOL passwordObtained = NO;
+        
+        if(!passwordObtained)
+        {
+            self.actualPassword = [self.appDelegate getApplicationPassword];
+            passwordObtained = YES;
+        }
+        
+        NSString * userPassword = self.passwordTF.text;
+        
+        if([self.actualPassword isEqualToString:userPassword])
+           [self presentTabs];
+        else
+        {
+            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Login failed!!" message:@"Please enter correct password to access the application" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+    
+    }
+    else
+    {
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"No internet!!" message:@"Make sure you have a working internet connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+
 - (void)viewDidUnload {
     [self setHeaderProvideInfo:nil];
     [self setHeaderWelcome:nil];

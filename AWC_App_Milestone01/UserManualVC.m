@@ -7,11 +7,11 @@
 //
 
 #import "UserManualVC.h"
-#import "AWCAppDelegate.h"
+#import "AppDelegate.h"
 
 @interface UserManualVC ()
 
-@property AWCAppDelegate * appDelegate;
+@property AppDelegate * appDelegate;
 
 @end
 
@@ -53,7 +53,7 @@
     }
     else
     {
-        NSLog(@"Internet available");
+        //NSLog(@"Internet available");
         NSURLRequest * request = [NSURLRequest requestWithURL:blogURL];
         
         [self.webView loadRequest:request];

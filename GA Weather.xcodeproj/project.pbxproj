@@ -161,7 +161,7 @@
 		75CF43EF17F8D34700CCF4F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75CF43EE17F8D34700CCF4F0 /* CoreGraphics.framework */; };
 		75CF43F517F8D34700CCF4F0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75CF43F317F8D34700CCF4F0 /* InfoPlist.strings */; };
 		75CF43F717F8D34700CCF4F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CF43F617F8D34700CCF4F0 /* main.m */; };
-		75CF43FB17F8D34700CCF4F0 /* AWCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CF43FA17F8D34700CCF4F0 /* AWCAppDelegate.m */; };
+		75CF43FB17F8D34700CCF4F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CF43FA17F8D34700CCF4F0 /* AppDelegate.m */; };
 		75CF43FD17F8D34700CCF4F0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 75CF43FC17F8D34700CCF4F0 /* Default.png */; };
 		75CF43FF17F8D34700CCF4F0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 75CF43FE17F8D34700CCF4F0 /* Default@2x.png */; };
 		75CF440117F8D34700CCF4F0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 75CF440017F8D34700CCF4F0 /* Default-568h@2x.png */; };
@@ -180,6 +180,8 @@
 		75D9D777183206C1000C640C /* DisplayMetars.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D9D775183206C1000C640C /* DisplayMetars.m */; };
 		75D9D778183206C1000C640C /* DisplayMetars.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75D9D776183206C1000C640C /* DisplayMetars.xib */; };
 		75F1115F1910DA9400E45394 /* UserManualVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F1115E1910DA9400E45394 /* UserManualVC.m */; };
+		75F11163191224D400E45394 /* CancelPIREP.png in Resources */ = {isa = PBXBuildFile; fileRef = 75F11162191224D400E45394 /* CancelPIREP.png */; };
+		75F111651912258000E45394 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F111641912258000E45394 /* Images.xcassets */; };
 		75F13B07181330110051C7B2 /* DisplayPIREP.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F13B051813300F0051C7B2 /* DisplayPIREP.m */; };
 		75F13B08181330110051C7B2 /* DisplayPIREP.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F13B06181330100051C7B2 /* DisplayPIREP.xib */; };
 		75FF64F81814CDB100E18E9E /* GreenBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 75FF64E41814CDB100E18E9E /* GreenBack.png */; };
@@ -193,9 +195,9 @@
 		75002BBF1809E8780031F4C1 /* Pirep.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pirep.m; sourceTree = "<group>"; };
 		75039FAD1847F42F00BF48C9 /* TabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarVC.h; sourceTree = "<group>"; };
 		75039FAE1847F42F00BF48C9 /* TabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarVC.m; sourceTree = "<group>"; };
-		750559BA18C414F200028670 /* Loading 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Loading 01.png"; sourceTree = "<group>"; };
-		750559BB18C414F200028670 /* Loading 02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Loading 02.png"; sourceTree = "<group>"; };
-		750559BC18C414F200028670 /* Loading_Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Loading_Background.png; sourceTree = "<group>"; };
+		750559BA18C414F200028670 /* Loading 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Loading 01.png"; path = "../Loading 01.png"; sourceTree = "<group>"; };
+		750559BB18C414F200028670 /* Loading 02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Loading 02.png"; path = "../Loading 02.png"; sourceTree = "<group>"; };
+		750559BC18C414F200028670 /* Loading_Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Loading_Background.png; path = ../Loading_Background.png; sourceTree = "<group>"; };
 		7516E55A183C014000DAACBD /* PIREP_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PIREP_02.png; sourceTree = "<group>"; };
 		7516E55C183C036600DAACBD /* PIREP_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PIREP_04.png; sourceTree = "<group>"; };
 		75385B3E190662D60094C4D1 /* User.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = User.png; sourceTree = "<group>"; };
@@ -350,16 +352,16 @@
 		75CD3E19190F38F6007CD5F3 /* TimeGroupsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeGroupsVC.h; sourceTree = "<group>"; };
 		75CD3E1A190F38F6007CD5F3 /* TimeGroupsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeGroupsVC.m; sourceTree = "<group>"; };
 		75CD3E1B190F38F6007CD5F3 /* TimeGroupsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeGroupsVC.xib; sourceTree = "<group>"; };
-		75CF43E717F8D34700CCF4F0 /* NWMSU_AWC_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NWMSU_AWC_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		75CF43E717F8D34700CCF4F0 /* GA Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GA Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		75CF43EA17F8D34700CCF4F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		75CF43EC17F8D34700CCF4F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		75CF43EE17F8D34700CCF4F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		75CF43F217F8D34700CCF4F0 /* NWMSU_AWC_App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NWMSU_AWC_App-Info.plist"; sourceTree = "<group>"; };
+		75CF43F217F8D34700CCF4F0 /* GA Weather-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GA Weather-Info.plist"; sourceTree = "<group>"; };
 		75CF43F417F8D34700CCF4F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		75CF43F617F8D34700CCF4F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		75CF43F817F8D34700CCF4F0 /* NWMSU_AWC_App-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NWMSU_AWC_App-Prefix.pch"; sourceTree = "<group>"; };
-		75CF43F917F8D34700CCF4F0 /* AWCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWCAppDelegate.h; sourceTree = "<group>"; };
-		75CF43FA17F8D34700CCF4F0 /* AWCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWCAppDelegate.m; sourceTree = "<group>"; };
+		75CF43F817F8D34700CCF4F0 /* GA Weather-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GA Weather-Prefix.pch"; sourceTree = "<group>"; };
+		75CF43F917F8D34700CCF4F0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		75CF43FA17F8D34700CCF4F0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		75CF43FC17F8D34700CCF4F0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		75CF43FE17F8D34700CCF4F0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		75CF440017F8D34700CCF4F0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -385,6 +387,8 @@
 		75D9D776183206C1000C640C /* DisplayMetars.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisplayMetars.xib; sourceTree = "<group>"; };
 		75F1115D1910DA9400E45394 /* UserManualVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManualVC.h; sourceTree = "<group>"; };
 		75F1115E1910DA9400E45394 /* UserManualVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManualVC.m; sourceTree = "<group>"; };
+		75F11162191224D400E45394 /* CancelPIREP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CancelPIREP.png; sourceTree = "<group>"; };
+		75F111641912258000E45394 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = NWMSU_AWC_App/Images.xcassets; sourceTree = "<group>"; };
 		75F13B041813300F0051C7B2 /* DisplayPIREP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayPIREP.h; sourceTree = "<group>"; };
 		75F13B051813300F0051C7B2 /* DisplayPIREP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayPIREP.m; sourceTree = "<group>"; };
 		75F13B06181330100051C7B2 /* DisplayPIREP.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisplayPIREP.xib; sourceTree = "<group>"; };
@@ -411,6 +415,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7504E824191229C100EC5435 /* Old icons and launch images */ = {
+			isa = PBXGroup;
+			children = (
+				75809375184F280D00DFA866 /* NWMSU_AWC_Original_Icon_Image_02.png */,
+				75809373184F280800DFA866 /* NWMSU_AWC_Original_Icon_Image_01.png */,
+				75B7EB89184C1C9700AB52D0 /* Default-Landscape@2x~ipad.png */,
+				75B7EB87184C1C9200AB52D0 /* Default-Landscape~ipad.png */,
+				75B7EB85184C1C8800AB52D0 /* Default-Portrait@2x~ipad.png */,
+				75B7EB83184C1A7900AB52D0 /* Default-Portrait~ipad.png */,
+			);
+			name = "Old icons and launch images";
+			sourceTree = "<group>";
+		};
 		756A27EF18B1FF1B00100665 /* Custom Pins */ = {
 			isa = PBXGroup;
 			children = (
@@ -557,16 +574,9 @@
 		75CF43DE17F8D34700CCF4F0 = {
 			isa = PBXGroup;
 			children = (
-				75809375184F280D00DFA866 /* NWMSU_AWC_Original_Icon_Image_02.png */,
-				75809373184F280800DFA866 /* NWMSU_AWC_Original_Icon_Image_01.png */,
-				75B7EB89184C1C9700AB52D0 /* Default-Landscape@2x~ipad.png */,
-				75B7EB87184C1C9200AB52D0 /* Default-Landscape~ipad.png */,
-				75B7EB85184C1C8800AB52D0 /* Default-Portrait@2x~ipad.png */,
-				75B7EB83184C1A7900AB52D0 /* Default-Portrait~ipad.png */,
-				750559BA18C414F200028670 /* Loading 01.png */,
-				750559BB18C414F200028670 /* Loading 02.png */,
-				750559BC18C414F200028670 /* Loading_Background.png */,
-				75CF43F017F8D34700CCF4F0 /* AWC_App_Milestone01 */,
+				75F111641912258000E45394 /* Images.xcassets */,
+				7504E824191229C100EC5435 /* Old icons and launch images */,
+				75CF43F017F8D34700CCF4F0 /* GA Weather */,
 				75CF43E917F8D34700CCF4F0 /* Frameworks */,
 				75CF43E817F8D34700CCF4F0 /* Products */,
 			);
@@ -575,7 +585,7 @@
 		75CF43E817F8D34700CCF4F0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				75CF43E717F8D34700CCF4F0 /* NWMSU_AWC_App.app */,
+				75CF43E717F8D34700CCF4F0 /* GA Weather.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -592,7 +602,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		75CF43F017F8D34700CCF4F0 /* AWC_App_Milestone01 */ = {
+		75CF43F017F8D34700CCF4F0 /* GA Weather */ = {
 			isa = PBXGroup;
 			children = (
 				75D9D73A1830B081000C640C /* PIREP */,
@@ -600,8 +610,8 @@
 				75D9D77018320512000C640C /* METAR */,
 				75B7EB8D184D526800AB52D0 /* TAF */,
 				75B7EBE3184D72E500AB52D0 /* HAZARD */,
-				75CF43F917F8D34700CCF4F0 /* AWCAppDelegate.h */,
-				75CF43FA17F8D34700CCF4F0 /* AWCAppDelegate.m */,
+				75CF43F917F8D34700CCF4F0 /* AppDelegate.h */,
+				75CF43FA17F8D34700CCF4F0 /* AppDelegate.m */,
 				75CF440217F8D34700CCF4F0 /* MainStoryboard.storyboard */,
 				75CF440817F8D34700CCF4F0 /* first.png */,
 				75CF440A17F8D34700CCF4F0 /* first@2x.png */,
@@ -609,16 +619,17 @@
 				75CF441117F8D34700CCF4F0 /* second@2x.png */,
 				75CF43F117F8D34700CCF4F0 /* Supporting Files */,
 			);
+			name = "GA Weather";
 			path = AWC_App_Milestone01;
 			sourceTree = "<group>";
 		};
 		75CF43F117F8D34700CCF4F0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				75CF43F217F8D34700CCF4F0 /* NWMSU_AWC_App-Info.plist */,
+				75CF43F217F8D34700CCF4F0 /* GA Weather-Info.plist */,
 				75CF43F317F8D34700CCF4F0 /* InfoPlist.strings */,
 				75CF43F617F8D34700CCF4F0 /* main.m */,
-				75CF43F817F8D34700CCF4F0 /* NWMSU_AWC_App-Prefix.pch */,
+				75CF43F817F8D34700CCF4F0 /* GA Weather-Prefix.pch */,
 				75CF43FC17F8D34700CCF4F0 /* Default.png */,
 				75CF43FE17F8D34700CCF4F0 /* Default@2x.png */,
 				75CF440017F8D34700CCF4F0 /* Default-568h@2x.png */,
@@ -643,6 +654,9 @@
 				754D1DEB18628ADD00A88E58 /* PIREP_05.png */,
 				75385B3E190662D60094C4D1 /* User.png */,
 				75D1B71A18AA957B00EDD7BD /* UserPirep.png */,
+				750559BA18C414F200028670 /* Loading 01.png */,
+				750559BB18C414F200028670 /* Loading 02.png */,
+				750559BC18C414F200028670 /* Loading_Background.png */,
 			);
 			name = PIREP;
 			sourceTree = "<group>";
@@ -707,6 +721,7 @@
 				75385B40190662FA0094C4D1 /* Send PIREP.png */,
 				75385B41190662FA0094C4D1 /* Simplified PIREP.png */,
 				758099F218F27F160087A09A /* Send.png */,
+				75F11162191224D400E45394 /* CancelPIREP.png */,
 				758099F318F27F160087A09A /* TURB_GRT.png */,
 				758099F418F27F160087A09A /* TURB_LGT.png */,
 				758099F518F27F160087A09A /* TURB_MOD.png */,
@@ -728,9 +743,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		75CF43E617F8D34700CCF4F0 /* NWMSU_AWC_App */ = {
+		75CF43E617F8D34700CCF4F0 /* GA Weather */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 75CF441517F8D34700CCF4F0 /* Build configuration list for PBXNativeTarget "NWMSU_AWC_App" */;
+			buildConfigurationList = 75CF441517F8D34700CCF4F0 /* Build configuration list for PBXNativeTarget "GA Weather" */;
 			buildPhases = (
 				75CF43E317F8D34700CCF4F0 /* Sources */,
 				75CF43E417F8D34700CCF4F0 /* Frameworks */,
@@ -740,9 +755,9 @@
 			);
 			dependencies = (
 			);
-			name = NWMSU_AWC_App;
+			name = "GA Weather";
 			productName = AWC_App_Milestone01;
-			productReference = 75CF43E717F8D34700CCF4F0 /* NWMSU_AWC_App.app */;
+			productReference = 75CF43E717F8D34700CCF4F0 /* GA Weather.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -760,7 +775,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 75CF43E217F8D34700CCF4F0 /* Build configuration list for PBXProject "NWMSU_AWC_App" */;
+			buildConfigurationList = 75CF43E217F8D34700CCF4F0 /* Build configuration list for PBXProject "GA Weather" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -772,7 +787,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				75CF43E617F8D34700CCF4F0 /* NWMSU_AWC_App */,
+				75CF43E617F8D34700CCF4F0 /* GA Weather */,
 			);
 		};
 /* End PBXProject section */
@@ -798,6 +813,7 @@
 				758099E018F278BA0087A09A /* SelectedTab.png in Resources */,
 				75809A0B18F27F160087A09A /* TURB_NONE.png in Resources */,
 				75F13B08181330110051C7B2 /* DisplayPIREP.xib in Resources */,
+				75F11163191224D400E45394 /* CancelPIREP.png in Resources */,
 				75FF64F81814CDB100E18E9E /* GreenBack.png in Resources */,
 				75FF65011814CDB100E18E9E /* RedBack.png in Resources */,
 				756A280218B201BB00100665 /* BluePin.png in Resources */,
@@ -826,6 +842,7 @@
 				754D1D9A186288E700A88E58 /* -GR.png in Resources */,
 				754D1D9B186288E700A88E58 /* -GS.png in Resources */,
 				75809A0718F27F160087A09A /* Send.png in Resources */,
+				75F111651912258000E45394 /* Images.xcassets in Resources */,
 				754D1D9C186288E700A88E58 /* -RA.png in Resources */,
 				75809A0118F27F160087A09A /* ICING_RIME.png in Resources */,
 				754D1D9D186288E700A88E58 /* -RASN.png in Resources */,
@@ -945,7 +962,7 @@
 			files = (
 				752ACD5E180BA2C800E5BBB5 /* Pirep.m in Sources */,
 				75CF43F717F8D34700CCF4F0 /* main.m in Sources */,
-				75CF43FB17F8D34700CCF4F0 /* AWCAppDelegate.m in Sources */,
+				75CF43FB17F8D34700CCF4F0 /* AppDelegate.m in Sources */,
 				75CF440717F8D34700CCF4F0 /* PIREP_View_Tab.m in Sources */,
 				75CF440E17F8D34700CCF4F0 /* PIREP_Send_Tab.m in Sources */,
 				75CF441C17F8DE1000CCF4F0 /* Annotation.m in Sources */,
@@ -1052,12 +1069,14 @@
 		75CF441617F8D34700CCF4F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AWC_App_Milestone01/NWMSU_AWC_App-Prefix.pch";
-				INFOPLIST_FILE = "AWC_App_Milestone01/NWMSU_AWC_App-Info.plist";
+				GCC_PREFIX_HEADER = "AWC_App_Milestone01/GA Weather-Prefix.pch";
+				INFOPLIST_FILE = "AWC_App_Milestone01/GA Weather-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = NWMSU_AWC_App;
+				PRODUCT_NAME = "GA Weather";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1066,12 +1085,14 @@
 		75CF441717F8D34700CCF4F0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AWC_App_Milestone01/NWMSU_AWC_App-Prefix.pch";
-				INFOPLIST_FILE = "AWC_App_Milestone01/NWMSU_AWC_App-Info.plist";
+				GCC_PREFIX_HEADER = "AWC_App_Milestone01/GA Weather-Prefix.pch";
+				INFOPLIST_FILE = "AWC_App_Milestone01/GA Weather-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = NWMSU_AWC_App;
+				PRODUCT_NAME = "GA Weather";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
@@ -1081,7 +1102,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		75CF43E217F8D34700CCF4F0 /* Build configuration list for PBXProject "NWMSU_AWC_App" */ = {
+		75CF43E217F8D34700CCF4F0 /* Build configuration list for PBXProject "GA Weather" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				75CF441317F8D34700CCF4F0 /* Debug */,
@@ -1090,7 +1111,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		75CF441517F8D34700CCF4F0 /* Build configuration list for PBXNativeTarget "NWMSU_AWC_App" */ = {
+		75CF441517F8D34700CCF4F0 /* Build configuration list for PBXNativeTarget "GA Weather" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				75CF441617F8D34700CCF4F0 /* Debug */,

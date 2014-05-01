@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:NWMSU_AWC_App.xcodeproj">
+      location = "self:GA Weather.xcodeproj">
    </FileRef>
 </Workspace>

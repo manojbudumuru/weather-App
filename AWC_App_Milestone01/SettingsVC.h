@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AWCAppDelegate.h"
+#import "AppDelegate.h"
 
 @interface SettingsVC : UIViewController <UITextFieldDelegate>
 
@@ -18,7 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *existingInfo;
 
 - (IBAction)saveData:(id)sender;
-@property AWCAppDelegate * appDelegate;
+@property AppDelegate * appDelegate;
 @property NSMutableArray * info;
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *header;

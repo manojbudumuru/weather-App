@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MapKit/MapKit.h"
-#import "AWCAppDelegate.h"
+#import "AppDelegate.h"
 
 //This class is used to display the various PIREPs on the map.
 

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Satish Kumar Baswapuram. All rights reserved.
 //
 
-#import "AWCAppDelegate.h"
+#import "AppDelegate.h"
 
-@implementation AWCAppDelegate
+@implementation AppDelegate
 
 @synthesize flightInformation;
 
@@ -87,6 +87,22 @@
         [[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
     else
         self.timeGroups = [[NSMutableArray alloc]initWithContentsOfFile:filePath];
+}
+
+//This method will retrieve the application password that each user must enter to access this app.
+-(NSString *)getApplicationPassword
+{
+    //NSURL * passwordURL = [NSURL URLWithString:@"https://dl.dropboxusercontent.com/s/y7gxs251cuvaw3h/password.json?dl=1&token_hash=AAHhKQBFtwG2OsSId3ROpEQsc_zZGCeTGbHQRwX4bVCi0g"];
+    NSURL * passwordURL = [NSURL URLWithString:@"https://docs.google.com/document/d/1hoKxvD-7gNkUGVj0nzOeJbCEDDoYvRc59GSrmj84SPg/export?format=txt&id=1hoKxvD-7gNkUGVj0nzOeJbCEDDoYvRc59GSrmj84SPg"];
+    NSData * passwordData = [NSData dataWithContentsOfURL:passwordURL];
+    NSError * error = nil;
+    NSDictionary * passwordDictionary = [NSJSONSerialization JSONObjectWithData:passwordData options:0 error:&error];
+    
+    NSString * password = passwordDictionary[@"password"];
+    
+    NSLog(@"Password: %@",password);
+    
+    return password;
 }
 				
 - (void)applicationWillResignActive:(UIApplication *)application

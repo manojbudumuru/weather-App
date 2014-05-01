@@ -8,7 +8,7 @@
 
 #import "DisplayMetars.h"
 #import "Metar.h"
-#import "AWCAppDelegate.h"
+#import "AppDelegate.h"
 
 #define CELL_HEIGHT 45
 #define RAWDATACELL_HEIGHT 90
@@ -19,7 +19,7 @@
 @property Metar * myMetar;
 @property NSMutableArray * key;
 @property NSMutableArray * value;
-@property AWCAppDelegate * appDelegate;
+@property AppDelegate * appDelegate;
 @property NSString * metarId;
 
 @end

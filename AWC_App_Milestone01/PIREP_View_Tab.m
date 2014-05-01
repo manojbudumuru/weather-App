@@ -11,7 +11,7 @@
 #import "DisplayPIREP.h"
 #import "UserPirep.h"
 #import <CoreLocation/CoreLocation.h>
-#import "AWCAppDelegate.h"
+#import "AppDelegate.h"
 
 @interface PIREP_View_Tab ()
 
@@ -19,7 +19,7 @@
 
 @property BOOL mapLoaded;
 @property BOOL annotationsAdded;
-@property AWCAppDelegate * appDelegate;
+@property AppDelegate * appDelegate;
 
 @end
 
@@ -43,7 +43,7 @@
 //Change the background of the view and header to reflect the theme of the application. Update the time label.
 -(void)viewWillAppear:(BOOL)animated
 {
-    AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
     
     self.view.backgroundColor = appDelegate.awcColor;
     [self.header setBarTintColor:appDelegate.awcColor];
@@ -64,7 +64,7 @@
 -(void)initializeData
 {
    
-    AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
     
     if([appDelegate isConnectedToInternet])
     {

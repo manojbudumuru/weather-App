@@ -60,7 +60,7 @@
 //Set the view background color and header color to reflect the theme of the app.
 -(void)viewWillAppear:(BOOL)animated
 {
-    AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
     self.view.backgroundColor = appDelegate.awcColor;
     [self.header setBarTintColor:appDelegate.awcColor];
     [self.header setTintColor:[UIColor whiteColor]];
@@ -135,7 +135,7 @@
 -(void)initializeData
 {
 
-    AWCAppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
     
     if([appDelegate isConnectedToInternet])
     
@@ -206,9 +206,9 @@
 //Handle action when a segment button is clicked.
 -(IBAction)segmentActions:(id)sender
 {
-    NSLog(@"Previous Index: %d",self.selectedIndex);
+    //NSLog(@"Previous Index: %d",self.selectedIndex);
     self.selectedIndex = (int)self.hazardsSegmentedControl.selectedSegmentIndex;
-    NSLog(@"Selected: %d",self.selectedIndex);
+    //NSLog(@"Selected: %d",self.selectedIndex);
     switch (self.selectedIndex) {
         case 0: [self genericButton:nil];
                 break;
