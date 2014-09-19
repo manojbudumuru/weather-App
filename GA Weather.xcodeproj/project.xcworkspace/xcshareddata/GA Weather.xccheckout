@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A811741E-9429-40A1-9DF0-537B1F4FFFF6</string>
+	<key>IDESourceControlProjectName</key>
+	<string>GA Weather</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>B580D2E9-432E-497A-B30B-D5B7D4FAC10C</key>
+		<string>https://bitbucket.org/dmonismi/nwmsu_awc.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>GA Weather.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>B580D2E9-432E-497A-B30B-D5B7D4FAC10C</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/dmonismi/nwmsu_awc.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B580D2E9-432E-497A-B30B-D5B7D4FAC10C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B580D2E9-432E-497A-B30B-D5B7D4FAC10C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>NWMSU AWC</string>
+		</dict>
+	</array>
+</dict>
+</plist>
