@@ -370,12 +370,12 @@
     
     if(self.chopPosition==-1)
     {
-        [self.pirepData addObject:@"CHOP SEVR/GRT"];
+        [self.pirepData addObject:@"CHOP SEVERE"];
         self.chopPosition = [self.pirepData count]-1;
     }
     else
     {
-        [self.pirepData setObject:@"CHOP SEVR/GRT" atIndexedSubscript:self.chopPosition];
+        [self.pirepData setObject:@"CHOP SEVERE" atIndexedSubscript:self.chopPosition];
     }
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
@@ -570,11 +570,11 @@
     
     if(self.turbPosition==-1)
     {
-        [self.pirepData addObject:@"TURB SEVR/GRT"];
+        [self.pirepData addObject:@"TURB SEVERE"];
         self.turbPosition = [self.pirepData count]-1;
     }
     else
-        [self.pirepData setObject:@"TURB SEVR/GRT" atIndexedSubscript:self.turbPosition];
+        [self.pirepData setObject:@"TURB SEVERE" atIndexedSubscript:self.turbPosition];
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
     
@@ -756,11 +756,11 @@
     
     if(self.mtnPosition==-1)
     {
-        [self.pirepData addObject:@"MTN WAVE SEVR/GRT"];
+        [self.pirepData addObject:@"MTN WAVE SEVERE"];
         self.mtnPosition = [self.pirepData count]-1;
     }
     else
-        [self.pirepData setObject:@"MTN WAVE SEVR/GRT" atIndexedSubscript:self.mtnPosition];
+        [self.pirepData setObject:@"MTN WAVE SEVERE" atIndexedSubscript:self.mtnPosition];
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
     
@@ -1147,9 +1147,9 @@
     NSString * iceInfo = nil;
     
     if(![self.iceLevel isEqualToString:@""])
-        iceInfo = [NSString stringWithFormat:@"%@ SEVR/GRT",self.iceLevel];
+        iceInfo = [NSString stringWithFormat:@"%@ SEVERE",self.iceLevel];
     else
-        iceInfo = @"ICE SEVR/GRT";
+        iceInfo = @"ICE SEVERE";
     
     if(self.icePosition==-1)
     {
