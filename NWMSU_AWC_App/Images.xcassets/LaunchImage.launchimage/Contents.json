@@ -5,7 +5,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "General Aviation Weather Launch Image.png",
+      "filename" : "AWC_LaunchImage.png",
       "scale" : "1x"
     },
     {
@@ -20,7 +20,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "General Aviation Weather Launch Image HD.png",
+      "filename" : "AWC_LaunchImage-1.png",
       "scale" : "2x"
     },
     {
@@ -34,7 +34,7 @@
       "orientation" : "portrait",
       "idiom" : "ipad",
       "extent" : "to-status-bar",
-      "filename" : "General Aviation Weather Launch Image 01.png",
+      "filename" : "AWC_LaunchImage-2.png",
       "scale" : "1x"
     },
     {
@@ -47,7 +47,7 @@
       "orientation" : "portrait",
       "idiom" : "ipad",
       "extent" : "to-status-bar",
-      "filename" : "General Aviation Weather Launch Image HD 01.png",
+      "filename" : "AWC_LaunchImage-3.png",
       "scale" : "2x"
     },
     {
