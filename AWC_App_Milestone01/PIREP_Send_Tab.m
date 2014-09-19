@@ -370,12 +370,12 @@
     
     if(self.chopPosition==-1)
     {
-        [self.pirepData addObject:@"CHOP SEV/GRT"];
+        [self.pirepData addObject:@"CHOP SEVR/GRT"];
         self.chopPosition = [self.pirepData count]-1;
     }
     else
     {
-        [self.pirepData setObject:@"CHOP SEV/GRT" atIndexedSubscript:self.chopPosition];
+        [self.pirepData setObject:@"CHOP SEVR/GRT" atIndexedSubscript:self.chopPosition];
     }
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
@@ -570,11 +570,11 @@
     
     if(self.turbPosition==-1)
     {
-        [self.pirepData addObject:@"TURB SEV/GRT"];
+        [self.pirepData addObject:@"TURB SEVR/GRT"];
         self.turbPosition = [self.pirepData count]-1;
     }
     else
-        [self.pirepData setObject:@"TURB SEV/GRT" atIndexedSubscript:self.turbPosition];
+        [self.pirepData setObject:@"TURB SEVR/GRT" atIndexedSubscript:self.turbPosition];
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
     
@@ -756,11 +756,11 @@
     
     if(self.mtnPosition==-1)
     {
-        [self.pirepData addObject:@"MTN WAVE SEV/GRT"];
+        [self.pirepData addObject:@"MTN WAVE SEVR/GRT"];
         self.mtnPosition = [self.pirepData count]-1;
     }
     else
-        [self.pirepData setObject:@"MTN WAVE SEV/GRT" atIndexedSubscript:self.mtnPosition];
+        [self.pirepData setObject:@"MTN WAVE SEVR/GRT" atIndexedSubscript:self.mtnPosition];
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
     
@@ -1147,9 +1147,9 @@
     NSString * iceInfo = nil;
     
     if(![self.iceLevel isEqualToString:@""])
-        iceInfo = [NSString stringWithFormat:@"%@ SEV/GRT",self.iceLevel];
+        iceInfo = [NSString stringWithFormat:@"%@ SEVR/GRT",self.iceLevel];
     else
-        iceInfo = @"ICE SEV/GRT";
+        iceInfo = @"ICE SEVR/GRT";
     
     if(self.icePosition==-1)
     {
@@ -1330,6 +1330,13 @@
             UIAlertView * sentAlert = [[UIAlertView alloc]initWithTitle:@"PIREP Sent" message:self.presentPirep delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
             [sentAlert show];
             [self performSelector:@selector(remAlert:) withObject:sentAlert afterDelay:2];
+            //edit2014
+            //NSLog(@"Hit Yes!!!");
+//            PIREP_View_Tab * pirepMapVC;
+//            pirepMapVC = [[PIREP_View_Tab alloc]initWithNibName:@"Pirepmap" bundle:nil];
+//            [self presentModalViewController:pirepMapVC animated:YES];
+            //[pirepMapVC release];
+            
             
         }
         if(buttonIndex == 1)

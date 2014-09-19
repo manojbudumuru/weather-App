@@ -10,6 +10,7 @@
 #import "MapKit/MapKit.h"
 #import "FlightInfo.h"
 #import "AppDelegate.h"
+#import "PIREP_View_Tab.h"//edit2014
 
 @interface PIREP_Send_Tab : UIViewController <CLLocationManagerDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 

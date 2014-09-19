@@ -20,6 +20,8 @@
 @property BOOL mapLoaded;
 @property BOOL annotationsAdded;
 @property AppDelegate * appDelegate;
+@property double latIn;
+@property double longIn;
 
 @end
 
@@ -292,12 +294,20 @@
         pirep.coordinate = CLLocationCoordinate2DMake([pirep.locationLatitude doubleValue], [pirep.locationLongitude doubleValue]);
         
         [self.pireps addObject:pirep];
-        
+        self.latIn = pirep.coordinate.latitude;
+        self.longIn = pirep.coordinate.longitude;
         //NSLog(@"I am at location : [%f,%f]",pirep.coordinate.latitude,pirep.coordinate.longitude);
         
     }
     
     [self.displayMap addAnnotations:self.pireps];
 }
-
+//edit2014
+- (IBAction)zoomIn:(id)sender {
+    
+    NSLog(@"I am at location : [%f,%f]",self.latIn,self.longIn);
+    self.displayMap.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(self.latIn,self.longIn), MKCoordinateSpanMake(0.04504504504, 0.04504504504));
+    
+}
+//edit2014 End
 @end
