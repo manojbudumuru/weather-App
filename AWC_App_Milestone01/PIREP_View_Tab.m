@@ -22,6 +22,9 @@
 @property AppDelegate * appDelegate;
 @property double latIn;
 @property double longIn;
+@property MKCoordinateRegion beforeZoom;//edit2014
+@property int check;
+
 
 @end
 
@@ -40,6 +43,14 @@
 
     
     self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
+    //edit2014
+    
+    self.button = [UIImage imageNamed:@"zoomIn.png"];
+    [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
+    [self.zoom addTarget:self action:@selector(zoomIn) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.check = 0;
+    //edit2014 end
 }
 
 //Change the background of the view and header to reflect the theme of the application. Update the time label.
@@ -117,6 +128,7 @@
     [self.activityStatus startAnimating];
     self.activityStatus.hidden = NO;
     self.loadingImage.hidden = NO;
+    
 }
 
 //If the map is completely loaded, then set mapLoaded to yes and check if the loading activity indicator needs to be stopped.
@@ -124,6 +136,13 @@
 {
     self.mapLoaded = YES;
     [self stopStatusIndicator];
+    //edit2014
+    if(self.check==0){
+    self.beforeZoom = self.displayMap.region;// Setting the region for Map
+    NSLog(@"Before Zoom In:          %f,%f",self.beforeZoom.span.latitudeDelta,self.beforeZoom.span.longitudeDelta);
+        self.check++;
+    }
+    //edit2014 end
 }
 
 //If the annotations are completely loaded, then set annotationsAdded to yes and check if the loading activity indicator needs to be stopped.
@@ -301,13 +320,34 @@
     }
     
     [self.displayMap addAnnotations:self.pireps];
+    
 }
 //edit2014
-- (IBAction)zoomIn:(id)sender {
+//- (IBAction)zoomIn:(id)sender {
+//    
+//    NSLog(@"I am at location : [%f,%f]",self.latIn,self.longIn);
+//    self.displayMap.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(self.latIn,self.longIn), MKCoordinateSpanMake(0.04504504504, 0.04504504504));
+//    
+//}
+- (void)zoomIn{
     
-    NSLog(@"I am at location : [%f,%f]",self.latIn,self.longIn);
+//    NSLog(@"Before Zoom In:          %f,%f",self.beforeZoom.span.latitudeDelta,self.beforeZoom.span.longitudeDelta);
+//    NSLog(@"Before Zoom In(Region):  %f,%f",self.displayMap.region.span.latitudeDelta,self.displayMap.region.span.longitudeDelta);
     self.displayMap.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(self.latIn,self.longIn), MKCoordinateSpanMake(0.04504504504, 0.04504504504));
-    
+    self.button = [UIImage imageNamed:@"zoomOut.png"];
+    [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
+    //[self.zoom setTitle:@"Zoom Out" forState:UIControlStateNormal];
+    [self.zoom addTarget:self action:@selector(zoomOut) forControlEvents:UIControlEventTouchUpInside];
+}
+-(void)zoomOut{
+    NSLog(@"zoomOut");
+    self.displayMap.region = MKCoordinateRegionMake(self.beforeZoom.center, self.beforeZoom.span);
+    //[self viewDidLoad];
+    [self.zoom addTarget:self action:@selector(zoomIn) forControlEvents:UIControlEventTouchUpInside];
+    //[self.zoom setTitle:@"Zoom In" forState:UIControlStateNormal];
+    self.button = [UIImage imageNamed:@"zoomIn.png"];
+    [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
+    NSLog(@"%f,%f",self.displayMap.region.span.latitudeDelta,self.displayMap.region.span.longitudeDelta);
 }
 //edit2014 End
 @end

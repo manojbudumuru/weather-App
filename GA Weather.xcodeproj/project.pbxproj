@@ -165,7 +165,6 @@
 		75CF43FD17F8D34700CCF4F0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 75CF43FC17F8D34700CCF4F0 /* Default.png */; };
 		75CF43FF17F8D34700CCF4F0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 75CF43FE17F8D34700CCF4F0 /* Default@2x.png */; };
 		75CF440117F8D34700CCF4F0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 75CF440017F8D34700CCF4F0 /* Default-568h@2x.png */; };
-		75CF440417F8D34700CCF4F0 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75CF440217F8D34700CCF4F0 /* MainStoryboard.storyboard */; };
 		75CF440717F8D34700CCF4F0 /* PIREP_View_Tab.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CF440617F8D34700CCF4F0 /* PIREP_View_Tab.m */; };
 		75CF440917F8D34700CCF4F0 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 75CF440817F8D34700CCF4F0 /* first.png */; };
 		75CF440B17F8D34700CCF4F0 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 75CF440A17F8D34700CCF4F0 /* first@2x.png */; };
@@ -188,6 +187,10 @@
 		75FF65011814CDB100E18E9E /* RedBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 75FF64ED1814CDB100E18E9E /* RedBack.png */; };
 		75FF65061814CDB100E18E9E /* YelloBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 75FF64F21814CDB100E18E9E /* YelloBack.png */; };
 		75FF65091815009700E18E9E /* FlightInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FF65081815009700E18E9E /* FlightInfo.m */; };
+		CAEA69C219D2845A00BDD8EA /* zoomIn.png in Resources */ = {isa = PBXBuildFile; fileRef = CAEA69C019D2845A00BDD8EA /* zoomIn.png */; };
+		CAEA69C319D2845A00BDD8EA /* zoomOut.png in Resources */ = {isa = PBXBuildFile; fileRef = CAEA69C119D2845A00BDD8EA /* zoomOut.png */; };
+		CAEA69C519D2882300BDD8EA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAEA69C419D2882300BDD8EA /* MainStoryboard.storyboard */; };
+		CAEA69C719D29DB100BDD8EA /* AWC_Login Screen.png in Resources */ = {isa = PBXBuildFile; fileRef = CAEA69C619D29DB100BDD8EA /* AWC_Login Screen.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -365,7 +368,6 @@
 		75CF43FC17F8D34700CCF4F0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		75CF43FE17F8D34700CCF4F0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		75CF440017F8D34700CCF4F0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		75CF440317F8D34700CCF4F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		75CF440517F8D34700CCF4F0 /* PIREP_View_Tab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIREP_View_Tab.h; sourceTree = "<group>"; };
 		75CF440617F8D34700CCF4F0 /* PIREP_View_Tab.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIREP_View_Tab.m; sourceTree = "<group>"; };
 		75CF440817F8D34700CCF4F0 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
@@ -397,6 +399,10 @@
 		75FF64F21814CDB100E18E9E /* YelloBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YelloBack.png; sourceTree = "<group>"; };
 		75FF65071815009700E18E9E /* FlightInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlightInfo.h; sourceTree = "<group>"; };
 		75FF65081815009700E18E9E /* FlightInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlightInfo.m; sourceTree = "<group>"; };
+		CAEA69C019D2845A00BDD8EA /* zoomIn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zoomIn.png; path = ../../../../Downloads/zoomIn.png; sourceTree = "<group>"; };
+		CAEA69C119D2845A00BDD8EA /* zoomOut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zoomOut.png; path = ../../../../Downloads/zoomOut.png; sourceTree = "<group>"; };
+		CAEA69C419D2882300BDD8EA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		CAEA69C619D29DB100BDD8EA /* AWC_Login Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AWC_Login Screen.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,6 +424,7 @@
 		7504E824191229C100EC5435 /* Old icons and launch images */ = {
 			isa = PBXGroup;
 			children = (
+				CAEA69C619D29DB100BDD8EA /* AWC_Login Screen.png */,
 				75809375184F280D00DFA866 /* NWMSU_AWC_Original_Icon_Image_02.png */,
 				75809373184F280800DFA866 /* NWMSU_AWC_Original_Icon_Image_01.png */,
 				75B7EB89184C1C9700AB52D0 /* Default-Landscape@2x~ipad.png */,
@@ -612,11 +619,11 @@
 				75B7EBE3184D72E500AB52D0 /* HAZARD */,
 				75CF43F917F8D34700CCF4F0 /* AppDelegate.h */,
 				75CF43FA17F8D34700CCF4F0 /* AppDelegate.m */,
-				75CF440217F8D34700CCF4F0 /* MainStoryboard.storyboard */,
 				75CF440817F8D34700CCF4F0 /* first.png */,
 				75CF440A17F8D34700CCF4F0 /* first@2x.png */,
 				75CF440F17F8D34700CCF4F0 /* second.png */,
 				75CF441117F8D34700CCF4F0 /* second@2x.png */,
+				CAEA69C419D2882300BDD8EA /* MainStoryboard.storyboard */,
 				75CF43F117F8D34700CCF4F0 /* Supporting Files */,
 			);
 			name = "GA Weather";
@@ -642,6 +649,8 @@
 			children = (
 				75CF440517F8D34700CCF4F0 /* PIREP_View_Tab.h */,
 				75CF440617F8D34700CCF4F0 /* PIREP_View_Tab.m */,
+				CAEA69C019D2845A00BDD8EA /* zoomIn.png */,
+				CAEA69C119D2845A00BDD8EA /* zoomOut.png */,
 				75002BBE1809E8780031F4C1 /* Pirep.h */,
 				75002BBF1809E8780031F4C1 /* Pirep.m */,
 				75D1B71718A9C9FE00EDD7BD /* UserPirep.h */,
@@ -801,7 +810,6 @@
 				75CF43FD17F8D34700CCF4F0 /* Default.png in Resources */,
 				75CF43FF17F8D34700CCF4F0 /* Default@2x.png in Resources */,
 				75CF440117F8D34700CCF4F0 /* Default-568h@2x.png in Resources */,
-				75CF440417F8D34700CCF4F0 /* MainStoryboard.storyboard in Resources */,
 				75CF440917F8D34700CCF4F0 /* first.png in Resources */,
 				75809A0418F27F160087A09A /* MTNWV_LGT.png in Resources */,
 				75CF440B17F8D34700CCF4F0 /* first@2x.png in Resources */,
@@ -825,9 +833,11 @@
 				75B7EAD0184BDDF000AB52D0 /* SHButton.png in Resources */,
 				75B7EB84184C1A7A00AB52D0 /* Default-Portrait~ipad.png in Resources */,
 				75B7EB86184C1C8800AB52D0 /* Default-Portrait@2x~ipad.png in Resources */,
+				CAEA69C319D2845A00BDD8EA /* zoomOut.png in Resources */,
 				75809A0818F27F160087A09A /* TURB_GRT.png in Resources */,
 				75B7EB88184C1C9200AB52D0 /* Default-Landscape~ipad.png in Resources */,
 				75B7EB8A184C1C9700AB52D0 /* Default-Landscape@2x~ipad.png in Resources */,
+				CAEA69C519D2882300BDD8EA /* MainStoryboard.storyboard in Resources */,
 				75B7EB95184D543A00AB52D0 /* DisplayTAF.xib in Resources */,
 				75B7EBEE184D81B900AB52D0 /* white.jpg in Resources */,
 				750559BE18C414F200028670 /* Loading 02.png in Resources */,
@@ -870,6 +880,7 @@
 				754D1DAD186288E700A88E58 /* +RA.png in Resources */,
 				75809A0518F27F160087A09A /* MTNWV_MOD.png in Resources */,
 				754D1DAE186288E700A88E58 /* +SHGR.png in Resources */,
+				CAEA69C219D2845A00BDD8EA /* zoomIn.png in Resources */,
 				754D1DAF186288E700A88E58 /* +SHGS.png in Resources */,
 				754D1DB0186288E700A88E58 /* +SHRA.png in Resources */,
 				758099FF18F27F160087A09A /* ICING_MOD.png in Resources */,
@@ -937,6 +948,7 @@
 				754D1DE0186288E700A88E58 /* TS.png in Resources */,
 				754D1DE1186288E700A88E58 /* TSGR.png in Resources */,
 				756A280318B201BB00100665 /* PinkPin.png in Resources */,
+				CAEA69C719D29DB100BDD8EA /* AWC_Login Screen.png in Resources */,
 				754D1DE2186288E700A88E58 /* TSGS.png in Resources */,
 				758099FE18F27F160087A09A /* ICING_MIXED.png in Resources */,
 				754D1DE3186288E700A88E58 /* TSRA.png in Resources */,
@@ -995,14 +1007,6 @@
 				75CF43F417F8D34700CCF4F0 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		75CF440217F8D34700CCF4F0 /* MainStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				75CF440317F8D34700CCF4F0 /* en */,
-			);
-			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

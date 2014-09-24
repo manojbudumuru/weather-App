@@ -1147,9 +1147,9 @@
     NSString * iceInfo = nil;
     
     if(![self.iceLevel isEqualToString:@""])
-        iceInfo = [NSString stringWithFormat:@"%@ SEVERE",self.iceLevel];
+        iceInfo = [NSString stringWithFormat:@"%@ SEVR",self.iceLevel];
     else
-        iceInfo = @"ICE SEVERE";
+        iceInfo = @"ICE SEVR";
     
     if(self.icePosition==-1)
     {

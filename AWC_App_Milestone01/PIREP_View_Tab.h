@@ -22,7 +22,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *loadingImage;
 
 @property UIPopoverController *popUp;
-- (IBAction)zoomIn:(id)sender;
+//- (IBAction)zoomIn:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *zoom;
+@property UIImage * button;
+
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *header;
 @end

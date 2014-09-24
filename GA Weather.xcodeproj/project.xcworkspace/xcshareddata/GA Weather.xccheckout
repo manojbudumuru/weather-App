@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>A811741E-9429-40A1-9DF0-537B1F4FFFF6</string>
+	<string>95439D51-0383-422E-917E-9F48F06D2AA6</string>
 	<key>IDESourceControlProjectName</key>
 	<string>GA Weather</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>B580D2E9-432E-497A-B30B-D5B7D4FAC10C</key>
-		<string>https://bitbucket.org/dmonismi/nwmsu_awc.git</string>
+		<key>3C74809A-FFDE-402B-A8FA-BC482CA462AB</key>
+		<string>https://bitbucket.org/dmonismi/ads_b_out_project.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>GA Weather.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>B580D2E9-432E-497A-B30B-D5B7D4FAC10C</key>
+		<key>3C74809A-FFDE-402B-A8FA-BC482CA462AB</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://bitbucket.org/dmonismi/nwmsu_awc.git</string>
+	<string>https://bitbucket.org/dmonismi/ads_b_out_project.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>B580D2E9-432E-497A-B30B-D5B7D4FAC10C</string>
+	<string>3C74809A-FFDE-402B-A8FA-BC482CA462AB</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B580D2E9-432E-497A-B30B-D5B7D4FAC10C</string>
+			<string>3C74809A-FFDE-402B-A8FA-BC482CA462AB</string>
 			<key>IDESourceControlWCCName</key>
 			<string>NWMSU AWC</string>
 		</dict>
