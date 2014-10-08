@@ -333,7 +333,7 @@
     
 //    NSLog(@"Before Zoom In:          %f,%f",self.beforeZoom.span.latitudeDelta,self.beforeZoom.span.longitudeDelta);
 //    NSLog(@"Before Zoom In(Region):  %f,%f",self.displayMap.region.span.latitudeDelta,self.displayMap.region.span.longitudeDelta);
-    self.displayMap.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(self.latIn,self.longIn), MKCoordinateSpanMake(0.04504504504, 0.04504504504));
+    self.displayMap.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(self.latIn,self.longIn), MKCoordinateSpanMake(4.347, 4.347));
     self.button = [UIImage imageNamed:@"zoomOut.png"];
     [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
     //[self.zoom setTitle:@"Zoom Out" forState:UIControlStateNormal];

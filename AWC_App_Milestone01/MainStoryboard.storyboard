@@ -142,7 +142,7 @@
                                 <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AWC_Login Screen.png" id="AiR-7o-In6">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AWC_Login Screen1.png" id="AiR-7o-In6">
                                         <rect key="frame" x="0.0" y="-63" width="806" height="1023"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -180,6 +180,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="center" minimumFontSize="17" id="f1w-Sc-Bvb">
                                 <rect key="frame" x="295" y="233" width="179" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="contentStretch" x="0.0" y="0.94999999999999996" width="1" height="1"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -1049,7 +1050,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="AWC_Login Screen.png" width="768" height="1004"/>
+        <image name="AWC_Login Screen1.png" width="768" height="1004"/>
         <image name="CHOP.png" width="400" height="200"/>
         <image name="CHOP_GRT.png" width="400" height="200"/>
         <image name="CHOP_LGT.png" width="400" height="200"/>

@@ -187,8 +187,9 @@
 		75FF65011814CDB100E18E9E /* RedBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 75FF64ED1814CDB100E18E9E /* RedBack.png */; };
 		75FF65061814CDB100E18E9E /* YelloBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 75FF64F21814CDB100E18E9E /* YelloBack.png */; };
 		75FF65091815009700E18E9E /* FlightInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FF65081815009700E18E9E /* FlightInfo.m */; };
-		CAEA69C219D2845A00BDD8EA /* zoomIn.png in Resources */ = {isa = PBXBuildFile; fileRef = CAEA69C019D2845A00BDD8EA /* zoomIn.png */; };
-		CAEA69C319D2845A00BDD8EA /* zoomOut.png in Resources */ = {isa = PBXBuildFile; fileRef = CAEA69C119D2845A00BDD8EA /* zoomOut.png */; };
+		CA08E95719D779A6002A098B /* AWC_Login Screen1.png in Resources */ = {isa = PBXBuildFile; fileRef = CA08E95619D779A6002A098B /* AWC_Login Screen1.png */; };
+		CA08E95A19D77FD2002A098B /* zoomIn.png in Resources */ = {isa = PBXBuildFile; fileRef = CA08E95819D77FD2002A098B /* zoomIn.png */; };
+		CA08E95B19D77FD2002A098B /* zoomOut.png in Resources */ = {isa = PBXBuildFile; fileRef = CA08E95919D77FD2002A098B /* zoomOut.png */; };
 		CAEA69C519D2882300BDD8EA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAEA69C419D2882300BDD8EA /* MainStoryboard.storyboard */; };
 		CAEA69C719D29DB100BDD8EA /* AWC_Login Screen.png in Resources */ = {isa = PBXBuildFile; fileRef = CAEA69C619D29DB100BDD8EA /* AWC_Login Screen.png */; };
 /* End PBXBuildFile section */
@@ -399,8 +400,9 @@
 		75FF64F21814CDB100E18E9E /* YelloBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YelloBack.png; sourceTree = "<group>"; };
 		75FF65071815009700E18E9E /* FlightInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlightInfo.h; sourceTree = "<group>"; };
 		75FF65081815009700E18E9E /* FlightInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlightInfo.m; sourceTree = "<group>"; };
-		CAEA69C019D2845A00BDD8EA /* zoomIn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zoomIn.png; path = ../../../../Downloads/zoomIn.png; sourceTree = "<group>"; };
-		CAEA69C119D2845A00BDD8EA /* zoomOut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zoomOut.png; path = ../../../../Downloads/zoomOut.png; sourceTree = "<group>"; };
+		CA08E95619D779A6002A098B /* AWC_Login Screen1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AWC_Login Screen1.png"; sourceTree = "<group>"; };
+		CA08E95819D77FD2002A098B /* zoomIn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomIn.png; sourceTree = "<group>"; };
+		CA08E95919D77FD2002A098B /* zoomOut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomOut.png; sourceTree = "<group>"; };
 		CAEA69C419D2882300BDD8EA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		CAEA69C619D29DB100BDD8EA /* AWC_Login Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AWC_Login Screen.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -424,6 +426,9 @@
 		7504E824191229C100EC5435 /* Old icons and launch images */ = {
 			isa = PBXGroup;
 			children = (
+				CA08E95819D77FD2002A098B /* zoomIn.png */,
+				CA08E95919D77FD2002A098B /* zoomOut.png */,
+				CA08E95619D779A6002A098B /* AWC_Login Screen1.png */,
 				CAEA69C619D29DB100BDD8EA /* AWC_Login Screen.png */,
 				75809375184F280D00DFA866 /* NWMSU_AWC_Original_Icon_Image_02.png */,
 				75809373184F280800DFA866 /* NWMSU_AWC_Original_Icon_Image_01.png */,
@@ -649,8 +654,6 @@
 			children = (
 				75CF440517F8D34700CCF4F0 /* PIREP_View_Tab.h */,
 				75CF440617F8D34700CCF4F0 /* PIREP_View_Tab.m */,
-				CAEA69C019D2845A00BDD8EA /* zoomIn.png */,
-				CAEA69C119D2845A00BDD8EA /* zoomOut.png */,
 				75002BBE1809E8780031F4C1 /* Pirep.h */,
 				75002BBF1809E8780031F4C1 /* Pirep.m */,
 				75D1B71718A9C9FE00EDD7BD /* UserPirep.h */,
@@ -833,7 +836,6 @@
 				75B7EAD0184BDDF000AB52D0 /* SHButton.png in Resources */,
 				75B7EB84184C1A7A00AB52D0 /* Default-Portrait~ipad.png in Resources */,
 				75B7EB86184C1C8800AB52D0 /* Default-Portrait@2x~ipad.png in Resources */,
-				CAEA69C319D2845A00BDD8EA /* zoomOut.png in Resources */,
 				75809A0818F27F160087A09A /* TURB_GRT.png in Resources */,
 				75B7EB88184C1C9200AB52D0 /* Default-Landscape~ipad.png in Resources */,
 				75B7EB8A184C1C9700AB52D0 /* Default-Landscape@2x~ipad.png in Resources */,
@@ -862,11 +864,13 @@
 				754D1DA1186288E700A88E58 /* -SHRA.png in Resources */,
 				758099E118F278BA0087A09A /* TabBarBackground.png in Resources */,
 				754D1DA2186288E700A88E58 /* -SHRASN.png in Resources */,
+				CA08E95719D779A6002A098B /* AWC_Login Screen1.png in Resources */,
 				754D1DA3186288E700A88E58 /* -SHSN.png in Resources */,
 				754D1DA4186288E700A88E58 /* -SHSNRA.png in Resources */,
 				754D1DA5186288E700A88E58 /* -SN.png in Resources */,
 				754D1DA6186288E700A88E58 /* -TSRA.png in Resources */,
 				75809A0918F27F160087A09A /* TURB_LGT.png in Resources */,
+				CA08E95A19D77FD2002A098B /* zoomIn.png in Resources */,
 				754D1DA7186288E700A88E58 /* -TSSN.png in Resources */,
 				75809A0018F27F160087A09A /* ICING_NONE.png in Resources */,
 				754D1DA8186288E700A88E58 /* +DZ.png in Resources */,
@@ -880,7 +884,6 @@
 				754D1DAD186288E700A88E58 /* +RA.png in Resources */,
 				75809A0518F27F160087A09A /* MTNWV_MOD.png in Resources */,
 				754D1DAE186288E700A88E58 /* +SHGR.png in Resources */,
-				CAEA69C219D2845A00BDD8EA /* zoomIn.png in Resources */,
 				754D1DAF186288E700A88E58 /* +SHGS.png in Resources */,
 				754D1DB0186288E700A88E58 /* +SHRA.png in Resources */,
 				758099FF18F27F160087A09A /* ICING_MOD.png in Resources */,
@@ -940,6 +943,7 @@
 				754D1DDB186288E700A88E58 /* SHSN.png in Resources */,
 				754D1DDC186288E700A88E58 /* SHSNRA.png in Resources */,
 				754D1DDD186288E700A88E58 /* SN.png in Resources */,
+				CA08E95B19D77FD2002A098B /* zoomOut.png in Resources */,
 				754D1DDE186288E700A88E58 /* SQ.png in Resources */,
 				758099F818F27F160087A09A /* CHOP_LGT.png in Resources */,
 				754D1DDF186288E700A88E58 /* SS.png in Resources */,

@@ -110,6 +110,7 @@
     //NSLog(@"Present Info: %@\n Splitd:\n%@\n%@\n%@\n%@",self.fData,data[0],data[1],data[2],data[3]);
     
     NSLog(@"Present Info: *%@*",self.fData);
+    NSLog(@"File Path: %@",self.fPath);
     
     if([self.fData isEqualToString:@"(null)"] || [self.fData isEqualToString:@""])
     {
