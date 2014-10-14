@@ -40,8 +40,9 @@
     self.hasPilotInfo = NO;
     
     self.view.backgroundColor = self.appDelegate.awcColor;
-    [self.header setBarTintColor:self.appDelegate.awcColor];
-    [self.header setTintColor:[UIColor whiteColor]];
+    //[self.header setBarTintColor:self.appDelegate.awcColor];
+    //[self.header setTintColor:[UIColor whiteColor]];
+    [self.header setBackgroundImage:[UIImage imageNamed:@"tabBar.png"] forBarPosition:UIBarPositionTop barMetrics:UIBarMetricsDefault];
     self.header.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
 
     
@@ -55,7 +56,8 @@
     self.infoTailNumber.hidden = YES;
     self.infoLicense.hidden = YES;
     
-    self.name.hidden = YES;
+    self.fName.hidden = YES;
+    self.lName.hidden = YES;
     self.aircraftType.hidden = YES;
     self.tailNumber.hidden = YES;
     self.license.hidden = YES;
@@ -131,7 +133,7 @@
         self.existingInfo.numberOfLines = 6;
         self.existingInfo.lineBreakMode = NSLineBreakByWordWrapping;
         
-        self.existingInfo.text = [NSString stringWithFormat:@"Existing information:\n\n%@ %@\n%@ %@\n%@ %@\n%@ %@",@"Name:",data[0],@"Aircraft Type:",data[1],@"Tail Number:",data[2],@"License:",data[3]];
+        self.existingInfo.text = [NSString stringWithFormat:@"Existing information:\n\n%@ %@ %@\n%@ %@\n%@ %@\n%@ %@",@"Name:",data[0],data[1],@"Aircraft Type:",data[2],@"Tail Number:",data[3],@"License:",data[4]];
         
         
         
@@ -175,9 +177,14 @@
 //Save the pilot information if all the fields are filled and present the tabs. Else, display an alert.
 - (void)saveData:(id)sender {
     
-    if([self.name.text isEqualToString:@""])
+    if([self.fName.text isEqualToString:@""])
     {
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Enter Information" message:@"Name cannot be empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Enter Information" message:@"First Name cannot be empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+    if([self.lName.text isEqualToString:@""])
+    {
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Enter Information" message:@"Last Name cannot be empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
     else if([self.aircraftType.text isEqualToString:@""])
@@ -197,7 +204,9 @@
     }
     else
     {
-        NSString * data = self.name.text;
+        NSString * data = self.fName.text;
+        [self.info addObject:data];
+        data = self.lName.text;
         [self.info addObject:data];
         data = self.aircraftType.text;
         [self.info addObject:data];
@@ -206,7 +215,7 @@
         data = self.license.text;
         [self.info addObject:data];
         
-        self.fData = [NSString stringWithFormat:@"%@_%@_%@_%@",self.name.text,self.aircraftType.text,self.tailNumber.text,self.license.text];
+        self.fData = [NSString stringWithFormat:@"%@_%@_%@_%@_%@",self.fName.text,self.lName.text,self.aircraftType.text,self.tailNumber.text,self.license.text];
         [self.fData writeToFile:self.fPath atomically:NO encoding:NSUTF8StringEncoding error:nil];
         
         self.appDelegate.flightInformation = self.info;
@@ -252,7 +261,8 @@
     self.infoTailNumber.hidden = NO;
     self.infoLicense.hidden = NO;
     
-    self.name.hidden = NO;
+    self.fName.hidden = NO;
+    self.lName.hidden = NO;
     self.aircraftType.hidden = NO;
     self.tailNumber.hidden = NO;
     self.license.hidden = NO;
@@ -309,7 +319,7 @@
     [self setInfoTailNumber:nil];
     [self setInfoLicense:nil];
     [self setLicense:nil];
-    [self setName:nil];
+    [self setFName:nil];
     [self setAircraftType:nil];
     [self setWelcomeText:nil];
     [self setSaveData:nil];

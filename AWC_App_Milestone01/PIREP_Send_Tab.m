@@ -75,7 +75,7 @@
     [self.header setBarTintColor:self.appDelegate.awcColor];
     [self.header setTintColor:[UIColor whiteColor]];
     self.header.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
-
+    
     
     self.flightData = self.appDelegate.flightInformation;
     
@@ -106,30 +106,37 @@
     self.iceLevel = @"";
     
     self.pirepSelected.text = @"";
-        
-        //Show heading
-        
-        self.titleInfo.hidden = NO;
-        
-        //Show main categories
-        
-        self.chop.enabled = YES;
-        self.turb.enabled = YES;
-        self.mtn.enabled = YES;
-        self.ice.enabled = YES;
-        
-        //Getting the location
-        self.myLoc = [[CLLocationManager alloc]init];
-        self.myLoc.delegate = self;
-        self.myLoc.desiredAccuracy = kCLLocationAccuracyKilometer;
-        [self.myLoc startUpdatingLocation];
     
-        //NSLog(@"Lat: %f, Long: %f",self.myLoc.location.coordinate.latitude,
-              //self.myLoc.location.coordinate.longitude);
-        
+    //Show heading
+    
+    self.titleInfo.hidden = NO;
+    
+    //Show main categories
+    
+    self.chop.enabled = YES;
+    self.turb.enabled = YES;
+    self.mtn.enabled = YES;
+    self.ice.enabled = YES;
+    
+    //edit2014
+    //Locking Ice Levels
+    self.lightIce.enabled = NO;
+    self.modIce.enabled = NO;
+    self.greaterIce.enabled = NO;
+    //edit2014 ends
+    
+    //Getting the location
+    self.myLoc = [[CLLocationManager alloc]init];
+    self.myLoc.delegate = self;
+    self.myLoc.desiredAccuracy = kCLLocationAccuracyKilometer;
+    [self.myLoc startUpdatingLocation];
+    
+    //NSLog(@"Lat: %f, Long: %f",self.myLoc.location.coordinate.latitude,
+    //self.myLoc.location.coordinate.longitude);
     
     
-        //Initializing the server variables' values
+    
+    //Initializing the server variables' values
     self.lisenceNum = self.flightData[3];
     self.aircraftType = self.flightData[1];
     self.tailNumber = self.flightData[2];
@@ -138,49 +145,49 @@
     self.pageURL = @"http://csgrad06.nwmissouri.edu/SaveDataToServer.php";
     
     
-        //Target methods for Chop
-        [self.chop addTarget:self action:@selector(Chop) forControlEvents:UIControlEventTouchUpInside];
-        [self.lightChop addTarget:self action:@selector(lChop) forControlEvents:UIControlEventTouchUpInside];
-        [self.modChop addTarget:self action:@selector(mChop) forControlEvents:UIControlEventTouchUpInside];
-        [self.greaterChop addTarget:self action:@selector(gChop) forControlEvents:UIControlEventTouchUpInside];
-        [self.noChop addTarget:self action:@selector(nChop) forControlEvents:UIControlEventTouchUpInside];
+    //Target methods for Chop
+    [self.chop addTarget:self action:@selector(Chop) forControlEvents:UIControlEventTouchUpInside];
+    [self.lightChop addTarget:self action:@selector(lChop) forControlEvents:UIControlEventTouchUpInside];
+    [self.modChop addTarget:self action:@selector(mChop) forControlEvents:UIControlEventTouchUpInside];
+    [self.greaterChop addTarget:self action:@selector(gChop) forControlEvents:UIControlEventTouchUpInside];
+    [self.noChop addTarget:self action:@selector(nChop) forControlEvents:UIControlEventTouchUpInside];
     
-        //Target methods for Turbulence
-        [self.turb addTarget:self action:@selector(Turb) forControlEvents:UIControlEventTouchUpInside];
-        [self.lightTurb addTarget:self action : @selector(lTurb) forControlEvents:UIControlEventTouchUpInside];
-        [self.modTurb addTarget:self action:@selector(mTurb) forControlEvents:UIControlEventTouchUpInside];
-        [self.greaterTurb addTarget:self action:@selector(gTurb) forControlEvents:UIControlEventTouchUpInside];
-        [self.noTurb addTarget:self action:@selector(nTurb) forControlEvents:UIControlEventTouchUpInside];
+    //Target methods for Turbulence
+    [self.turb addTarget:self action:@selector(Turb) forControlEvents:UIControlEventTouchUpInside];
+    [self.lightTurb addTarget:self action : @selector(lTurb) forControlEvents:UIControlEventTouchUpInside];
+    [self.modTurb addTarget:self action:@selector(mTurb) forControlEvents:UIControlEventTouchUpInside];
+    [self.greaterTurb addTarget:self action:@selector(gTurb) forControlEvents:UIControlEventTouchUpInside];
+    [self.noTurb addTarget:self action:@selector(nTurb) forControlEvents:UIControlEventTouchUpInside];
     
-        //Target methods for Mtn Wave
-        [self.mtn addTarget:self action:@selector(mtnWave) forControlEvents:UIControlEventTouchUpInside];
-        [self.lightMtn addTarget:self action:@selector(lMtn) forControlEvents:UIControlEventTouchUpInside];
-        [self.modMtn addTarget:self action:@selector(mMtn) forControlEvents:UIControlEventTouchUpInside];
-        [self.greaterMtn addTarget:self action:@selector(gMtn) forControlEvents:UIControlEventTouchUpInside];
-        [self.noMtn addTarget:self action:@selector(nMtn) forControlEvents:UIControlEventTouchUpInside];
+    //Target methods for Mtn Wave
+    [self.mtn addTarget:self action:@selector(mtnWave) forControlEvents:UIControlEventTouchUpInside];
+    [self.lightMtn addTarget:self action:@selector(lMtn) forControlEvents:UIControlEventTouchUpInside];
+    [self.modMtn addTarget:self action:@selector(mMtn) forControlEvents:UIControlEventTouchUpInside];
+    [self.greaterMtn addTarget:self action:@selector(gMtn) forControlEvents:UIControlEventTouchUpInside];
+    [self.noMtn addTarget:self action:@selector(nMtn) forControlEvents:UIControlEventTouchUpInside];
     
-        //Target methods for Ice
+    //Target methods for Ice
     
-        [self.ice addTarget:self action:@selector(Ice) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        [self.clear addTarget:self action:@selector(clearIce) forControlEvents:UIControlEventTouchUpInside];
-        [self.rime addTarget:self action:@selector(rimeIce) forControlEvents:UIControlEventTouchUpInside];
-        [self.mixed addTarget:self action:@selector(mixedIce) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        [self.trace addTarget:self action:@selector(traceIce) forControlEvents:UIControlEventTouchUpInside];
-        [self.lightIce addTarget:self action:@selector(lIce) forControlEvents:UIControlEventTouchUpInside];
-        [self.modIce addTarget:self action:@selector(mIce) forControlEvents:UIControlEventTouchUpInside];
-        [self.greaterIce addTarget:self action:@selector(gIce) forControlEvents:UIControlEventTouchUpInside];
-        [self.noIce addTarget:self action:@selector(nIce) forControlEvents:UIControlEventTouchUpInside];
-    
-        [self.sendPirep addTarget:self action:@selector(sendPirep:) forControlEvents:UIControlEventTouchUpInside];
+    [self.ice addTarget:self action:@selector(Ice) forControlEvents:UIControlEventTouchUpInside];
     
     
+    [self.clear addTarget:self action:@selector(clearIce) forControlEvents:UIControlEventTouchUpInside];
+    [self.rime addTarget:self action:@selector(rimeIce) forControlEvents:UIControlEventTouchUpInside];
+    [self.mixed addTarget:self action:@selector(mixedIce) forControlEvents:UIControlEventTouchUpInside];
     
-        
-        // Do any additional setup after loading the view, typically from a nib.
+    
+    [self.trace addTarget:self action:@selector(traceIce) forControlEvents:UIControlEventTouchUpInside];
+    [self.lightIce addTarget:self action:@selector(lIce) forControlEvents:UIControlEventTouchUpInside];
+    [self.modIce addTarget:self action:@selector(mIce) forControlEvents:UIControlEventTouchUpInside];
+    [self.greaterIce addTarget:self action:@selector(gIce) forControlEvents:UIControlEventTouchUpInside];
+    [self.noIce addTarget:self action:@selector(nIce) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.sendPirep addTarget:self action:@selector(sendPirep:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    
+    // Do any additional setup after loading the view, typically from a nib.
     
 }
 
@@ -238,13 +245,13 @@
 
 //Update report when user clicks on Chop button.
 - (void)Chop {
-
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@"/CHOP"];
     
-//    if(![self.presentPirep isEqualToString:@""])
-//        self.presentPirep = [self.presentPirep stringByAppendingString:@"/"];
-//    
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@"CHOP"];
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@"/CHOP"];
+    
+    //    if(![self.presentPirep isEqualToString:@""])
+    //        self.presentPirep = [self.presentPirep stringByAppendingString:@"/"];
+    //
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@"CHOP"];
     
     if(self.chopPosition==-1)
     {
@@ -265,19 +272,19 @@
     
     //self.checkChop = NO;
     
-//    self.chop.enabled = NO;
-//    self.turb.enabled = NO;
-//    self.mtn.enabled = NO;
-//    self.ice.enabled = NO;
-//    
-//    [self.lightChop setBackgroundImage:[UIImage imageNamed:@"CHOP_LGT.png"] forState:UIControlStateNormal];
-//    [self.modChop setBackgroundImage:[UIImage imageNamed:@"CHOP_MOD.png"] forState:UIControlStateNormal];
-//    [self.greaterChop setBackgroundImage:[UIImage imageNamed:@"CHOP_GRT.png"] forState:UIControlStateNormal];
-//
-//    self.lightChop.enabled = YES;
-//    self.modChop.enabled = YES;
-//    self.greaterChop.enabled = YES;
-//    self.noChop.enabled = YES;
+    //    self.chop.enabled = NO;
+    //    self.turb.enabled = NO;
+    //    self.mtn.enabled = NO;
+    //    self.ice.enabled = NO;
+    //
+    //    [self.lightChop setBackgroundImage:[UIImage imageNamed:@"CHOP_LGT.png"] forState:UIControlStateNormal];
+    //    [self.modChop setBackgroundImage:[UIImage imageNamed:@"CHOP_MOD.png"] forState:UIControlStateNormal];
+    //    [self.greaterChop setBackgroundImage:[UIImage imageNamed:@"CHOP_GRT.png"] forState:UIControlStateNormal];
+    //
+    //    self.lightChop.enabled = YES;
+    //    self.modChop.enabled = YES;
+    //    self.greaterChop.enabled = YES;
+    //    self.noChop.enabled = YES;
     
     //self.sendPirep.enabled = NO;
 }
@@ -285,8 +292,8 @@
 //Update report when user clicks on lightChop button.
 -(void)lChop
 {
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" LGT"];
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" LGT"];
     
     if(self.chopPosition==-1)
     {
@@ -311,21 +318,21 @@
     
     //[self.lightChop setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
     
-//    self.lightChop.enabled = NO;
-//    self.modChop.enabled = NO;
-//    self.greaterChop.enabled = NO;
-//    self.noChop.enabled = NO;
+    //    self.lightChop.enabled = NO;
+    //    self.modChop.enabled = NO;
+    //    self.greaterChop.enabled = NO;
+    //    self.noChop.enabled = NO;
     
     //self.chopLevel = @"/CHOP LGT";
     
-//    //if(self.checkTurb)
-//        self.turb.enabled = YES;
-//    //if(self.checkMtn)
-//        self.mtn.enabled = YES;
-//    //if(self.checkIce)
-//        self.ice.enabled = YES;
-//    self.chop.enabled = YES;
-//    [self.chop setBackgroundImage:[UIImage imageNamed:@"GreenBack.png"] forState:UIControlStateNormal];
+    //    //if(self.checkTurb)
+    //        self.turb.enabled = YES;
+    //    //if(self.checkMtn)
+    //        self.mtn.enabled = YES;
+    //    //if(self.checkIce)
+    //        self.ice.enabled = YES;
+    //    self.chop.enabled = YES;
+    //    [self.chop setBackgroundImage:[UIImage imageNamed:@"GreenBack.png"] forState:UIControlStateNormal];
     
     //self.sendPirep.enabled = YES;
 }
@@ -333,8 +340,8 @@
 //Update report when user clicks on modChop button.
 -(void)mChop
 {
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" MOD"];
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" MOD"];
     
     if(self.chopPosition==-1)
     {
@@ -350,25 +357,25 @@
     
     //[self saveToFile:@" MOD"];
     
-//    self.lightChop.enabled = NO;
-//    self.modChop.enabled = NO;
-//    self.greaterChop.enabled = NO;
-//    self.noChop.enabled = NO;
-//    
-//    [self.modChop setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    //self.chopLevel = @"/CHOP MOD";
-//
-//    
-//    
-//    //if(self.checkTurb)
-//        self.turb.enabled = YES;
-//    //if(self.checkMtn)
-//        self.mtn.enabled = YES;
-//    //if(self.checkIce)
-//        self.ice.enabled = YES;
-//    self.chop.enabled = YES;
-//    [self.chop setBackgroundImage:[UIImage imageNamed:@"GreenBack.png"] forState:UIControlStateNormal];
+    //    self.lightChop.enabled = NO;
+    //    self.modChop.enabled = NO;
+    //    self.greaterChop.enabled = NO;
+    //    self.noChop.enabled = NO;
+    //
+    //    [self.modChop setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //    //self.chopLevel = @"/CHOP MOD";
+    //
+    //
+    //
+    //    //if(self.checkTurb)
+    //        self.turb.enabled = YES;
+    //    //if(self.checkMtn)
+    //        self.mtn.enabled = YES;
+    //    //if(self.checkIce)
+    //        self.ice.enabled = YES;
+    //    self.chop.enabled = YES;
+    //    [self.chop setBackgroundImage:[UIImage imageNamed:@"GreenBack.png"] forState:UIControlStateNormal];
     
     //self.sendPirep.enabled = YES;
 }
@@ -376,8 +383,8 @@
 //Update report when user clicks on greatChop button.
 -(void)gChop
 {
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" GRT"];
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" GRT"];
     
     if(self.chopPosition==-1)
     {
@@ -391,26 +398,26 @@
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
     
-//    self.lightChop.enabled = NO;
-//    self.modChop.enabled = NO;
-//    self.greaterChop.enabled = NO;
-//    self.noChop.enabled = NO;
-//    
-//    //self.chopLevel = @"/CHOP GRT";
-//
-//    
-//    [self.greaterChop setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    //if(self.checkTurb)
-//        self.turb.enabled = YES;
-//    //if(self.checkMtn)
-//        self.mtn.enabled = YES;
-//    //if(self.checkIce)
-//        self.ice.enabled = YES;
-//    self.chop.enabled = YES;
-//    [self.chop setBackgroundImage:[UIImage imageNamed:@"GreenBack.png"] forState:UIControlStateNormal];
-//    
-//    self.sendPirep.enabled = YES;
+    //    self.lightChop.enabled = NO;
+    //    self.modChop.enabled = NO;
+    //    self.greaterChop.enabled = NO;
+    //    self.noChop.enabled = NO;
+    //
+    //    //self.chopLevel = @"/CHOP GRT";
+    //
+    //
+    //    [self.greaterChop setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //    //if(self.checkTurb)
+    //        self.turb.enabled = YES;
+    //    //if(self.checkMtn)
+    //        self.mtn.enabled = YES;
+    //    //if(self.checkIce)
+    //        self.ice.enabled = YES;
+    //    self.chop.enabled = YES;
+    //    [self.chop setBackgroundImage:[UIImage imageNamed:@"GreenBack.png"] forState:UIControlStateNormal];
+    //
+    //    self.sendPirep.enabled = YES;
     //[self saveToFile:@" GRT"];
 }
 
@@ -432,33 +439,33 @@
         [self setPresentPirepData];
         self.pirepSelected.text = self.presentPirep;
         
-//        self.lightChop.enabled = NO;
-//        self.modChop.enabled = NO;
-//        self.greaterChop.enabled = NO;
-//        self.noChop.enabled = NO;
-//        
-//        //if(self.checkTurb)
-//        self.turb.enabled = YES;
-//        //if(self.checkMtn)
-//        self.mtn.enabled = YES;
-//        //if(self.checkIce)
-//        self.ice.enabled = YES;
-//        self.chop.enabled = YES;
-//        [self.chop setBackgroundImage:[UIImage imageNamed:@"GreenBack.png"] forState:UIControlStateNormal];
-//        
-//        self.sendPirep.enabled = YES;
+        //        self.lightChop.enabled = NO;
+        //        self.modChop.enabled = NO;
+        //        self.greaterChop.enabled = NO;
+        //        self.noChop.enabled = NO;
+        //
+        //        //if(self.checkTurb)
+        //        self.turb.enabled = YES;
+        //        //if(self.checkMtn)
+        //        self.mtn.enabled = YES;
+        //        //if(self.checkIce)
+        //        self.ice.enabled = YES;
+        //        self.chop.enabled = YES;
+        //        [self.chop setBackgroundImage:[UIImage imageNamed:@"GreenBack.png"] forState:UIControlStateNormal];
+        //
+        //        self.sendPirep.enabled = YES;
     }
 }
 
 //Update report when user clicks on Turb button.
 - (void)Turb
 {
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@"/TURB"];
-//    
-//    if(![self.presentPirep isEqualToString:@""])
-//        self.presentPirep = [self.presentPirep stringByAppendingString:@"/"];
-//    
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@"TURB"];
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@"/TURB"];
+    //
+    //    if(![self.presentPirep isEqualToString:@""])
+    //        self.presentPirep = [self.presentPirep stringByAppendingString:@"/"];
+    //
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@"TURB"];
     if(self.turbPosition==-1)
     {
         [self.pirepData addObject:@"TURB"];
@@ -477,28 +484,28 @@
     
     //self.checkTurb = NO;
     
-//    self.turb.enabled = NO;
-//    self.chop.enabled = NO;
-//    self.mtn.enabled = NO;
-//    self.ice.enabled = NO;
-//    
-//    [self.lightTurb setBackgroundImage:[UIImage imageNamed:@"TURB_LGT.png"] forState:UIControlStateNormal];
-//    [self.modTurb setBackgroundImage:[UIImage imageNamed:@"TURB_MOD.png"] forState:UIControlStateNormal];
-//    [self.greaterTurb setBackgroundImage:[UIImage imageNamed:@"TURB_GRT.png"] forState:UIControlStateNormal];
-//    
-//    self.lightTurb.enabled = YES;
-//    self.modTurb.enabled = YES;
-//    self.greaterTurb.enabled = YES;
-//    self.noTurb.enabled = YES;
-//    
-//    self.sendPirep.enabled = NO;
+    //    self.turb.enabled = NO;
+    //    self.chop.enabled = NO;
+    //    self.mtn.enabled = NO;
+    //    self.ice.enabled = NO;
+    //
+    //    [self.lightTurb setBackgroundImage:[UIImage imageNamed:@"TURB_LGT.png"] forState:UIControlStateNormal];
+    //    [self.modTurb setBackgroundImage:[UIImage imageNamed:@"TURB_MOD.png"] forState:UIControlStateNormal];
+    //    [self.greaterTurb setBackgroundImage:[UIImage imageNamed:@"TURB_GRT.png"] forState:UIControlStateNormal];
+    //
+    //    self.lightTurb.enabled = YES;
+    //    self.modTurb.enabled = YES;
+    //    self.greaterTurb.enabled = YES;
+    //    self.noTurb.enabled = YES;
+    //
+    //    self.sendPirep.enabled = NO;
 }
 
 //Update report when user clicks on lightTurb button.
 - (void) lTurb
 {
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" LGT"];
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" LGT"];
     
     if(self.turbPosition==-1)
     {
@@ -512,33 +519,33 @@
     
     //[self saveToFile:@" LGT"];
     
-//    [self.lightTurb setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    self.lightTurb.enabled = NO;
-//    self.modTurb.enabled = NO;
-//    self.greaterTurb.enabled = NO;
-//    self.noTurb.enabled = NO;
-//    
-//    //self.turbLevel = @"/TURB LGT";
-//    
-//    //if(self.checkChop)
-//        self.chop.enabled = YES;
-//    //if(self.checkMtn)
-//        self.mtn.enabled = YES;
-//    //if(self.checkIce)
-//        self.ice.enabled = YES;
-//    
-//    self.turb.enabled = YES;
-//    [self.turb setBackgroundImage:[UIImage imageNamed:@"YelloBack.png"] forState:UIControlStateNormal];
-//    
-//    self.sendPirep.enabled = YES;
+    //    [self.lightTurb setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //    self.lightTurb.enabled = NO;
+    //    self.modTurb.enabled = NO;
+    //    self.greaterTurb.enabled = NO;
+    //    self.noTurb.enabled = NO;
+    //
+    //    //self.turbLevel = @"/TURB LGT";
+    //
+    //    //if(self.checkChop)
+    //        self.chop.enabled = YES;
+    //    //if(self.checkMtn)
+    //        self.mtn.enabled = YES;
+    //    //if(self.checkIce)
+    //        self.ice.enabled = YES;
+    //
+    //    self.turb.enabled = YES;
+    //    [self.turb setBackgroundImage:[UIImage imageNamed:@"YelloBack.png"] forState:UIControlStateNormal];
+    //
+    //    self.sendPirep.enabled = YES;
 }
 
 //Update report when user clicks on modTurb button.
 -(void) mTurb
 {
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" MOD"];
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" MOD"];
     
     if(self.turbPosition==-1)
     {
@@ -552,32 +559,32 @@
     
     //[self saveToFile:@" MOD"];
     
-//    [self.modTurb setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    self.lightTurb.enabled = NO;
-//    self.modTurb.enabled = NO;
-//    self.greaterTurb.enabled = NO;
-//    self.noTurb.enabled = NO;
-//    
-//    //self.turbLevel = @"/TURB MOD";
-//    
-//    //if(self.checkChop)
-//        self.chop.enabled = YES;
-//    //if(self.checkMtn)
-//        self.mtn.enabled = YES;
-//    //if(self.checkIce)
-//        self.ice.enabled = YES;
-//    self.turb.enabled = YES;
-//    [self.turb setBackgroundImage:[UIImage imageNamed:@"YelloBack.png"] forState:UIControlStateNormal];
-//    
-//    self.sendPirep.enabled = YES;
+    //    [self.modTurb setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //    self.lightTurb.enabled = NO;
+    //    self.modTurb.enabled = NO;
+    //    self.greaterTurb.enabled = NO;
+    //    self.noTurb.enabled = NO;
+    //
+    //    //self.turbLevel = @"/TURB MOD";
+    //
+    //    //if(self.checkChop)
+    //        self.chop.enabled = YES;
+    //    //if(self.checkMtn)
+    //        self.mtn.enabled = YES;
+    //    //if(self.checkIce)
+    //        self.ice.enabled = YES;
+    //    self.turb.enabled = YES;
+    //    [self.turb setBackgroundImage:[UIImage imageNamed:@"YelloBack.png"] forState:UIControlStateNormal];
+    //
+    //    self.sendPirep.enabled = YES;
 }
 
 //Update report when user clicks on greatTurb button.
 - (void) gTurb
 {
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" GRT"];
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" GRT"];
     
     if(self.turbPosition==-1)
     {
@@ -591,25 +598,25 @@
     
     //[self saveToFile:@" GRT"];
     
-//    [self.greaterTurb setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    self.lightTurb.enabled = NO;
-//    self.modTurb.enabled = NO;
-//    self.greaterTurb.enabled = NO;
-//    self.noTurb.enabled = NO;
-//    
-//    //self.turbLevel = @"/TURB GRT";
-//    
-//    //if(self.checkChop)
-//        self.chop.enabled = YES;
-//    //if(self.checkMtn)
-//        self.mtn.enabled = YES;
-//    //if(self.checkIce)
-//        self.ice.enabled = YES;
-//    self.turb.enabled = YES;
-//    [self.turb setBackgroundImage:[UIImage imageNamed:@"YelloBack.png"] forState:UIControlStateNormal];
-//    
-//    self.sendPirep.enabled = YES;
+    //    [self.greaterTurb setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //    self.lightTurb.enabled = NO;
+    //    self.modTurb.enabled = NO;
+    //    self.greaterTurb.enabled = NO;
+    //    self.noTurb.enabled = NO;
+    //
+    //    //self.turbLevel = @"/TURB GRT";
+    //
+    //    //if(self.checkChop)
+    //        self.chop.enabled = YES;
+    //    //if(self.checkMtn)
+    //        self.mtn.enabled = YES;
+    //    //if(self.checkIce)
+    //        self.ice.enabled = YES;
+    //    self.turb.enabled = YES;
+    //    [self.turb setBackgroundImage:[UIImage imageNamed:@"YelloBack.png"] forState:UIControlStateNormal];
+    //
+    //    self.sendPirep.enabled = YES;
 }
 
 //Update report when user clicks on noneTurb button.
@@ -626,35 +633,35 @@
         
         [self.pirepData removeObjectAtIndex:self.turbPosition];
         self.turbPosition = -1;
-
+        
         [self setPresentPirepData];
         self.pirepSelected.text = self.presentPirep;
         
-//        self.lightTurb.enabled = NO;
-//        self.modTurb.enabled = NO;
-//        self.greaterTurb.enabled = NO;
-//        self.noTurb.enabled = NO;
-//        
-//        //if(self.checkChop)
-//        self.chop.enabled = YES;
-//        //if(self.checkMtn)
-//        self.mtn.enabled = YES;
-//        //if(self.checkIce)
-//        self.ice.enabled = YES;
-//        self.turb.enabled = YES;
-//        [self.turb setBackgroundImage:[UIImage imageNamed:@"YelloBack.png"] forState:UIControlStateNormal];
-//        
-//        self.sendPirep.enabled = YES;
+        //        self.lightTurb.enabled = NO;
+        //        self.modTurb.enabled = NO;
+        //        self.greaterTurb.enabled = NO;
+        //        self.noTurb.enabled = NO;
+        //
+        //        //if(self.checkChop)
+        //        self.chop.enabled = YES;
+        //        //if(self.checkMtn)
+        //        self.mtn.enabled = YES;
+        //        //if(self.checkIce)
+        //        self.ice.enabled = YES;
+        //        self.turb.enabled = YES;
+        //        [self.turb setBackgroundImage:[UIImage imageNamed:@"YelloBack.png"] forState:UIControlStateNormal];
+        //
+        //        self.sendPirep.enabled = YES;
     }
 }
 
 //Update report when user clicks on MtnWave button.
 -(void)mtnWave
 {
-//    if(![self.presentPirep isEqualToString:@""])
-//        self.presentPirep = [self.presentPirep stringByAppendingString:@"/"];
-//    
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@"MTN WAVE"];
+    //    if(![self.presentPirep isEqualToString:@""])
+    //        self.presentPirep = [self.presentPirep stringByAppendingString:@"/"];
+    //
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@"MTN WAVE"];
     if(self.mtnPosition==-1)
     {
         [self.pirepData addObject:@"RM MTNWV"];
@@ -667,31 +674,31 @@
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
     
-//    [self.mtn setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    //self.checkMtn = NO;
-//    
-//    self.mtn.enabled = NO;
-//    self.chop.enabled = NO;
-//    self.turb.enabled = NO;
-//    self.ice.enabled = NO;
-//    
-//    [self.lightMtn setBackgroundImage:[UIImage imageNamed:@"MTNWV_LGT.png"] forState:UIControlStateNormal];
-//    [self.modMtn setBackgroundImage:[UIImage imageNamed:@"MTNWV_MOD.png"] forState:UIControlStateNormal];
-//    [self.greaterMtn setBackgroundImage:[UIImage imageNamed:@"MTNWV_GRT.png"] forState:UIControlStateNormal];
-//    
-//    self.lightMtn.enabled = YES;
-//    self.modMtn.enabled = YES;
-//    self.greaterMtn.enabled = YES;
-//    self.noMtn.enabled = YES;
-//    
-//    self.sendPirep.enabled = NO;
+    //    [self.mtn setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //    //self.checkMtn = NO;
+    //
+    //    self.mtn.enabled = NO;
+    //    self.chop.enabled = NO;
+    //    self.turb.enabled = NO;
+    //    self.ice.enabled = NO;
+    //
+    //    [self.lightMtn setBackgroundImage:[UIImage imageNamed:@"MTNWV_LGT.png"] forState:UIControlStateNormal];
+    //    [self.modMtn setBackgroundImage:[UIImage imageNamed:@"MTNWV_MOD.png"] forState:UIControlStateNormal];
+    //    [self.greaterMtn setBackgroundImage:[UIImage imageNamed:@"MTNWV_GRT.png"] forState:UIControlStateNormal];
+    //
+    //    self.lightMtn.enabled = YES;
+    //    self.modMtn.enabled = YES;
+    //    self.greaterMtn.enabled = YES;
+    //    self.noMtn.enabled = YES;
+    //
+    //    self.sendPirep.enabled = NO;
 }
 
 //Update report when user clicks on lightMtnWave button.
 -(void)lMtn
 {
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];
     
     if(self.mtnPosition==-1)
     {
@@ -703,31 +710,31 @@
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
     
-//    [self.lightMtn setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    self.lightMtn.enabled = NO;
-//    self.modMtn.enabled = NO;
-//    self.greaterMtn.enabled = NO;
-//    self.noMtn.enabled = NO;
-//    
-//    //self.mtnLevel = @"/MTN WAVE LGT";
-//    
-//    //if(self.checkChop)
-//        self.chop.enabled = YES;
-//    //if(self.checkTurb)
-//        self.turb.enabled = YES;
-//    //if(self.checkIce)
-//        self.ice.enabled = YES;
-//    self.mtn.enabled = YES;
-//    [self.mtn setBackgroundImage:[UIImage imageNamed:@"OrangeBack.png"] forState:UIControlStateNormal];
-//    
-//    self.sendPirep.enabled = YES;
+    //    [self.lightMtn setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //    self.lightMtn.enabled = NO;
+    //    self.modMtn.enabled = NO;
+    //    self.greaterMtn.enabled = NO;
+    //    self.noMtn.enabled = NO;
+    //
+    //    //self.mtnLevel = @"/MTN WAVE LGT";
+    //
+    //    //if(self.checkChop)
+    //        self.chop.enabled = YES;
+    //    //if(self.checkTurb)
+    //        self.turb.enabled = YES;
+    //    //if(self.checkIce)
+    //        self.ice.enabled = YES;
+    //    self.mtn.enabled = YES;
+    //    [self.mtn setBackgroundImage:[UIImage imageNamed:@"OrangeBack.png"] forState:UIControlStateNormal];
+    //
+    //    self.sendPirep.enabled = YES;
 }
 
 //Update report when user clicks on modMtnWave button.
 -(void)mMtn
 {
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];
     
     if(self.mtnPosition==-1)
     {
@@ -739,31 +746,31 @@
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
     
-//    [self.modMtn setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    self.lightMtn.enabled = NO;
-//    self.modMtn.enabled = NO;
-//    self.greaterMtn.enabled = NO;
-//    self.noMtn.enabled = NO;
-//    
-//    //self.mtnLevel = @"/MTN WAVE MOD";
-//    
-//    //if(self.checkChop)
-//        self.chop.enabled = YES;
-//    //if(self.checkTurb)
-//        self.turb.enabled = YES;
-//    //if(self.checkIce)
-//        self.ice.enabled = YES;
-//    self.mtn.enabled = YES;
-//    [self.mtn setBackgroundImage:[UIImage imageNamed:@"OrangeBack.png"] forState:UIControlStateNormal];
-//
-//    self.sendPirep.enabled = YES;
+    //    [self.modMtn setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //    self.lightMtn.enabled = NO;
+    //    self.modMtn.enabled = NO;
+    //    self.greaterMtn.enabled = NO;
+    //    self.noMtn.enabled = NO;
+    //
+    //    //self.mtnLevel = @"/MTN WAVE MOD";
+    //
+    //    //if(self.checkChop)
+    //        self.chop.enabled = YES;
+    //    //if(self.checkTurb)
+    //        self.turb.enabled = YES;
+    //    //if(self.checkIce)
+    //        self.ice.enabled = YES;
+    //    self.mtn.enabled = YES;
+    //    [self.mtn setBackgroundImage:[UIImage imageNamed:@"OrangeBack.png"] forState:UIControlStateNormal];
+    //
+    //    self.sendPirep.enabled = YES;
 }
 
 //Update report when user clicks on greatMtnWave button.
 -(void)gMtn
 {
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];
     
     if(self.mtnPosition==-1)
     {
@@ -775,25 +782,25 @@
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
     
-//    [self.greaterMtn setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    self.lightMtn.enabled = NO;
-//    self.modMtn.enabled = NO;
-//    self.greaterMtn.enabled = NO;
-//    self.noMtn.enabled = NO;
-//    
-//    //self.mtnLevel = @"/MTN WAVE GRT";
-//    
-//    //if(self.checkChop)
-//        self.chop.enabled = YES;
-//    //if(self.checkTurb)
-//        self.turb.enabled = YES;
-//    //if(self.checkIce)
-//        self.ice.enabled = YES;
-//    self.mtn.enabled = YES;
-//    [self.mtn setBackgroundImage:[UIImage imageNamed:@"OrangeBack.png"] forState:UIControlStateNormal];
-//    
-//    self.sendPirep.enabled = YES;
+    //    [self.greaterMtn setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //    self.lightMtn.enabled = NO;
+    //    self.modMtn.enabled = NO;
+    //    self.greaterMtn.enabled = NO;
+    //    self.noMtn.enabled = NO;
+    //
+    //    //self.mtnLevel = @"/MTN WAVE GRT";
+    //
+    //    //if(self.checkChop)
+    //        self.chop.enabled = YES;
+    //    //if(self.checkTurb)
+    //        self.turb.enabled = YES;
+    //    //if(self.checkIce)
+    //        self.ice.enabled = YES;
+    //    self.mtn.enabled = YES;
+    //    [self.mtn setBackgroundImage:[UIImage imageNamed:@"OrangeBack.png"] forState:UIControlStateNormal];
+    //
+    //    self.sendPirep.enabled = YES;
 }
 
 //Update report when user clicks on noneMtnWave button.
@@ -814,33 +821,33 @@
         [self setPresentPirepData];
         self.pirepSelected.text = self.presentPirep;
         
-//        self.lightMtn.enabled = NO;
-//        self.modMtn.enabled = NO;
-//        self.greaterMtn.enabled = NO;
-//        self.noMtn.enabled = NO;
-//        
-//        //if(self.checkChop)
-//        self.chop.enabled = YES;
-//        //if(self.checkTurb)
-//        self.turb.enabled = YES;
-//        //if(self.checkIce)
-//        self.ice.enabled = YES;
-//        self.mtn.enabled = YES;
-//        [self.mtn setBackgroundImage:[UIImage imageNamed:@"OrangeBack.png"] forState:UIControlStateNormal];
-//        
-//        self.sendPirep.enabled = YES;
+        //        self.lightMtn.enabled = NO;
+        //        self.modMtn.enabled = NO;
+        //        self.greaterMtn.enabled = NO;
+        //        self.noMtn.enabled = NO;
+        //
+        //        //if(self.checkChop)
+        //        self.chop.enabled = YES;
+        //        //if(self.checkTurb)
+        //        self.turb.enabled = YES;
+        //        //if(self.checkIce)
+        //        self.ice.enabled = YES;
+        //        self.mtn.enabled = YES;
+        //        [self.mtn setBackgroundImage:[UIImage imageNamed:@"OrangeBack.png"] forState:UIControlStateNormal];
+        //
+        //        self.sendPirep.enabled = YES;
     }
 }
 
 //Update report when user clicks on Icing button.
 - (void)Ice
 {
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@"/ICE"];
-//    
-//    if(![self.presentPirep isEqualToString:@""])
-//        self.presentPirep = [self.presentPirep stringByAppendingString:@"/"];
-//    
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@"ICE"];
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@"/ICE"];
+    //
+    //    if(![self.presentPirep isEqualToString:@""])
+    //        self.presentPirep = [self.presentPirep stringByAppendingString:@"/"];
+    //
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@"ICE"];
     if(self.icePosition==-1)
     {
         [self.pirepData addObject:@"ICE"];
@@ -852,43 +859,43 @@
     }
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
-
+    
     //self.presentPirep = @"Ice ";
     
-//    [self.ice setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    //self.checkIce = NO;
-//    
-//    self.ice.enabled = NO;
-//    self.chop.enabled = NO;
-//    self.turb.enabled = NO;
-//    self.mtn.enabled = NO;
-//    
-//    [self.clear setBackgroundImage:[UIImage imageNamed:@"ICING_CLEAR.png"] forState:UIControlStateNormal];
-//    [self.rime setBackgroundImage:[UIImage imageNamed:@"ICING_RIME.png"] forState:UIControlStateNormal];
-//    [self.mixed setBackgroundImage:[UIImage imageNamed:@"ICING_MIXED.png"] forState:UIControlStateNormal];
-//    
-//    self.clear.enabled = YES;
-//    self.rime.enabled = YES;
-//    self.mixed.enabled = YES;
-//    self.noIce.enabled = YES;
-//    //    self.trace.enabled = NO;
-//    //    self.lightIce.enabled = NO;
-//    //    self.modIce.enabled = NO;
-//    //    self.greaterIce.enabled = NO;
-//    
-//    self.sendPirep.enabled = NO;
+    //    [self.ice setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //    //self.checkIce = NO;
+    //
+    //    self.ice.enabled = NO;
+    //    self.chop.enabled = NO;
+    //    self.turb.enabled = NO;
+    //    self.mtn.enabled = NO;
+    //
+    //    [self.clear setBackgroundImage:[UIImage imageNamed:@"ICING_CLEAR.png"] forState:UIControlStateNormal];
+    //    [self.rime setBackgroundImage:[UIImage imageNamed:@"ICING_RIME.png"] forState:UIControlStateNormal];
+    //    [self.mixed setBackgroundImage:[UIImage imageNamed:@"ICING_MIXED.png"] forState:UIControlStateNormal];
+    //
+    //    self.clear.enabled = YES;
+    //    self.rime.enabled = YES;
+    //    self.mixed.enabled = YES;
+    //    self.noIce.enabled = YES;
+    //    //    self.trace.enabled = NO;
+    //    //    self.lightIce.enabled = NO;
+    //    //    self.modIce.enabled = NO;
+    //    //    self.greaterIce.enabled = NO;
+    //
+    //    self.sendPirep.enabled = NO;
 }
 
 //Update report when user clicks on clearIcing button.
 - (void)clearIce
 {
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" CLEAR"];
-//    
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" CLEAR"];
-
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" CLEAR"];
+    //
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" CLEAR"];
+    
     self.iceLevel = @"CLEAR";
-
+    
     if(self.icePosition==-1)
     {
         [self.pirepData addObject:@"CLEAR"];
@@ -898,35 +905,38 @@
         [self.pirepData setObject:self.iceLevel atIndexedSubscript:self.icePosition];
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
-
-//
-//    [self.clear setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    
-//    
-//    self.clear.enabled = NO;
-//    self.rime.enabled = NO;
-//    self.mixed.enabled = NO;
-//    self.trace.enabled = YES;
-//    self.lightIce.enabled = YES;
-//    self.modIce.enabled = YES;
-//    self.greaterIce.enabled = YES;
-//    
-//    [self.trace setBackgroundImage:[UIImage imageNamed:@"ICING_TRACE.png"] forState:UIControlStateNormal];
-//    [self.lightIce setBackgroundImage:[UIImage imageNamed:@"ICING_LGT.png"] forState:UIControlStateNormal];
-//    [self.modIce setBackgroundImage:[UIImage imageNamed:@"ICING_MOD.png"] forState:UIControlStateNormal];
-//    [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"ICING_GRT.png"] forState:UIControlStateNormal];
     
+    //
+    //    [self.clear setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //
+    //
+    //    self.clear.enabled = NO;
+    //    self.rime.enabled = NO;
+    //    self.mixed.enabled = NO;
+    //    self.trace.enabled = YES;
+    //    self.lightIce.enabled = YES;
+    //    self.modIce.enabled = YES;
+    //    self.greaterIce.enabled = YES;
+    //
+    //    [self.trace setBackgroundImage:[UIImage imageNamed:@"ICING_TRACE.png"] forState:UIControlStateNormal];
+    //    [self.lightIce setBackgroundImage:[UIImage imageNamed:@"ICING_LGT.png"] forState:UIControlStateNormal];
+    //    [self.modIce setBackgroundImage:[UIImage imageNamed:@"ICING_MOD.png"] forState:UIControlStateNormal];
+    //    [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"ICING_GRT.png"] forState:UIControlStateNormal];
     
-    
+    //edit2014
+    self.lightIce.enabled=YES;
+    self.modIce.enabled=YES;
+    self.greaterIce.enabled=YES;
+    //edit2014 ends
 }
 
 //Update report when user clicks on rimeIcing button.
 - (void)rimeIce
 {
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" RIME"];
-//    
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" RIME"];
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" RIME"];
+    //
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" RIME"];
     self.iceLevel = @"RIME";
     
     if(self.icePosition==-1)
@@ -939,22 +949,28 @@
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
     
-//    [self.rime setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    //self.iceLevel = @"ICE RIME";
-//    
-//    self.clear.enabled = NO;
-//    self.rime.enabled = NO;
-//    self.mixed.enabled = NO;
-//    self.trace.enabled = YES;
-//    self.lightIce.enabled = YES;
-//    self.modIce.enabled = YES;
-//    self.greaterIce.enabled = YES;
-//    
-//    [self.trace setBackgroundImage:[UIImage imageNamed:@"ICING_TRACE.png"] forState:UIControlStateNormal];
-//    [self.lightIce setBackgroundImage:[UIImage imageNamed:@"ICING_LGT.png"] forState:UIControlStateNormal];
-//    [self.modIce setBackgroundImage:[UIImage imageNamed:@"ICING_MOD.png"] forState:UIControlStateNormal];
-//    [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"ICING_GRT.png"] forState:UIControlStateNormal];
+    //edit2014
+    self.lightIce.enabled=YES;
+    self.modIce.enabled=YES;
+    self.greaterIce.enabled=YES;
+    //edit2014 ends
+    
+    //    [self.rime setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //    //self.iceLevel = @"ICE RIME";
+    //
+    //    self.clear.enabled = NO;
+    //    self.rime.enabled = NO;
+    //    self.mixed.enabled = NO;
+    //    self.trace.enabled = YES;
+    //    self.lightIce.enabled = YES;
+    //    self.modIce.enabled = YES;
+    //    self.greaterIce.enabled = YES;
+    //
+    //    [self.trace setBackgroundImage:[UIImage imageNamed:@"ICING_TRACE.png"] forState:UIControlStateNormal];
+    //    [self.lightIce setBackgroundImage:[UIImage imageNamed:@"ICING_LGT.png"] forState:UIControlStateNormal];
+    //    [self.modIce setBackgroundImage:[UIImage imageNamed:@"ICING_MOD.png"] forState:UIControlStateNormal];
+    //    [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"ICING_GRT.png"] forState:UIControlStateNormal];
     
     
 }
@@ -962,11 +978,11 @@
 //Update report when user clicks on mixedIcing button.
 - (void)mixedIce
 {
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" MIXED"];
-//    
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" MIXED"];
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" MIXED"];
+    //
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" MIXED"];
     self.iceLevel = @"MIXED";
-
+    
     if(self.icePosition==-1)
     {
         [self.pirepData addObject:@"MIXED"];
@@ -977,32 +993,36 @@
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
     
-//    [self.mixed setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    //self.iceLevel = @"ICE MIXED";
-//    
-//    self.clear.enabled = NO;
-//    self.rime.enabled = NO;
-//    self.mixed.enabled = NO;
-//    self.trace.enabled = YES;
-//    self.lightIce.enabled = YES;
-//    self.modIce.enabled = YES;
-//    self.greaterIce.enabled = YES;
-//    
-//    [self.trace setBackgroundImage:[UIImage imageNamed:@"ICING_TRACE.png"] forState:UIControlStateNormal];
-//    [self.lightIce setBackgroundImage:[UIImage imageNamed:@"ICING_LGT.png"] forState:UIControlStateNormal];
-//    [self.modIce setBackgroundImage:[UIImage imageNamed:@"ICING_MOD.png"] forState:UIControlStateNormal];
-//    [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"ICING_GRT.png"] forState:UIControlStateNormal];
-    
+    //    [self.mixed setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //    //self.iceLevel = @"ICE MIXED";
+    //
+    //    self.clear.enabled = NO;
+    //    self.rime.enabled = NO;
+    //    self.mixed.enabled = NO;
+    //    self.trace.enabled = YES;
+    //    self.lightIce.enabled = YES;
+    //    self.modIce.enabled = YES;
+    //    self.greaterIce.enabled = YES;
+    //
+    //    [self.trace setBackgroundImage:[UIImage imageNamed:@"ICING_TRACE.png"] forState:UIControlStateNormal];
+    //    [self.lightIce setBackgroundImage:[UIImage imageNamed:@"ICING_LGT.png"] forState:UIControlStateNormal];
+    //    [self.modIce setBackgroundImage:[UIImage imageNamed:@"ICING_MOD.png"] forState:UIControlStateNormal];
+    //    [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"ICING_GRT.png"] forState:UIControlStateNormal];
+    //edit2014
+    self.lightIce.enabled=YES;
+    self.modIce.enabled=YES;
+    self.greaterIce.enabled=YES;
+    //edit2014 ends
     
 }
 
 //Update report when user clicks on traceIcing button.
 - (void)traceIce
 {
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" TRACE"];
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" TRACE"];
-//    self.iceLevel = @"ICE CLEAR";
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" TRACE"];
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" TRACE"];
+    //    self.iceLevel = @"ICE CLEAR";
     
     NSString * iceInfo = nil;
     
@@ -1010,7 +1030,7 @@
         iceInfo = [NSString stringWithFormat:@"IC TRACE %@",self.iceLevel];
     else
         iceInfo = @"ICE TRACE";
-
+    
     if(self.icePosition==-1)
     {
         [self.pirepData addObject:iceInfo];
@@ -1020,39 +1040,39 @@
         [self.pirepData setObject:iceInfo atIndexedSubscript:self.icePosition];
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
-
+    
     //[self saveToFile:@" TRACE"];
     
-//    [self.trace setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-////    self.iceLevel = [self.iceLevel stringByAppendingString:@" TRACE"];
-//    
-//    self.clear.enabled = NO;
-//    self.rime.enabled = NO;
-//    self.mixed.enabled = NO;
-//    self.trace.enabled = NO;
-//    self.lightIce.enabled = NO;
-//    self.modIce.enabled = NO;
-//    self.greaterIce.enabled = NO;
-//    self.noIce.enabled = NO;
-//    
-//    //if(self.checkChop)
-//        self.chop.enabled = YES;
-//    //if(self.checkTurb)
-//        self.turb.enabled = YES;
-//    //if(self.checkMtn)
-//        self.mtn.enabled = YES;
-//    self.ice.enabled = YES;
-//    [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
-//
-//    self.sendPirep.enabled = YES;
+    //    [self.trace setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    ////    self.iceLevel = [self.iceLevel stringByAppendingString:@" TRACE"];
+    //
+    //    self.clear.enabled = NO;
+    //    self.rime.enabled = NO;
+    //    self.mixed.enabled = NO;
+    //    self.trace.enabled = NO;
+    //    self.lightIce.enabled = NO;
+    //    self.modIce.enabled = NO;
+    //    self.greaterIce.enabled = NO;
+    //    self.noIce.enabled = NO;
+    //
+    //    //if(self.checkChop)
+    //        self.chop.enabled = YES;
+    //    //if(self.checkTurb)
+    //        self.turb.enabled = YES;
+    //    //if(self.checkMtn)
+    //        self.mtn.enabled = YES;
+    //    self.ice.enabled = YES;
+    //    [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
+    //
+    //    self.sendPirep.enabled = YES;
 }
 
 //Update report when user clicks on lightIcing button.
 - (void)lIce
 {
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" LGT"];
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" LGT"];
     
     NSString * iceInfo = nil;
     
@@ -1070,40 +1090,40 @@
         [self.pirepData setObject:iceInfo atIndexedSubscript:self.icePosition];
     [self setPresentPirepData];
     self.pirepSelected.text = self.presentPirep;
-
+    
     //[self saveToFile:@" LGT"];
     
-//    [self.lightIce setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    //self.iceLevel = [self.iceLevel stringByAppendingString:@" LGT"];
-//    
-//    self.clear.enabled = NO;
-//    self.rime.enabled = NO;
-//    self.mixed.enabled = NO;
-//    self.trace.enabled = NO;
-//    self.lightIce.enabled = NO;
-//    self.modIce.enabled = NO;
-//    self.greaterIce.enabled = NO;
-//    self.noIce.enabled = NO;
-//    
-//    //if(self.checkChop)
-//        self.chop.enabled = YES;
-//    //if(self.checkTurb)
-//        self.turb.enabled = YES;
-//    //if(self.checkMtn)
-//        self.mtn.enabled = YES;
-//    
-//    self.ice.enabled = YES;
-//    [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
-//    
-//    self.sendPirep.enabled = YES;
+    //    [self.lightIce setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //    //self.iceLevel = [self.iceLevel stringByAppendingString:@" LGT"];
+    //
+    //    self.clear.enabled = NO;
+    //    self.rime.enabled = NO;
+    //    self.mixed.enabled = NO;
+    //    self.trace.enabled = NO;
+    //    self.lightIce.enabled = NO;
+    //    self.modIce.enabled = NO;
+    //    self.greaterIce.enabled = NO;
+    //    self.noIce.enabled = NO;
+    //
+    //    //if(self.checkChop)
+    //        self.chop.enabled = YES;
+    //    //if(self.checkTurb)
+    //        self.turb.enabled = YES;
+    //    //if(self.checkMtn)
+    //        self.mtn.enabled = YES;
+    //
+    //    self.ice.enabled = YES;
+    //    [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
+    //
+    //    self.sendPirep.enabled = YES;
 }
 
 //Update report when user clicks on modIcing button.
 - (void)mIce
 {
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" MOD"];
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" MOD"];
     
     NSString * iceInfo = nil;
     
@@ -1124,36 +1144,36 @@
     
     //[self saveToFile:@" MOD"];
     
-//    [self.modIce setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    //self.iceLevel = [self.iceLevel stringByAppendingString:@" MOD"];
-//    
-//    self.clear.enabled = NO;
-//    self.rime.enabled = NO;
-//    self.mixed.enabled = NO;
-//    self.trace.enabled = NO;
-//    self.lightIce.enabled = NO;
-//    self.modIce.enabled = NO;
-//    self.greaterIce.enabled = NO;
-//    self.noIce.enabled = NO;
-//    
-//    //if(self.checkChop)
-//        self.chop.enabled = YES;
-//    //if(self.checkTurb)
-//        self.turb.enabled = YES;
-//    //if(self.checkMtn)
-//        self.mtn.enabled = YES;
-//    self.ice.enabled = YES;
-//    [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
-//
-//    self.sendPirep.enabled = YES;
+    //    [self.modIce setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //    //self.iceLevel = [self.iceLevel stringByAppendingString:@" MOD"];
+    //
+    //    self.clear.enabled = NO;
+    //    self.rime.enabled = NO;
+    //    self.mixed.enabled = NO;
+    //    self.trace.enabled = NO;
+    //    self.lightIce.enabled = NO;
+    //    self.modIce.enabled = NO;
+    //    self.greaterIce.enabled = NO;
+    //    self.noIce.enabled = NO;
+    //
+    //    //if(self.checkChop)
+    //        self.chop.enabled = YES;
+    //    //if(self.checkTurb)
+    //        self.turb.enabled = YES;
+    //    //if(self.checkMtn)
+    //        self.mtn.enabled = YES;
+    //    self.ice.enabled = YES;
+    //    [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
+    //
+    //    self.sendPirep.enabled = YES;
 }
 
 //Update report when user clicks on greatIcing button.
 -(void)gIce
 {
-//    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];
-//    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" GRT"];
+    //    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];
+    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" GRT"];
     
     NSString * iceInfo = nil;
     
@@ -1174,77 +1194,98 @@
     
     //[self saveToFile:@" GRT"];
     
-//    [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
-//    
-//    //self.iceLevel = [self.iceLevel stringByAppendingString:@" GRT"];
-//    
-//    self.clear.enabled = NO;
-//    self.rime.enabled = NO;
-//    self.mixed.enabled = NO;
-//    self.trace.enabled = NO;
-//    self.lightIce.enabled = NO;
-//    self.modIce.enabled = NO;
-//    self.greaterIce.enabled = NO;
-//    self.noIce.enabled = NO;
-//    
-//    //if(self.checkChop)
-//        self.chop.enabled = YES;
-//    //if(self.checkTurb)
-//        self.turb.enabled = YES;
-//    //if(self.checkMtn)
-//        self.mtn.enabled = YES;
-//    self.ice.enabled = YES;
-//    [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
-//    
-//    self.sendPirep.enabled = YES;
+    //    [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];
+    //
+    //    //self.iceLevel = [self.iceLevel stringByAppendingString:@" GRT"];
+    //
+    //    self.clear.enabled = NO;
+    //    self.rime.enabled = NO;
+    //    self.mixed.enabled = NO;
+    //    self.trace.enabled = NO;
+    //    self.lightIce.enabled = NO;
+    //    self.modIce.enabled = NO;
+    //    self.greaterIce.enabled = NO;
+    //    self.noIce.enabled = NO;
+    //
+    //    //if(self.checkChop)
+    //        self.chop.enabled = YES;
+    //    //if(self.checkTurb)
+    //        self.turb.enabled = YES;
+    //    //if(self.checkMtn)
+    //        self.mtn.enabled = YES;
+    //    self.ice.enabled = YES;
+    //    [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
+    //
+    //    self.sendPirep.enabled = YES;
 }
 
 //Update report when user clicks on noneIcing button.
 -(void)nIce
 {
-    if(self.icePosition!=-1)
+    //edit2014
+    NSString * iceInfo = nil;
+    
+    if(![self.iceLevel isEqualToString:@""])
+        iceInfo = [NSString stringWithFormat:@"IC NEG %@",self.iceLevel];
+    else
+        iceInfo = @"ICE SEVR";
+    
+    if(self.icePosition==-1)
     {
-        if(self.chopPosition>self.icePosition)
-            self.chopPosition--;
-        if(self.turbPosition>self.icePosition)
-            self.turbPosition--;
-        if(self.mtnPosition>self.icePosition)
-            self.mtnPosition--;
-        
-        [self.pirepData removeObjectAtIndex:self.icePosition];
-        self.icePosition = -1;
-        self.iceLevel = @"";
-        
-        [self setPresentPirepData];
-        self.pirepSelected.text = self.presentPirep;
-        
-//        self.clear.enabled = NO;
-//        self.rime.enabled = NO;
-//        self.mixed.enabled = NO;
-//        self.trace.enabled = NO;
-//        self.lightIce.enabled = NO;
-//        self.modIce.enabled = NO;
-//        self.greaterIce.enabled = NO;
-//        self.noIce.enabled = NO;
-//        
-//        //if(self.checkChop)
-//        self.chop.enabled = YES;
-//        //if(self.checkTurb)
-//        self.turb.enabled = YES;
-//        //if(self.checkMtn)
-//        self.mtn.enabled = YES;
-//        self.ice.enabled = YES;
-//        [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
-//        [self.clear setBackgroundImage:[UIImage imageNamed:@"ICING_CLEAR.png"] forState:UIControlStateNormal];
-//        [self.rime setBackgroundImage:[UIImage imageNamed:@"ICING_RIME.png"] forState:UIControlStateNormal];
-//        [self.mixed setBackgroundImage:[UIImage imageNamed:@"ICING_MIXED.png"] forState:UIControlStateNormal];
-//        [self.trace setBackgroundImage:[UIImage imageNamed:@"ICING_TRACE.png"] forState:UIControlStateNormal];
-//        [self.lightIce setBackgroundImage:[UIImage imageNamed:@"ICING_LGT.png"] forState:UIControlStateNormal];
-//        [self.modIce setBackgroundImage:[UIImage imageNamed:@"ICING_MOD.png"] forState:UIControlStateNormal];
-//        [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"ICING_GRT.png"] forState:UIControlStateNormal];
-//        
-//        self.sendPirep.enabled = YES;
+        [self.pirepData addObject:iceInfo];
+        self.icePosition = [self.pirepData count]-1;
     }
+    else
+        [self.pirepData setObject:iceInfo atIndexedSubscript:self.icePosition];
+    [self setPresentPirepData];
+    self.pirepSelected.text = self.presentPirep;
+    //edit2014 ends
+    
+    /*edit2014
+     if(self.icePosition!=-1)
+     {
+     if(self.chopPosition>self.icePosition)
+     self.chopPosition--;
+     if(self.turbPosition>self.icePosition)
+     self.turbPosition--;
+     if(self.mtnPosition>self.icePosition)
+     self.mtnPosition--;
+     
+     [self.pirepData removeObjectAtIndex:self.icePosition];
+     self.icePosition = -1;
+     self.iceLevel = @"";
+     
+     [self setPresentPirepData];
+     self.pirepSelected.text = self.presentPirep;
+     
+     //        self.clear.enabled = NO;
+     //        self.rime.enabled = NO;
+     //        self.mixed.enabled = NO;
+     //        self.trace.enabled = NO;
+     //        self.lightIce.enabled = NO;
+     //        self.modIce.enabled = NO;
+     //        self.greaterIce.enabled = NO;
+     //        self.noIce.enabled = NO;
+     //
+     //        //if(self.checkChop)
+     //        self.chop.enabled = YES;
+     //        //if(self.checkTurb)
+     //        self.turb.enabled = YES;
+     //        //if(self.checkMtn)
+     //        self.mtn.enabled = YES;
+     //        self.ice.enabled = YES;
+     //        [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];
+     //        [self.clear setBackgroundImage:[UIImage imageNamed:@"ICING_CLEAR.png"] forState:UIControlStateNormal];
+     //        [self.rime setBackgroundImage:[UIImage imageNamed:@"ICING_RIME.png"] forState:UIControlStateNormal];
+     //        [self.mixed setBackgroundImage:[UIImage imageNamed:@"ICING_MIXED.png"] forState:UIControlStateNormal];
+     //        [self.trace setBackgroundImage:[UIImage imageNamed:@"ICING_TRACE.png"] forState:UIControlStateNormal];
+     //        [self.lightIce setBackgroundImage:[UIImage imageNamed:@"ICING_LGT.png"] forState:UIControlStateNormal];
+     //        [self.modIce setBackgroundImage:[UIImage imageNamed:@"ICING_MOD.png"] forState:UIControlStateNormal];
+     //        [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"ICING_GRT.png"] forState:UIControlStateNormal];
+     //
+     //        self.sendPirep.enabled = YES;
+     }
+     edit2014 ends*/
 }
 
 //Hide keyboard if the user is editing and touches outside the textfiled
@@ -1339,9 +1380,9 @@
             [self performSelector:@selector(remAlert:) withObject:sentAlert afterDelay:2];
             //edit2014
             //NSLog(@"Hit Yes!!!");
-//            PIREP_View_Tab * pirepMapVC;
-//            pirepMapVC = [[PIREP_View_Tab alloc]initWithNibName:@"Pirepmap" bundle:nil];
-//            [self presentModalViewController:pirepMapVC animated:YES];
+            //            PIREP_View_Tab * pirepMapVC;
+            //            pirepMapVC = [[PIREP_View_Tab alloc]initWithNibName:@"Pirepmap" bundle:nil];
+            //            [self presentModalViewController:pirepMapVC animated:YES];
             //[pirepMapVC release];
             
             
@@ -1359,25 +1400,25 @@
 //Reset all buttons once the report is sent or cancelled.
 -(void)resetButtons
 {
-
-        self.presentPirep = @"";
-        self.pirepSelected.text = @"";
-        
-        self.pirepData = [[NSMutableArray alloc]init];
-        self.chopPosition = -1;
-        self.turbPosition = -1;
-        self.mtnPosition = -1;
-        self.icePosition = -1;
-        self.iceLevel = @"";
-        
-        NSLog(@"PIREP:\n%@",addData);
-        
-        [self setPirep];
-        
-        //Set button backgrounds to actual color
+    
+    self.presentPirep = @"";
+    self.pirepSelected.text = @"";
+    
+    self.pirepData = [[NSMutableArray alloc]init];
+    self.chopPosition = -1;
+    self.turbPosition = -1;
+    self.mtnPosition = -1;
+    self.icePosition = -1;
+    self.iceLevel = @"";
+    
+    NSLog(@"PIREP:\n%@",addData);
+    
+    [self setPirep];
+    
+    //Set button backgrounds to actual color
     //[self setDefaults];
     
-        [self initializeData];
+    [self initializeData];
     
 }
 
@@ -1428,16 +1469,16 @@
 //Send PIREP if there is a report. Else, display an alert.
 - (void)sendPirep:(id)sender {
     
-//    self.chop.enabled = YES;
-//    self.turb.enabled = YES;
-//    self.mtn.enabled = YES;
-//    self.ice.enabled = YES;
-//    
-//    self.chopPosition = YES;
-//    self.turbPosition = YES;
-//    self.mtnPosition = YES;
-//    self.icePosition = YES;
-//    
+    //    self.chop.enabled = YES;
+    //    self.turb.enabled = YES;
+    //    self.mtn.enabled = YES;
+    //    self.ice.enabled = YES;
+    //    
+    //    self.chopPosition = YES;
+    //    self.turbPosition = YES;
+    //    self.mtnPosition = YES;
+    //    self.icePosition = YES;
+    //    
     //NSLog(@"Present: %@\nSelected: %@",self.presentPirep,self.pirepSelected.text);
     
     if(![self.pirepSelected.text isEqualToString:@""])

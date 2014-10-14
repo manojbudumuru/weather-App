@@ -29,7 +29,8 @@
 //Show if the information is entered before
 @property (strong, nonatomic) IBOutlet UILabel *existingInfo;
 
-@property (strong, nonatomic) IBOutlet UITextField *name;
+@property (strong, nonatomic) IBOutlet UITextField *fName;
+@property (strong, nonatomic) IBOutlet UITextField *lName;
 @property (strong, nonatomic) IBOutlet UITextField *aircraftType;
 @property (strong, nonatomic) IBOutlet UITextField *tailNumber;
 @property (strong, nonatomic) IBOutlet UITextField *license;

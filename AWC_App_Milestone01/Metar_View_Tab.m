@@ -242,8 +242,10 @@
         }
     }
     
+    //NSLog(@"\n\n1: %d\n\n2: %d\n\n3: %d\n\n4: %d\n\n5: %d\n\n6: %d\n\n7: %d\n\n8: %d",[self.metarsWithZeroPriority count],[self.metarsWithOnePriority count],[self.metarsWithTwoPriority count],[self.metarsWithThreePriority count],[self.metarsWithFourPriority count],[self.metarsWithFivePriority count],[self.metarsWithSixPriority count],[self.metarsWithSevenPriority  count]);
+    [self.displayWind addAnnotations:self.metarsWithZeroPriority]; //edit2014 adding annotations to wind map
     [self.displayMetar addAnnotations:self.metarsWithZeroPriority];
-    [self findZoom];
+    //[self findZoom];
 }
 
 //Display a popover when a Metar is clicked. The popover contains the details of the Metar listed in a table format.
@@ -300,36 +302,36 @@
 }
 
 //Previous method used to display the views for annotation.
--(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation_Working:(id<MKAnnotation>)annotation
-{
-    static NSString * identifier = @"Annotation";
-    MKPinAnnotationView * annotView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-    if(annotView == nil)
-    {
-        annotView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:identifier];
-        
-        if([annotation isKindOfClass:[Metar class]])
-        {
-            static int count = 0;
-            Metar * thisMetar = (Metar *)annotation;
-            
-            if(thisMetar.wx!=nil)
-            {
-                NSMutableArray * words = [[NSMutableArray alloc]initWithArray:[thisMetar.wx componentsSeparatedByString:@" "]];
-                NSString * name = [NSString stringWithFormat:@"%@.png",words[0]];
-                annotView.image = [UIImage imageNamed:name];
-            }
-            else
-            {
-                NSLog(@"++++++++++ %d",++count);
-            }
-        }
-        //annotView.image = [UIImage imageNamed:@"+TSRA.png"];
-            
-    }
-    annotView.annotation = annotation;
-    return annotView;
-}
+//-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation_Working:(id<MKAnnotation>)annotation
+//{
+//    static NSString * identifier = @"Annotation";
+//    MKPinAnnotationView * annotView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+//    if(annotView == nil)
+//    {
+//        annotView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:identifier];
+//        
+//        if([annotation isKindOfClass:[Metar class]])
+//        {
+//            static int count = 0;
+//            Metar * thisMetar = (Metar *)annotation;
+//            
+//            if(thisMetar.wx!=nil)
+//            {
+//                NSMutableArray * words = [[NSMutableArray alloc]initWithArray:[thisMetar.wx componentsSeparatedByString:@" "]];
+//                NSString * name = [NSString stringWithFormat:@"%@.png",words[0]];
+//                annotView.image = [UIImage imageNamed:name];
+//            }
+//            else
+//            {
+//                NSLog(@"++++++++++ %d",++count);
+//            }
+//        }
+//        //annotView.image = [UIImage imageNamed:@"+TSRA.png"];
+//            
+//    }
+//    annotView.annotation = annotation;
+//    return annotView;
+//}
 
 //Dynamically change the pins on the map when the user zooms in/out.
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
@@ -476,5 +478,21 @@
 //Reload the pins on the map.
 - (IBAction)refreshMetars:(id)sender {
     [self initializeData];
+}
+- (IBAction)viewChanged:(id)sender {
+    switch (self.segmentedControl.selectedSegmentIndex)
+    {
+        case 0:
+            self.displayMetar.hidden = NO;
+            self.displayWind.hidden = YES;
+            break;
+        case 1:
+            self.displayMetar.hidden = YES;
+            self.displayWind.hidden = NO;
+            break;
+        default:
+            break;
+    }
+
 }
 @end

@@ -13,9 +13,13 @@
 @interface Metar_View_Tab : UIViewController <MKMapViewDelegate>
 
 @property (strong, nonatomic) IBOutlet MKMapView *displayMetar;
+@property (weak, nonatomic) IBOutlet MKMapView *displayWind;//edit2014 map for wind barbs
 @property (strong, nonatomic) IBOutlet UILabel *lastUpdate;
 - (IBAction)refreshMetars:(id)sender;
 -(float)findZoom;
+//edit2014 adding Segment controller
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+- (IBAction)viewChanged:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityStatus;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingImage;
