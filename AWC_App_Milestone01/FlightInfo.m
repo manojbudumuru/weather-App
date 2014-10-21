@@ -132,7 +132,26 @@
         self.existingInfo.lineBreakMode = NSLineBreakByWordWrapping;
         //edit2014
         
-        self.existingInfo.text = [NSString stringWithFormat:@"Existing information:\n\n%@ %@ %@\n%@ %@\n%@ %@\n%@ %@",@"Name:",data[0],data[1],@"Aircraft Type:",data[2],@"Tail Number:",data[3],@"License:",data[5]];
+        NSMutableArray * displayData = [[NSMutableArray alloc]init];
+        NSString * temp;
+        NSString * temp1;
+        NSMutableString * str;
+        NSString *s = @"\u2022";
+        for(int i=0;i<self.appDelegate.flightInformation.count;i++){
+            temp = self.appDelegate.flightInformation[i];
+            temp1 = [temp substringWithRange:NSMakeRange(0, 1)];
+            str = [NSMutableString stringWithString:temp1];
+            for(int j=1;j<temp.length-1;j++)
+            {
+                //[str appendFormat:s];
+                [str appendFormat:@"*"];
+            }
+            temp1 = [temp substringWithRange:NSMakeRange(temp.length-1, 1)];
+            [str appendFormat:temp1];
+            [displayData addObject:str];
+        }
+        NSLog(@"%@",str);
+        self.existingInfo.text = [NSString stringWithFormat:@"Existing information:\n\n%@ %@ %@\n%@ %@\n%@ %@\n%@ %@",@"Name:",displayData[0],displayData[1],@"Aircraft Type:",displayData[2],@"Tail Number:",displayData[3],@"License:",displayData[4]];
         self.fileLoaded = YES;
         
         
