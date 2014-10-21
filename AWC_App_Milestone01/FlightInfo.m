@@ -16,6 +16,10 @@
 @property NSString * fData;
 @property BOOL hasPilotInfo;
 @property NSString * actualPassword;
+@property NSString * savedPassword;
+@property NSString * loginURL;
+@property BOOL fileLoaded;
+
 
 @end
 
@@ -71,23 +75,15 @@
     [self.saveData addTarget:self action:@selector(saveData:) forControlEvents:UIControlEventTouchUpInside];
     [self.enterData addTarget:self action:@selector(displayButtons:) forControlEvents:UIControlEventTouchUpInside];
     [self.changeData addTarget:self action:@selector(displayButtons:) forControlEvents:UIControlEventTouchUpInside];
-    [self.cancel addTarget:self action:@selector(validateUser) forControlEvents:UIControlEventTouchUpInside];
-    [self.cancelDataCollection addTarget:self action:@selector(validateUser) forControlEvents:UIControlEventTouchUpInside];
+    [self.cancel addTarget:self action:@selector(validatePassword) forControlEvents:UIControlEventTouchUpInside];
+    [self.cancelDataCollection addTarget:self action:@selector(viewDidLoad) forControlEvents:UIControlEventTouchUpInside];
     
     
     self.existingInfo.hidden = YES;
     
-    
-
-    
+    self.loginURL = @"http://csgrad07.nwmissouri.edu/login.php";
     
     [self checkData];
-    
-    
-    
-    
-    
-    
     
 	// Do any additional setup after loading the view.
 }
@@ -96,6 +92,7 @@
 //Else, ask him to enter the information.
 -(void)checkData
 {
+    self.welcomeText.hidden = NO;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     self.fPath = [documentsDirectory stringByAppendingPathComponent:@"Flight_Data.txt"];
@@ -119,6 +116,7 @@
         self.welcomeText.text = @"This is the first time you are using this application. This application needs some information from you inorder to send reports to the ground station. Please press 'OK' to fill in the required information and start using the application.";
         self.enterData.hidden = NO;
         self.passwordTF.hidden = YES;
+        self.fileLoaded = NO;
     }
     else
     {
@@ -132,8 +130,10 @@
         self.existingInfo.textAlignment = NSTextAlignmentCenter;
         self.existingInfo.numberOfLines = 6;
         self.existingInfo.lineBreakMode = NSLineBreakByWordWrapping;
+        //edit2014
         
-        self.existingInfo.text = [NSString stringWithFormat:@"Existing information:\n\n%@ %@ %@\n%@ %@\n%@ %@\n%@ %@",@"Name:",data[0],data[1],@"Aircraft Type:",data[2],@"Tail Number:",data[3],@"License:",data[4]];
+        self.existingInfo.text = [NSString stringWithFormat:@"Existing information:\n\n%@ %@ %@\n%@ %@\n%@ %@\n%@ %@",@"Name:",data[0],data[1],@"Aircraft Type:",data[2],@"Tail Number:",data[3],@"License:",data[5]];
+        self.fileLoaded = YES;
         
         
         
@@ -202,6 +202,11 @@
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Enter Information" message:@"License cannot be empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
+    else if([self.passwordTF.text isEqualToString:@""])
+    {
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Enter Information" message:@"Please enter correct password" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
     else
     {
         NSString * data = self.fName.text;
@@ -214,12 +219,15 @@
         [self.info addObject:data];
         data = self.license.text;
         [self.info addObject:data];
+        data = self.passwordTF.text;
+        [self.info addObject:data];
         
-        self.fData = [NSString stringWithFormat:@"%@_%@_%@_%@_%@",self.fName.text,self.lName.text,self.aircraftType.text,self.tailNumber.text,self.license.text];
+        self.fData = [NSString stringWithFormat:@"%@_%@_%@_%@_%@_%@",self.fName.text,self.lName.text,self.aircraftType.text,self.tailNumber.text,self.license.text,self.passwordTF.text];
         [self.fData writeToFile:self.fPath atomically:NO encoding:NSUTF8StringEncoding error:nil];
         
         self.appDelegate.flightInformation = self.info;
-        
+//        NSLog(@"\nFROM SAVEDATA()\n%@, %@, %@\n>>>>>>>>>COUNT : %d",self.appDelegate.flightInformation[0],self.appDelegate.flightInformation[1],self.appDelegate.flightInformation[4],self.appDelegate.flightInformation.count);
+//        NSLog(@"\nFROM SAVEDATA()\nself.info\n%@, %@, %@",self.info[0],self.info[1],self.info[4]);
         
         [self validateUser];
         
@@ -229,14 +237,7 @@
 //If the device has internet, present tabs. Else, prompt the user to connect to internet.
 -(void)presentTabs
 {
-    
-//    //        http://aviationweather.gov/
-//    NSString * replyFromURL = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://aviationweather.gov/"] encoding:NSStringEncodingConversionAllowLossy error:nil];
-//    
-//    BOOL result = (replyFromURL!=NULL)?YES:NO;
-//    
-//    //NSLog(@"Internet Connection: %c",result);
-   
+
     if([self.appDelegate isConnectedToInternet])
     {
     
@@ -279,28 +280,52 @@
         self.cancelDataCollection.hidden = NO;
 }
 
+//Validate if the user is listed in the database
 -(void)validateUser
 {
-    
+    //edit2014
     if([self.appDelegate isConnectedToInternet])
     {
-        static BOOL passwordObtained = NO;
-        
-        if(!passwordObtained)
-        {
-            self.actualPassword = [self.appDelegate getApplicationPassword];
-            passwordObtained = YES;
+        NSMutableString * credentials = [NSMutableString stringWithString:self.loginURL];
+        if(self.fileLoaded){
+            [credentials appendFormat:@"?fname=%@",self.appDelegate.flightInformation[0]];
+            [credentials appendFormat:@"&lname=%@",self.appDelegate.flightInformation[1]];
+            [credentials appendFormat:@"&licnum=%@",self.appDelegate.flightInformation[4]];
+            NSLog(@"%@\n*****",credentials);
+            //
+            NSMutableURLRequest * request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:credentials]];
+            NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+            NSString * reply = [[NSString alloc]initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
+            NSLog(@"Reply: %@",reply);
+            int returnValue = [reply intValue];
+            if (returnValue == 1) {
+                [self presentTabs];
+            }
+            else{
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Error!!!" message:@"Boo Hoo!!! Get a valid License First.." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                [alert show];
+                self.info = [[NSMutableArray alloc]init];
+            }
+            
+            
         }
-        
-        NSString * userPassword = self.passwordTF.text;
-        
-        if([self.actualPassword isEqualToString:userPassword])
-           [self presentTabs];
-        else
-        {
-            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Login failed!!" message:@"Please enter correct password to access the application" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-        }
+//        static BOOL passwordObtained = NO;
+//        
+//        if(!passwordObtained)
+//        {
+//            self.actualPassword = [self.appDelegate getApplicationPassword];
+//            passwordObtained = YES;
+//        }
+//        
+//        NSString * userPassword = self.passwordTF.text;
+//        if([self. isEqualToString:userPassword])
+//           [self presentTabs];
+//        else
+//        {
+//            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Login failed!!" message:@"Please enter correct password to access the application" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//            [alert show];
+//        }
+//      [self presentTabs];
     
     }
     else
@@ -329,5 +354,17 @@
     [self setCancel:nil];
     [self setExistingInfo:nil];
     [super viewDidUnload];
+}
+//Validate the information of the user already stored on the app after he/she provides a correct passkey
+-(void)validatePassword {
+    if([self.passwordTF.text isEqualToString:self.appDelegate.flightInformation[self.appDelegate.flightInformation.count-1]])
+    {
+        [self validateUser];
+    }
+    else
+    {
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Incorrect password!!" message:@"Please enter the correct password to continue." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 @end
