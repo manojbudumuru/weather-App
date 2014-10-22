@@ -85,7 +85,7 @@
     
     [self checkData];
     
-	// Do any additional setup after loading the view.
+	// Do any additional setup afßßter loading the view.
 }
 
 //Check if the app has any exisiting data. If yes, present him with the options to change or continue with the same.

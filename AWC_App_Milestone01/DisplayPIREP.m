@@ -159,7 +159,7 @@
         
         if(self.userPirep.lisenceNum!=nil)
         {
-            self.icaoId = self.userPirep.lisenceNum;
+            self.icaoId = @"Pilot Report";//edit2014//self.userPirep.lisenceNum;
             //[self.titles addObject:@"License Number"];
             //[self.values addObject:self.userPirep.lisenceNum];
         }

@@ -52,7 +52,7 @@
     self.existingInfo.numberOfLines = 6;
     self.existingInfo.lineBreakMode = NSLineBreakByWordWrapping;
     
-    self.existingInfo.text = [NSString stringWithFormat:@"Existing information:\n\n%@ %@\n%@ %@\n%@ %@\n%@ %@",@"Name:",data[0],@"Aircraft Type:",data[1],@"Tail Number:",data[2],@"License:",data[3]];
+    self.existingInfo.text = [NSString stringWithFormat:@"Existing information:\n\n%@ %@ %@\n%@ %@\n%@ %@\n%@ %@",@"Name:",data[0],data[1],@"Aircraft Type:",data[2],@"Tail Number:",data[3],@"License:",data[4]];
     
 	// Do any additional setup after loading the view.
 }
