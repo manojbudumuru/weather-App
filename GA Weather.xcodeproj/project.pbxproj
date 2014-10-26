@@ -172,6 +172,9 @@
 		CA08E95719D779A6002A098B /* AWC_Login Screen1.png in Resources */ = {isa = PBXBuildFile; fileRef = CA08E95619D779A6002A098B /* AWC_Login Screen1.png */; };
 		CA08E95A19D77FD2002A098B /* zoomIn.png in Resources */ = {isa = PBXBuildFile; fileRef = CA08E95819D77FD2002A098B /* zoomIn.png */; };
 		CA08E95B19D77FD2002A098B /* zoomOut.png in Resources */ = {isa = PBXBuildFile; fileRef = CA08E95919D77FD2002A098B /* zoomOut.png */; };
+		CA2AB73919FCFA9C00C624C0 /* category drop.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2AB73619FCFA9C00C624C0 /* category drop.png */; };
+		CA2AB73A19FCFA9C00C624C0 /* levelAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2AB73719FCFA9C00C624C0 /* levelAdd.png */; };
+		CA2AB73B19FCFA9C00C624C0 /* SendPirepBack.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2AB73819FCFA9C00C624C0 /* SendPirepBack.png */; };
 		CAEA69C519D2882300BDD8EA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAEA69C419D2882300BDD8EA /* MainStoryboard.storyboard */; };
 		CAEA69C719D29DB100BDD8EA /* AWC_Login Screen.png in Resources */ = {isa = PBXBuildFile; fileRef = CAEA69C619D29DB100BDD8EA /* AWC_Login Screen.png */; };
 /* End PBXBuildFile section */
@@ -367,6 +370,9 @@
 		CA08E95619D779A6002A098B /* AWC_Login Screen1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AWC_Login Screen1.png"; sourceTree = "<group>"; };
 		CA08E95819D77FD2002A098B /* zoomIn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomIn.png; sourceTree = "<group>"; };
 		CA08E95919D77FD2002A098B /* zoomOut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomOut.png; sourceTree = "<group>"; };
+		CA2AB73619FCFA9C00C624C0 /* category drop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category drop.png"; sourceTree = "<group>"; };
+		CA2AB73719FCFA9C00C624C0 /* levelAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = levelAdd.png; sourceTree = "<group>"; };
+		CA2AB73819FCFA9C00C624C0 /* SendPirepBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SendPirepBack.png; sourceTree = "<group>"; };
 		CAEA69C419D2882300BDD8EA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		CAEA69C619D29DB100BDD8EA /* AWC_Login Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AWC_Login Screen.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -390,6 +396,9 @@
 		7504E824191229C100EC5435 /* Old icons and launch images */ = {
 			isa = PBXGroup;
 			children = (
+				CA2AB73619FCFA9C00C624C0 /* category drop.png */,
+				CA2AB73719FCFA9C00C624C0 /* levelAdd.png */,
+				CA2AB73819FCFA9C00C624C0 /* SendPirepBack.png */,
 				CA08E95819D77FD2002A098B /* zoomIn.png */,
 				CA08E95919D77FD2002A098B /* zoomOut.png */,
 				CA08E95619D779A6002A098B /* AWC_Login Screen1.png */,
@@ -733,7 +742,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 75CF43E217F8D34700CCF4F0 /* Build configuration list for PBXProject "ga weather" */;
+			buildConfigurationList = 75CF43E217F8D34700CCF4F0 /* Build configuration list for PBXProject "GA Weather" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -808,8 +817,10 @@
 				754D1DA6186288E700A88E58 /* -TSRA.png in Resources */,
 				BCB97AFB19E5EA6000177259 /* MTNWV.png in Resources */,
 				CA08E95A19D77FD2002A098B /* zoomIn.png in Resources */,
+				CA2AB73A19FCFA9C00C624C0 /* levelAdd.png in Resources */,
 				BCB97B0219E5EA6000177259 /* TURB.png in Resources */,
 				754D1DA7186288E700A88E58 /* -TSSN.png in Resources */,
+				CA2AB73919FCFA9C00C624C0 /* category drop.png in Resources */,
 				754D1DA8186288E700A88E58 /* +DZ.png in Resources */,
 				754D1DA9186288E700A88E58 /* +FZDZ.png in Resources */,
 				754D1DAA186288E700A88E58 /* +FZRA.png in Resources */,
@@ -828,6 +839,7 @@
 				754D1DB4186288E700A88E58 /* +SN.png in Resources */,
 				754D1DB5186288E700A88E58 /* +SS.png in Resources */,
 				754D1DB6186288E700A88E58 /* +TSGR.png in Resources */,
+				CA2AB73B19FCFA9C00C624C0 /* SendPirepBack.png in Resources */,
 				754D1DB7186288E700A88E58 /* +TSGRRA.png in Resources */,
 				754D1DB8186288E700A88E58 /* +TSGS.png in Resources */,
 				754D1DB9186288E700A88E58 /* +TSRA.png in Resources */,
@@ -1038,7 +1050,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		75CF43E217F8D34700CCF4F0 /* Build configuration list for PBXProject "ga weather" */ = {
+		75CF43E217F8D34700CCF4F0 /* Build configuration list for PBXProject "GA Weather" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				75CF441317F8D34700CCF4F0 /* Debug */,

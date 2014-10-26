@@ -326,19 +326,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SendPirep.jpg" id="p9p-7t-ubh">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SendPirepBack.png" id="p9p-7t-ubh">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="Ye0-iI-x3b">
-                                <rect key="frame" x="20" y="134" width="125" height="55"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <state key="normal" backgroundImage="CHOP.png">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
+                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="category drop.png" id="UmI-XQ-wkB">
+                                <rect key="frame" x="363" y="146" width="379" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PJj-M2-t2w">
-                                <rect key="frame" x="429" y="896" width="143" height="57"/>
+                                <rect key="frame" x="440" y="905" width="121" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="CANCEL.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -348,30 +345,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iLV-zq-cHZ">
-                                <rect key="frame" x="197" y="896" width="143" height="57"/>
+                                <rect key="frame" x="208" y="905" width="122" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="SEND.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Qef-z1-7Rb">
-                                <rect key="frame" x="207" y="134" width="125" height="55"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <state key="normal" backgroundImage="TURB.png">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nU6-IA-JbD">
-                                <rect key="frame" x="593" y="134" width="125" height="55"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <state key="normal" backgroundImage="ICING.png">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="ZHW-a0-6bP">
-                                <rect key="frame" x="20" y="427" width="125" height="65"/>
+                                <rect key="frame" x="20" y="349" width="125" height="65"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" backgroundImage="LGT.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -379,7 +360,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eif-2c-6pg">
-                                <rect key="frame" x="207" y="427" width="125" height="65"/>
+                                <rect key="frame" x="207" y="349" width="125" height="65"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" backgroundImage="LGT.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -387,7 +368,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uHy-YT-KcS">
-                                <rect key="frame" x="333" y="229" width="102" height="53"/>
+                                <rect key="frame" x="394" y="176" width="102" height="48"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" backgroundImage="CLEAR.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -395,7 +376,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9UC-3K-leu">
-                                <rect key="frame" x="471" y="229" width="102" height="53"/>
+                                <rect key="frame" x="505" y="176" width="102" height="48"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" backgroundImage="RIME.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -403,7 +384,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ju2-xT-3PF">
-                                <rect key="frame" x="616" y="229" width="102" height="53"/>
+                                <rect key="frame" x="616" y="176" width="102" height="48"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" backgroundImage="MIXED.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -411,7 +392,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="W5E-8C-cxP">
-                                <rect key="frame" x="207" y="533" width="125" height="65"/>
+                                <rect key="frame" x="207" y="532" width="125" height="65"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" backgroundImage="MOD.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -419,7 +400,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="24B-Sy-Ppt">
-                                <rect key="frame" x="593" y="406" width="125" height="60"/>
+                                <rect key="frame" x="593" y="339" width="125" height="60"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" backgroundImage="TRACE.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -427,7 +408,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xrH-aq-Muw">
-                                <rect key="frame" x="593" y="482" width="125" height="60"/>
+                                <rect key="frame" x="593" y="471" width="125" height="60"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" backgroundImage="LGT.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -435,7 +416,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KPV-l3-a0E">
-                                <rect key="frame" x="593" y="566" width="125" height="60"/>
+                                <rect key="frame" x="593" y="591" width="125" height="60"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" backgroundImage="MOD.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -443,23 +424,15 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" id="61u-wu-nIh">
-                                <rect key="frame" x="207" y="636" width="125" height="65"/>
+                                <rect key="frame" x="207" y="710" width="125" height="65"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" backgroundImage="SEV.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" id="oOL-J4-zcg">
-                                <rect key="frame" x="399" y="134" width="125" height="55"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <state key="normal" backgroundImage="MTNWV.png">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mqu-JQ-Q2y">
-                                <rect key="frame" x="399" y="427" width="125" height="65"/>
+                                <rect key="frame" x="399" y="349" width="125" height="65"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" backgroundImage="LGT.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -467,7 +440,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WKU-c9-Bh8">
-                                <rect key="frame" x="399" y="533" width="125" height="65"/>
+                                <rect key="frame" x="399" y="532" width="125" height="65"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" backgroundImage="MOD.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -475,7 +448,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" id="Fpu-cj-WK1">
-                                <rect key="frame" x="399" y="636" width="125" height="65"/>
+                                <rect key="frame" x="399" y="710" width="125" height="65"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" backgroundImage="SEV.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -483,7 +456,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="wordWrap" id="7K4-cv-4Db">
-                                <rect key="frame" x="20" y="636" width="125" height="65"/>
+                                <rect key="frame" x="20" y="710" width="125" height="65"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" backgroundImage="SEV.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -491,7 +464,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" id="xQT-3c-OQO">
-                                <rect key="frame" x="593" y="641" width="125" height="60"/>
+                                <rect key="frame" x="593" y="715" width="125" height="60"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" backgroundImage="SEV.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -499,7 +472,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="Dgm-ia-RpG">
-                                <rect key="frame" x="20" y="533" width="125" height="65"/>
+                                <rect key="frame" x="20" y="532" width="125" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" backgroundImage="MOD.png">
@@ -529,13 +502,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="nku-gF-RA0">
-                                <rect key="frame" x="20" y="324" width="125" height="65"/>
+                                <rect key="frame" x="20" y="256" width="125" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" backgroundImage="NEG.png"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4H6-aN-aB4">
-                                <rect key="frame" x="207" y="324" width="125" height="65"/>
+                                <rect key="frame" x="207" y="256" width="125" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" backgroundImage="NEG.png">
@@ -544,7 +517,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pdS-yA-KMe">
-                                <rect key="frame" x="399" y="324" width="125" height="65"/>
+                                <rect key="frame" x="399" y="256" width="125" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" backgroundImage="NEG.png">
@@ -553,11 +526,46 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0Kb-c9-5Y4">
-                                <rect key="frame" x="593" y="324" width="125" height="65"/>
+                                <rect key="frame" x="593" y="256" width="125" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" backgroundImage="NEG.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHOP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JOJ-Kh-tPc">
+                                <rect key="frame" x="38" y="105" width="88" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="28"/>
+                                <color key="textColor" red="0.066666670143604279" green="0.55686277151107788" blue="0.85098046064376831" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TURB" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sc3-ET-5vv">
+                                <rect key="frame" x="224" y="105" width="88" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="28"/>
+                                <color key="textColor" red="0.066666670139999995" green="0.55686277149999996" blue="0.85098046059999999" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MTNWV" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SR3-fk-Zc5">
+                                <rect key="frame" x="405" y="105" width="113" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="28"/>
+                                <color key="textColor" red="0.066666670139999995" green="0.55686277149999996" blue="0.85098046059999999" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ICING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hEf-oi-mdJ">
+                                <rect key="frame" x="611" y="105" width="88" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="28"/>
+                                <color key="textColor" red="0.066666670139999995" green="0.55686277149999996" blue="0.85098046059999999" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XhA-vi-bbX">
+                                <rect key="frame" x="59" y="453" width="46" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="levelAdd.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -567,14 +575,13 @@
                     <tabBarItem key="tabBarItem" title="PIREP Send" image="first.png" id="4gj-Lx-uPm"/>
                     <navigationItem key="navigationItem" title="Pirep Send" id="qOI-lR-LBX"/>
                     <connections>
-                        <outlet property="chop" destination="Ye0-iI-x3b" id="DKz-0a-RAZ"/>
+                        <outlet property="chopLM" destination="XhA-vi-bbX" id="UFl-8A-krE"/>
                         <outlet property="clear" destination="uHy-YT-KcS" id="Kgg-kG-uCd"/>
                         <outlet property="greaterChop" destination="7K4-cv-4Db" id="GYg-Sg-IcI"/>
                         <outlet property="greaterIce" destination="xQT-3c-OQO" id="4Xh-gc-vDJ"/>
                         <outlet property="greaterMtn" destination="Fpu-cj-WK1" id="IL3-0C-7PI"/>
                         <outlet property="greaterTurb" destination="61u-wu-nIh" id="i00-xl-7vR"/>
                         <outlet property="header" destination="J6V-y0-ybd" id="wx9-c1-uEb"/>
-                        <outlet property="ice" destination="nU6-IA-JbD" id="LM6-R4-qW5"/>
                         <outlet property="lightChop" destination="ZHW-a0-6bP" id="qpy-Jd-t9N"/>
                         <outlet property="lightIce" destination="xrH-aq-Muw" id="UpI-eH-pvz"/>
                         <outlet property="lightMtn" destination="mqu-JQ-Q2y" id="j4H-az-0Xj"/>
@@ -584,7 +591,6 @@
                         <outlet property="modIce" destination="KPV-l3-a0E" id="Aw2-6g-4ji"/>
                         <outlet property="modMtn" destination="WKU-c9-Bh8" id="i22-t1-gBd"/>
                         <outlet property="modTurb" destination="W5E-8C-cxP" id="sEg-X4-UkS"/>
-                        <outlet property="mtn" destination="oOL-J4-zcg" id="0hV-70-UGm"/>
                         <outlet property="noChop" destination="nku-gF-RA0" id="cqm-U9-rvS"/>
                         <outlet property="noIce" destination="0Kb-c9-5Y4" id="Zyu-eY-wzR"/>
                         <outlet property="noMtn" destination="pdS-yA-KMe" id="GxK-Sl-GcY"/>
@@ -593,7 +599,6 @@
                         <outlet property="rime" destination="9UC-3K-leu" id="z4Q-LG-7na"/>
                         <outlet property="sendPirep" destination="iLV-zq-cHZ" id="59a-Z6-ymS"/>
                         <outlet property="trace" destination="24B-Sy-Ppt" id="5GL-en-dDh"/>
-                        <outlet property="turb" destination="Qef-z1-7Rb" id="wYM-Wn-HXE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wtR-Dz-usq" sceneMemberID="firstResponder"/>
@@ -1060,23 +1065,21 @@
     <resources>
         <image name="AWC_Login Screen1.png" width="768" height="1004"/>
         <image name="CANCEL.png" width="552" height="200"/>
-        <image name="CHOP.png" width="400" height="200"/>
         <image name="CLEAR.png" width="344" height="200"/>
-        <image name="ICING.png" width="400" height="200"/>
         <image name="LGT.png" width="400" height="200"/>
         <image name="Loading 02.png" width="100" height="100"/>
         <image name="MIXED.png" width="344" height="200"/>
         <image name="MOD.png" width="400" height="200"/>
-        <image name="MTNWV.png" width="400" height="200"/>
         <image name="NEG.png" width="400" height="200"/>
         <image name="RIME.png" width="344" height="200"/>
         <image name="SEND.png" width="552" height="200"/>
         <image name="SEV.png" width="400" height="200"/>
-        <image name="SendPirep.jpg" width="768" height="1004"/>
+        <image name="SendPirepBack.png" width="768" height="1004"/>
         <image name="TRACE.png" width="344" height="200"/>
-        <image name="TURB.png" width="400" height="200"/>
+        <image name="category drop.png" width="443" height="100"/>
         <image name="first" width="140" height="75"/>
         <image name="first.png" width="30" height="30"/>
+        <image name="levelAdd.png" width="53" height="53"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

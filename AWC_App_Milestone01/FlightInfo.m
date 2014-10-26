@@ -247,7 +247,7 @@
         self.appDelegate.flightInformation = self.info;
 //        NSLog(@"\nFROM SAVEDATA()\n%@, %@, %@\n>>>>>>>>>COUNT : %d",self.appDelegate.flightInformation[0],self.appDelegate.flightInformation[1],self.appDelegate.flightInformation[4],self.appDelegate.flightInformation.count);
 //        NSLog(@"\nFROM SAVEDATA()\nself.info\n%@, %@, %@",self.info[0],self.info[1],self.info[4]);
-        
+        self.fileLoaded = YES;
         [self validateUser];
         
     }

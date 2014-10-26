@@ -18,22 +18,23 @@
 @property (weak, nonatomic) IBOutlet UIButton *titleInfo;
 
 // Buttons for CHOP
-@property (strong, nonatomic) IBOutlet UIButton *chop;
+//@property (strong, nonatomic) IBOutlet UIButton *chop;
 @property (strong, nonatomic) IBOutlet UIButton *lightChop;
 @property (strong, nonatomic) IBOutlet UIButton *modChop;
 @property (strong, nonatomic) IBOutlet UIButton *greaterChop;
 @property (weak, nonatomic) IBOutlet UIButton *noChop;
+@property (strong, nonatomic) IBOutlet UIButton *chopLM;//edit2014
 
 
 // Buttons for TURB
-@property (strong, nonatomic) IBOutlet UIButton *turb;
+//@property (strong, nonatomic) IBOutlet UIButton *turb;
 @property (strong, nonatomic) IBOutlet UIButton *lightTurb;
 @property (strong, nonatomic) IBOutlet UIButton *modTurb;
 @property (strong, nonatomic) IBOutlet UIButton *greaterTurb;
 @property (weak, nonatomic) IBOutlet UIButton *noTurb;
 
 // Buttons for MTN WAVE
-@property (strong, nonatomic) IBOutlet UIButton *mtn;
+//@property (strong, nonatomic) IBOutlet UIButton *mtn;
 @property (strong, nonatomic) IBOutlet UIButton *lightMtn;
 @property (strong, nonatomic) IBOutlet UIButton *modMtn;
 @property (strong, nonatomic) IBOutlet UIButton *greaterMtn;
@@ -41,7 +42,7 @@
 
 
 // Buttons for ICE
-@property (strong, nonatomic) IBOutlet UIButton *ice;
+//@property (strong, nonatomic) IBOutlet UIButton *ice;
 @property (strong, nonatomic) IBOutlet UIButton *clear;
 @property (strong, nonatomic) IBOutlet UIButton *rime;
 @property (strong, nonatomic) IBOutlet UIButton *mixed;
