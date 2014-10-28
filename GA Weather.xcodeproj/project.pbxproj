@@ -176,7 +176,6 @@
 		CA2AB74419FF158A00C624C0 /* pirepView.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2AB74219FF158A00C624C0 /* pirepView.png */; };
 		CA2AB74519FF158A00C624C0 /* pirepSender.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2AB74319FF158A00C624C0 /* pirepSender.png */; };
 		CA2AB74719FF16AB00C624C0 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2AB74619FF16AB00C624C0 /* map.png */; };
-		CA2AB74A19FF1C0400C624C0 /* SelectedTab.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2AB74819FF1C0400C624C0 /* SelectedTab.png */; };
 		CA2AB74B19FF1C0400C624C0 /* TabBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2AB74919FF1C0400C624C0 /* TabBarBackground.png */; };
 		CA2AB75219FF308800C624C0 /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2AB74C19FF308800C624C0 /* email.png */; };
 		CA2AB75319FF308800C624C0 /* hazard.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2AB74D19FF308800C624C0 /* hazard.png */; };
@@ -186,6 +185,7 @@
 		CA2AB75719FF308800C624C0 /* TabBarBackground2.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2AB75119FF308800C624C0 /* TabBarBackground2.png */; };
 		CA495DF519FFD5380010FE13 /* footer.png in Resources */ = {isa = PBXBuildFile; fileRef = CA495DF419FFD5380010FE13 /* footer.png */; };
 		CA495DF719FFD6B40010FE13 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = CA495DF619FFD6B40010FE13 /* header.png */; };
+		CA495DFB19FFE25A0010FE13 /* SelectedTab.png in Resources */ = {isa = PBXBuildFile; fileRef = CA495DFA19FFE25A0010FE13 /* SelectedTab.png */; };
 		CAEA69C519D2882300BDD8EA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAEA69C419D2882300BDD8EA /* MainStoryboard.storyboard */; };
 		CAEA69C719D29DB100BDD8EA /* AWC_Login Screen.png in Resources */ = {isa = PBXBuildFile; fileRef = CAEA69C619D29DB100BDD8EA /* AWC_Login Screen.png */; };
 /* End PBXBuildFile section */
@@ -385,7 +385,6 @@
 		CA2AB74219FF158A00C624C0 /* pirepView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pirepView.png; sourceTree = "<group>"; };
 		CA2AB74319FF158A00C624C0 /* pirepSender.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pirepSender.png; sourceTree = "<group>"; };
 		CA2AB74619FF16AB00C624C0 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
-		CA2AB74819FF1C0400C624C0 /* SelectedTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectedTab.png; sourceTree = "<group>"; };
 		CA2AB74919FF1C0400C624C0 /* TabBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarBackground.png; sourceTree = "<group>"; };
 		CA2AB74C19FF308800C624C0 /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email.png; sourceTree = "<group>"; };
 		CA2AB74D19FF308800C624C0 /* hazard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hazard.png; sourceTree = "<group>"; };
@@ -395,6 +394,7 @@
 		CA2AB75119FF308800C624C0 /* TabBarBackground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarBackground2.png; sourceTree = "<group>"; };
 		CA495DF419FFD5380010FE13 /* footer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = footer.png; sourceTree = "<group>"; };
 		CA495DF619FFD6B40010FE13 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
+		CA495DFA19FFE25A0010FE13 /* SelectedTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectedTab.png; sourceTree = "<group>"; };
 		CAEA69C419D2882300BDD8EA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		CAEA69C619D29DB100BDD8EA /* AWC_Login Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AWC_Login Screen.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -461,7 +461,7 @@
 			isa = PBXGroup;
 			children = (
 				BC9F31DC19EB5B7E00AA6110 /* tabBar.png */,
-				CA2AB74819FF1C0400C624C0 /* SelectedTab.png */,
+				CA495DFA19FFE25A0010FE13 /* SelectedTab.png */,
 				CA2AB74919FF1C0400C624C0 /* TabBarBackground.png */,
 			);
 			name = TabBarImages;
@@ -832,7 +832,6 @@
 				754D1D99186288E700A88E58 /* -FZRA.png in Resources */,
 				CA2AB75619FF308800C624C0 /* TabBarBackground1.png in Resources */,
 				754D1D9A186288E700A88E58 /* -GR.png in Resources */,
-				CA2AB74A19FF1C0400C624C0 /* SelectedTab.png in Resources */,
 				754D1D9B186288E700A88E58 /* -GS.png in Resources */,
 				CA2AB75219FF308800C624C0 /* email.png in Resources */,
 				75F111651912258000E45394 /* Images.xcassets in Resources */,
@@ -868,6 +867,7 @@
 				754D1DAE186288E700A88E58 /* +SHGR.png in Resources */,
 				754D1DAF186288E700A88E58 /* +SHGS.png in Resources */,
 				754D1DB0186288E700A88E58 /* +SHRA.png in Resources */,
+				CA495DFB19FFE25A0010FE13 /* SelectedTab.png in Resources */,
 				CA2AB74419FF158A00C624C0 /* pirepView.png in Resources */,
 				754D1DB1186288E700A88E58 /* +SHRASN.png in Resources */,
 				BCB97B0119E5EA6000177259 /* TRACE.png in Resources */,
