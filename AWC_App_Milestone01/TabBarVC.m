@@ -31,10 +31,10 @@
     //[self.tabBar setTranslucent:NO];
     
     [self.tabBar setTintColor:[UIColor whiteColor]];
-    [self.tabBar setBarTintColor:appDelegate.awcColor];
+    //[self.tabBar setBarTintColor:appDelegate.awcColor];
     
     self.tabBar.itemWidth = 120;
-    self.tabBar.backgroundImage = [UIImage imageNamed:@"TabBarBackground.png"];
+    self.tabBar.backgroundImage = appDelegate.footer;
     self.tabBar.selectionIndicatorImage = [UIImage imageNamed:@"SelectedTab.png"];
     
     //CGRect tabFrame = self.tabBar.frame;

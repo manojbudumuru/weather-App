@@ -19,6 +19,9 @@
 
 //Color for headers and tab bar
 @property UIColor * awcColor;
+//Images for Header and Tab Bar
+@property UIImage * header;
+@property UIImage * footer;
 
 //To convert a given time to local time
 -(NSString *)convertToLocalTime:(NSString *)serverTime;
@@ -26,6 +29,6 @@
 @property NSMutableArray * timeGroups;
 
 //To get the application password which will validate a user
--(NSString *)getApplicationPassword;
+//-(NSString *)getApplicationPassword;
 
 @end

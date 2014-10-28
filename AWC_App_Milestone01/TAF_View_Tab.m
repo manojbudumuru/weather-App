@@ -63,6 +63,7 @@
 {
     self.view.backgroundColor = self.appDelegate.awcColor;
     [self.header setBarTintColor:self.appDelegate.awcColor];
+    [self.header setBackgroundImage:self.appDelegate.header forBarPosition:UIBarPositionTop barMetrics:UIBarMetricsDefault];
     [self.header setTintColor:[UIColor whiteColor]];
     self.header.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     [self updateTimeLabel];

@@ -23,7 +23,18 @@
 @property (strong, nonatomic) IBOutlet UIButton *modChop;
 @property (strong, nonatomic) IBOutlet UIButton *greaterChop;
 @property (weak, nonatomic) IBOutlet UIButton *noChop;
+
+//edit2014
+// Buttons for Dual Levels
 @property (strong, nonatomic) IBOutlet UIButton *chopLM;//edit2014
+@property (strong, nonatomic) IBOutlet UIButton *chopMS;
+@property (strong, nonatomic) IBOutlet UIButton *turbLM;
+@property (strong, nonatomic) IBOutlet UIButton *turbMS;
+@property (strong, nonatomic) IBOutlet UIButton *mtnLM;
+@property (strong, nonatomic) IBOutlet UIButton *mtnMS;
+@property (strong, nonatomic) IBOutlet UIButton *iceTL;
+@property (strong, nonatomic) IBOutlet UIButton *iceLM;
+@property (strong, nonatomic) IBOutlet UIButton *iceMS;
 
 
 // Buttons for TURB

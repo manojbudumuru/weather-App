@@ -56,7 +56,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="PIREP View" image="first" id="7"/>
+                    <tabBarItem key="tabBarItem" title="PIREP View" image="map.png" id="7"/>
                     <connections>
                         <outlet property="activityStatus" destination="cyf-Qp-nch" id="C6Y-5J-ClD"/>
                         <outlet property="displayMap" destination="gnY-0e-LaE" id="vW2-NZ-j5P"/>
@@ -70,7 +70,7 @@
             </objects>
             <point key="canvasLocation" x="-339" y="-148"/>
         </scene>
-        <!--View Tab - TAFs-->
+        <!--View Tab - TAFS-->
         <scene sceneID="srM-n0-aPo">
             <objects>
                 <viewController id="zHb-Cp-mOo" customClass="TAF_View_Tab" sceneMemberID="viewController">
@@ -116,7 +116,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="TAFs" image="first.png" id="02R-aF-ncg"/>
+                    <tabBarItem key="tabBarItem" title="TAFS" image="plane_4.png" id="02R-aF-ncg"/>
                     <connections>
                         <outlet property="activityStatus" destination="EhS-8G-S9y" id="pZC-b4-3of"/>
                         <outlet property="displayTAF" destination="t2O-Br-ebM" id="m7a-Hq-iuv"/>
@@ -408,7 +408,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xrH-aq-Muw">
-                                <rect key="frame" x="593" y="471" width="125" height="60"/>
+                                <rect key="frame" x="593" y="467" width="125" height="60"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" backgroundImage="LGT.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -569,19 +569,79 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tho-fa-smC">
+                                <rect key="frame" x="59" y="634" width="46" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="levelAdd.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="L0t-5M-6Jr">
+                                <rect key="frame" x="246" y="453" width="46" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="levelAdd.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oSH-K5-cBS">
+                                <rect key="frame" x="246" y="634" width="46" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="levelAdd.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eaC-1a-PJR">
+                                <rect key="frame" x="438" y="453" width="46" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="levelAdd.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LBS-5r-G75">
+                                <rect key="frame" x="438" y="634" width="46" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="levelAdd.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qFR-2m-ucm">
+                                <rect key="frame" x="635" y="414" width="40" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="levelAdd.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jDP-Jz-e1b">
+                                <rect key="frame" x="635" y="542" width="40" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="levelAdd.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="p4Q-ve-4Sq">
+                                <rect key="frame" x="635" y="665" width="40" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="levelAdd.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96195652173913038" green="0.96195652173913038" blue="0.96195652173913038" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="PIREP Send" image="first.png" id="4gj-Lx-uPm"/>
+                    <tabBarItem key="tabBarItem" title="PIREP SEND" image="email.png" id="4gj-Lx-uPm"/>
                     <navigationItem key="navigationItem" title="Pirep Send" id="qOI-lR-LBX"/>
                     <connections>
                         <outlet property="chopLM" destination="XhA-vi-bbX" id="UFl-8A-krE"/>
+                        <outlet property="chopMS" destination="tho-fa-smC" id="NNf-VL-aGW"/>
                         <outlet property="clear" destination="uHy-YT-KcS" id="Kgg-kG-uCd"/>
                         <outlet property="greaterChop" destination="7K4-cv-4Db" id="GYg-Sg-IcI"/>
                         <outlet property="greaterIce" destination="xQT-3c-OQO" id="4Xh-gc-vDJ"/>
                         <outlet property="greaterMtn" destination="Fpu-cj-WK1" id="IL3-0C-7PI"/>
                         <outlet property="greaterTurb" destination="61u-wu-nIh" id="i00-xl-7vR"/>
                         <outlet property="header" destination="J6V-y0-ybd" id="wx9-c1-uEb"/>
+                        <outlet property="iceLM" destination="jDP-Jz-e1b" id="Jhy-Hd-9Vm"/>
+                        <outlet property="iceMS" destination="p4Q-ve-4Sq" id="RD2-HK-dHw"/>
+                        <outlet property="iceTL" destination="qFR-2m-ucm" id="TtX-IW-rgG"/>
                         <outlet property="lightChop" destination="ZHW-a0-6bP" id="qpy-Jd-t9N"/>
                         <outlet property="lightIce" destination="xrH-aq-Muw" id="UpI-eH-pvz"/>
                         <outlet property="lightMtn" destination="mqu-JQ-Q2y" id="j4H-az-0Xj"/>
@@ -591,6 +651,8 @@
                         <outlet property="modIce" destination="KPV-l3-a0E" id="Aw2-6g-4ji"/>
                         <outlet property="modMtn" destination="WKU-c9-Bh8" id="i22-t1-gBd"/>
                         <outlet property="modTurb" destination="W5E-8C-cxP" id="sEg-X4-UkS"/>
+                        <outlet property="mtnLM" destination="eaC-1a-PJR" id="Ebg-a6-YBN"/>
+                        <outlet property="mtnMS" destination="LBS-5r-G75" id="tfH-LZ-4h2"/>
                         <outlet property="noChop" destination="nku-gF-RA0" id="cqm-U9-rvS"/>
                         <outlet property="noIce" destination="0Kb-c9-5Y4" id="Zyu-eY-wzR"/>
                         <outlet property="noMtn" destination="pdS-yA-KMe" id="GxK-Sl-GcY"/>
@@ -599,6 +661,8 @@
                         <outlet property="rime" destination="9UC-3K-leu" id="z4Q-LG-7na"/>
                         <outlet property="sendPirep" destination="iLV-zq-cHZ" id="59a-Z6-ymS"/>
                         <outlet property="trace" destination="24B-Sy-Ppt" id="5GL-en-dDh"/>
+                        <outlet property="turbLM" destination="L0t-5M-6Jr" id="Hme-dS-1eE"/>
+                        <outlet property="turbMS" destination="oSH-K5-cBS" id="YHl-Hi-ZHU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wtR-Dz-usq" sceneMemberID="firstResponder"/>
@@ -739,7 +803,7 @@
             </objects>
             <point key="canvasLocation" x="558" y="996"/>
         </scene>
-        <!--Hazard View Tab - HAZARDs-->
+        <!--Hazard View Tab - HAZARDS-->
         <scene sceneID="0Q6-2k-szX">
             <objects>
                 <viewController id="rq7-jr-d2g" customClass="Hazard_View_Tab" sceneMemberID="viewController">
@@ -791,7 +855,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="HAZARDs" image="first.png" id="7wq-3s-4So"/>
+                    <tabBarItem key="tabBarItem" title="HAZARDS" image="hazard.png" id="7wq-3s-4So"/>
                     <connections>
                         <outlet property="activityStatus" destination="S3L-Ek-bPV" id="FEf-ge-mkD"/>
                         <outlet property="hazardsSegmentedControl" destination="Djm-RX-XCB" id="h10-kU-a5I"/>
@@ -805,7 +869,7 @@
             </objects>
             <point key="canvasLocation" x="1438" y="996"/>
         </scene>
-        <!--Metar View Tab - METARs-->
+        <!--Metar View Tab - METARS-->
         <scene sceneID="fYK-vn-cjp">
             <objects>
                 <viewController id="F7c-XD-sgH" customClass="Metar_View_Tab" sceneMemberID="viewController">
@@ -865,7 +929,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="METARs" image="first.png" id="upq-yO-A3p"/>
+                    <tabBarItem key="tabBarItem" title="METARS" image="METARS.png" id="upq-yO-A3p"/>
                     <connections>
                         <outlet property="activityStatus" destination="G20-1P-5vv" id="7QS-Od-BtH"/>
                         <outlet property="displayMetar" destination="LhL-79-dMe" id="uWK-6H-ksp"/>
@@ -1068,6 +1132,7 @@
         <image name="CLEAR.png" width="344" height="200"/>
         <image name="LGT.png" width="400" height="200"/>
         <image name="Loading 02.png" width="100" height="100"/>
+        <image name="METARS.png" width="30" height="30"/>
         <image name="MIXED.png" width="344" height="200"/>
         <image name="MOD.png" width="400" height="200"/>
         <image name="NEG.png" width="400" height="200"/>
@@ -1077,9 +1142,12 @@
         <image name="SendPirepBack.png" width="768" height="1004"/>
         <image name="TRACE.png" width="344" height="200"/>
         <image name="category drop.png" width="443" height="100"/>
-        <image name="first" width="140" height="75"/>
+        <image name="email.png" width="30" height="30"/>
         <image name="first.png" width="30" height="30"/>
-        <image name="levelAdd.png" width="53" height="53"/>
+        <image name="hazard.png" width="30" height="30"/>
+        <image name="levelAdd.png" width="78" height="78"/>
+        <image name="map.png" width="30" height="30"/>
+        <image name="plane_4.png" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

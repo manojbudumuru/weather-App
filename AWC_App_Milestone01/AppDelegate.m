@@ -18,8 +18,11 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    // #42D4FE
-    self.awcColor = [UIColor colorWithRed:66/255.0 green:212/255.0 blue:254/255.0 alpha:1.0];
+    // #42D4FE - older
+    // #018490
+    self.awcColor = [UIColor colorWithRed:1/255.0 green:132/255.0 blue:144/255.0 alpha:1.0];
+    self.header = [UIImage imageNamed:@"header.png"];
+    self.footer = [UIImage imageNamed:@"footer.png"];
     
     //Initialize time groups
     self.timeGroups = [[NSMutableArray alloc]initWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7"]];
@@ -88,24 +91,25 @@
     else
         self.timeGroups = [[NSMutableArray alloc]initWithContentsOfFile:filePath];
 }
-
+//edit2014
+//This method obselete.. i.e. This functinality is no more required.
 //This method will retrieve the application password that each user must enter to access this app.
--(NSString *)getApplicationPassword
-{
-    //NSURL * passwordURL = [NSURL URLWithString:@"https://dl.dropboxusercontent.com/s/y7gxs251cuvaw3h/password.json?dl=1&token_hash=AAHhKQBFtwG2OsSId3ROpEQsc_zZGCeTGbHQRwX4bVCi0g"];
-    
-    NSURL * passwordURL = [NSURL URLWithString:@"https://docs.google.com/document/d/1hoKxvD-7gNkUGVj0nzOeJbCEDDoYvRc59GSrmj84SPg/export?format=txt&id=1hoKxvD-7gNkUGVj0nzOeJbCEDDoYvRc59GSrmj84SPg"];
-    NSData * passwordData = [NSData dataWithContentsOfURL:passwordURL];
-    NSError * error = nil;
-    NSDictionary * passwordDictionary = [NSJSONSerialization JSONObjectWithData:passwordData options:0 error:&error];
-    
-    NSString * password = passwordDictionary[@"password"];
-    
-    NSLog(@"Password: %@",password);
-    
-    return password;
-}
-				
+//-(NSString *)getApplicationPassword
+//{
+//    //NSURL * passwordURL = [NSURL URLWithString:@"https://dl.dropboxusercontent.com/s/y7gxs251cuvaw3h/password.json?dl=1&token_hash=AAHhKQBFtwG2OsSId3ROpEQsc_zZGCeTGbHQRwX4bVCi0g"];
+//    
+//    NSURL * passwordURL = [NSURL URLWithString:@"https://docs.google.com/document/d/1hoKxvD-7gNkUGVj0nzOeJbCEDDoYvRc59GSrmj84SPg/export?format=txt&id=1hoKxvD-7gNkUGVj0nzOeJbCEDDoYvRc59GSrmj84SPg"];
+//    NSData * passwordData = [NSData dataWithContentsOfURL:passwordURL];
+//    NSError * error = nil;
+//    NSDictionary * passwordDictionary = [NSJSONSerialization JSONObjectWithData:passwordData options:0 error:&error];
+//    
+//    NSString * password = passwordDictionary[@"password"];
+//    
+//    NSLog(@"Password: %@",password);
+//    
+//    return password;
+//}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -35,6 +35,7 @@
 {
     [super viewDidLoad];
     
+
     //Setting map type and delegate
     _displayMap.mapType = MKMapTypeStandard;
     _displayMap.delegate = self;
@@ -57,7 +58,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
-    
+    //self.view.backgroundColor = [UIColor colorWithRed:1/255.0 green:132/255.0 blue:144/255.0 alpha:1.0];
+    [self.header setBackgroundImage:appDelegate.header forBarPosition:UIBarPositionTop barMetrics:UIBarMetricsDefault];
     self.view.backgroundColor = appDelegate.awcColor;
     [self.header setBarTintColor:appDelegate.awcColor];
     [self.header setTintColor:[UIColor whiteColor]];
