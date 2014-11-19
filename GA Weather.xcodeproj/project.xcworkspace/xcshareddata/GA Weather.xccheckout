@@ -7,34 +7,34 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>0110FEB4-E161-45A0-BA1C-FB4E16C6BF84</string>
 	<key>IDESourceControlProjectName</key>
-	<string>ga weather</string>
+	<string>GA Weather</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>3C74809A-FFDE-402B-A8FA-BC482CA462AB</key>
+		<key>3B3446FC107A645F7A4EEC2EBCC25AA89EFA991C</key>
 		<string>https://bitbucket.org/dmonismi/ads_b_out_project.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ga weather.xcodeproj/project.xcworkspace</string>
+	<string>GA Weather.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>3C74809A-FFDE-402B-A8FA-BC482CA462AB</key>
+		<key>3B3446FC107A645F7A4EEC2EBCC25AA89EFA991C</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://bitbucket.org/dmonismi/ads_b_out_project.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>3C74809A-FFDE-402B-A8FA-BC482CA462AB</string>
+	<string>3B3446FC107A645F7A4EEC2EBCC25AA89EFA991C</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>3C74809A-FFDE-402B-A8FA-BC482CA462AB</string>
+			<string>3B3446FC107A645F7A4EEC2EBCC25AA89EFA991C</string>
 			<key>IDESourceControlWCCName</key>
-			<string>NWMSU AWC</string>
+			<string>Alpha</string>
 		</dict>
 	</array>
 </dict>

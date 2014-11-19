@@ -46,6 +46,7 @@
     self.view.backgroundColor = self.appDelegate.awcColor;
     //[self.header setBarTintColor:self.appDelegate.awcColor];
     //[self.header setTintColor:[UIColor whiteColor]];
+    self.header.translucent = YES;
     [self.header setBackgroundImage:[UIImage imageNamed:@"tabBar.png"] forBarPosition:UIBarPositionTop barMetrics:UIBarMetricsDefault];
     self.header.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
 

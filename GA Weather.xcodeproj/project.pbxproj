@@ -186,6 +186,9 @@
 		CA495DF519FFD5380010FE13 /* footer.png in Resources */ = {isa = PBXBuildFile; fileRef = CA495DF419FFD5380010FE13 /* footer.png */; };
 		CA495DF719FFD6B40010FE13 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = CA495DF619FFD6B40010FE13 /* header.png */; };
 		CA495DFB19FFE25A0010FE13 /* SelectedTab.png in Resources */ = {isa = PBXBuildFile; fileRef = CA495DFA19FFE25A0010FE13 /* SelectedTab.png */; };
+		CA9BBBEA1A15637B00C6DC65 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = CA9BBBE91A15637B00C6DC65 /* transparent.png */; };
+		CABAE9011A1C8E8A00026252 /* Weather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CABAE9001A1C8E8A00026252 /* Weather.ttf */; };
+		CABAE9081A1C961400026252 /* Metar+TTF.m in Sources */ = {isa = PBXBuildFile; fileRef = CABAE9071A1C961400026252 /* Metar+TTF.m */; };
 		CAEA69C519D2882300BDD8EA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAEA69C419D2882300BDD8EA /* MainStoryboard.storyboard */; };
 		CAEA69C719D29DB100BDD8EA /* AWC_Login Screen.png in Resources */ = {isa = PBXBuildFile; fileRef = CAEA69C619D29DB100BDD8EA /* AWC_Login Screen.png */; };
 /* End PBXBuildFile section */
@@ -360,7 +363,7 @@
 		75F13B06181330100051C7B2 /* DisplayPIREP.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisplayPIREP.xib; sourceTree = "<group>"; };
 		75FF65071815009700E18E9E /* FlightInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlightInfo.h; sourceTree = "<group>"; };
 		75FF65081815009700E18E9E /* FlightInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlightInfo.m; sourceTree = "<group>"; };
-		BC9F31DC19EB5B7E00AA6110 /* tabBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabBar.png; sourceTree = "<group>"; };
+		BC9F31DC19EB5B7E00AA6110 /* tabBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabBar.png; path = AWC_App_Milestone01/tabBar.png; sourceTree = "<group>"; };
 		BCB97AE519E5EA6000177259 /* CANCEL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CANCEL.png; path = ../CANCEL.png; sourceTree = "<group>"; };
 		BCB97AE619E5EA6000177259 /* CHOP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CHOP.png; path = ../CHOP.png; sourceTree = "<group>"; };
 		BCB97AE719E5EA6000177259 /* CLEAR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CLEAR.png; path = ../CLEAR.png; sourceTree = "<group>"; };
@@ -385,7 +388,7 @@
 		CA2AB74219FF158A00C624C0 /* pirepView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pirepView.png; sourceTree = "<group>"; };
 		CA2AB74319FF158A00C624C0 /* pirepSender.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pirepSender.png; sourceTree = "<group>"; };
 		CA2AB74619FF16AB00C624C0 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
-		CA2AB74919FF1C0400C624C0 /* TabBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarBackground.png; sourceTree = "<group>"; };
+		CA2AB74919FF1C0400C624C0 /* TabBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabBarBackground.png; path = AWC_App_Milestone01/TabBarBackground.png; sourceTree = "<group>"; };
 		CA2AB74C19FF308800C624C0 /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email.png; sourceTree = "<group>"; };
 		CA2AB74D19FF308800C624C0 /* hazard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hazard.png; sourceTree = "<group>"; };
 		CA2AB74E19FF308800C624C0 /* METARS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = METARS.png; sourceTree = "<group>"; };
@@ -394,7 +397,11 @@
 		CA2AB75119FF308800C624C0 /* TabBarBackground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarBackground2.png; sourceTree = "<group>"; };
 		CA495DF419FFD5380010FE13 /* footer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = footer.png; sourceTree = "<group>"; };
 		CA495DF619FFD6B40010FE13 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
-		CA495DFA19FFE25A0010FE13 /* SelectedTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectedTab.png; sourceTree = "<group>"; };
+		CA495DFA19FFE25A0010FE13 /* SelectedTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SelectedTab.png; path = AWC_App_Milestone01/SelectedTab.png; sourceTree = "<group>"; };
+		CA9BBBE91A15637B00C6DC65 /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
+		CABAE9001A1C8E8A00026252 /* Weather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Weather.ttf; sourceTree = "<group>"; };
+		CABAE9061A1C961400026252 /* Metar+TTF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Metar+TTF.h"; sourceTree = "<group>"; };
+		CABAE9071A1C961400026252 /* Metar+TTF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Metar+TTF.m"; sourceTree = "<group>"; };
 		CAEA69C419D2882300BDD8EA /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		CAEA69C619D29DB100BDD8EA /* AWC_Login Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AWC_Login Screen.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -415,9 +422,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7504E824191229C100EC5435 /* Old icons and launch images */ = {
+		7504E824191229C100EC5435 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CABAE9001A1C8E8A00026252 /* Weather.ttf */,
+				BC9F31DC19EB5B7E00AA6110 /* tabBar.png */,
+				CA495DFA19FFE25A0010FE13 /* SelectedTab.png */,
+				CA2AB74919FF1C0400C624C0 /* TabBarBackground.png */,
 				CA495DF619FFD6B40010FE13 /* header.png */,
 				CA495DF419FFD5380010FE13 /* footer.png */,
 				CA2AB74C19FF308800C624C0 /* email.png */,
@@ -443,7 +454,7 @@
 				75B7EB85184C1C8800AB52D0 /* Default-Portrait@2x~ipad.png */,
 				75B7EB83184C1A7900AB52D0 /* Default-Portrait~ipad.png */,
 			);
-			name = "Old icons and launch images";
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		756A27EF18B1FF1B00100665 /* Custom Pins */ = {
@@ -460,9 +471,6 @@
 		758099DD18F2788E0087A09A /* TabBarImages */ = {
 			isa = PBXGroup;
 			children = (
-				BC9F31DC19EB5B7E00AA6110 /* tabBar.png */,
-				CA495DFA19FFE25A0010FE13 /* SelectedTab.png */,
-				CA2AB74919FF1C0400C624C0 /* TabBarBackground.png */,
 			);
 			name = TabBarImages;
 			sourceTree = "<group>";
@@ -594,7 +602,7 @@
 			isa = PBXGroup;
 			children = (
 				75F111641912258000E45394 /* Images.xcassets */,
-				7504E824191229C100EC5435 /* Old icons and launch images */,
+				7504E824191229C100EC5435 /* Resources */,
 				75CF43F017F8D34700CCF4F0 /* GA Weather */,
 				75CF43E917F8D34700CCF4F0 /* Frameworks */,
 				75CF43E817F8D34700CCF4F0 /* Products */,
@@ -670,6 +678,7 @@
 				75F13B06181330100051C7B2 /* DisplayPIREP.xib */,
 				7516E55A183C014000DAACBD /* PIREP_02.png */,
 				7516E55C183C036600DAACBD /* PIREP_04.png */,
+				CA9BBBE91A15637B00C6DC65 /* transparent.png */,
 				754D1DEB18628ADD00A88E58 /* PIREP_05.png */,
 				75385B3E190662D60094C4D1 /* User.png */,
 				75D1B71A18AA957B00EDD7BD /* UserPirep.png */,
@@ -709,6 +718,8 @@
 				75B7EADA184C12C700AB52D0 /* Metar Images */,
 				75D9D771183205E4000C640C /* Metar.h */,
 				75D9D772183205E4000C640C /* Metar.m */,
+				CABAE9061A1C961400026252 /* Metar+TTF.h */,
+				CABAE9071A1C961400026252 /* Metar+TTF.m */,
 				75D9D774183206C1000C640C /* DisplayMetars.h */,
 				75D9D775183206C1000C640C /* DisplayMetars.m */,
 				75D9D776183206C1000C640C /* DisplayMetars.xib */,
@@ -841,7 +852,9 @@
 				754D1D9F186288E700A88E58 /* -SHGR.png in Resources */,
 				CA2AB75519FF308800C624C0 /* plane_4.png in Resources */,
 				BCB97AFF19E5EA6000177259 /* SendPirep.jpg in Resources */,
+				CABAE9011A1C8E8A00026252 /* Weather.ttf in Resources */,
 				754D1DA0186288E700A88E58 /* -SHGS.png in Resources */,
+				CA9BBBEA1A15637B00C6DC65 /* transparent.png in Resources */,
 				BCB97AFA19E5EA6000177259 /* MOD.png in Resources */,
 				CA495DF719FFD6B40010FE13 /* header.png in Resources */,
 				754D1DA1186288E700A88E58 /* -SHRA.png in Resources */,
@@ -976,6 +989,7 @@
 				75039FAF1847F42F00BF48C9 /* TabBarVC.m in Sources */,
 				75B7EAD6184BFBBE00AB52D0 /* SettingsVC.m in Sources */,
 				75D1B71918A9C9FE00EDD7BD /* UserPirep.m in Sources */,
+				CABAE9081A1C961400026252 /* Metar+TTF.m in Sources */,
 				75CD3E1C190F38F6007CD5F3 /* TimeGroupsVC.m in Sources */,
 				75B7EB90184D52A700AB52D0 /* TAF.m in Sources */,
 				75B7EB94184D543A00AB52D0 /* DisplayTAF.m in Sources */,
@@ -1064,11 +1078,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AWC_App_Milestone01/GA Weather-Prefix.pch";
 				INFOPLIST_FILE = "AWC_App_Milestone01/GA Weather-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "GA Weather";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1080,6 +1096,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AWC_App_Milestone01/GA Weather-Prefix.pch";
 				INFOPLIST_FILE = "AWC_App_Milestone01/GA Weather-Info.plist";

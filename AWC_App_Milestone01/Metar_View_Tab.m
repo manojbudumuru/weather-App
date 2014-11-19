@@ -9,6 +9,7 @@
 #import "Metar_View_Tab.h"
 #import "Metar.h"
 #import "DisplayMetars.h"
+#import "Metar+TTF.h"
 #define MERCATOR_RADIUS 85445659.44705395
 @interface Metar_View_Tab ()
 
@@ -44,6 +45,7 @@
     [super viewDidLoad];
     
     self.displayMetar.delegate = self;
+    self.displayWind.delegate = self;//Setting Delegate property so that we wont get Pins displayed on map
     self.displayMetar.mapType = MKMapTypeStandard;
     
     self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
@@ -254,7 +256,7 @@
 {
     if([view.annotation isKindOfClass : [Metar class]])
     {
-        
+    
         [self.displayMetar deselectAnnotation:view.annotation animated:YES];
         
         
@@ -273,34 +275,41 @@
 
 //Display appropriate pins on the map for each annotation based on the value of WX property.
 //If there is no WX property for a Metar, it indicates that the weather over there is clear and is indicated with a hollow circle.
+
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
     Metar * thisMetar = (Metar *)annotation;
-    NSString * metarWX = @"NULL.png";
+    
+    NSString * metarWX = @"@";
+    //NSString * identifier = @"Annotation";
     if(thisMetar.wx!=nil)
     {
         NSMutableArray * words = [[NSMutableArray alloc]initWithArray:[thisMetar.wx componentsSeparatedByString:@" "]];
-        metarWX = [NSString stringWithFormat:@"%@.png",words[0]];
+        metarWX = [thisMetar ttfEquivalent:words[0]];//[NSString stringWithFormat:@"%@",words[0]];
     }
-
+    
     MKPinAnnotationView * annotView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:metarWX];
     if(annotView == nil)
     {
         annotView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:metarWX];
-        
-        if([annotation isKindOfClass:[Metar class]])
-        {
-            
-            
-                annotView.image = [UIImage imageNamed:metarWX];
-           
-        }
-        //annotView.image = [UIImage imageNamed:@"+TSRA.png"];
+
+        UILabel * lbl2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 30)];
+
+        lbl2.textColor = [UIColor blackColor];
+
+        lbl2.font = [UIFont fontWithName:@"Weather" size:32.0f];
+
+        lbl2.text = metarWX;
+        [annotView addSubview:lbl2];
+
+        annotView.image = [UIImage imageNamed:@"asdf"];
         
     }
+
     annotView.annotation = annotation;
     return annotView;
 }
+
 
 //Previous method used to display the views for annotation.
 //-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation_Working:(id<MKAnnotation>)annotation

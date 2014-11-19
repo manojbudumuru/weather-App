@@ -38,7 +38,7 @@
 
     //Setting map type and delegate
     _displayMap.mapType = MKMapTypeStandard;
-    _displayMap.delegate = self;
+    self.displayMap.delegate = self;
     
     self.appDelegate = [UIApplication sharedApplication].delegate;
 
@@ -171,7 +171,7 @@
     if([view.annotation isKindOfClass:[Pirep class]])
     {
         [self.displayMap deselectAnnotation:view.annotation animated:YES];
-        
+        NSLog(@"Clicked PIREP");
         Pirep * annotObj = (Pirep *)view.annotation;
         if(![self.popUp isPopoverVisible])
         {
@@ -185,7 +185,7 @@
     else if([view.annotation isKindOfClass:[UserPirep class]])
     {
         [self.displayMap deselectAnnotation:view.annotation animated:YES];
-        
+        NSLog(@"Clicked USERPIREP");
         UserPirep * annotObj = (UserPirep *)view.annotation;
         if(![self.popUp isPopoverVisible])
         {
@@ -212,11 +212,28 @@
     
     if([annotation isKindOfClass:[Pirep class]])
     {
-        if(annotView == nil)
-        {
+//        if(annotView == nil)
+//        {
+            //NSLog(@"******************INSIDE");
             annotView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:identifier];
-            annotView.image = [UIImage imageNamed:@"PIREP_05.png"];
-        }
+            //UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+            UILabel * lbl2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+        
+//            lbl.font = [UIFont fontWithName:@"Weather" size:35.0f];//lbl.backgroundColor = [UIColor blackColor];
+            lbl2.textColor = [UIColor blackColor];
+//            lbl.text = @"4";
+        lbl2.font = [UIFont fontWithName:@"Weather" size:32.0f];
+        lbl2.text = @"4";
+        //self.displayMap.delegate = self;
+            [annotView addSubview:lbl2];
+        
+        
+            //Following lets the callout still work if you tap on the label...
+        
+            //annotView.canShowCallout = YES;
+            //annotView.frame = lbl.frame;
+            annotView.image = [UIImage imageNamed:@"asd"];
+  //      }
     }
     else if([annotation isKindOfClass:[UserPirep class]])
     {
@@ -226,8 +243,8 @@
             annotView.image = [UIImage imageNamed:@"User.png"];
         }
     }
-    
     annotView.annotation = annotation;
+    //annotation.title;
     return annotView;
 }
 
