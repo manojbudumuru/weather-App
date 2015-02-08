@@ -15,7 +15,8 @@
 //Fetch Hazards information from the database and parse them.
 -(void)fetchData
 {
-    NSString * airmetURL = @"http://new.aviationweather.gov/gis/scripts/AirmetJSON.php";
+    NSString * airmetURL = @"http://aviationweather.gov/gis/scripts/GairmetJSON.php?fore=3";
+//http://csgrad07.nwmissouri.edu/test.php";
     
     NSURLRequest * urlReq1 = [NSURLRequest requestWithURL:[NSURL URLWithString:airmetURL]];
     
@@ -27,7 +28,7 @@
 
     self.airmetPropertiesArray = [self.results valueForKey:@"features"];
         
-    NSString * sigmetURL = @"http://new.aviationweather.gov/gis/scripts/SigmetJSON.php";
+    NSString * sigmetURL = @"http://aviationweather.gov/gis/scripts/SigmetJSON.php";
   
     NSURLRequest * urlReq2 = [NSURLRequest requestWithURL:[NSURL URLWithString:sigmetURL]];
     
@@ -40,7 +41,11 @@
     self.sigmetPropertiesArray = [self.sigmetResults valueForKey:@"features"];
     
     self.hazardsArray = [[NSMutableArray alloc]init];
-
+    NSLog(@"Airmet: %d,SIGMET: %d",self.airmetPropertiesArray.count,self.sigmetPropertiesArray.count);
+//    for (int i=0; i<self.airmetPropertiesArray.count; i++) {
+//        NSLog(@">>>  %@",self.airmetPropertiesArray[i]);
+//    }
+ 
 
 }
 
@@ -60,19 +65,31 @@
     {
         self.airmetCoordsArray = self.results[@"features"][i][@"geometry"][@"coordinates"];
         int count1 = [self.airmetCoordsArray count];
-        
+        for (int i=0; i<self.airmetCoordsArray.count; i++) {
+            NSLog(@"Coords:  %@",self.airmetCoordsArray[i]);
+        }
         for(int j = 0; j < count1 ; j++)
         {
+            self.hazard = [NSString stringWithFormat:@"%@",self.results[@"features"][i][@"properties"][@"hazard"]];
+            
+            if([self.hazard isEqualToString:@"IFR"] || [self.hazard isEqualToString:@"MT_OBSC"] ||  [self.hazard isEqualToString:@"ICE"] || [self.hazard isEqualToString:@"TURB"] || [self.hazard isEqualToString:@"TURB-HI"] || [self.hazard isEqualToString:@"TURB-LO"]){
             self.airmetInternalCoordsArray = self.results[@"features"][i][@"geometry"][@"coordinates"][j];
+            }
             int count2 = [self.airmetInternalCoordsArray count];
+            for (int i=0; i<self.airmetInternalCoordsArray.count; i++) {
+                NSLog(@"InternalCoords:  %@",self.airmetInternalCoordsArray[i]);
+            }
             // Declaring the CLLocationCoordinate2D object
             CLLocationCoordinate2D coords[count2];
             for(int k = 0; k < count2; k++)
             {
+                CLLocationDegrees lon,lat;
                 // Creating the longitude and latitude properties
-                CLLocationDegrees lon = [self.results[@"features"][i][@"geometry"][@"coordinates"][j][k][0] doubleValue];
-                CLLocationDegrees lat = [self.results[@"features"][i][@"geometry"][@"coordinates"][j][k][1] doubleValue];
-                
+                if([self.hazard isEqualToString:@"IFR"] || [self.hazard isEqualToString:@"MT_OBSC"] ||  [self.hazard isEqualToString:@"ICE"] || [self.hazard isEqualToString:@"TURB"] || [self.hazard isEqualToString:@"TURB-HI"] || [self.hazard isEqualToString:@"TURB-LO"]){
+                lon = [self.results[@"features"][i][@"geometry"][@"coordinates"][j][k][0] doubleValue];
+                lat = [self.results[@"features"][i][@"geometry"][@"coordinates"][j][k][1] doubleValue];
+                }
+                //NSLog(@"GAIRMET Coords %f,%f",lat,lon);
                 // Creating a CLLocationCoordinate2D object by passing the above created lat & lon
                 coords[k] = CLLocationCoordinate2DMake(lat, lon);
                 
@@ -81,9 +98,9 @@
             // Creating an MKPolygon object by passing the coordinates array and count value
             MKPolygon * polygon = [MKPolygon polygonWithCoordinates:coords count:count2];
             // Storing the hazard value in NSString "self.hazard"
-            self.hazard = [NSString stringWithFormat:@"%@",self.results[@"features"][i][@"properties"][@"hazard"]];
             
-            self.airSigmetType = [NSString stringWithFormat:@"%@",self.results[@"features"][i][@"properties"][@"airSigmetType"]];
+            NSLog(@"HAZARD: %@",self.hazard);
+            self.airSigmetType = @"AIRMET";//[NSString stringWithFormat:@"%@",self.results[@"features"][i][@"properties"][@"airSigmetType"]];
             // Setting the appropriate color to the polygon based on hazard type and calling the method colorToPolygon:
             UIColor * color = [self colorToPolygon:self.hazard airSigmetType:self.airSigmetType];
             // Initializing the Hazards class object by passing the hazard type, polygon created and color of polygon
@@ -141,7 +158,7 @@
     UIColor * color = nil;
     // Checking the hazard type and accordingly assigning corresponding color to UIColor object
     
-    if([hazard isEqualToString:@"MTN OBSCN"])
+    if([hazard isEqualToString:@"MTN OBSCN"] || [hazard isEqualToString:@"MT_OBSC"])
     {
         color=[[UIColor alloc] initWithRed:1.0 green:0.0 blue:0.0 alpha:1];
         

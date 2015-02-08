@@ -30,6 +30,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>WindWeather.ttf</string>
 		<string>Weather.ttf</string>
 	</array>
 	<key>UIMainStoryboardFile</key>

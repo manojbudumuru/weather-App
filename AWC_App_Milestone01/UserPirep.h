@@ -26,6 +26,8 @@
 @property NSString * locationLatitude;
 @property NSString * locationLongitude;
 @property NSString * pilotReport;
+// edit2014
+@property UIColor * ttfColor;
 //@property NSString * pageURL;
 
 @property (nonatomic,copy) NSString * title;

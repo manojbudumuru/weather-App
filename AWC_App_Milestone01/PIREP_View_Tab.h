@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "MapKit/MapKit.h"
 #import "AppDelegate.h"
+#import "UserPirep+TTF.h"
+#import "Pirep+TTF.h"
 
 //This class is used to display the various PIREPs on the map.
 
-@interface PIREP_View_Tab : UIViewController <MKMapViewDelegate>
+@interface PIREP_View_Tab : UIViewController <MKMapViewDelegate,CLLocationManagerDelegate>
 
 @property (strong, nonatomic) IBOutlet MKMapView *displayMap;
+@property (strong, nonatomic) CLLocationManager *locationManager;
 - (IBAction)refreshPirep:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UILabel *lastUpdateInfoLabel;
@@ -25,6 +28,7 @@
 //- (IBAction)zoomIn:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *zoom;
 @property UIImage * button;
+@property UIColor * ttfColor;
 
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *header;

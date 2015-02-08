@@ -33,6 +33,8 @@
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 @property (readwrite) CLLocationDegrees latitude;
 @property (readwrite) CLLocationDegrees longitude;
+// Edit2014
+@property UIColor * ttfColor;
 
 -(CLLocationDegrees) latitude;
 -(void)setLatitude:(CLLocationDegrees)val;

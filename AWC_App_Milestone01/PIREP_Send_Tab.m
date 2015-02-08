@@ -262,7 +262,6 @@
 {
     if([self.pirepData count]>0)
     {
-        self.presentPirep = self.pirepData[0];
         for(int i=1;i<[self.pirepData count];i++)
         {
             self.presentPirep = [self.presentPirep stringByAppendingFormat:@"/%@",self.pirepData[i]];

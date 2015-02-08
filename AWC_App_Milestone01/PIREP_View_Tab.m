@@ -39,10 +39,13 @@
     //Setting map type and delegate
     _displayMap.mapType = MKMapTypeStandard;
     self.displayMap.delegate = self;
+    self.locationManager = [[CLLocationManager alloc]init];
+    self.locationManager.delegate = self;
     
     self.appDelegate = [UIApplication sharedApplication].delegate;
 
-    
+    [self.locationManager requestAlwaysAuthorization];
+    [self.locationManager startUpdatingLocation];
     self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
     //edit2014
     
@@ -50,6 +53,7 @@
     [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
     [self.zoom addTarget:self action:@selector(zoomIn) forControlEvents:UIControlEventTouchUpInside];
     
+    self.displayMap.showsUserLocation = YES;
     self.check = 0;
     //edit2014 end
 }
@@ -141,6 +145,7 @@
     //edit2014
     if(self.check==0){
     self.beforeZoom = self.displayMap.region;// Setting the region for Map
+        NSLog(@"LATITUDE : %f",self.displayMap.userLocation.location.coordinate.latitude);
     NSLog(@"Before Zoom In:          %f,%f",self.beforeZoom.span.latitudeDelta,self.beforeZoom.span.longitudeDelta);
         self.check++;
     }
@@ -215,15 +220,23 @@
 //        if(annotView == nil)
 //        {
             //NSLog(@"******************INSIDE");
+        Pirep *pirep = (Pirep*)annotation;
             annotView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:identifier];
             //UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
             UILabel * lbl2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
         
 //            lbl.font = [UIFont fontWithName:@"Weather" size:35.0f];//lbl.backgroundColor = [UIColor blackColor];
-            lbl2.textColor = [UIColor blackColor];
+        
 //            lbl.text = @"4";
         lbl2.font = [UIFont fontWithName:@"Weather" size:32.0f];
-        lbl2.text = @"4";
+        lbl2.text =  [pirep ttfEquivalent:pirep.rawOb];
+        if([lbl2.text  isEqual: @"2"] || [lbl2.text  isEqual: @"8"])
+            lbl2.textColor = [UIColor greenColor];
+        if([lbl2.text  isEqual: @"4"] || [lbl2.text  isEqual: @":"])
+           lbl2.textColor = [UIColor orangeColor];
+        if([lbl2.text  isEqual: @"6"] || [lbl2.text  isEqual: @";"])
+            lbl2.textColor = [UIColor redColor];
+        
         //self.displayMap.delegate = self;
             [annotView addSubview:lbl2];
         
@@ -240,7 +253,21 @@
         if(annotView == nil)
         {
             annotView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:identifier];
-            annotView.image = [UIImage imageNamed:@"User.png"];
+            
+            
+            UserPirep * user = (UserPirep*)annotation;
+            UILabel * lbl2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 30)];
+            lbl2.font = [UIFont fontWithName:@"Weather" size:32.0f];
+            lbl2.text = [user ttfEquivalent:user.pilotReport];
+            if([lbl2.text  isEqual: @"2"] || [lbl2.text  isEqual: @"8"])
+                lbl2.textColor = [UIColor greenColor];
+            if([lbl2.text  isEqual: @"4"] || [lbl2.text  isEqual: @":"])
+                lbl2.textColor = [UIColor orangeColor];
+            if([lbl2.text  isEqual: @"6"] || [lbl2.text  isEqual: @";"])
+                lbl2.textColor = [UIColor redColor];
+            //NSLog(@"USE REPORT: %@",user.pilotReport);
+            [annotView addSubview:lbl2];
+            annotView.image = [UIImage imageNamed:@"User.pngg"];
         }
     }
     annotView.annotation = annotation;
@@ -332,8 +359,8 @@
         pirep.coordinate = CLLocationCoordinate2DMake([pirep.locationLatitude doubleValue], [pirep.locationLongitude doubleValue]);
         
         [self.pireps addObject:pirep];
-        self.latIn = pirep.coordinate.latitude;
-        self.longIn = pirep.coordinate.longitude;
+        self.latIn = self.displayMap.userLocation.location.coordinate.latitude;
+        self.longIn = self.displayMap.userLocation.location.coordinate.longitude;
         //NSLog(@"I am at location : [%f,%f]",pirep.coordinate.latitude,pirep.coordinate.longitude);
         
     }
@@ -367,6 +394,17 @@
     self.button = [UIImage imageNamed:@"zoomIn.png"];
     [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
     NSLog(@"%f,%f",self.displayMap.region.span.latitudeDelta,self.displayMap.region.span.longitudeDelta);
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
+    region.center.latitude = self.locationManager.location.coordinate.latitude;
+    region.center.longitude = self.locationManager.location.coordinate.longitude;
+//    region.span.latitudeDelta = 0.0187f;
+//    region.span.longitudeDelta = 0.0137f;
+    [self.displayMap setRegion:region animated:YES];
+    
+    //_initialPosition = NO;
 }
 //edit2014 End
 @end

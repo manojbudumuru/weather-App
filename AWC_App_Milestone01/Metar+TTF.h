@@ -11,5 +11,6 @@
 @interface Metar (TTF)
 
 -(NSString*)ttfEquivalent:(NSString*)input;
+-(NSString*)ttfEquivalentWind:(int)speed;
 
 @end

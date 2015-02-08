@@ -1,4 +1,5 @@
-//
+//location ka problem aara merku!
+
 //  Hazard_View_Tab.m
 //  AWC_App_Milestone01
 //
@@ -150,8 +151,10 @@
         _myHazardsParser = [[HazardsParser alloc]init];
         
         self.hazardOverlays = [_myHazardsParser GetHazards];
-        
-        
+//        for (int i=0; i<self.hazardOverlays.count; i++) {
+//            NSLog(@"Hazards: >>>> %@\n",self.hazardOverlays[i]);
+//        }
+//        
         
         //[self showHazards];
         
@@ -282,7 +285,7 @@
         for( int i=0;i< [self.hazardOverlays count];i++)
         {
             Hazards * myHazard = [self.hazardOverlays objectAtIndex:i];
-            if([myHazard.type isEqualToString:@"MTN OBSCN"])
+            if([myHazard.type isEqualToString:@"MTN OBSCN"] || [myHazard.type isEqualToString:@"MT_OBSC"])
             {
                 [self.mapView addAnnotation:myHazard];
                 [self.mapView addOverlay:myHazard];
