@@ -47,7 +47,8 @@
     
     self.displayMetar.delegate = self;
     self.displayWind.delegate = self;//Setting Delegate property so that we wont get Pins displayed on map
-    self.displayMetar.mapType = MKMapTypeStandard;
+    self.displayMetar.mapType = MKMapTypeStandard;// edit 2015
+    self.displayWind.mapType = MKMapTypeStandard;
     
     self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
     self.metarOn = YES;
@@ -87,6 +88,7 @@
     
     
         [self.displayMetar removeAnnotations:self.displayMetar.annotations];
+        [self.displayWind removeAnnotations:self.displayWind.annotations];//edit 2015
         
         self.metars = [[NSMutableArray alloc]init];
         self.metarsWithZeroPriority = [[NSMutableArray alloc]init];
@@ -338,6 +340,7 @@
         return annotView;
 
     }
+    return annotView;
 }
 
 
@@ -384,7 +387,8 @@
     
     float currentZoomLevel = 21 - (log2(self.displayMetar.region.span.longitudeDelta *
                                         MERCATOR_RADIUS * M_PI / (180.0 * self.displayMetar.bounds.size.width)));
-    
+    float currentZoomLevelWind = 21 - (log2(self.displayWind.region.span.longitudeDelta *
+                                        MERCATOR_RADIUS * M_PI / (180.0 * self.displayWind.bounds.size.width)));
     
     
     
@@ -395,11 +399,6 @@
         //[self.displayMetar addAnnotations:self.metarsWithOnePriority];
         [self.displayMetar addAnnotations:self.metarsWithZeroPriority];
         //For Wind Map
-        [self.displayWind removeAnnotations:self.displayWind.annotations];
-        [self.displayWind addAnnotations:self.metarsWithZeroPriority];
-        
-        
-        //NSLog(@" 1 ");
     }
     
     else if(currentZoomLevel < 4.5 )
@@ -408,12 +407,7 @@
         [self.displayMetar addAnnotations:self.metarsWithOnePriority];
         [self.displayMetar addAnnotations:self.metarsWithZeroPriority];
         //[self.displayMetar addAnnotations:self.metarsWithTwoPriority];
-        
-        //for wind map
-        [self.displayWind removeAnnotations:self.displayWind.annotations];
-        [self.displayWind addAnnotations:self.metarsWithOnePriority];
-        [self.displayWind addAnnotations:self.metarsWithZeroPriority];
-        
+
         //NSLog(@" 2 ");
     }
     
@@ -424,12 +418,6 @@
         [self.displayMetar addAnnotations:self.metarsWithOnePriority];
         [self.displayMetar addAnnotations:self.metarsWithTwoPriority];
         //[self.displayMetar addAnnotations:self.metarsWithThreePriority];
-        
-        //For Wind Map
-        [self.displayWind removeAnnotations:self.displayWind.annotations];
-        [self.displayWind addAnnotations:self.metarsWithZeroPriority];
-        [self.displayWind addAnnotations:self.metarsWithOnePriority];
-        [self.displayWind addAnnotations:self.metarsWithTwoPriority];
 
         //NSLog(@" 3 ");
     }
@@ -443,14 +431,7 @@
         [self.displayMetar addAnnotations:self.metarsWithThreePriority];
         
         //[self.displayMetar addAnnotations:self.metarsWithFourPriority];
-        
-        //For Wind Map
-        [self.displayWind removeAnnotations:self.displayWind.annotations];
-        [self.displayWind addAnnotations:self.metarsWithZeroPriority];
-        [self.displayWind addAnnotations:self.metarsWithOnePriority];
-        [self.displayWind addAnnotations:self.metarsWithTwoPriority];
-        [self.displayWind addAnnotations:self.metarsWithThreePriority];
-        
+
         //NSLog(@" 4 ");
     }
     
@@ -464,16 +445,7 @@
         
         [self.displayMetar addAnnotations:self.metarsWithFourPriority];
         //[self.displayMetar addAnnotations:self.metarsWithFivePriority];
-        
-        //For Wind Map
-        [self.displayWind removeAnnotations:self.displayWind.annotations];
-        [self.displayWind addAnnotations:self.metarsWithZeroPriority];
-        [self.displayWind addAnnotations:self.metarsWithOnePriority];
-        [self.displayWind addAnnotations:self.metarsWithTwoPriority];
-        [self.displayWind addAnnotations:self.metarsWithThreePriority];
-        
-        [self.displayWind addAnnotations:self.metarsWithFourPriority];
-        
+
         //NSLog(@" 5 ");
     }
     
@@ -488,17 +460,7 @@
         [self.displayMetar addAnnotations:self.metarsWithFourPriority];
         [self.displayMetar addAnnotations:self.metarsWithFivePriority];
         // [self.displayMetar addAnnotations:self.metarsWithSixPriority];
-        
-        //For Wind Map
-        [self.displayWind removeAnnotations:self.displayWind.annotations];
-        [self.displayWind addAnnotations:self.metarsWithZeroPriority];
-        [self.displayWind addAnnotations:self.metarsWithOnePriority];
-        [self.displayWind addAnnotations:self.metarsWithTwoPriority];
-        [self.displayWind addAnnotations:self.metarsWithThreePriority];
-        
-        [self.displayWind addAnnotations:self.metarsWithFourPriority];
-        [self.displayMetar addAnnotations:self.metarsWithFivePriority];
-        //NSLog(@" 6 ");
+
     }
     
     else if(currentZoomLevel < 8.0 )
@@ -514,20 +476,7 @@
         [self.displayMetar addAnnotations:self.metarsWithFivePriority];
         [self.displayMetar addAnnotations:self.metarsWithSixPriority];
         //[self.displayMetar addAnnotations:self.metarsWithSevenPriority];
-        
-        //For Wind Map
-        [self.displayWind removeAnnotations:self.displayWind.annotations];
-        
-        [self.displayWind addAnnotations:self.metarsWithZeroPriority];
-        [self.displayWind addAnnotations:self.metarsWithOnePriority];
-        [self.displayWind addAnnotations:self.metarsWithTwoPriority];
-        [self.displayWind addAnnotations:self.metarsWithThreePriority];
-        
-        [self.displayWind addAnnotations:self.metarsWithFourPriority];
-        [self.displayWind addAnnotations:self.metarsWithFivePriority];
-        [self.displayWind addAnnotations:self.metarsWithSixPriority];
-        
-        //NSLog(@" 7 ");
+
     }
     else if(currentZoomLevel <=20 )
     {
@@ -543,7 +492,65 @@
         [self.displayMetar addAnnotations:self.metarsWithSixPriority];
         [self.displayMetar addAnnotations:self.metarsWithSevenPriority];
         
+
+    }
+    if (currentZoomLevelWind <3.5) {
+        [self.displayWind removeAnnotations:self.displayWind.annotations];
+        [self.displayWind addAnnotations:self.metarsWithZeroPriority];
+        //NSLog(@" 1 ");
+    }else if(currentZoomLevelWind < 4.5){
+        //for wind map
+        [self.displayWind removeAnnotations:self.displayWind.annotations];
+        [self.displayWind addAnnotations:self.metarsWithOnePriority];
+        [self.displayWind addAnnotations:self.metarsWithZeroPriority];
+    }else if(currentZoomLevelWind<5.5){
+        //For Wind Map
+        [self.displayWind removeAnnotations:self.displayWind.annotations];
+        [self.displayWind addAnnotations:self.metarsWithZeroPriority];
+        [self.displayWind addAnnotations:self.metarsWithOnePriority];
+        [self.displayWind addAnnotations:self.metarsWithTwoPriority];
+    }else if(currentZoomLevelWind<6.5){
+        //For Wind Map
+        [self.displayWind removeAnnotations:self.displayWind.annotations];
+        [self.displayWind addAnnotations:self.metarsWithZeroPriority];
+        [self.displayWind addAnnotations:self.metarsWithOnePriority];
+        [self.displayWind addAnnotations:self.metarsWithTwoPriority];
+        [self.displayWind addAnnotations:self.metarsWithThreePriority];
+    }else if(currentZoomLevelWind < 7.0){
+        //For Wind Map
+        [self.displayWind removeAnnotations:self.displayWind.annotations];
+        [self.displayWind addAnnotations:self.metarsWithZeroPriority];
+        [self.displayWind addAnnotations:self.metarsWithOnePriority];
+        [self.displayWind addAnnotations:self.metarsWithTwoPriority];
+        [self.displayWind addAnnotations:self.metarsWithThreePriority];
         
+        [self.displayWind addAnnotations:self.metarsWithFourPriority];
+    }else if(currentZoomLevelWind<7.5){
+        //For Wind Map
+        [self.displayWind removeAnnotations:self.displayWind.annotations];
+        [self.displayWind addAnnotations:self.metarsWithZeroPriority];
+        [self.displayWind addAnnotations:self.metarsWithOnePriority];
+        [self.displayWind addAnnotations:self.metarsWithTwoPriority];
+        [self.displayWind addAnnotations:self.metarsWithThreePriority];
+        
+        [self.displayWind addAnnotations:self.metarsWithFourPriority];
+        [self.displayMetar addAnnotations:self.metarsWithFivePriority];
+        //NSLog(@" 6 ");
+    }        else if(currentZoomLevelWind<8.0){
+        //For Wind Map
+        [self.displayWind removeAnnotations:self.displayWind.annotations];
+        
+        [self.displayWind addAnnotations:self.metarsWithZeroPriority];
+        [self.displayWind addAnnotations:self.metarsWithOnePriority];
+        [self.displayWind addAnnotations:self.metarsWithTwoPriority];
+        [self.displayWind addAnnotations:self.metarsWithThreePriority];
+        
+        [self.displayWind addAnnotations:self.metarsWithFourPriority];
+        [self.displayWind addAnnotations:self.metarsWithFivePriority];
+        [self.displayWind addAnnotations:self.metarsWithSixPriority];
+        
+        //NSLog(@" 7 ");
+    }else if(currentZoomLevelWind<=20){
         //For Wind Map
         [self.displayWind removeAnnotations:self.displayWind.annotations];
         
@@ -562,15 +569,16 @@
     
     
     
-    
     //[self.displayWind reloadInputViews];
     
     
     //NSLog(@"Zoom level = %f",21 - (log2(self.displayMetar.region.span.longitudeDelta *
                                         //MERCATOR_RADIUS * M_PI / (180.0 * self.displayMetar.bounds.size.width))));
-    
+    if(self.displayMetar){
     return 21 - (log2(self.displayMetar.region.span.longitudeDelta *
                       MERCATOR_RADIUS * M_PI / (180.0 * self.displayMetar.bounds.size.width)));
+    }else return 21 - (log2(self.displayWind.region.span.longitudeDelta *
+                     MERCATOR_RADIUS * M_PI / (180.0 * self.displayWind.bounds.size.width)));
 }
 
 - (void)didReceiveMemoryWarning
@@ -581,6 +589,7 @@
 
 - (void)viewDidUnload {
     [self setDisplayMetar:nil];
+    [self setDisplayWind:nil];
     [self setLastUpdate:nil];
     [super viewDidUnload];
 }

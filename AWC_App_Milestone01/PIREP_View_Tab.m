@@ -87,9 +87,6 @@
     
     if([appDelegate isConnectedToInternet])
     {
-    
-    
-        
         [self.displayMap removeAnnotations:self.displayMap.annotations];
         
         //Initializing the arrays that store the annotation data
@@ -98,11 +95,7 @@
         // Do any additional setup after loading the view, typically from a nib.
         
         [self updateTimeLabel];
-        
-        
-        
         [self viewPireps];
-        
     }
     else
     {
@@ -228,16 +221,18 @@
 //            lbl.font = [UIFont fontWithName:@"Weather" size:35.0f];//lbl.backgroundColor = [UIColor blackColor];
         
 //            lbl.text = @"4";
+        
         lbl2.font = [UIFont fontWithName:@"Weather" size:32.0f];
-        lbl2.text =  [pirep ttfEquivalent:pirep.rawOb];
+        lbl2.text =  [pirep ttfEquivalent:pirep.icgInt1 tbLvl:pirep.tbInt1];
         if([lbl2.text  isEqual: @"2"] || [lbl2.text  isEqual: @"8"])
             lbl2.textColor = [UIColor greenColor];
         if([lbl2.text  isEqual: @"4"] || [lbl2.text  isEqual: @":"])
            lbl2.textColor = [UIColor orangeColor];
-        if([lbl2.text  isEqual: @"6"] || [lbl2.text  isEqual: @";"])
+        if([lbl2.text  isEqual: @"6"] || [lbl2.text  isEqual: @"<"])
             lbl2.textColor = [UIColor redColor];
         
         //self.displayMap.delegate = self;
+        //if(pirep.icgInt1 != NULL && pirep.tbInt1 != NULL)
             [annotView addSubview:lbl2];
         
         
@@ -260,10 +255,10 @@
             lbl2.font = [UIFont fontWithName:@"Weather" size:32.0f];
             lbl2.text = [user ttfEquivalent:user.pilotReport];
             if([lbl2.text  isEqual: @"2"] || [lbl2.text  isEqual: @"8"])
-                lbl2.textColor = [UIColor greenColor];
+                lbl2.textColor = [UIColor colorWithRed:0 green:255 blue:0 alpha:1];
             if([lbl2.text  isEqual: @"4"] || [lbl2.text  isEqual: @":"])
                 lbl2.textColor = [UIColor orangeColor];
-            if([lbl2.text  isEqual: @"6"] || [lbl2.text  isEqual: @";"])
+            if([lbl2.text  isEqual: @"6"] || [lbl2.text  isEqual: @"<"])
                 lbl2.textColor = [UIColor redColor];
             //NSLog(@"USE REPORT: %@",user.pilotReport);
             [annotView addSubview:lbl2];
@@ -311,11 +306,12 @@
         pirep.wdir = properties[@"wdir"];
         pirep.wspd = properties[@"wspd"];
         pirep.fltlv1 = properties[@"fltlv1"];
+        pirep.icgInt1 = properties[@"icgInt1"];
         pirep.tbInt1 = properties[@"tbInt1"];
         pirep.tbFreq1 = properties[@"tbFreq1"];
         pirep.rawOb = properties[@"rawOb"];
         
-        //  NSLog(@"Here = %@",properties[@"icaoId"]);
+        //NSLog(@"*************Here = %@",properties[@"icgInt1"]);
         
         NSDictionary *geometries = [feature objectForKey:@"geometry"];
         
@@ -366,7 +362,6 @@
     }
     
     [self.displayMap addAnnotations:self.pireps];
-    
 }
 //edit2014
 //- (IBAction)zoomIn:(id)sender {

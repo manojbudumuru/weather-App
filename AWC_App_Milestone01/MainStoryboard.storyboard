@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="MwV-zy-yQH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="MwV-zy-yQH">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--PIREP View-->
@@ -330,6 +330,10 @@
                                 <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="category drop.png" id="UmI-XQ-wkB">
+                                <rect key="frame" x="11" y="146" width="379" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PJj-M2-t2w">
                                 <rect key="frame" x="440" y="905" width="121" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -621,10 +625,6 @@
                                 <color key="textColor" red="0.066666670139999995" green="0.55686277149999996" blue="0.85098046059999999" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="category drop.png" id="UmI-XQ-wkB">
-                                <rect key="frame" x="11" y="146" width="379" height="86"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.96195652173913038" green="0.96195652173913038" blue="0.96195652173913038" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -635,32 +635,32 @@
                         <outlet property="chopMS" destination="tho-fa-smC" id="NNf-VL-aGW"/>
                         <outlet property="clear" destination="uHy-YT-KcS" id="Kgg-kG-uCd"/>
                         <outlet property="greaterChop" destination="7K4-cv-4Db" id="GYg-Sg-IcI"/>
-                        <outlet property="greaterIce" destination="xQT-3c-OQO" id="4Xh-gc-vDJ"/>
+                        <outlet property="greaterIce" destination="xQT-3c-OQO" id="fle-93-k7g"/>
                         <outlet property="greaterMtn" destination="Fpu-cj-WK1" id="IL3-0C-7PI"/>
                         <outlet property="greaterTurb" destination="61u-wu-nIh" id="i00-xl-7vR"/>
                         <outlet property="header" destination="J6V-y0-ybd" id="wx9-c1-uEb"/>
                         <outlet property="iceLM" destination="jDP-Jz-e1b" id="Jhy-Hd-9Vm"/>
                         <outlet property="iceMS" destination="p4Q-ve-4Sq" id="RD2-HK-dHw"/>
-                        <outlet property="iceTL" destination="qFR-2m-ucm" id="TtX-IW-rgG"/>
+                        <outlet property="iceTL" destination="qFR-2m-ucm" id="5q8-Ih-Xl1"/>
                         <outlet property="lightChop" destination="ZHW-a0-6bP" id="qpy-Jd-t9N"/>
-                        <outlet property="lightIce" destination="xrH-aq-Muw" id="UpI-eH-pvz"/>
+                        <outlet property="lightIce" destination="xrH-aq-Muw" id="bXM-CF-NG4"/>
                         <outlet property="lightMtn" destination="mqu-JQ-Q2y" id="j4H-az-0Xj"/>
                         <outlet property="lightTurb" destination="eif-2c-6pg" id="tJb-Ql-Wm9"/>
                         <outlet property="mixed" destination="ju2-xT-3PF" id="s46-Rk-4v8"/>
                         <outlet property="modChop" destination="Dgm-ia-RpG" id="EVk-sy-zxe"/>
-                        <outlet property="modIce" destination="KPV-l3-a0E" id="Aw2-6g-4ji"/>
+                        <outlet property="modIce" destination="KPV-l3-a0E" id="flO-Tp-wLz"/>
                         <outlet property="modMtn" destination="WKU-c9-Bh8" id="i22-t1-gBd"/>
                         <outlet property="modTurb" destination="W5E-8C-cxP" id="sEg-X4-UkS"/>
                         <outlet property="mtnLM" destination="eaC-1a-PJR" id="Ebg-a6-YBN"/>
                         <outlet property="mtnMS" destination="LBS-5r-G75" id="tfH-LZ-4h2"/>
                         <outlet property="noChop" destination="nku-gF-RA0" id="cqm-U9-rvS"/>
-                        <outlet property="noIce" destination="0Kb-c9-5Y4" id="Zyu-eY-wzR"/>
+                        <outlet property="noIce" destination="0Kb-c9-5Y4" id="tNn-q3-q9F"/>
                         <outlet property="noMtn" destination="pdS-yA-KMe" id="GxK-Sl-GcY"/>
                         <outlet property="noTurb" destination="4H6-aN-aB4" id="sue-Sh-Ep9"/>
                         <outlet property="pirepSelected" destination="Ej3-Pu-Vmn" id="PSX-Xb-UPL"/>
                         <outlet property="rime" destination="9UC-3K-leu" id="z4Q-LG-7na"/>
                         <outlet property="sendPirep" destination="iLV-zq-cHZ" id="59a-Z6-ymS"/>
-                        <outlet property="trace" destination="24B-Sy-Ppt" id="5GL-en-dDh"/>
+                        <outlet property="trace" destination="24B-Sy-Ppt" id="LJc-Kv-vKX"/>
                         <outlet property="turbLM" destination="L0t-5M-6Jr" id="Hme-dS-1eE"/>
                         <outlet property="turbMS" destination="oSH-K5-cBS" id="YHl-Hi-ZHU"/>
                     </connections>

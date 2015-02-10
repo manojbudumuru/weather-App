@@ -24,6 +24,7 @@
 @property NSString * wspd;
 @property NSString * fltlv1;
 @property NSString * tbInt1;
+@property NSString * icgInt1;
 @property NSString * tbFreq1;
 @property NSString * rawOb;
 @property NSString * point;

@@ -10,5 +10,6 @@
 
 @interface Pirep (TTF)
 
--(NSString*)ttfEquivalent:(NSString*)input;
+//-(NSString*)ttfEquivalent:(NSString*)input;
+-(NSString*)ttfEquivalent:(NSString*)icLvl tbLvl:(NSString*)tbLvl;
 @end

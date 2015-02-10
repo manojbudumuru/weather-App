@@ -12,44 +12,35 @@
 
 @implementation Pirep (TTF)
 
--(NSString*)ttfEquivalent:(NSString*)input{
+-(NSString*)ttfEquivalent:(NSString*)icLvl tbLvl:(NSString*)tbLvl{
+    NSString * ttf = @"";
     
-    Rx * icPattern = RX(@"IC (TRACE|LGT|LGT-MOD|MOD|MOD-SEV|SEV)");
-    Rx * tbPattern = RX(@"TB (LGT|LGT-MOD|MOD|MOD-SEV|SEV)");
-    Rx * mvPattern = RX(@"RM (LGT|LGT-MOD|MOD|MOD-SEV|SEV)");
-    NSString * ttf = @"'";
-    UIColor *orange = [UIColor orangeColor];
-    UIColor *green = [UIColor greenColor];
-    UIColor *red = [UIColor redColor];
-    //ttfColor = [UIColor blackColor];
-    
-    if([input isMatch:icPattern])
+    if(icLvl != NULL)
     {
-        if([input containsString:@"IC LGT"]){
+        if([icLvl containsString:@"LGT"] || [icLvl containsString:@"TRC"]){
             ttf =  @"2";
             //ttfColor = green;
-        } else if([input containsString:@"IC MOD"] || [input containsString:@"IC LGT-MOD"]){
+        } else if([icLvl containsString:@"MOD"] || [icLvl containsString:@"LGT-MOD"]){
             ttf =  @"4";
             //ttfColor = orange;
-        } else if([input containsString:@"IC SEV"] || [input containsString:@"IC MOD-SEV"]){
+        } else if([icLvl containsString:@"SEV"] || [icLvl containsString:@"MOD-SEV"]){
             ttf =  @"6";
             //ttfColor = red;
         }
-    }else if([input isMatch:tbPattern]||[input isMatch:mvPattern])
-    {
-        if([input containsString:@"TB LGT"]||[input containsString:@"RM LGT"]){
-            ttf =  @"8";
-            //ttfColor = green;
-        } else if([input containsString:@"TB MOD"] || [input containsString:@"RM MOD"] || [input containsString:@"TB LGT-MOD"] || [input containsString:@"RM LGT-MOD"]){
-            ttf =  @":";
-            //ttfColor = orange;
-        } else if([input containsString:@"TB SEV"] || [input containsString:@"RM SEV"] || [input containsString:@"TB MOD-SEV"] || [input containsString:@"RM MOD-SEV"]){
-            ttf =  @"<";
-            //ttfColor = red;
-        }
     }
-//    NSLog(@"%@",input);
-//    NSLog(@"SYMBOL FOR NOW IS: %@",ttf);
+    else if(tbLvl != NULL){
+        
+        if([tbLvl containsString:@"LGT"]){
+                ttf =  @"8";
+                //ttfColor = green;
+            } else if([tbLvl containsString:@"MOD"] || [tbLvl containsString:@"LGT-MOD"]){
+                ttf =  @":";
+                //ttfColor = orange;
+            } else if([tbLvl containsString:@"SEV"] || [tbLvl containsString:@"MOD-SEV"]){
+                ttf =  @"<";
+                //ttfColor = red;
+            }
+    }
     
     return ttf;
 }

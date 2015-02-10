@@ -12,12 +12,7 @@
 
 -(NSString*)ttfEquivalent:(NSString*)input
 {
-    NSString *ttf = @"'";
-    UIColor *orange = [UIColor orangeColor];
-    UIColor *green = [UIColor greenColor];
-    UIColor *red = [UIColor redColor];
-    //self.ttfColor = [UIColor blackColor];
-    
+    NSString *ttf = @"";
     Rx * icPattern = RX(@"IC (TRACE|LGT|LGT-MOD|MOD|MOD-SEV|SEV)");
     Rx * tbPattern = RX(@"TB (LGT|LGT-MOD|MOD|MOD-SEV|SEV)");
     Rx * mvPattern = RX(@"RM (LGT|LGT-MOD|MOD|MOD-SEV|SEV)");
