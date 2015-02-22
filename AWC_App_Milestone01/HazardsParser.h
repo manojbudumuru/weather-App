@@ -24,9 +24,11 @@
 @property NSString * airSigmetType;
 @property NSDictionary * results;
 @property NSDictionary * sigmetResults;
+//Property that can be updated from View_tab
+@property int forecastTime;
 
 -(void)fetchData;
--(NSMutableArray *)GetHazards;
+-(NSMutableArray *)GetHazards:(int)fore;
 
 
 @end

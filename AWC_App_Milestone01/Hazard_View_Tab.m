@@ -28,11 +28,14 @@
 @property BOOL genericValidate;
 @property NSMutableArray * hazardOverlays;
 
+
 @property BOOL mapLoaded;
 @property BOOL annotationsAdded;
 @property BOOL overlaysAdded;
 
 @property int selectedIndex;
+@property int selectedFore;
+
 
 @end
 
@@ -56,6 +59,16 @@
     _mapView.mapType = MKMapTypeStandard;
     
     self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
+    
+    //edit2015
+    self.forecastVC = [[Forecast alloc]initWithStyle:UITableViewStylePlain];
+    self.forecastVC.delegate = self;
+    
+    self.popOverController = [[UIPopoverController alloc]initWithContentViewController:self.forecastVC];
+    //Assigning targets and action
+    [self.forecastsBTN setTarget:self];
+    [self.forecastsBTN setAction:@selector(selectForecasts:)];
+
 }
 
 //Set the view background color and header color to reflect the theme of the app.
@@ -67,6 +80,8 @@
     [self.header setBackgroundImage:appDelegate.header forBarPosition:UIBarPositionTop barMetrics:UIBarMetricsDefault];
     [self.header setTintColor:[UIColor whiteColor]];
     self.header.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    
+    //self.navigationItem.leftBarButtonItem
     [self updateTimeLabel];
 }
 
@@ -89,7 +104,7 @@
         [self.hazardsSegmentedControl setSelectedSegmentIndex:self.selectedIndex];
     }
     
-    [self initializeData];
+    [self initializeData:self.selectedFore];
 }
 
 //This will start the loading activity indicator when the map loads.
@@ -134,7 +149,7 @@
 }
 
 //If the user has no internet connection, display an alert. Else, parse the json from database and add Hazards on the map.
--(void)initializeData
+-(void)initializeData:(int)fore
 {
 
     AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
@@ -150,37 +165,7 @@
         
         _myHazardsParser = [[HazardsParser alloc]init];
         
-        self.hazardOverlays = [_myHazardsParser GetHazards];
-//        for (int i=0; i<self.hazardOverlays.count; i++) {
-//            NSLog(@"Hazards: >>>> %@\n",self.hazardOverlays[i]);
-//        }
-//        
-        
-        //[self showHazards];
-        
-//        _mtnObsn = [[UIBarButtonItem alloc] initWithTitle:@"mtn obscn" style:UIBarButtonItemStyleBordered target:self action:@selector(mtnObsnButton:)];
-//        
-//        
-//        _turbulence = [[UIBarButtonItem alloc] initWithTitle:@"turbulence" style:UIBarButtonItemStyleBordered target:self action:@selector(turbulenceButton:)];
-//        
-//        
-//        _icing = [[UIBarButtonItem alloc] initWithTitle:@"icing" style:UIBarButtonItemStyleBordered target:self action:@selector(icingButton:)];
-//        
-//        
-//        _convective = [[UIBarButtonItem alloc] initWithTitle:@"convective" style:UIBarButtonItemStyleBordered target:self action:@selector(convectiveButton:)];
-//        
-//        
-//        _ash = [[UIBarButtonItem alloc] initWithTitle:@"ash" style:UIBarButtonItemStyleBordered target:self action:@selector(ashButton:)];
-//        
-//        _ifr = [[UIBarButtonItem alloc] initWithTitle:@"ifr" style:UIBarButtonItemStyleBordered target:self action:@selector(ifrButton:)];
-//        
-//        _generic = [[UIBarButtonItem alloc] initWithTitle:@"all" style:UIBarButtonItemStyleBordered target:self action:@selector(genericButton:)];
-        
-        
-//        NSArray * Hazarditems = [NSArray arrayWithObjects:_generic, _mtnObsn,_turbulence,_icing,_convective,_ash,_ifr,nil];
-//        
-//        self.hazardsBar.items = Hazarditems;
-        
+        self.hazardOverlays = [_myHazardsParser GetHazards:fore];
         [self.hazardsSegmentedControl setSelectedSegmentIndex:self.selectedIndex];
         
         [self.hazardsSegmentedControl addTarget:self action:@selector(segmentActions:) forControlEvents:UIControlEventValueChanged];
@@ -273,16 +258,7 @@
     [self.mapView removeOverlays:self.mapView.overlays];
     [self.mapView removeAnnotations:self.mapView.annotations];
     
-//    if (self.mtnValidate == NO) {
-//        if(self.genericValidate==YES)
-//        {
-//            _generic.tintColor=[UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//            [self genericButton:sender];
-//        }
-//        _mtnObsn.tintColor = [UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//        
-    
-        for( int i=0;i< [self.hazardOverlays count];i++)
+    for( int i=0;i< [self.hazardOverlays count];i++)
         {
             Hazards * myHazard = [self.hazardOverlays objectAtIndex:i];
             if([myHazard.type isEqualToString:@"MTN OBSCN"] || [myHazard.type isEqualToString:@"MT_OBSC"])
@@ -293,23 +269,6 @@
             
         }
         
-//        self.mtnValidate = YES;
-//        
-//    }
-//    else
-//    {
-//        _mtnObsn.tintColor = [UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//        self.mtnValidate = NO;
-//        for (int i =0; i < [self.hazardOverlays count]; i++) {
-//            
-//            Hazards * myHazard = [self.hazardOverlays objectAtIndex:i];
-//            if([myHazard.type isEqualToString:@"MTN OBSCN"])
-//            {
-//                [self.mapView removeAnnotation:[self.hazardOverlays objectAtIndex:i]];
-//                [self.mapView removeOverlay:[self.hazardOverlays objectAtIndex:i]];
-//            }
-//        }
-//    }
 }
 
 //Remove all hazards from the screen except turbulence.
@@ -317,14 +276,6 @@
 {
     [self.mapView removeOverlays:self.mapView.overlays];
     [self.mapView removeAnnotations:self.mapView.annotations];
-    
-//    if (self.turbValidate == NO) {
-//        if(self.genericValidate==YES)
-//        {
-//            _generic.tintColor=[UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//            [self genericButton:sender];
-//        }
-//        _turbulence.tintColor = [UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
     
         for( int i=0;i< [self.hazardOverlays count];i++)
         {
@@ -335,26 +286,6 @@
                 [self.mapView addOverlay:myHazard];
             }
         }
-//        self.turbValidate = YES;
-//        
-//        
-//    }
-//    else
-//    {
-//        _turbulence.tintColor = [UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//        self.turbValidate = NO;
-//        for (int i =0; i < [self.hazardOverlays count]; i++) {
-//            
-//            Hazards * myHazard = [self.hazardOverlays objectAtIndex:i];
-//            if([myHazard.type isEqualToString:@"TURB"])
-//            {
-//                [self.mapView removeAnnotation:[self.hazardOverlays objectAtIndex:i]];
-//                [self.mapView removeOverlay:[self.hazardOverlays objectAtIndex:i]];
-//            }
-//            
-//        }
-//        
-//    }
     
 }
 
@@ -364,16 +295,6 @@
     [self.mapView removeOverlays:self.mapView.overlays];
     [self.mapView removeAnnotations:self.mapView.annotations];
     
-//    if (self.icingValidate == NO) {
-//        if(self.genericValidate==YES)
-//        {
-//            _generic.tintColor=[UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//            [self genericButton:sender];
-//        }
-//        _icing.tintColor = [UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-    
-        
-        
         for( int i=0;i< [self.hazardOverlays count];i++)
         {
             Hazards * myHazard = [self.hazardOverlays objectAtIndex:i];
@@ -384,30 +305,6 @@
             }
             
         }
-//        self.icingValidate = YES;
-//        
-//        
-//        
-//        
-//    }
-//    else
-//    {
-//        _icing.tintColor = [UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//        self.icingValidate = NO;
-//        for (int i =0; i < [self.hazardOverlays count]; i++) {
-//            
-//            Hazards * myHazard = [self.hazardOverlays objectAtIndex:i];
-//            if([myHazard.type isEqualToString:@"ICE"])
-//            {
-//                [self.mapView removeAnnotation:[self.hazardOverlays objectAtIndex:i]];
-//                [self.mapView removeOverlay:[self.hazardOverlays objectAtIndex:i]];
-//            }
-//            
-//            
-//        }
-//        
-//    }
-    
 }
 
 //Remove all hazards from the screen except convective.
@@ -415,14 +312,6 @@
 {
     [self.mapView removeOverlays:self.mapView.overlays];
     [self.mapView removeAnnotations:self.mapView.annotations];
-    
-//    if (self.convectiveValidate == NO) {
-//        if(self.genericValidate==YES)
-//        {
-//            _generic.tintColor=[UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//            [self genericButton:sender];
-//        }
-//        _convective.tintColor = [UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
     
         for( int i=0;i< [self.hazardOverlays count];i++)
         {
@@ -434,27 +323,6 @@
             }
             
         }
-//        self.convectiveValidate = YES;
-//        
-//        
-//    }
-//    else
-//    {
-//        _convective.tintColor = [UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//        self.convectiveValidate = NO;
-//        for (int i =0; i < [self.hazardOverlays count]; i++) {
-//            
-//            Hazards * myHazard = [self.hazardOverlays objectAtIndex:i];
-//            if([myHazard.type isEqualToString:@"CONVECTIVE"])
-//            {
-//                [self.mapView removeAnnotation:[self.hazardOverlays objectAtIndex:i]];
-//                [self.mapView removeOverlay:[self.hazardOverlays objectAtIndex:i]];
-//            }
-//            
-//            
-//        }
-//        
-//    }
 }
 
 //Remove all hazards from the screen except ash.
@@ -463,15 +331,6 @@
     [self.mapView removeOverlays:self.mapView.overlays];
     [self.mapView removeAnnotations:self.mapView.annotations];
     
-//    if (self.ashValidate == NO) {
-//        if(self.genericValidate==YES)
-//        {
-//            _generic.tintColor=[UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//            [self genericButton:sender];
-//        }
-//        _ash.tintColor = [UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-    
-        
         for( int i=0;i< [self.hazardOverlays count];i++)
         {
             Hazards * myHazard = [self.hazardOverlays objectAtIndex:i];
@@ -482,26 +341,6 @@
             }
             
         }
-        //self.ashValidate = YES;
-        
-//    }
-//    else
-//    {
-//        _ash.tintColor = [UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//        self.ashValidate = NO;
-//        for (int i =0; i < [self.hazardOverlays count]; i++) {
-//            
-//            Hazards * myHazard = [self.hazardOverlays objectAtIndex:i];
-//            if([myHazard.type isEqualToString:@"ASH"])
-//            {
-//                [self.mapView removeAnnotation:[self.hazardOverlays objectAtIndex:i]];
-//                [self.mapView removeOverlay:[self.hazardOverlays objectAtIndex:i]];
-//            }
-//            
-//            
-//        }
-//        
-//    }
 }
 
 //Remove all hazards from the screen except ifr.
@@ -509,16 +348,6 @@
 {
     [self.mapView removeOverlays:self.mapView.overlays];
     [self.mapView removeAnnotations:self.mapView.annotations];
-    
-//    if (self.ifrValidate == NO) {
-//        if(self.genericValidate==YES)
-//        {
-//            _generic.tintColor=[UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//            [self genericButton:sender];
-//        }
-//        _ifr.tintColor = [UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-    
-        
         for( int i=0;i< [self.hazardOverlays count];i++)
         {
             Hazards * myHazard = [self.hazardOverlays objectAtIndex:i];
@@ -529,26 +358,6 @@
             }
             
         }
-//        self.ifrValidate = YES;
-//        
-//    }
-//    else
-//    {
-//        _ifr.tintColor = [UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//        self.ifrValidate = NO;
-//        for (int i =0; i < [self.hazardOverlays count]; i++) {
-//            
-//            Hazards * myHazard = [self.hazardOverlays objectAtIndex:i];
-//            if([myHazard.type isEqualToString:@"IFR"])
-//            {
-//                [self.mapView removeAnnotation:[self.hazardOverlays objectAtIndex:i]];
-//                [self.mapView removeOverlay:[self.hazardOverlays objectAtIndex:i]];
-//            }
-//            
-//            
-//        }
-//        
-//    }
 }
 
 
@@ -557,15 +366,6 @@
 {
     [self.mapView removeOverlays:self.mapView.overlays];
     [self.mapView removeAnnotations:self.mapView.annotations];
-    
-//    if (self.genericValidate == NO) {
-//        _generic.tintColor=[UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//        _mtnObsn.tintColor=[UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//        _icing.tintColor=[UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//        _convective.tintColor=[UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//        _ifr.tintColor=[UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//        _ash.tintColor=[UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//        _turbulence.tintColor=[UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
         for( int i=0;i< [self.hazardOverlays count];i++)
         {
             Hazards * myHazard = [self.hazardOverlays objectAtIndex:i];
@@ -576,24 +376,19 @@
             
             
         }
-//        self.genericValidate = YES;
-//        self.icingValidate=NO;
-//        self.mtnValidate=NO;
-//        self.turbValidate=NO;
-//        self.convectiveValidate=NO;
-//        self.ashValidate=NO;
-//        self.ifrValidate=NO;
-//        
-//    }
-//    else
-//    {
-//        _generic.tintColor=[UIColor colorWithRed:0.1 green:0.5 blue:0.7 alpha:1.0];
-//        
-//        self.genericValidate = NO;
-//        [self.mapView removeOverlays:_hazardOverlays];
-//        [self.mapView removeAnnotations:_hazardOverlays];
-//        
-//    }
+    
+}
+
+//Action for Forecast bar button
+-(IBAction)selectForecasts:(id)sender{
+    [self.popOverController presentPopoverFromBarButtonItem:self.forecastsBTN permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+}
+
+-(void)selectedForecast:(NSString *)fore{
+    //[self.forecasts addObject:fore];
+    //NSLog(@"After Selection: %d",self.forecasts.count);
+    self.selectedFore =[fore intValue];
+    [self initializeData:self.selectedFore];
     
 }
 
@@ -620,4 +415,5 @@
     [self setMapView:nil];
     [super viewDidUnload];
 }
+
 @end

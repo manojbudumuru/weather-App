@@ -26,6 +26,7 @@
 @property BOOL mapLoaded;
 @property BOOL metarOn;
 @property BOOL annotationsAdded;
+//@property BOOL isMetar;
 
 @end
 
@@ -49,9 +50,10 @@
     self.displayWind.delegate = self;//Setting Delegate property so that we wont get Pins displayed on map
     self.displayMetar.mapType = MKMapTypeStandard;// edit 2015
     self.displayWind.mapType = MKMapTypeStandard;
+    //self.isMetar = YES;
     
     self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
-    self.metarOn = YES;
+    //self.metarOn = YES;
 
     
     
@@ -287,6 +289,8 @@
     if([mapView isEqual: self.displayMetar])
     {
         metarWX = @"@";
+    //if (self.isMetar) {
+        
         if(thisMetar.wx!=nil)
         {
             NSMutableArray * words = [[NSMutableArray alloc]initWithArray:[thisMetar.wx componentsSeparatedByString:@" "]];
@@ -315,7 +319,8 @@
         
     return annotView;
     }
-    if([mapView isEqual: self.displayWind]) {
+    if([mapView isEqual: self.displayWind]){
+    //else{
         annotView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:metarWX];
         annotView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:metarWX];
         
@@ -602,12 +607,18 @@
     switch (self.segmentedControl.selectedSegmentIndex)
     {
         case 0:
-            self.displayMetar.hidden = NO;
             self.displayWind.hidden = YES;
+            [self.displayMetar setRegion: MKCoordinateRegionForMapRect([self.displayWind visibleMapRect])];
+            self.displayMetar.hidden = NO;
             break;
         case 1:
             self.displayMetar.hidden = YES;
+            [self.displayWind setRegion: MKCoordinateRegionForMapRect([self.displayMetar visibleMapRect])];
             self.displayWind.hidden = NO;
+//            self.isMetar = NO;
+//            [self refreshMetars:self];
+            //NSLog(@"%@",self.displayMetar.visibleMapRect);
+            
             break;
         default:
             break;

@@ -13,10 +13,15 @@
 @implementation HazardsParser
 
 //Fetch Hazards information from the database and parse them.
--(void)fetchData
+-(void)fetchData{
+    [self fetchData:0];
+    //Overloading the method if default value is to be used
+}
+-(void)fetchData:(int)fore
 {
-    NSString * airmetURL = @"http://aviationweather.gov/gis/scripts/GairmetJSON.php?fore=3";
-//http://csgrad07.nwmissouri.edu/test.php";
+    self.forecastTime = fore;
+    NSString * airmetURL = [NSString stringWithFormat:@"http://aviationweather.gov/gis/scripts/GairmetJSON.php?fore=%d",self.forecastTime];///http://csgrad07.nwmissouri.edu/test.php";
+    NSLog(@"Forecast Time: %d",self.forecastTime);
     
     NSURLRequest * urlReq1 = [NSURLRequest requestWithURL:[NSURL URLWithString:airmetURL]];
     
@@ -50,9 +55,9 @@
 }
 
 //Fetch, parse and returns Harards.
--(NSMutableArray *)GetHazards
+-(NSMutableArray *)GetHazards:(int)fore
 {
-    [self fetchData];
+    [self fetchData:fore];
     [self parseDataAirmet];
     [self parseDataSigmet];
     return self.hazardsArray;
@@ -65,9 +70,9 @@
     {
         self.airmetCoordsArray = self.results[@"features"][i][@"geometry"][@"coordinates"];
         int count1 = [self.airmetCoordsArray count];
-        for (int i=0; i<self.airmetCoordsArray.count; i++) {
-            NSLog(@"Coords:  %@",self.airmetCoordsArray[i]);
-        }
+//        for (int i=0; i<self.airmetCoordsArray.count; i++) {
+//            NSLog(@"Coords:  %@",self.airmetCoordsArray[i]);
+//        }
         for(int j = 0; j < count1 ; j++)
         {
             self.hazard = [NSString stringWithFormat:@"%@",self.results[@"features"][i][@"properties"][@"hazard"]];
@@ -76,9 +81,9 @@
             self.airmetInternalCoordsArray = self.results[@"features"][i][@"geometry"][@"coordinates"][j];
             }
             int count2 = [self.airmetInternalCoordsArray count];
-            for (int i=0; i<self.airmetInternalCoordsArray.count; i++) {
-                NSLog(@"InternalCoords:  %@",self.airmetInternalCoordsArray[i]);
-            }
+//            for (int i=0; i<self.airmetInternalCoordsArray.count; i++) {
+//                //NSLog(@"InternalCoords:  %@",self.airmetInternalCoordsArray[i]);
+//            }
             // Declaring the CLLocationCoordinate2D object
             CLLocationCoordinate2D coords[count2];
             for(int k = 0; k < count2; k++)
@@ -99,7 +104,7 @@
             MKPolygon * polygon = [MKPolygon polygonWithCoordinates:coords count:count2];
             // Storing the hazard value in NSString "self.hazard"
             
-            NSLog(@"HAZARD: %@",self.hazard);
+            //NSLog(@"HAZARD: %@",self.hazard);
             self.airSigmetType = @"AIRMET";//[NSString stringWithFormat:@"%@",self.results[@"features"][i][@"properties"][@"airSigmetType"]];
             // Setting the appropriate color to the polygon based on hazard type and calling the method colorToPolygon:
             UIColor * color = [self colorToPolygon:self.hazard airSigmetType:self.airSigmetType];

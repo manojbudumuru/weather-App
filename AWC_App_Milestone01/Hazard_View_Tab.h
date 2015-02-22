@@ -11,8 +11,9 @@
 #import "HazardsParser.h"
 #import "Hazards.h"
 #import "AppDelegate.h"
+#import "Forecast.h"
 
-@interface Hazard_View_Tab : UIViewController <MKMapViewDelegate>
+@interface Hazard_View_Tab : UIViewController <MKMapViewDelegate, ForecastDelegate>
 
 @property (strong, nonatomic) IBOutlet UIToolbar *hazardsBar;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *hazardsSegmentedControl;
@@ -25,5 +26,9 @@
 @property (weak, nonatomic) IBOutlet UINavigationBar *header;
 
 @property (weak, nonatomic) IBOutlet UILabel *lastUpdateLabel;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *forecastsBTN;
+
+@property Forecast * forecastVC;
+@property UIPopoverController * popOverController;
 
 @end

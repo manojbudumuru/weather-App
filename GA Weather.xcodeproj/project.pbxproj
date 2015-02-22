@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		316C46641A89B65700450DAE /* Forecast.m in Sources */ = {isa = PBXBuildFile; fileRef = 316C46621A89B65700450DAE /* Forecast.m */; };
+		316C46651A89B65700450DAE /* Forecast.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316C46631A89B65700450DAE /* Forecast.xib */; };
 		75039FAF1847F42F00BF48C9 /* TabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75039FAE1847F42F00BF48C9 /* TabBarVC.m */; };
 		750559BD18C414F200028670 /* Loading 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 750559BA18C414F200028670 /* Loading 01.png */; };
 		750559BE18C414F200028670 /* Loading 02.png in Resources */ = {isa = PBXBuildFile; fileRef = 750559BB18C414F200028670 /* Loading 02.png */; };
@@ -198,6 +200,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		316C46611A89B65700450DAE /* Forecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Forecast.h; sourceTree = "<group>"; };
+		316C46621A89B65700450DAE /* Forecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Forecast.m; sourceTree = "<group>"; };
+		316C46631A89B65700450DAE /* Forecast.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Forecast.xib; sourceTree = "<group>"; };
 		75002BBE1809E8780031F4C1 /* Pirep.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pirep.h; sourceTree = "<group>"; };
 		75002BBF1809E8780031F4C1 /* Pirep.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pirep.m; sourceTree = "<group>"; };
 		75039FAD1847F42F00BF48C9 /* TabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarVC.h; sourceTree = "<group>"; };
@@ -606,6 +611,9 @@
 				75B7EBE8184D758E00AB52D0 /* Hazards.m */,
 				75B7EBE9184D758E00AB52D0 /* HazardsParser.h */,
 				75B7EBEA184D758E00AB52D0 /* HazardsParser.m */,
+				316C46611A89B65700450DAE /* Forecast.h */,
+				316C46621A89B65700450DAE /* Forecast.m */,
+				316C46631A89B65700450DAE /* Forecast.xib */,
 			);
 			name = HAZARD;
 			sourceTree = "<group>";
@@ -881,6 +889,7 @@
 				CABAE9011A1C8E8A00026252 /* Weather.ttf in Resources */,
 				754D1DA0186288E700A88E58 /* -SHGS.png in Resources */,
 				CA9BBBEA1A15637B00C6DC65 /* transparent.png in Resources */,
+				316C46651A89B65700450DAE /* Forecast.xib in Resources */,
 				BCB97AFA19E5EA6000177259 /* MOD.png in Resources */,
 				CA495DF719FFD6B40010FE13 /* header.png in Resources */,
 				754D1DA1186288E700A88E58 /* -SHRA.png in Resources */,
@@ -1024,6 +1033,7 @@
 				75B7EB90184D52A700AB52D0 /* TAF.m in Sources */,
 				75B7EB94184D543A00AB52D0 /* DisplayTAF.m in Sources */,
 				75B7EB98184D59C700AB52D0 /* TAF_View_Tab.m in Sources */,
+				316C46641A89B65700450DAE /* Forecast.m in Sources */,
 				75B7EBE6184D74F800AB52D0 /* Hazard_View_Tab.m in Sources */,
 				75B7EBEB184D76AF00AB52D0 /* Hazards.m in Sources */,
 				75B7EBEC184D76C800AB52D0 /* HazardsParser.m in Sources */,
