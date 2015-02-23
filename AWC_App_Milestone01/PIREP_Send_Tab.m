@@ -295,6 +295,8 @@
     self.modTurb.enabled = NO;
     self.self.greaterTurb.enabled = NO;
     self.noTurb.enabled = NO;
+    self.turbLM.enabled = NO;
+    self.turbMS.enabled = NO;
 }
 
 //Update report when user selects level betwween CHOP LGT-MOD
@@ -343,6 +345,8 @@
     self.modTurb.enabled = NO;
     self.self.greaterTurb.enabled = NO;
     self.noTurb.enabled = NO;
+    self.turbLM.enabled = NO;
+    self.turbMS.enabled = NO;
 }
 
 //Update report when user selects level betwween CHOP MOD-SEV
@@ -392,6 +396,8 @@
     self.modTurb.enabled = NO;
     self.self.greaterTurb.enabled = NO;
     self.noTurb.enabled = NO;
+    self.turbLM.enabled = NO;
+    self.turbMS.enabled = NO;
 }
 
 //Update report when user clicks on noneChop button.
@@ -412,6 +418,9 @@
     self.modTurb.enabled = NO;
     self.self.greaterTurb.enabled = NO;
     self.noTurb.enabled = NO;
+    self.turbLM.enabled = NO;
+    self.turbLM.enabled = NO;
+    self.turbMS.enabled = NO;
     //self.turb.enabled = NO;
     //edit2014 ends
 }
@@ -437,6 +446,8 @@
     self.modChop.enabled = NO;
     self.self.greaterChop.enabled = NO;
     self.noChop.enabled = NO;
+    self.chopLM.enabled = NO;
+    self.chopMS.enabled = NO;
     //edit2014 ends
 }
 
@@ -483,6 +494,8 @@
     self.modChop.enabled = NO;
     self.self.greaterChop.enabled = NO;
     self.noChop.enabled = NO;
+    self.chopLM.enabled = NO;
+    self.chopMS.enabled = NO;
     //edit2014 ends
 }
 
@@ -530,6 +543,8 @@
     self.modChop.enabled = NO;
     self.self.greaterChop.enabled = NO;
     self.noChop.enabled = NO;
+    self.chopLM.enabled = NO;
+    self.chopMS.enabled = NO;
     //edit2014 ends
 }
 
@@ -551,6 +566,8 @@
     self.modChop.enabled = NO;
     self.self.greaterChop.enabled = NO;
     self.noChop.enabled = NO;
+    self.chopLM.enabled = NO;
+    self.chopMS.enabled = NO;
     //edit2014 ends
 }
 
