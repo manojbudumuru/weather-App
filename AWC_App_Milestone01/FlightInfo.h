@@ -11,7 +11,7 @@
 
 //This class accepts the flight information which is required before giving, the pilot, access to the PIREP and PIREP Send Tab.
 
-@interface FlightInfo : UIViewController
+@interface FlightInfo : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 
 //Info Labels
@@ -50,9 +50,12 @@
 -(void)checkData;
 -(void)presentTabs;
 
+@property NSMutableArray* aircraftTypes;
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *header;
 
 @property (weak, nonatomic) IBOutlet UITextField *passwordTF;
-
+@property (weak, nonatomic) IBOutlet UIPickerView *aircraftPicker;
+- (IBAction)helpAircraft:(id)sender;
+@property(nonatomic, assign)IBOutlet UIButton * help1;
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		316305F31A9B720D0015A90A /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = 316305F21A9B720D0015A90A /* help.png */; };
 		316C46641A89B65700450DAE /* Forecast.m in Sources */ = {isa = PBXBuildFile; fileRef = 316C46621A89B65700450DAE /* Forecast.m */; };
 		316C46651A89B65700450DAE /* Forecast.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316C46631A89B65700450DAE /* Forecast.xib */; };
 		75039FAF1847F42F00BF48C9 /* TabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75039FAE1847F42F00BF48C9 /* TabBarVC.m */; };
@@ -200,6 +201,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		316305F21A9B720D0015A90A /* help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help.png; sourceTree = "<group>"; };
 		316C46611A89B65700450DAE /* Forecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Forecast.h; sourceTree = "<group>"; };
 		316C46621A89B65700450DAE /* Forecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Forecast.m; sourceTree = "<group>"; };
 		316C46631A89B65700450DAE /* Forecast.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Forecast.xib; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 		7504E824191229C100EC5435 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				316305F21A9B720D0015A90A /* help.png */,
 				CA2E08471A21B28C00B18EF4 /* zoomOut.png */,
 				CA2E08481A21B28C00B18EF4 /* zoomIn.png */,
 				CA2E08491A21B28C00B18EF4 /* levelAdd.png */,
@@ -653,6 +656,8 @@
 		75CF43F017F8D34700CCF4F0 /* GA Weather */ = {
 			isa = PBXGroup;
 			children = (
+				75FF65071815009700E18E9E /* FlightInfo.h */,
+				75FF65081815009700E18E9E /* FlightInfo.m */,
 				75D9D73A1830B081000C640C /* PIREP */,
 				75D9D73B1830B0D5000C640C /* PIREP Send */,
 				75D9D77018320512000C640C /* METAR */,
@@ -723,8 +728,6 @@
 				75CF440D17F8D34700CCF4F0 /* PIREP_Send_Tab.m */,
 				75CF441A17F8DE1000CCF4F0 /* Annotation.h */,
 				75CF441B17F8DE1000CCF4F0 /* Annotation.m */,
-				75FF65071815009700E18E9E /* FlightInfo.h */,
-				75FF65081815009700E18E9E /* FlightInfo.m */,
 				759030DA18287B4800D6DB55 /* EditFlightInfo.h */,
 				759030DB18287B4800D6DB55 /* EditFlightInfo.m */,
 				75B7EAD4184BFBBD00AB52D0 /* SettingsVC.h */,
@@ -934,6 +937,7 @@
 				754D1DB7186288E700A88E58 /* +TSGRRA.png in Resources */,
 				754D1DB8186288E700A88E58 /* +TSGS.png in Resources */,
 				754D1DB9186288E700A88E58 /* +TSRA.png in Resources */,
+				316305F31A9B720D0015A90A /* help.png in Resources */,
 				754D1DBA186288E700A88E58 /* +TSSN.png in Resources */,
 				754D1DBB186288E700A88E58 /* BCFG.png in Resources */,
 				754D1DBC186288E700A88E58 /* BLSN.png in Resources */,

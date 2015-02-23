@@ -415,5 +415,27 @@
     [self setMapView:nil];
     [super viewDidUnload];
 }
+/*
+//Display a popover when a Metar is clicked. The popover contains the details of the Metar listed in a table format.
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+{
+    //if([view.annotation isKindOfClass : [Hazards class]]){
+        
+        [self.mapView deselectAnnotation:view.annotation animated:YES];
+        
+        
+        Hazards * hazardObject = (Hazards *)view.annotation;
+        if(![self.popUp isPopoverVisible])
+        {
+            DisplayMetars * myTable = [[DisplayMetars alloc]initWithStyle:UITableViewStylePlain incomingMetar:metarObject];
+            
+            self.popUp = [[UIPopoverController alloc]initWithContentViewController:myTable];
+            self.popUp.popoverContentSize = CGSizeMake(400, 400);
+            [self.popUp presentPopoverFromRect:view.bounds inView:view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        }
+        
+    //}
+}
+*/
 
 @end
