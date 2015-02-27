@@ -21,7 +21,7 @@
 {
     self.forecastTime = fore;
     NSString * airmetURL = [NSString stringWithFormat:@"http://aviationweather.gov/gis/scripts/GairmetJSON.php?fore=%d",self.forecastTime];///http://csgrad07.nwmissouri.edu/test.php";
-    NSLog(@"Forecast Time: %d",self.forecastTime);
+    //NSLog(@"Forecast Time: %d",self.forecastTime);
     
     NSURLRequest * urlReq1 = [NSURLRequest requestWithURL:[NSURL URLWithString:airmetURL]];
     
