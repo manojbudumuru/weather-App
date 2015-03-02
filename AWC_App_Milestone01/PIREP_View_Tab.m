@@ -49,6 +49,7 @@
     self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
     //edit2014
     
+    self.panel.alpha = 0.6;
     self.button = [UIImage imageNamed:@"zoomIn.png"];
     [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
     [self.zoom addTarget:self action:@selector(zoomIn) forControlEvents:UIControlEventTouchUpInside];
@@ -63,6 +64,9 @@
 {
     AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
     //self.view.backgroundColor = [UIColor colorWithRed:1/255.0 green:132/255.0 blue:144/255.0 alpha:1.0];
+
+    //  Loading control Panel
+    [self controlPanelLoad];
     [self.header setBackgroundImage:appDelegate.header forBarPosition:UIBarPositionTop barMetrics:UIBarMetricsDefault];
     self.view.backgroundColor = appDelegate.awcColor;
     [self.header setBarTintColor:appDelegate.awcColor];
@@ -402,4 +406,38 @@
     //_initialPosition = NO;
 }
 //edit2014 End
+
+
+//  Setting Control Panel Properties
+- (void)controlPanelLoad{
+    self.panel.hidden = YES;
+    self.controlUp.hidden = NO;
+    if(self.appDelegate.isFilghtOn == NO)
+        NSLog(@"ISFLIGHTON : NO");
+    else NSLog(@"ISFLIGHTON : YES");
+}
+- (IBAction)controlPanel:(id)sender {
+    self.panel.hidden = NO;
+    self.controlUp.hidden = YES;
+}
+- (IBAction)flightOnAction:(id)sender {
+    //self.appDelegate.isFilghtOn = YES;
+    self.flightOff.hidden = NO;
+    if(self.appDelegate.isFilghtOn == NO){
+    self.appDelegate.startDate = [NSDate date];
+    
+    // Create the stop watch timer that fires every 100 ms
+        [self.appDelegate startTimer];
+        self.stopWatchLBL.text = self.appDelegate.stopwatchLabel;
+    }
+}
+
+
+
+
+
+- (IBAction)controlPanelDown:(id)sender {
+    self.controlUp.hidden = NO;
+    self.panel.hidden = YES;
+}
 @end

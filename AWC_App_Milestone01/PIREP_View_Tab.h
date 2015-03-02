@@ -31,5 +31,22 @@
 @property UIColor * ttfColor;
 
 
+//  Properties for Control Panel
+@property (weak, nonatomic) IBOutlet UIVisualEffectView *panel;
+- (IBAction)controlPanel:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *controlUp;
+@property (weak, nonatomic) IBOutlet UIButton *flightOn;
+- (IBAction)flightOnAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *flightOff;
+
+@property (weak, nonatomic) IBOutlet UILabel *stopWatchLBL;
+
+- (IBAction)controlPanelDown:(id)sender;
+
+
+
+
+
+
 @property (weak, nonatomic) IBOutlet UINavigationBar *header;
 @end

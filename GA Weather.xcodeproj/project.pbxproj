@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		314C74501AA16FD600A3345E /* upSlider.png in Resources */ = {isa = PBXBuildFile; fileRef = 314C744F1AA16FD600A3345E /* upSlider.png */; };
+		314C74521AA180CB00A3345E /* downSlider.png in Resources */ = {isa = PBXBuildFile; fileRef = 314C74511AA180CB00A3345E /* downSlider.png */; };
+		314C74541AA264E300A3345E /* turbStop.png in Resources */ = {isa = PBXBuildFile; fileRef = 314C74531AA264E300A3345E /* turbStop.png */; };
+		314C74561AA264EF00A3345E /* flightStart.png in Resources */ = {isa = PBXBuildFile; fileRef = 314C74551AA264EF00A3345E /* flightStart.png */; };
+		314C74581AA264FB00A3345E /* flightStop.png in Resources */ = {isa = PBXBuildFile; fileRef = 314C74571AA264FB00A3345E /* flightStop.png */; };
+		314C745A1AA2650B00A3345E /* helpPanel.png in Resources */ = {isa = PBXBuildFile; fileRef = 314C74591AA2650B00A3345E /* helpPanel.png */; };
+		314C745C1AA2651200A3345E /* settingPanel.png in Resources */ = {isa = PBXBuildFile; fileRef = 314C745B1AA2651200A3345E /* settingPanel.png */; };
+		314C745E1AA2651900A3345E /* turbStart.png in Resources */ = {isa = PBXBuildFile; fileRef = 314C745D1AA2651900A3345E /* turbStart.png */; };
 		316305F31A9B720D0015A90A /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = 316305F21A9B720D0015A90A /* help.png */; };
 		316C46641A89B65700450DAE /* Forecast.m in Sources */ = {isa = PBXBuildFile; fileRef = 316C46621A89B65700450DAE /* Forecast.m */; };
 		316C46651A89B65700450DAE /* Forecast.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316C46631A89B65700450DAE /* Forecast.xib */; };
@@ -201,6 +209,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		314C744F1AA16FD600A3345E /* upSlider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upSlider.png; sourceTree = "<group>"; };
+		314C74511AA180CB00A3345E /* downSlider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downSlider.png; sourceTree = "<group>"; };
+		314C74531AA264E300A3345E /* turbStop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = turbStop.png; sourceTree = "<group>"; };
+		314C74551AA264EF00A3345E /* flightStart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flightStart.png; sourceTree = "<group>"; };
+		314C74571AA264FB00A3345E /* flightStop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flightStop.png; sourceTree = "<group>"; };
+		314C74591AA2650B00A3345E /* helpPanel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = helpPanel.png; sourceTree = "<group>"; };
+		314C745B1AA2651200A3345E /* settingPanel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingPanel.png; sourceTree = "<group>"; };
+		314C745D1AA2651900A3345E /* turbStart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = turbStart.png; sourceTree = "<group>"; };
 		316305F21A9B720D0015A90A /* help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help.png; sourceTree = "<group>"; };
 		316C46611A89B65700450DAE /* Forecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Forecast.h; sourceTree = "<group>"; };
 		316C46621A89B65700450DAE /* Forecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Forecast.m; sourceTree = "<group>"; };
@@ -443,6 +459,14 @@
 		7504E824191229C100EC5435 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				314C745D1AA2651900A3345E /* turbStart.png */,
+				314C745B1AA2651200A3345E /* settingPanel.png */,
+				314C74591AA2650B00A3345E /* helpPanel.png */,
+				314C74571AA264FB00A3345E /* flightStop.png */,
+				314C74551AA264EF00A3345E /* flightStart.png */,
+				314C74531AA264E300A3345E /* turbStop.png */,
+				314C74511AA180CB00A3345E /* downSlider.png */,
+				314C744F1AA16FD600A3345E /* upSlider.png */,
 				316305F21A9B720D0015A90A /* help.png */,
 				CA2E08471A21B28C00B18EF4 /* zoomOut.png */,
 				CA2E08481A21B28C00B18EF4 /* zoomIn.png */,
@@ -850,6 +874,7 @@
 				75CF43FD17F8D34700CCF4F0 /* Default.png in Resources */,
 				75CF43FF17F8D34700CCF4F0 /* Default@2x.png in Resources */,
 				75CF440117F8D34700CCF4F0 /* Default-568h@2x.png in Resources */,
+				314C745A1AA2650B00A3345E /* helpPanel.png in Resources */,
 				75CF440917F8D34700CCF4F0 /* first.png in Resources */,
 				75CF440B17F8D34700CCF4F0 /* first@2x.png in Resources */,
 				75CF441017F8D34700CCF4F0 /* second.png in Resources */,
@@ -868,6 +893,7 @@
 				75B7EB88184C1C9200AB52D0 /* Default-Landscape~ipad.png in Resources */,
 				75B7EB8A184C1C9700AB52D0 /* Default-Landscape@2x~ipad.png in Resources */,
 				BCB97AF919E5EA6000177259 /* MIXED.png in Resources */,
+				314C745C1AA2651200A3345E /* settingPanel.png in Resources */,
 				CAEA69C519D2882300BDD8EA /* MainStoryboard.storyboard in Resources */,
 				75B7EB95184D543A00AB52D0 /* DisplayTAF.xib in Resources */,
 				750559BE18C414F200028670 /* Loading 02.png in Resources */,
@@ -896,6 +922,7 @@
 				BCB97AFA19E5EA6000177259 /* MOD.png in Resources */,
 				CA495DF719FFD6B40010FE13 /* header.png in Resources */,
 				754D1DA1186288E700A88E58 /* -SHRA.png in Resources */,
+				314C74521AA180CB00A3345E /* downSlider.png in Resources */,
 				754D1DA2186288E700A88E58 /* -SHRASN.png in Resources */,
 				CA08E95719D779A6002A098B /* AWC_Login Screen1.png in Resources */,
 				754D1DA3186288E700A88E58 /* -SHSN.png in Resources */,
@@ -926,9 +953,11 @@
 				754D1DB2186288E700A88E58 /* +SHSN.png in Resources */,
 				754D1DB3186288E700A88E58 /* +SHSNRA.png in Resources */,
 				754D1DB4186288E700A88E58 /* +SN.png in Resources */,
+				314C74501AA16FD600A3345E /* upSlider.png in Resources */,
 				754D1DB5186288E700A88E58 /* +SS.png in Resources */,
 				CA2AB74719FF16AB00C624C0 /* map.png in Resources */,
 				CA2AB75319FF308800C624C0 /* hazard.png in Resources */,
+				314C74561AA264EF00A3345E /* flightStart.png in Resources */,
 				CA2E084A1A21B28C00B18EF4 /* zoomOut.png in Resources */,
 				CA495DF519FFD5380010FE13 /* footer.png in Resources */,
 				CA2AB74519FF158A00C624C0 /* pirepSender.png in Resources */,
@@ -963,6 +992,7 @@
 				754D1DCA186288E700A88E58 /* HZ.png in Resources */,
 				754D1DCB186288E700A88E58 /* IC.png in Resources */,
 				754D1DCC186288E700A88E58 /* MIFG.png in Resources */,
+				314C74581AA264FB00A3345E /* flightStop.png in Resources */,
 				754D1DCD186288E700A88E58 /* NULL.png in Resources */,
 				754D1DCE186288E700A88E58 /* PE.png in Resources */,
 				754D1DCF186288E700A88E58 /* PL.png in Resources */,
@@ -973,6 +1003,7 @@
 				754D1DD4186288E700A88E58 /* SA.png in Resources */,
 				754D1DD5186288E700A88E58 /* SG.png in Resources */,
 				754D1DD6186288E700A88E58 /* SH.png in Resources */,
+				314C74541AA264E300A3345E /* turbStop.png in Resources */,
 				754D1DD7186288E700A88E58 /* SHGR.png in Resources */,
 				CA2AB74B19FF1C0400C624C0 /* TabBarBackground.png in Resources */,
 				754D1DD8186288E700A88E58 /* SHGS.png in Resources */,
@@ -991,6 +1022,7 @@
 				756A280318B201BB00100665 /* PinkPin.png in Resources */,
 				CAEA69C719D29DB100BDD8EA /* AWC_Login Screen.png in Resources */,
 				754D1DE2186288E700A88E58 /* TSGS.png in Resources */,
+				314C745E1AA2651900A3345E /* turbStart.png in Resources */,
 				754D1DE3186288E700A88E58 /* TSRA.png in Resources */,
 				754D1DE4186288E700A88E58 /* TSSN.png in Resources */,
 				754D1DE5186288E700A88E58 /* UP.png in Resources */,
@@ -1126,7 +1158,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AWC_App_Milestone01/GA Weather-Prefix.pch";
 				INFOPLIST_FILE = "AWC_App_Milestone01/GA Weather-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				PRODUCT_NAME = "GA Weather";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1144,7 +1176,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AWC_App_Milestone01/GA Weather-Prefix.pch";
 				INFOPLIST_FILE = "AWC_App_Milestone01/GA Weather-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				PRODUCT_NAME = "GA Weather";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;

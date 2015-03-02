@@ -24,6 +24,10 @@
     self.header = [UIImage imageNamed:@"header.png"];
     self.footer = [UIImage imageNamed:@"footer.png"];
     
+    //  Control Panel variables/prperties
+    self.isFilghtOn = NO;
+    self.isTurbOn = NO;
+    
     //Initialize time groups
     self.timeGroups = [[NSMutableArray alloc]initWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7"]];
     [self loadTimeGroups];
@@ -91,6 +95,30 @@
     else
         self.timeGroups = [[NSMutableArray alloc]initWithContentsOfFile:filePath];
 }
+
+- (void)updateTimer
+{
+    NSDate *currentDate = [NSDate date];
+    NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:self.startDate];
+    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    
+    // Create a date formatter
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm:ss.SSS"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
+    
+    // Format the elapsed time and set it to the label
+    self.stopwatchLabel = [dateFormatter stringFromDate:timerDate];
+}
+
+-(void)startTimer{
+    self.stopWatchTimer =  [NSTimer scheduledTimerWithTimeInterval:1.0/10.0 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
+}
+
+
+
+
+
 //edit2014
 //This method obselete.. i.e. This functinality is no more required.
 //This method will retrieve the application password that each user must enter to access this app.

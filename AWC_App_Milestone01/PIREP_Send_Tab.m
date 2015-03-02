@@ -1050,7 +1050,9 @@
     //[self setDefaults];
     
     [self initializeData];
-    
+    if(self.appDelegate.isFilghtOn == NO)
+        NSLog(@"ISFLIGHTON FROM send : NO");
+    else NSLog(@"ISFLIGHTON from send : YES");
 }
 
 //Set button backgrounds to actual color. Not currently in use.

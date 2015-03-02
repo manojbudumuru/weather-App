@@ -23,6 +23,17 @@
 @property UIImage * header;
 @property UIImage * footer;
 
+//  Properties for EDR/ General Control Panel
+@property bool isFilghtOn;
+@property bool isTurbOn;
+@property (strong, nonatomic) NSTimer *stopWatchTimer; // Store the timer that fires after a certain time
+@property (strong, nonatomic) NSDate *startDate; // Stores the date of the click on the start button
+- (void)updateTimer;
+-(void)startTimer;
+@property NSString* stopwatchLabel;
+
+
+
 //To convert a given time to local time
 -(NSString *)convertToLocalTime:(NSString *)serverTime;
 
