@@ -2,7 +2,7 @@
 //  Metar+TTF.h
 //  GA Weather
 //
-//  Created by GA Weather App on 11/19/14.
+//  Created by Syed Mazhar Hussani on 11/19/14.
 //  Copyright (c) 2014 Syed Mazhar. All rights reserved.
 //
 

@@ -2,6 +2,7 @@
 //  FlightInfo.m
 //  AWC_App_Milestone01
 //
+//  Edited by Syed Mazhar Hussani
 //  Created by SATISH KUMAR BASWAPURAM on 10/21/13.
 //  Copyright (c) 2013 Satish Kumar Baswapuram. All rights reserved.
 //
@@ -9,6 +10,7 @@
 #import "FlightInfo.h"
 #import "PIREP_View_Tab.h"
 #import "TabBarVC.h"
+#import "ControlPanelManager.h"
 
 @interface FlightInfo ()
 
@@ -20,6 +22,7 @@
 @property NSString * loginURL;
 @property BOOL fileLoaded;
 @property int selectedRow;
+@property ControlPanelManager *cp;
 
 
 @end
@@ -45,6 +48,8 @@
     self.hasPilotInfo = NO;
     
     self.aircraftTypes = self.appDelegate.aircraftTypes;
+    //  ControlPanelManager
+    self.cp = [ControlPanelManager sharedManager];
     
     self.view.backgroundColor = self.appDelegate.awcColor;
     //[self.header setBarTintColor:self.appDelegate.awcColor];
@@ -216,10 +221,12 @@
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Enter Information" message:@"Last Name cannot be empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
-    else if([self.aircraftType.text isEqualToString:@""])
-    {
+    else if(self.selectedRow == 0){
+        if([self.aircraftType.text isEqualToString:@""])
+        {
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Enter Information" message:@"Aircraft Type cannot be empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
+        }
     }
     else if([self.tailNumber.text isEqualToString:@""])
     {
@@ -248,6 +255,7 @@
         }
         else {
            self.aircraftType.enabled = NO;
+            self.aircraftType.text = self.aircraftTypes[self.selectedRow];
             data = self.aircraftTypes[self.selectedRow];
         }
         NSLog(@"%@",data);
@@ -338,7 +346,11 @@
             NSLog(@"Reply: %@",reply);
             int returnValue = [reply intValue];
             if (returnValue == 1) {
-                [self presentTabs];
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Are you starting your flight now?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                alert.title = @"FlightOn";
+                [alert show];
+                
+                //[self presentTabs];
             }
             else{
                 UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Error!!!" message:@"Boo Hoo!!! Get a valid License First.." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -371,6 +383,20 @@
     {
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"No internet!!" message:@"Make sure you have a working internet connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
+    }
+}
+
+#pragma mark UIAlertView
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    // NO = 0, YES = 1
+    if([alertView.title  isEqual: @"FlightOn"]){
+        if(buttonIndex == 0){
+            self.cp.isFlightOn = YES;
+            self.cp.startDate = [NSDate date];
+            [self.cp startTimer];
+            [self presentTabs];
+        }
+        else [self presentTabs];
     }
 }
 
@@ -447,4 +473,5 @@
     UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Help!" message:@"Please select an aircraft type from picker, if not listed select \"other\" and enter the 3 or 4 character code for your aircraft.\nExample: C182 - Cessna 182\n\t C172 - Cessna 172" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
+
 @end

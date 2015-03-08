@@ -3,6 +3,7 @@
 //  AWC_App_Milestone01
 //
 //  Created by SATISH KUMAR BASWAPURAM on 10/21/13.
+//  Edited by Syed Mazhar Hussani
 //  Copyright (c) 2013 Satish Kumar Baswapuram. All rights reserved.
 //
 
@@ -11,7 +12,7 @@
 
 //This class accepts the flight information which is required before giving, the pilot, access to the PIREP and PIREP Send Tab.
 
-@interface FlightInfo : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface FlightInfo : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate>
 
 
 //Info Labels

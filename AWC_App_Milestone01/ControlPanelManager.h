@@ -21,7 +21,7 @@
 @property (strong, nonatomic) NSDate *startDate; // Stores the date of the click on the start button
 - (void)updateTimer;
 -(void)startTimer;
--(NSString*)stopWatchCall;
+//-(NSString*)stopWatchCall;
 + (id)sharedManager;
 
 @end

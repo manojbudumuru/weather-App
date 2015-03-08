@@ -52,9 +52,11 @@
     self.stopWatchTimer =  [NSTimer scheduledTimerWithTimeInterval:1.0/10.0 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
 }
 
--(NSString*)stopWatchCall{
-    return stopwatch;
-}
+//  No more required
+//-(NSString*)stopWatchCall{
+//    return stopwatch;
+//}
+
 
 
 - (void)dealloc {
