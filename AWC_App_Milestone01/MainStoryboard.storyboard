@@ -768,6 +768,9 @@
                                             <state key="normal" backgroundImage="settingPanel.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <segue destination="N56-em-OBx" kind="modal" id="JuX-0P-Lga"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="x0C-jc-LNm">
                                             <rect key="frame" x="392" y="50" width="77" height="76"/>
@@ -775,6 +778,9 @@
                                             <state key="normal" backgroundImage="helpPanel.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <segue destination="vd9-7V-NKQ" kind="modal" id="5oV-3g-nA1"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00.000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8gS-9V-c25">
                                             <rect key="frame" x="110" y="158" width="293" height="62"/>
@@ -1281,7 +1287,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nLb-hP-E5q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1293" y="-1388"/>
+            <point key="canvasLocation" x="1321" y="-1388"/>
         </scene>
         <!--User ManualVC-->
         <scene sceneID="ClM-HA-69c">
@@ -1327,7 +1333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wje-BP-43Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="514" y="-1388"/>
+            <point key="canvasLocation" x="503" y="-1388"/>
         </scene>
     </scenes>
     <resources>
@@ -1368,4 +1374,8 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="JuX-0P-Lga"/>
+        <segue reference="5oV-3g-nA1"/>
+    </inferredMetricsTieBreakers>
 </document>

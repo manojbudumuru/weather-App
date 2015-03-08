@@ -235,7 +235,7 @@
         lbl2.font = [UIFont fontWithName:@"Weather" size:32.0f];
         lbl2.text =  [pirep ttfEquivalent:pirep.icgInt1 tbLvl:pirep.tbInt1];
         if([lbl2.text  isEqual: @"2"] || [lbl2.text  isEqual: @"8"])
-            lbl2.textColor = [UIColor greenColor];
+            lbl2.textColor = [UIColor colorWithRed:43/255.0 green:172/255.0 blue:49/255.0 alpha:1.0]; //Hex Color #2BAC31
         if([lbl2.text  isEqual: @"4"] || [lbl2.text  isEqual: @":"])
            lbl2.textColor = [UIColor orangeColor];
         if([lbl2.text  isEqual: @"6"] || [lbl2.text  isEqual: @"<"])
@@ -265,7 +265,7 @@
             lbl2.font = [UIFont fontWithName:@"Weather" size:32.0f];
             lbl2.text = [user ttfEquivalent:user.pilotReport];
             if([lbl2.text  isEqual: @"2"] || [lbl2.text  isEqual: @"8"])
-                lbl2.textColor = [UIColor colorWithRed:0 green:255 blue:0 alpha:1];
+                lbl2.textColor = [UIColor colorWithRed:43/255.0 green:172/255.0 blue:49/255.0 alpha:1.0]; //Hex Color #2BAC31
             if([lbl2.text  isEqual: @"4"] || [lbl2.text  isEqual: @":"])
                 lbl2.textColor = [UIColor orangeColor];
             if([lbl2.text  isEqual: @"6"] || [lbl2.text  isEqual: @"<"])
