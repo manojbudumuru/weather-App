@@ -13,7 +13,7 @@
 
 @property NSString * fPath;
 @property NSString * fData;
-
+@property int selectedRow;
 @end
 
 @implementation SettingsVC
@@ -34,9 +34,18 @@
     self.appDelegate = [[UIApplication sharedApplication] delegate];
     
     self.view.backgroundColor = self.appDelegate.awcColor;
-    [self.header setBarTintColor:self.appDelegate.awcColor];
-    [self.header setTintColor:[UIColor whiteColor]];
+//    [self.header setBarTintColor:self.appDelegate.awcColor];
+//    [self.header setTintColor:[UIColor whiteColor]];
+    self.header.translucent = YES;
+    [self.header setBackgroundImage:[UIImage imageNamed:@"tabBar.png"] forBarPosition:UIBarPositionTop barMetrics:UIBarMetricsDefault];
     self.header.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    
+    self.aircraftTypes = self.appDelegate.aircraftTypes;
+    
+    self.aircraftPicker.delegate = self;
+    self.aircraftPicker.dataSource = self;
+    self.selectedRow = 0;
+
     
     self.info = [[NSMutableArray alloc]init];
     
@@ -132,7 +141,50 @@
 
 //Present user manual to the user when this button is clicked.
 - (IBAction)showUserManual:(id)sender {
-    UserManualVC * userManualVC = [self.storyboard instantiateViewControllerWithIdentifier:@"userManualVC"];
+    /*
+     UserManualVC * userManualVC = [self.storyboard instantiateViewControllerWithIdentifier:@"userManualVC"];
     [self presentViewController:userManualVC animated:YES completion:nil];
+     */
 }
+
+- (IBAction)cancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+//  UI Picker methods
+// The number of rows of data
+
+-(int)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+    
+}
+// The data to return for the row and component (column) that's being passed in
+
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSString *title = self.aircraftTypes[row];
+    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],}];
+    
+    return attString;
+    
+}/*
+  -(NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+  return self.aircraftTypes[row];
+  }
+  */
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent: (NSInteger)component
+{
+    return self.aircraftTypes.count;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component{
+    
+    self.selectedRow = row;
+    if(self.selectedRow != 0)
+        self.aircraftType.enabled = NO;
+    else self.aircraftType.enabled = YES;
+    //NSLog(@"Selected Row %d", row);
+}
+
+
 @end

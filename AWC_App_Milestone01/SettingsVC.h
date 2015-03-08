@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 
-@interface SettingsVC : UIViewController <UITextFieldDelegate>
+@interface SettingsVC : UIViewController <UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITextField *name;
 @property (strong, nonatomic) IBOutlet UITextField *aircraftType;
@@ -20,9 +20,13 @@
 - (IBAction)saveData:(id)sender;
 @property AppDelegate * appDelegate;
 @property NSMutableArray * info;
+@property NSMutableArray* aircraftTypes;
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *header;
 
 - (IBAction)showUserManual:(id)sender;
+- (IBAction)cancel:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIPickerView *aircraftPicker;
 
 @end

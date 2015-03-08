@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="MwV-zy-yQH">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
@@ -87,6 +86,9 @@
                                             <state key="normal" backgroundImage="turbStart.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="turbAction:" destination="2" eventType="touchUpInside" id="thV-11-cFe"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="11R-R9-SOq">
                                             <rect key="frame" x="273" y="50" width="77" height="76"/>
@@ -94,6 +96,9 @@
                                             <state key="normal" backgroundImage="settingPanel.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <segue destination="N56-em-OBx" kind="modal" id="2Yh-jL-3n7"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FT5-YA-ld7">
                                             <rect key="frame" x="392" y="50" width="77" height="76"/>
@@ -101,6 +106,9 @@
                                             <state key="normal" backgroundImage="helpPanel.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <segue destination="vd9-7V-NKQ" kind="modal" id="FaS-k3-7kv"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00.000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HXR-Hy-I3O">
                                             <rect key="frame" x="110" y="158" width="293" height="62"/>
@@ -110,13 +118,23 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wVu-sw-Ixl">
-                                            <rect key="frame" x="41" y="129" width="77" height="76"/>
+                                            <rect key="frame" x="41" y="50" width="77" height="76"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" backgroundImage="flightStop.png">
+                                            <state key="normal" backgroundImage="flightStopRed.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
                                                 <action selector="flightOnAction:" destination="2" eventType="touchUpInside" id="vcn-5B-NLR"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="C2B-hm-Z17">
+                                            <rect key="frame" x="155" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="turbStopRed.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="turbAction:" destination="2" eventType="touchUpInside" id="hvd-JN-fja"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -148,6 +166,8 @@
                         <outlet property="loadingImage" destination="uz0-dX-RY5" id="eYe-cO-OIM"/>
                         <outlet property="panel" destination="Ot8-nq-fsI" id="OLH-hM-X1c"/>
                         <outlet property="stopWatchLBL" destination="HXR-Hy-I3O" id="vQy-94-fEn"/>
+                        <outlet property="turbOff" destination="C2B-hm-Z17" id="RYH-ux-Lw2"/>
+                        <outlet property="turbOn" destination="JPB-se-P8G" id="GaX-uI-qlX"/>
                         <outlet property="zoom" destination="adZ-HT-og8" id="pkJ-AF-2Tn"/>
                     </connections>
                 </viewController>
@@ -417,7 +437,6 @@
                         <segue destination="F7c-XD-sgH" kind="relationship" relationship="viewControllers" id="wcf-1j-0Tf"/>
                         <segue destination="zHb-Cp-mOo" kind="relationship" relationship="viewControllers" id="zzu-Kj-Aig"/>
                         <segue destination="rq7-jr-d2g" kind="relationship" relationship="viewControllers" id="aex-uZ-9gV"/>
-                        <segue destination="N56-em-OBx" kind="relationship" relationship="viewControllers" id="AoV-kD-vRt"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
@@ -441,7 +460,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PJj-M2-t2w">
-                                <rect key="frame" x="440" y="905" width="121" height="48"/>
+                                <rect key="frame" x="440" y="875" width="121" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="CANCEL.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -451,7 +470,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iLV-zq-cHZ">
-                                <rect key="frame" x="208" y="905" width="122" height="48"/>
+                                <rect key="frame" x="208" y="875" width="122" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="SEND.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -462,17 +481,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="barTintColor" red="0.96195652170000001" green="0.96195652170000001" blue="0.96195652170000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
-                                    <navigationItem title="PIREP Send" id="zFJ-Aj-B4d">
-                                        <barButtonItem key="rightBarButtonItem" title="Edit Flight Information" id="faj-Z7-8Xo">
-                                            <connections>
-                                                <segue destination="1BX-o1-zqH" kind="modal" id="G0a-06-csj"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
+                                    <navigationItem title="PIREP Send" id="zFJ-Aj-B4d"/>
                                 </items>
                             </navigationBar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ej3-Pu-Vmn">
-                                <rect key="frame" x="20" y="843" width="728" height="21"/>
+                                <rect key="frame" x="20" y="830" width="728" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -709,6 +722,103 @@
                                 <color key="textColor" red="0.066666670139999995" green="0.55686277149999996" blue="0.85098046059999999" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" id="ZRc-rN-Bei">
+                                <rect key="frame" x="129" y="707" width="512" height="267"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="0wM-8E-EhB">
+                                    <rect key="frame" x="0.0" y="0.0" width="512" height="267"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3g1-Lq-y58">
+                                            <rect key="frame" x="0.0" y="0.0" width="512" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="downSlider.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="controlPanel:" destination="2" eventType="touchUpInside" id="x5r-iY-2rl"/>
+                                                <action selector="controlPanelDown:" destination="2" eventType="touchUpInside" id="7yR-Os-aSm"/>
+                                                <action selector="controlPanelDown:" destination="Loh-VZ-QkP" eventType="touchUpInside" id="9bK-ki-5AI"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ESh-Ox-4CJ">
+                                            <rect key="frame" x="41" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="flightStart.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="flightOnAction:" destination="Loh-VZ-QkP" eventType="touchUpInside" id="uPp-L4-JmW"/>
+                                                <action selector="flightOnAction:" destination="2" eventType="touchUpInside" id="yWq-8E-lKQ"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hDb-iq-PuM">
+                                            <rect key="frame" x="155" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="turbStart.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="turbAction:" destination="Loh-VZ-QkP" eventType="touchUpInside" id="auT-YH-VXh"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CUs-G2-tGU">
+                                            <rect key="frame" x="273" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="settingPanel.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="x0C-jc-LNm">
+                                            <rect key="frame" x="392" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="helpPanel.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00.000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8gS-9V-c25">
+                                            <rect key="frame" x="110" y="158" width="293" height="62"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="44"/>
+                                            <color key="textColor" red="0.30893905389999998" green="0.30893905389999998" blue="0.30893905389999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cDT-3c-VW7">
+                                            <rect key="frame" x="41" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="flightStopRed.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="flightOnAction:" destination="Loh-VZ-QkP" eventType="touchUpInside" id="Ahi-1x-lTK"/>
+                                                <action selector="flightOnAction:" destination="2" eventType="touchUpInside" id="eUT-hT-3S6"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WXa-Lo-dbe">
+                                            <rect key="frame" x="155" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="turbStopRed.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="turbAction:" destination="Loh-VZ-QkP" eventType="touchUpInside" id="Ip5-I2-1B5"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="RhF-fv-w5M">
+                                <rect key="frame" x="128" y="946" width="513" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="upSlider.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="controlPanel:" destination="Loh-VZ-QkP" eventType="touchUpInside" id="NCf-Bi-hsG"/>
+                                    <action selector="controlPanel:" destination="2" eventType="touchUpInside" id="Yit-Gz-BMf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96195652173913038" green="0.96195652173913038" blue="0.96195652173913038" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -718,6 +828,9 @@
                         <outlet property="chopLM" destination="ctc-OA-xtd" id="Hvd-yK-e8a"/>
                         <outlet property="chopMS" destination="w0d-RB-qZQ" id="muN-UL-Gp7"/>
                         <outlet property="clear" destination="Obe-1a-FRI" id="n1c-Sk-gFu"/>
+                        <outlet property="controlUp" destination="RhF-fv-w5M" id="vQ3-TZ-MRX"/>
+                        <outlet property="flightOff" destination="cDT-3c-VW7" id="6zP-ee-u3y"/>
+                        <outlet property="flightOn" destination="ESh-Ox-4CJ" id="QG5-on-YD2"/>
                         <outlet property="greaterChop" destination="c1A-yI-V2y" id="cEg-yG-mcX"/>
                         <outlet property="greaterIce" destination="4qc-PJ-NHV" id="tnU-gM-JxB"/>
                         <outlet property="greaterMtn" destination="9CL-hy-GqJ" id="fyL-p8-nOI"/>
@@ -741,12 +854,16 @@
                         <outlet property="noIce" destination="U2Z-26-EEZ" id="Jj9-2s-c7I"/>
                         <outlet property="noMtn" destination="9jz-Yh-3az" id="3Ku-pT-A5G"/>
                         <outlet property="noTurb" destination="lP5-UE-cnK" id="rcC-ja-ana"/>
+                        <outlet property="panel" destination="ZRc-rN-Bei" id="hTY-6T-aeh"/>
                         <outlet property="pirepSelected" destination="Ej3-Pu-Vmn" id="PSX-Xb-UPL"/>
                         <outlet property="rime" destination="Ha3-9z-Hqa" id="TCq-aw-nCV"/>
                         <outlet property="sendPirep" destination="iLV-zq-cHZ" id="59a-Z6-ymS"/>
+                        <outlet property="stopWatchLBL" destination="8gS-9V-c25" id="sY5-cs-9sE"/>
                         <outlet property="trace" destination="976-As-l9z" id="0Wj-1V-5MZ"/>
                         <outlet property="turbLM" destination="ozJ-4C-NQy" id="ZZd-Wu-krK"/>
                         <outlet property="turbMS" destination="EHw-OC-a5l" id="Qjk-3O-JLa"/>
+                        <outlet property="turbOff" destination="WXa-Lo-dbe" id="AXg-4J-04M"/>
+                        <outlet property="turbOn" destination="hDb-iq-PuM" id="EBv-b8-JeL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wtR-Dz-usq" sceneMemberID="firstResponder"/>
@@ -761,27 +878,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="9jX-YS-8Lr">
-                                <rect key="frame" x="0.0" y="64" width="768" height="960"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Welcome to General Aviation Weather App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="w8l-fl-DlD">
-                                        <rect key="frame" x="104" y="20" width="561" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Please fill in the following information to complete your setup" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RE6-gD-Gx3">
-                                        <rect key="frame" x="113" y="73" width="542" height="41"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kfg-4E-ghH">
                                 <rect key="frame" x="176" y="262" width="185" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -871,6 +967,27 @@
                                     <action selector="cancel:" destination="1BX-o1-zqH" eventType="touchUpInside" id="CCG-AU-cSV"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" id="9jX-YS-8Lr">
+                                <rect key="frame" x="40" y="118" width="768" height="960"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Welcome to General Aviation Weather App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="w8l-fl-DlD">
+                                        <rect key="frame" x="104" y="20" width="561" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Please fill in the following information to complete your setup" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RE6-gD-Gx3">
+                                        <rect key="frame" x="113" y="73" width="542" height="41"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                     </view>
                     <navigationItem key="navigationItem" id="lGa-Bf-bM7"/>
@@ -885,7 +1002,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xEB-NX-de6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="558" y="996"/>
+            <point key="canvasLocation" x="1384" y="-148"/>
         </scene>
         <!--HAZARDS-->
         <scene sceneID="0Q6-2k-szX">
@@ -954,7 +1071,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBg-H5-sKZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1438" y="996"/>
+            <point key="canvasLocation" x="498" y="996"/>
         </scene>
         <!--METARS-->
         <scene sceneID="fYK-vn-cjp">
@@ -1043,6 +1160,10 @@
                                 <rect key="frame" x="0.0" y="64" width="768" height="910"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AWC_Login Screen.png" id="rn1-zQ-cdg">
+                                        <rect key="frame" x="0.0" y="-31" width="768" height="972"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bWq-Oq-cUY">
                                         <rect key="frame" x="312" y="839" width="144" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1055,85 +1176,87 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Welcome to General Aviation Weather App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1hd-uq-MAO">
-                                        <rect key="frame" x="104" y="20" width="561" height="45"/>
+                                        <rect key="frame" x="88" y="22" width="649" height="66"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="STHeitiTC-Medium" family="Heiti TC" pointSize="30"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Please fill in the following information to modify your details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n9V-Qa-nGb">
+                                        <rect key="frame" x="113" y="67" width="598" height="53"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="20"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="center" minimumFontSize="17" id="8kz-xG-ymI">
+                                        <rect key="frame" x="193" y="163" width="179" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Aircraft Type" textAlignment="center" minimumFontSize="17" id="fmu-So-i04">
+                                        <rect key="frame" x="193" y="242" width="179" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tail Number" textAlignment="center" minimumFontSize="17" id="sdF-rO-UFp">
+                                        <rect key="frame" x="193" y="327" width="179" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="License Number" textAlignment="center" minimumFontSize="17" id="sUk-EV-hYm">
+                                        <rect key="frame" x="407" y="327" width="179" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="center" minimumFontSize="17" id="JJu-tZ-Cd0">
+                                        <rect key="frame" x="407" y="163" width="179" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ocj-cu-79F">
+                                        <rect key="frame" x="199" y="373" width="370" height="300"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Please fill in the following information to complete your setup" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n9V-Qa-nGb">
-                                        <rect key="frame" x="113" y="73" width="542" height="41"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Xdg-fH-1Te">
+                                        <rect key="frame" x="231" y="381" width="164" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" red="1" green="0.92371771092358368" blue="0.0068243145779380843" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveData:" destination="N56-em-OBx" eventType="touchUpInside" id="jdl-KF-0BF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cXN-IZ-xtX">
+                                        <rect key="frame" x="373" y="381" width="164" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="1" green="0.92371771089999999" blue="0.006824314578" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancel:" destination="N56-em-OBx" eventType="touchUpInside" id="eJL-Mo-hYO"/>
+                                        </connections>
+                                    </button>
+                                    <pickerView contentMode="scaleToFill" id="M6d-1s-vOS">
+                                        <rect key="frame" x="420" y="184" width="153" height="155"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    </pickerView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QPd-NP-Seg">
-                                <rect key="frame" x="176" y="223" width="185" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Aircraft Type:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="THf-cs-5MF">
-                                <rect key="frame" x="176" y="272" width="185" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tail Number:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dL2-t1-W2p">
-                                <rect key="frame" x="176" y="322" width="185" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="8kz-xG-ymI">
-                                <rect key="frame" x="413" y="219" width="179" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="fmu-So-i04">
-                                <rect key="frame" x="413" y="268" width="179" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="sdF-rO-UFp">
-                                <rect key="frame" x="413" y="318" width="179" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Xdg-fH-1Te">
-                                <rect key="frame" x="302" y="442" width="164" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Save">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="saveData:" destination="N56-em-OBx" eventType="touchUpInside" id="jdl-KF-0BF"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="License:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7hq-3h-hX5">
-                                <rect key="frame" x="176" y="372" width="64" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="sUk-EV-hYm">
-                                <rect key="frame" x="413" y="368" width="179" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <navigationBar contentMode="scaleToFill" translucent="NO" id="hOP-gy-hu7">
                                 <rect key="frame" x="0.0" y="20" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -1142,18 +1265,12 @@
                                     <navigationItem title="Flight Information" id="PJs-ko-3tf"/>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ocj-cu-79F">
-                                <rect key="frame" x="199" y="439" width="370" height="300"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="first.png" id="MJA-5j-WbW"/>
                     <connections>
+                        <outlet property="aircraftPicker" destination="M6d-1s-vOS" id="mPi-S1-3NN"/>
                         <outlet property="aircraftType" destination="fmu-So-i04" id="Cb3-YM-8WM"/>
                         <outlet property="existingInfo" destination="Ocj-cu-79F" id="UVy-de-jRg"/>
                         <outlet property="header" destination="hOP-gy-hu7" id="eHY-YC-7gK"/>
@@ -1164,7 +1281,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nLb-hP-E5q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="558" y="2152"/>
+            <point key="canvasLocation" x="1293" y="-1388"/>
         </scene>
         <!--User ManualVC-->
         <scene sceneID="ClM-HA-69c">
@@ -1210,10 +1327,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wje-BP-43Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1438" y="2152"/>
+            <point key="canvasLocation" x="514" y="-1388"/>
         </scene>
     </scenes>
     <resources>
+        <image name="AWC_Login Screen.png" width="768" height="1004"/>
         <image name="AWC_Login Screen1.png" width="768" height="1004"/>
         <image name="CANCEL.png" width="552" height="200"/>
         <image name="CLEAR.png" width="344" height="200"/>
@@ -1233,7 +1351,7 @@
         <image name="email.png" width="30" height="30"/>
         <image name="first.png" width="30" height="30"/>
         <image name="flightStart.png" width="74" height="74"/>
-        <image name="flightStop.png" width="74" height="74"/>
+        <image name="flightStopRed.png" width="74" height="74"/>
         <image name="hazard.png" width="30" height="30"/>
         <image name="help.png" width="256" height="256"/>
         <image name="helpPanel.png" width="74" height="74"/>
@@ -1242,6 +1360,7 @@
         <image name="plane_4.png" width="30" height="30"/>
         <image name="settingPanel.png" width="74" height="74"/>
         <image name="turbStart.png" width="74" height="74"/>
+        <image name="turbStopRed.png" width="74" height="74"/>
         <image name="upSlider.png" width="640" height="45"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

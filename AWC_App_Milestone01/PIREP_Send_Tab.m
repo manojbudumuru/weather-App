@@ -7,6 +7,7 @@
 //
 
 #import "PIREP_Send_Tab.h"
+#import "ControlPanelManager.h"
 
 #define PIREP_CONFIRMATION_TAG 524
 
@@ -42,6 +43,7 @@
 @property NSString * locationLongitude;
 @property NSString * pilotReport;
 @property NSString * pageURL;
+@property ControlPanelManager *cp;
 
 
 @end
@@ -53,9 +55,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    //Control Panel Transperancy
+    self.cp = [ControlPanelManager sharedManager];
+    self.panel.alpha = 0.6;
     
-    
-    
+}
+
+//Change the background of the view and header to reflect the theme of the application. Update the time label.
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self controlPanelLoad];
 }
 
 //Initialize the data after the view appears to enable faster switching between tabs.
@@ -69,7 +79,7 @@
 {
     //[self setDefaults];
     
-    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    
     
     self.view.backgroundColor = self.appDelegate.awcColor;
     [self.header setBarTintColor:self.appDelegate.awcColor];
@@ -1050,9 +1060,6 @@
     //[self setDefaults];
     
     [self initializeData];
-    if(self.appDelegate.isFilghtOn == NO)
-        NSLog(@"ISFLIGHTON FROM send : NO");
-    else NSLog(@"ISFLIGHTON from send : YES");
 }
 
 //Set button backgrounds to actual color. Not currently in use.
@@ -1133,4 +1140,90 @@
 //{
 //    self.presentPirep = self.pirepSelected.text;
 //}
+
+//  Code for Control Panel
+
+//  Setting Control Panel Properties
+- (void)controlPanelLoad{
+    self.panel.hidden = YES;
+    self.controlUp.hidden = NO;
+    if(self.cp.isFlightOn == NO){
+        self.flightOn.hidden = NO;
+        self.flightOff.hidden = YES;
+    }
+    else {
+        self.flightOn.hidden = YES;
+        self.flightOff.hidden = NO;
+    }
+    
+    if (self.cp.isTurbOn) {
+        self.turbOff.hidden = NO;
+        self.turbOn.hidden = YES;
+    }
+    else{
+        self.turbOff.hidden = YES;
+        self.turbOn.hidden = NO;
+    }
+}
+- (IBAction)controlPanel:(id)sender {
+    self.panel.hidden = NO;
+    self.controlUp.hidden = YES;
+    [self updateTimerLabel];
+    
+}
+- (IBAction)flightOnAction:(id)sender {
+    
+    if(self.flightOn.hidden){
+        self.cp.isFlightOn = NO;
+        self.flightOff.hidden = YES;
+        self.flightOn.hidden = NO;
+        
+        if (self.turbOn.hidden) {
+            self.turbOff.hidden = YES;
+            self.turbOn.hidden = NO;
+            self.cp.isTurbOn = NO;
+        }
+        [self.cp.stopWatchTimer invalidate];
+        self.cp.stopWatchTimer = nil;
+        [self updateTimerLabel];
+    }
+    else{
+        self.cp.isFlightOn = YES;
+        self.flightOff.hidden = NO;
+        self.flightOn.hidden = YES;
+        self.cp.startDate = [NSDate date];
+        [self.cp startTimer];
+        [self updateTimerLabel];
+    }
+}
+
+- (IBAction)turbAction:(id)sender {
+    
+    if (self.cp.isFlightOn) {
+        if(self.turbOn.hidden){
+            self.cp.isTurbOn = NO;
+            self.turbOff.hidden = YES;
+            self.turbOn.hidden = NO;
+        }
+        else {
+            self.cp.isTurbOn = YES;
+            self.turbOn.hidden = YES;
+            self.turbOff.hidden = NO;
+        }
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Turbulence can be only activated if the flight data is being recorded, So switch on Flight Recorder first." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+-(void)updateTimerLabel{
+    self.stopWatchLBL.text = self.cp.stopwatch;//self.appDelegate.stopWatchCall;//self.appDelegate.stopwatchLabel;
+    [self performSelector:@selector(updateTimerLabel) withObject:self afterDelay:0.1];
+}
+
+- (IBAction)controlPanelDown:(id)sender {
+    self.controlUp.hidden = NO;
+    self.panel.hidden = YES;
+}
+
 @end

@@ -35,9 +35,16 @@
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *panel;
 - (IBAction)controlPanel:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *controlUp;
+
+// Properties/Action Events for Flight Status
 @property (weak, nonatomic) IBOutlet UIButton *flightOn;
 - (IBAction)flightOnAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *flightOff;
+
+//  Properties/Action Events for Turb Flag
+- (IBAction)turbAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *turbOff;
+@property (weak, nonatomic) IBOutlet UIButton *turbOn;
 
 @property (weak, nonatomic) IBOutlet UILabel *stopWatchLBL;
 

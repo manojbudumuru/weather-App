@@ -12,6 +12,7 @@
 #import "UserPirep.h"
 #import <CoreLocation/CoreLocation.h>
 #import "AppDelegate.h"
+#import "ControlPanelManager.h"
 
 @interface PIREP_View_Tab ()
 
@@ -24,6 +25,7 @@
 @property double longIn;
 @property MKCoordinateRegion beforeZoom;//edit2014
 @property int check;
+@property ControlPanelManager *cp;
 
 
 @end
@@ -48,8 +50,10 @@
     [self.locationManager startUpdatingLocation];
     self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
     //edit2014
-    
+    //Control Panel Transperancy
+    self.cp = [ControlPanelManager sharedManager];
     self.panel.alpha = 0.6;
+    
     self.button = [UIImage imageNamed:@"zoomIn.png"];
     [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
     [self.zoom addTarget:self action:@selector(zoomIn) forControlEvents:UIControlEventTouchUpInside];
@@ -67,6 +71,7 @@
 
     //  Loading control Panel
     [self controlPanelLoad];
+    
     [self.header setBackgroundImage:appDelegate.header forBarPosition:UIBarPositionTop barMetrics:UIBarMetricsDefault];
     self.view.backgroundColor = appDelegate.awcColor;
     [self.header setBarTintColor:appDelegate.awcColor];
@@ -412,32 +417,83 @@
 - (void)controlPanelLoad{
     self.panel.hidden = YES;
     self.controlUp.hidden = NO;
-    if(self.appDelegate.isFilghtOn == NO)
-        NSLog(@"ISFLIGHTON : NO");
-    else NSLog(@"ISFLIGHTON : YES");
+    if(self.cp.isFlightOn == NO){
+        self.flightOn.hidden = NO;
+        self.flightOff.hidden = YES;
+    }
+    else {
+        self.flightOn.hidden = YES;
+        self.flightOff.hidden = NO;
+    }
+    
+    if (self.cp.isTurbOn) {
+        self.turbOff.hidden = NO;
+        self.turbOn.hidden = YES;
+    }
+    else{
+        self.turbOff.hidden = YES;
+        self.turbOn.hidden = NO;
+    }
 }
 - (IBAction)controlPanel:(id)sender {
     self.panel.hidden = NO;
     self.controlUp.hidden = YES;
+    [self updateTimerLabel];
+
 }
 - (IBAction)flightOnAction:(id)sender {
-    //self.appDelegate.isFilghtOn = YES;
-    self.flightOff.hidden = NO;
-    if(self.appDelegate.isFilghtOn == NO){
-    self.appDelegate.startDate = [NSDate date];
     
-    // Create the stop watch timer that fires every 100 ms
-        [self.appDelegate startTimer];
-        self.stopWatchLBL.text = self.appDelegate.stopwatchLabel;
+    if(self.flightOn.hidden){
+        self.cp.isFlightOn = NO;
+        self.flightOff.hidden = YES;
+        self.flightOn.hidden = NO;
+        
+        if (self.turbOn.hidden) {
+            self.turbOff.hidden = YES;
+            self.turbOn.hidden = NO;
+            self.cp.isTurbOn = NO;
+        }
+        [self.cp.stopWatchTimer invalidate];
+        self.cp.stopWatchTimer = nil;
+        [self updateTimerLabel];
+    }
+    else{
+        self.cp.isFlightOn = YES;
+        self.flightOff.hidden = NO;
+        self.flightOn.hidden = YES;
+        self.cp.startDate = [NSDate date];
+        [self.cp startTimer];
+        [self updateTimerLabel];
     }
 }
 
-
-
-
+- (IBAction)turbAction:(id)sender {
+    
+    if (self.cp.isFlightOn) {
+        if(self.turbOn.hidden){
+            self.cp.isTurbOn = NO;
+            self.turbOff.hidden = YES;
+            self.turbOn.hidden = NO;
+        }
+        else {
+            self.cp.isTurbOn = YES;
+            self.turbOn.hidden = YES;
+            self.turbOff.hidden = NO;
+        }
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Turbulence can be only activated if the flight data is being recorded, So switch on Flight Recorder first." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+-(void)updateTimerLabel{
+    self.stopWatchLBL.text = self.cp.stopwatch;//self.appDelegate.stopWatchCall;//self.appDelegate.stopwatchLabel;
+    [self performSelector:@selector(updateTimerLabel) withObject:self afterDelay:0.1];
+}
 
 - (IBAction)controlPanelDown:(id)sender {
     self.controlUp.hidden = NO;
     self.panel.hidden = YES;
 }
+
 @end

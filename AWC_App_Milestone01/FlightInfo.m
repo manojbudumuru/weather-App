@@ -44,7 +44,7 @@
     self.info = [[NSMutableArray alloc]init];
     self.hasPilotInfo = NO;
     
-    self.aircraftTypes = [[NSMutableArray alloc]initWithArray:@[@"Other",@"A306",@"A30B",@"A310",@"A318",@"A319",@"A320",@"A321",@"A332",@"A333",@"A343",@"A345",@"A346",@"A388",@"A3ST",@"AT43",@"AT45",@"AT72",@"AT73",@"AT75",@"ATP",@"B462",@"B703",@"B712",@"B722",@"B732",@"B733",@"B734",@"B735",@"B736",@"B737",@"B738",@"B739",@"B742",@"B743",@"B744",@"B752",@"B753",@"B762",@"B763",@"B764",@"B772",@"B773",@"B77L",@"B77W",@"",@"BA11",@"BE20",@"BE58",@"BE99",@"BE9L",@"C130",@"C160",@"C172",@"182",@"C421",@"C510",@"C550",@"C560",@"C56X",@"C750",@"CL60",@"CRJ1",@"CRJ2",@"CRJ9",@"D228",@"D328",@"DA42",@"DC10",@"DC87",@"DC94",@"DH8A",@"DH8C",@"DH8D",@"E120",@"E135",@"E145",@"E170",@"E190",@"E50P",@"E55P",@"EA50",@"F100",@"F27",@"F28",@"F2TH",@"F50",@"F70",@"F900",@"FA10",@"FA20",@"FA50",@"FA7X",@"FGTH",@"FGTL",@"FGTN",@"H25A",@"JS32",@"JS41",@"L101",@"LJ35",@"LJ45",@"MD11",@"MD82",@"MD83",@"MU2",@"P28A",@"PA27",@"PA31",@"PA34",@"PAY2",@"PAY3",@"RJ85",@"SB20",@"SF34",@"SH36",@"SW4",@"T134",@"T154",@"TBM7",@"TRIN"]];
+    self.aircraftTypes = self.appDelegate.aircraftTypes;
     
     self.view.backgroundColor = self.appDelegate.awcColor;
     //[self.header setBarTintColor:self.appDelegate.awcColor];
