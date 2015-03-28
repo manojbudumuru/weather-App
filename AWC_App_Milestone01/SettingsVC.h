@@ -12,11 +12,13 @@
 
 @interface SettingsVC : UIViewController <UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 
-@property (strong, nonatomic) IBOutlet UITextField *name;
+@property (weak, nonatomic) IBOutlet UITextField *lName;
+@property (strong, nonatomic) IBOutlet UITextField *fName;
 @property (strong, nonatomic) IBOutlet UITextField *aircraftType;
 @property (strong, nonatomic) IBOutlet UITextField *tailNumber;
 @property (strong, nonatomic) IBOutlet UITextField *license;
 @property (strong, nonatomic) IBOutlet UILabel *existingInfo;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTF;
 
 - (IBAction)saveData:(id)sender;
 @property AppDelegate * appDelegate;

@@ -15,6 +15,7 @@
 @property NSString * fPath;
 @property NSString * fData;
 @property int selectedRow;
+@property NSString* oldPassword;
 @end
 
 @implementation SettingsVC
@@ -62,8 +63,9 @@
     self.existingInfo.numberOfLines = 6;
     self.existingInfo.lineBreakMode = NSLineBreakByWordWrapping;
     
-    self.existingInfo.text = [NSString stringWithFormat:@"Existing information:\n\n%@ %@ %@\n%@ %@\n%@ %@\n%@ %@",@"Name:",data[0],data[1],@"Aircraft Type:",data[2],@"Tail Number:",data[3],@"License:",data[4]];
+    self.existingInfo.text = [NSString stringWithFormat:@"Existing information:\n\n%@ %@ %@\n%@ %@\n%@ %@",@"Name:",data[0],data[1],@"Aircraft Type:",data[2],@"Tail Number:",data[3]];//,@"License:",data[4]];
     
+    self.passwordTF.text = self.oldPassword = data[5];
 	// Do any additional setup after loading the view.
 }
 
@@ -74,7 +76,8 @@
 }
 
 - (void)viewDidUnload {
-    [self setName:nil];
+    [self setFName:nil];
+    [self setLName:nil];
     [self setAircraftType:nil];
     [self setTailNumber:nil];
     [self setLicense:nil];
@@ -85,15 +88,22 @@
 //Save the pilot information if all the fields are filled and present the tabs. Else, display an alert.
 - (IBAction)saveData:(id)sender {
     
-    if([self.name.text isEqualToString:@""])
+    if([self.fName.text isEqualToString:@""])
     {
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Enter Information" message:@"Name cannot be empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
-    else if([self.aircraftType.text isEqualToString:@""])
+    else if([self.lName.text isEqualToString:@""])
     {
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Enter Information" message:@"Aircraft Type cannot be empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Enter Information" message:@"Last Name cannot be empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
+    }
+    else if(self.selectedRow == 0){
+        if([self.aircraftType.text isEqualToString:@""])
+        {
+            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Enter Information" message:@"Aircraft Type cannot be empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
     }
     else if([self.tailNumber.text isEqualToString:@""])
     {
@@ -105,18 +115,35 @@
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Enter Information" message:@"License cannot be empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
+    else if([self.passwordTF.text isEqualToString:@""])
+    {
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Enter Information" message:@"Please enter correct password" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
     else
     {
-        NSString * data = self.name.text;
+        NSString * data = self.fName.text;
         [self.info addObject:data];
-        data = self.aircraftType.text;
+        data = self.lName.text;
+        [self.info addObject:data];
+        if (self.selectedRow == 0) {
+            self.aircraftType.enabled = YES;
+            data = self.aircraftType.text;
+        }
+        else {
+            self.aircraftType.enabled = NO;
+            self.aircraftType.text = self.aircraftTypes[self.selectedRow];
+            data = self.aircraftTypes[self.selectedRow];
+        }
         [self.info addObject:data];
         data = self.tailNumber.text;
         [self.info addObject:data];
         data = self.license.text;
         [self.info addObject:data];
+        data = self.passwordTF.text;
+        [self.info addObject:data];
         
-        self.fData = [NSString stringWithFormat:@"%@_%@_%@_%@",self.name.text,self.aircraftType.text,self.tailNumber.text,self.license.text];
+        self.fData = [NSString stringWithFormat:@"%@_%@_%@_%@_%@_%@",self.fName.text,self.lName.text,self.aircraftType.text,self.tailNumber.text,self.license.text,self.passwordTF.text];
         [self.fData writeToFile:self.fPath atomically:NO encoding:NSUTF8StringEncoding error:nil];
         
         self.appDelegate.flightInformation = self.info;
@@ -139,15 +166,14 @@
     }
     [super touchesBegan:touches withEvent:event];
 }
-
+/*
 //Present user manual to the user when this button is clicked.
 - (IBAction)showUserManual:(id)sender {
-    /*
      UserManualVC * userManualVC = [self.storyboard instantiateViewControllerWithIdentifier:@"userManualVC"];
     [self presentViewController:userManualVC animated:YES completion:nil];
-     */
+ 
 }
-
+*/
 - (IBAction)cancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

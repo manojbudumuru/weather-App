@@ -13,7 +13,7 @@
 	<key>CFBundleIcons~ipad</key>
 	<dict/>
 	<key>CFBundleIdentifier</key>
-	<string>com.satishchinna.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.satishchinna.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -58,5 +58,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>GA Weather would like to use your location.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>GA Weather would like to use your location.</string>
 </dict>
 </plist>

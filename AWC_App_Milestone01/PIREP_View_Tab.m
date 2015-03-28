@@ -40,27 +40,38 @@
     
 
     //Setting map type and delegate
-    _displayMap.mapType = MKMapTypeStandard;
+    
     self.displayMap.delegate = self;
     self.locationManager = [[CLLocationManager alloc]init];
     self.locationManager.delegate = self;
     
     self.appDelegate = [UIApplication sharedApplication].delegate;
 
-    [self.locationManager requestAlwaysAuthorization];
+    // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+#ifdef __IPHONE_8_0
+    if(IS_OS_8_OR_LATER) {
+        // Use one or the other, not both. Depending on what you put in info.plist
+        //[self.locationManager requestWhenInUseAuthorization];
+        [self.locationManager requestAlwaysAuthorization];
+    }
+#endif
     [self.locationManager startUpdatingLocation];
     self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
     //edit2014
-    //Control Panel Transperancy
-    self.cp = [ControlPanelManager sharedManager];
-    self.panel.alpha = 0.6;
+
     
-    self.button = [UIImage imageNamed:@"zoomIn.png"];
+    
+    self.button = [UIImage imageNamed:@"zoomingin.png"];
     [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
     [self.zoom addTarget:self action:@selector(zoomIn) forControlEvents:UIControlEventTouchUpInside];
     
+    _displayMap.mapType = MKMapTypeStandard;
     self.displayMap.showsUserLocation = YES;
+    
     self.check = 0;
+    //Control Panel Transperancy
+    self.cp = [ControlPanelManager sharedManager];
+    self.panel.alpha = 0.6;
     //edit2014 end
 }
 
@@ -69,7 +80,7 @@
 {
     AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
     //self.view.backgroundColor = [UIColor colorWithRed:1/255.0 green:132/255.0 blue:144/255.0 alpha:1.0];
-
+    
     //  Loading control Panel
     [self controlPanelLoad];
     
@@ -84,6 +95,8 @@
 //Load PIREPs after the view has appeared so that the user can switch faster between the tabs.
 -(void)viewDidAppear:(BOOL)animated
 {
+    //Location Update code edit2014
+    //edit2014 end
     self.mapLoaded = NO;
     self.annotationsAdded = NO;
     [self initializeData];
@@ -176,6 +189,7 @@
 //Display a popover when a PIREP is clicked. The popover contains the details of the PIREP listed in a table format.
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
+    
     if([view.annotation isKindOfClass:[Pirep class]])
     {
         [self.displayMap deselectAnnotation:view.annotation animated:YES];
@@ -210,6 +224,9 @@
 -(MKAnnotationView *)mapView:(MKMapView *)sender viewForAnnotation:(id<MKAnnotation>)annotation
 {
     static NSString * identifier = @"Annotation";
+    
+    if ([annotation isKindOfClass:[MKUserLocation class]])
+        return nil;  //return nil to use default blue dot view
     
     if([annotation isKindOfClass:[Pirep class]])
         identifier = @"PIREP";
@@ -384,35 +401,58 @@
     
 //    NSLog(@"Before Zoom In:          %f,%f",self.beforeZoom.span.latitudeDelta,self.beforeZoom.span.longitudeDelta);
 //    NSLog(@"Before Zoom In(Region):  %f,%f",self.displayMap.region.span.latitudeDelta,self.displayMap.region.span.longitudeDelta);
-    self.displayMap.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(self.latIn,self.longIn), MKCoordinateSpanMake(4.347, 4.347));
-    self.button = [UIImage imageNamed:@"zoomOut.png"];
+    self.displayMap.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(self.displayMap.userLocation.location.coordinate.latitude,self.displayMap.userLocation.location.coordinate.longitude), MKCoordinateSpanMake(4.347, 4.347));
+    self.button = [UIImage imageNamed:@"zoomingout.png"];
     [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
     //[self.zoom setTitle:@"Zoom Out" forState:UIControlStateNormal];
     [self.zoom addTarget:self action:@selector(zoomOut) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)zoomOut{
-    NSLog(@"zoomOut");
+    //NSLog(@"zoomOut");
     self.displayMap.region = MKCoordinateRegionMake(self.beforeZoom.center, self.beforeZoom.span);
     //[self viewDidLoad];
     [self.zoom addTarget:self action:@selector(zoomIn) forControlEvents:UIControlEventTouchUpInside];
     //[self.zoom setTitle:@"Zoom In" forState:UIControlStateNormal];
-    self.button = [UIImage imageNamed:@"zoomIn.png"];
+    self.button = [UIImage imageNamed:@"zoomingin.png"];
     [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
-    NSLog(@"%f,%f",self.displayMap.region.span.latitudeDelta,self.displayMap.region.span.longitudeDelta);
+    //NSLog(@"%f,%f",self.displayMap.userLocation.coordinate.latitude,self.displayMap.userLocation.coordinate.longitude);//self.displayMap.region.span.longitudeDelta);
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
-    region.center.latitude = self.locationManager.location.coordinate.latitude;
-    region.center.longitude = self.locationManager.location.coordinate.longitude;
+    //self.displayMap.center = CGPointMake(self.displayMap.userLocation.coordinate.latitude, self.displayMap.userLocation.coordinate.longitude);//self.displayMap.userLocation.coordinate
+    //MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
+//    region.center.latitude = self.locationManager.location.coordinate.latitude;
+//    region.center.longitude = self.locationManager.location.coordinate.longitude;
 //    region.span.latitudeDelta = 0.0187f;
 //    region.span.longitudeDelta = 0.0137f;
-    [self.displayMap setRegion:region animated:YES];
+//    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.displayMap.userLocation.coordinate, 600.0f, 600.0f);
+//    //[self.mapView setRegion:region animated:YES];
+//    region.span.latitudeDelta = 0.5f;
+//    region.span.longitudeDelta = 0.5f;
+//    [self.displayMap setRegion:region animated:YES];
     
     //_initialPosition = NO;
 }
 //edit2014 End
 
+//updating user location on map
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+//    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 1600.0f, 1600.0f);
+//    [self.displayMap setRegion:region animated:YES];//[self.displayMap regionThatFits:region] animated:YES];
+}
+- (NSString *)deviceLocation {
+    return [NSString stringWithFormat:@"latitude: %f longitude: %f", self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
+}
+- (NSString *)deviceLat {
+    return [NSString stringWithFormat:@"%f", self.locationManager.location.coordinate.latitude];
+}
+- (NSString *)deviceLon {
+    return [NSString stringWithFormat:@"%f", self.locationManager.location.coordinate.longitude];
+}
+- (NSString *)deviceAlt {
+    return [NSString stringWithFormat:@"%f", self.locationManager.location.altitude];
+}
 
 //  Setting Control Panel Properties
 - (void)controlPanelLoad{

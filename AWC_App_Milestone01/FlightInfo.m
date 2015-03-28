@@ -2,8 +2,8 @@
 //  FlightInfo.m
 //  AWC_App_Milestone01
 //
-//  Edited by Syed Mazhar Hussani
 //  Created by SATISH KUMAR BASWAPURAM on 10/21/13.
+//  Edited by Syed Mazhar Hussani
 //  Copyright (c) 2013 Satish Kumar Baswapuram. All rights reserved.
 //
 
@@ -60,8 +60,8 @@
     
     self.aircraftPicker.delegate = self;
     self.aircraftPicker.dataSource = self;
-    
     self.selectedRow = 0;
+    
     self.welcomeText.numberOfLines = 10;
     self.welcomeText.lineBreakMode = NSLineBreakByWordWrapping;
     
@@ -146,12 +146,12 @@
         self.existingInfo.numberOfLines = 6;
         self.existingInfo.lineBreakMode = NSLineBreakByWordWrapping;
         //edit2014
-        
+        /*
         NSMutableArray * displayData = [[NSMutableArray alloc]init];
         NSString * temp;
         NSString * temp1;
         NSMutableString * str;
-        NSString *s = @"\u2022";
+        //NSString *s = @"\u2022";
         for(int i=0;i<self.appDelegate.flightInformation.count;i++){
             temp = self.appDelegate.flightInformation[i];
             temp1 = [temp substringWithRange:NSMakeRange(0, 1)];
@@ -166,7 +166,10 @@
             [displayData addObject:str];
         }
         NSLog(@"%@",str);
+         
         self.existingInfo.text = [NSString stringWithFormat:@"Existing information:\n\n%@ %@ %@\n%@ %@\n%@ %@\n%@ %@",@"Name:",displayData[0],displayData[1],@"Aircraft Type:",displayData[2],@"Tail Number:",displayData[3],@"License:",displayData[4]];
+        */
+        self.existingInfo.text = [NSString stringWithFormat:@"Existing information:\n\n%s %@ %@\n%s %@\n%s %@",[@"Name:" UTF8String],data[0],data[1],[@"Aircraft Type:" UTF8String],data[2],[@"Tail Number:" UTF8String],data[3]];//,@"License:",data[4]];
         self.fileLoaded = YES;
         
         
@@ -258,7 +261,7 @@
             self.aircraftType.text = self.aircraftTypes[self.selectedRow];
             data = self.aircraftTypes[self.selectedRow];
         }
-        NSLog(@"%@",data);
+        //NSLog(@"%@",data);
         [self.info addObject:data];
         data = self.tailNumber.text;
         [self.info addObject:data];
