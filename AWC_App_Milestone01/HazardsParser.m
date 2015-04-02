@@ -169,14 +169,13 @@
         color=[[UIColor alloc] initWithRed:1.0 green:0.0 blue:0.0 alpha:1];
         
     }
-    else if([hazard isEqualToString:@"TURB"] &&
+    else if(([hazard isEqualToString:@"TURB"] || [hazard isEqualToString:@"TURB-HI"] || [hazard isEqualToString:@"TURB-LO"]) &&
             [airSigmet isEqualToString:@"AIRMET"])
     {
         color=[[UIColor alloc] initWithRed:192.0/255 green:48.0/255 blue:0 alpha:1];
         
     }
-    else if([hazard isEqualToString:@"TURB"] &&
-            [airSigmet isEqualToString:@"SIGMET"] )
+    else if(([hazard isEqualToString:@"TURB"] || [hazard isEqualToString:@"TURB-HI"] || [hazard isEqualToString:@"TURB-LO"]) &&[airSigmet isEqualToString:@"SIGMET"] )
     {
         color =[[UIColor alloc] initWithRed:240.0/255 green:96.0/255 blue:0 alpha:1];
         
@@ -205,10 +204,11 @@
     {
        color = [[UIColor alloc] initWithRed:126.0/255 green:48.0/255 blue:126.0/255 alpha:1];
     }
-    else
-    {
-       color = [UIColor blackColor];
-    }
+//    else
+//    {
+//        NSLog(@"hazard: %@",hazard);
+//       color = [UIColor blackColor];
+//    }
     
     // return color
     return color;

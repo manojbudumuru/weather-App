@@ -42,8 +42,8 @@
             //ttfColor = red;
         }
     }
-    NSLog(@"%@",input);
-    NSLog(@"SYMBOL FOR NOW IS: %@",ttf);
+//    NSLog(@"%@",input);
+//    NSLog(@"SYMBOL FOR NOW IS: %@",ttf);
 //    if(![input containsString:@"ICE CLEAR LGT"] && [input containsString:@"ICE"])
 //    {
 //        ttf = @"2";

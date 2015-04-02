@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="MwV-zy-yQH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="MwV-zy-yQH">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--PIREP View-->
@@ -285,7 +285,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cds-fZ-tO5">
-                                        <rect key="frame" x="301" y="448" width="43" height="38"/>
+                                        <rect key="frame" x="363" y="448" width="43" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Start">
@@ -293,13 +293,6 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f3K-aF-AoP">
-                                        <rect key="frame" x="233" y="454" width="340" height="275"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vPb-WT-1sI">
                                         <rect key="frame" x="211" y="443" width="93" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -318,6 +311,13 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f3K-aF-AoP">
+                                        <rect key="frame" x="233" y="454" width="340" height="275"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -437,6 +437,7 @@
                         <segue destination="F7c-XD-sgH" kind="relationship" relationship="viewControllers" id="wcf-1j-0Tf"/>
                         <segue destination="zHb-Cp-mOo" kind="relationship" relationship="viewControllers" id="zzu-Kj-Aig"/>
                         <segue destination="rq7-jr-d2g" kind="relationship" relationship="viewControllers" id="aex-uZ-9gV"/>
+                        <segue destination="4m0-lm-Sac" kind="relationship" relationship="viewControllers" id="ecc-mE-fY0"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
@@ -1079,6 +1080,33 @@
             </objects>
             <point key="canvasLocation" x="498" y="996"/>
         </scene>
+        <!--Radar ViewController-->
+        <scene sceneID="SBH-67-Fzc">
+            <objects>
+                <viewController title="Radar ViewController" id="4m0-lm-Sac" customClass="AWCRadarViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TS5-r0-Md1">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="NZE-sM-nQh">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="4m0-lm-Sac" id="ZPg-bc-E3s"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Radar View" image="METARS.png" id="DMe-OT-9bb"/>
+                    <connections>
+                        <outlet property="mapView" destination="NZE-sM-nQh" id="vUH-5T-aek"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K6O-v7-NrS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1249" y="2175"/>
+        </scene>
         <!--METARS-->
         <scene sceneID="fYK-vn-cjp">
             <objects>
@@ -1152,7 +1180,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OQE-FF-zkp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-339" y="2152"/>
+            <point key="canvasLocation" x="-329" y="2175"/>
         </scene>
         <!--Settings-->
         <scene sceneID="G5j-tf-I3u">
@@ -1373,7 +1401,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="2Yh-jL-3n7"/>
         <segue reference="FaS-k3-7kv"/>
+        <segue reference="JuX-0P-Lga"/>
     </inferredMetricsTieBreakers>
 </document>

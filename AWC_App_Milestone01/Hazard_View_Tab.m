@@ -281,7 +281,7 @@
         for( int i=0;i< [self.hazardOverlays count];i++)
         {
             Hazards * myHazard = [self.hazardOverlays objectAtIndex:i];
-            if([myHazard.type isEqualToString:@"TURB"])
+            if([myHazard.type isEqualToString:@"TURB"] || [myHazard.type isEqualToString:@"TURB-HI"] || [myHazard.type isEqualToString:@"TURB-LO"])
             {
                 [self.mapView addAnnotation:myHazard];
                 [self.mapView addOverlay:myHazard];
@@ -416,6 +416,22 @@
     [self setMapView:nil];
     [super viewDidUnload];
 }
+
+//Display appropriate pins on the map for each annotation based on the value of fltcat property.
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
+    static NSString * identifier = @"Annotation";
+    MKPinAnnotationView * annotView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if(annotView == nil)
+        {
+            annotView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:identifier];
+            annotView.image = [UIImage imageNamed:@"RedPin.png"];
+            //annotView.pinColor = ];
+        }
+    annotView.annotation = annotation;
+    return annotView;
+}
+
 /*
 //Display a popover when a Metar is clicked. The popover contains the details of the Metar listed in a table format.
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
@@ -428,7 +444,7 @@
         Hazards * hazardObject = (Hazards *)view.annotation;
         if(![self.popUp isPopoverVisible])
         {
-            DisplayMetars * myTable = [[DisplayMetars alloc]initWithStyle:UITableViewStylePlain incomingMetar:metarObject];
+            DisplayMetars * myTable = [[DisplayMetars alloc]initWithStyle:UITableViewStylePlain incomingMetar:hazardObject];
             
             self.popUp = [[UIPopoverController alloc]initWithContentViewController:myTable];
             self.popUp.popoverContentSize = CGSizeMake(400, 400);
