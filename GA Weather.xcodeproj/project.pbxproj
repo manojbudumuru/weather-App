@@ -189,6 +189,7 @@
 		A40EBBD01ACCBB0E0094F8D5 /* AWCRadarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40EBBCF1ACCBB0E0094F8D5 /* AWCRadarViewController.m */; };
 		A40EBBD41ACCBBCF0094F8D5 /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = A40EBBD31ACCBBCF0094F8D5 /* Grid.m */; };
 		A40EBBD71ACCBBEB0094F8D5 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = A40EBBD61ACCBBEB0094F8D5 /* GridView.m */; };
+		A40EBBD91ACCC5A10094F8D5 /* RADAR2.png in Resources */ = {isa = PBXBuildFile; fileRef = A40EBBD81ACCC5A10094F8D5 /* RADAR2.png */; };
 		BC9F31DD19EB5B7E00AA6110 /* tabBar.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9F31DC19EB5B7E00AA6110 /* tabBar.png */; };
 		CA08E95719D779A6002A098B /* AWC_Login Screen1.png in Resources */ = {isa = PBXBuildFile; fileRef = CA08E95619D779A6002A098B /* AWC_Login Screen1.png */; };
 		CA0A74A31A799FBF007491A0 /* RegExCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0A74A21A799FBF007491A0 /* RegExCategories.m */; };
@@ -433,6 +434,7 @@
 		A40EBBD31ACCBBCF0094F8D5 /* Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grid.m; sourceTree = "<group>"; };
 		A40EBBD51ACCBBEB0094F8D5 /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
 		A40EBBD61ACCBBEB0094F8D5 /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
+		A40EBBD81ACCC5A10094F8D5 /* RADAR2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RADAR2.png; sourceTree = "<group>"; };
 		BC9F31DC19EB5B7E00AA6110 /* tabBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabBar.png; path = AWC_App_Milestone01/tabBar.png; sourceTree = "<group>"; };
 		CA08E95619D779A6002A098B /* AWC_Login Screen1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AWC_Login Screen1.png"; sourceTree = "<group>"; };
 		CA0A74A11A799FBF007491A0 /* RegExCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegExCategories.h; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 		7504E824191229C100EC5435 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A40EBBD81ACCC5A10094F8D5 /* RADAR2.png */,
 				31D0E2181ACCA7A30010B517 /* RADAR.png */,
 				31D0E1D81AC752790010B517 /* zoomingin.png */,
 				31D0E1DA1AC7528A0010B517 /* zoomingout.png */,
@@ -984,6 +987,7 @@
 				754D1DAB186288E700A88E58 /* +GR.png in Resources */,
 				75D1B71B18AA957B00EDD7BD /* UserPirep.png in Resources */,
 				754D1DAC186288E700A88E58 /* +GS.png in Resources */,
+				A40EBBD91ACCC5A10094F8D5 /* RADAR2.png in Resources */,
 				31D0E2121AC7DF750010B517 /* BluePin.png in Resources */,
 				754D1DAD186288E700A88E58 /* +RA.png in Resources */,
 				754D1DAE186288E700A88E58 /* +SHGR.png in Resources */,
