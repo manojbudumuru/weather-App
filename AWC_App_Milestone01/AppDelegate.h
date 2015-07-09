@@ -10,6 +10,7 @@
 //  Edited by Syed Mazhar Hussani
 
 #import <UIKit/UIKit.h>
+#import "CoreLocation/CoreLocation.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -40,5 +41,8 @@
 
 //To get the application password which will validate a user
 //-(NSString *)getApplicationPassword;
+
+//User Location
+@property CLLocationCoordinate2D userLocTAF;
 
 @end

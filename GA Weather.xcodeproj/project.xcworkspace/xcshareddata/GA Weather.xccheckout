@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>0110FEB4-E161-45A0-BA1C-FB4E16C6BF84</string>
 	<key>IDESourceControlProjectName</key>
-	<string>GA Weather</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>3B3446FC107A645F7A4EEC2EBCC25AA89EFA991C</key>
 		<string>https://bitbucket.org/dmonismi/ads_b_out_project.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>GA Weather.xcodeproj</string>
+	<string>GA Weather.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>3B3446FC107A645F7A4EEC2EBCC25AA89EFA991C</key>

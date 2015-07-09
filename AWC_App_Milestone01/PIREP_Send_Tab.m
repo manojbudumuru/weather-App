@@ -45,6 +45,7 @@
 @property NSString * pilotReport;
 @property NSString * pageURL;
 @property ControlPanelManager *cp;
+@property int trigger;
 
 
 @end
@@ -60,6 +61,7 @@
     //Control Panel Transperancy
     self.cp = [ControlPanelManager sharedManager];
     self.panel.alpha = 0.6;
+    self.trigger = 0;
     
 }
 
@@ -172,7 +174,7 @@
     self.tailNumber = self.flightData[2];
     self.skyCondition = @"UNKNWN";
     self.weatherCondition = @"UNKNWN";
-    self.pageURL = @"http://csgrad06.nwmissouri.edu/SaveDataToServer.php";
+    self.pageURL = @"http://csgrad07.nwmissouri.edu/SaveDataToServer.php";
     
     
     //Target methods for Chop
@@ -1187,6 +1189,9 @@
         [self.cp.stopWatchTimer invalidate];
         self.cp.stopWatchTimer = nil;
         [self updateTimerLabel];
+        self.cp.stoppingRec = NO;
+
+        
     }
     else{
         self.cp.isFlightOn = YES;
@@ -1195,6 +1200,8 @@
         self.cp.startDate = [NSDate date];
         [self.cp startTimer];
         [self updateTimerLabel];
+        [self.cp startRec];
+
     }
 }
 
@@ -1205,11 +1212,13 @@
             self.cp.isTurbOn = NO;
             self.turbOff.hidden = YES;
             self.turbOn.hidden = NO;
+            self.cp.TurbFlag = YES;
         }
         else {
             self.cp.isTurbOn = YES;
             self.turbOn.hidden = YES;
             self.turbOff.hidden = NO;
+            self.cp.TurbFlag = YES;
         }
     }
     else {

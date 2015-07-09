@@ -27,6 +27,7 @@
 @property MKCoordinateRegion beforeZoom;//edit2014
 @property int check;
 @property ControlPanelManager *cp;
+@property int trigger;
 
 
 @end
@@ -37,13 +38,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-
     //Setting map type and delegate
     
     self.displayMap.delegate = self;
     self.locationManager = [[CLLocationManager alloc]init];
     self.locationManager.delegate = self;
+    self.trigger = 0;
     
     self.appDelegate = [UIApplication sharedApplication].delegate;
 
@@ -72,6 +72,8 @@
     //Control Panel Transperancy
     self.cp = [ControlPanelManager sharedManager];
     self.panel.alpha = 0.6;
+    
+    
     //edit2014 end
 }
 
@@ -355,7 +357,7 @@
     //NSLog(@"Show: %c",pirepShow);
     
     //User generated PIREPs will be handled here
-    URL = [NSURL URLWithString:@"http://csgrad06.nwmissouri.edu/GetDataFromServer.php"];
+    URL = [NSURL URLWithString:@"http://csgrad07.nwmissouri.edu/GetDataFromServer.php"];
     
     jsonData = [NSData dataWithContentsOfURL:URL];
     
@@ -419,6 +421,7 @@
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    self.appDelegate.userLocTAF = self.displayMap.userLocation.coordinate;
     //self.displayMap.center = CGPointMake(self.displayMap.userLocation.coordinate.latitude, self.displayMap.userLocation.coordinate.longitude);//self.displayMap.userLocation.coordinate
     //MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
 //    region.center.latitude = self.locationManager.location.coordinate.latitude;
@@ -497,6 +500,8 @@
         [self.cp.stopWatchTimer invalidate];
         self.cp.stopWatchTimer = nil;
         [self updateTimerLabel];
+        self.cp.stoppingRec = NO;
+        
     }
     else{
         self.cp.isFlightOn = YES;
@@ -505,7 +510,9 @@
         self.cp.startDate = [NSDate date];
         [self.cp startTimer];
         [self updateTimerLabel];
+        [self.cp startRec];
     }
+    
 }
 
 - (IBAction)turbAction:(id)sender {
@@ -515,11 +522,13 @@
             self.cp.isTurbOn = NO;
             self.turbOff.hidden = YES;
             self.turbOn.hidden = NO;
+            self.cp.TurbFlag = YES;
         }
         else {
             self.cp.isTurbOn = YES;
             self.turbOn.hidden = YES;
             self.turbOff.hidden = NO;
+            self.cp.TurbFlag = YES;
         }
     }
     else {

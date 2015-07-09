@@ -10,6 +10,7 @@
 #import "TAF.h"
 #import "DisplayTAF.h"
 #import "CoreLocation/CoreLocation.h"
+#import "ControlPanelManager.h"
 
 @interface TAF_View_Tab ()
 
@@ -18,6 +19,12 @@
 @property NSMutableArray * timeGroups;
 @property NSMutableArray * tafAnnotations;
 @property AppDelegate * appDelegate;
+
+//Zoom in properties
+@property MKCoordinateRegion beforeZoom;//edit2014
+@property int check;
+@property ControlPanelManager *cp;
+@property int trigger;
 
 @end
 
@@ -39,7 +46,6 @@
     
     self.appDelegate = [UIApplication sharedApplication].delegate;
     
-    self.displayTAF.mapType = MKMapTypeStandard;
     self.displayTAF.delegate = self;
     
     self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
@@ -50,18 +56,45 @@
     self.timeGroupsVC.delegate = self;
     
     self.popOverController = [[UIPopoverController alloc]initWithContentViewController:self.timeGroupsVC];
+
+    // Zoom in Functionality
+    self.locationManager = [[CLLocationManager alloc]init];
+    self.locationManager.delegate = self;
     
+#ifdef __IPHONE_8_0
+    if(IS_OS_8_OR_LATER) {
+        // Use one or the other, not both. Depending on what you put in info.plist
+        //[self.locationManager requestWhenInUseAuthorization];
+        [self.locationManager requestAlwaysAuthorization];
+    }
+#endif
+    //[self.locationManager startUpdatingLocation];
+    self.button = [UIImage imageNamed:@"zoomingin.png"];
+    [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
+    [self.zoom addTarget:self action:@selector(zoomIn) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.displayTAF.mapType = MKMapTypeStandard;
+    self.check = 0;
+    
+    //zoomin functionality
     //Assigning target and action for the bar button item
     [self.presentButtons setTarget:self];
     [self.presentButtons setAction:@selector(selectTimeGroups:)];
     
 	// Do any additional setup after loading the view.
+    
+    //Control Panel Transperancy
+    self.cp = [ControlPanelManager sharedManager];
+    self.panel.alpha = 0.6;
 }
 
 //Set the view background color and header color to reflect the theme of the app.
 -(void)viewWillAppear:(BOOL)animated
 {
     self.view.backgroundColor = self.appDelegate.awcColor;
+    //  Loading control Panel
+    [self controlPanelLoad];
+    
     [self.header setBarTintColor:self.appDelegate.awcColor];
     [self.header setBackgroundImage:self.appDelegate.header forBarPosition:UIBarPositionTop barMetrics:UIBarMetricsDefault];
     [self.header setTintColor:[UIColor whiteColor]];
@@ -131,6 +164,11 @@
 {
     self.mapLoaded = YES;
     [self stopStatusIndicator];
+    //Zoom level
+    if(self.check==0){
+        self.beforeZoom = self.displayTAF.region;// Setting the region for Map
+        self.check++;
+    }
 }
 
 //If the annotations are completely loaded, then set annotationsAdded to yes and check if the loading activity indicator needs to be stopped.
@@ -154,6 +192,7 @@
 //Display a popover when a TAF is clicked. The popover contains the details of the TAF listed in a table format.
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
+    
     if([view.annotation isKindOfClass:[TAF class]])
     {
         [self.displayTAF deselectAnnotation:view.annotation animated:YES];
@@ -171,6 +210,8 @@
 //Display appropriate pins on the map for each annotation based on the value of fltcat property.
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
+    if([annotation isKindOfClass:[MKUserLocation class]])
+        return nil;//return nil to use default blue dot view
     static NSString * identifier = @"Annotation";
     MKPinAnnotationView * annotView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
     if([annotation isKindOfClass:[TAF class]])
@@ -250,6 +291,7 @@
 //Update the pins on the map based on the timegroups selected.
 -(void)updateTAFsOnMap
 {
+    //self.displayTAF.showsUserLocation = YES;
     [self updateTimeLabel];
     //[self.displayTAF removeAnnotations:self.displayTAF.annotations];
     
@@ -298,4 +340,115 @@
 - (IBAction)selectTimeGroups:(id)sender {
     [self.popOverController presentPopoverFromBarButtonItem:self.presentButtons permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
+
+// Zoom in Functionality Code
+- (void)zoomIn{
+    self.displayTAF.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(self.appDelegate.userLocTAF.latitude,self.appDelegate.userLocTAF.longitude), MKCoordinateSpanMake(4.347, 4.347));
+    self.button = [UIImage imageNamed:@"zoomingout.png"];
+    [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
+    [self.zoom addTarget:self action:@selector(zoomOut) forControlEvents:UIControlEventTouchUpInside];
+}
+-(void)zoomOut{
+    self.displayTAF.region = MKCoordinateRegionMake(self.beforeZoom.center, self.beforeZoom.span);
+    [self.zoom addTarget:self action:@selector(zoomIn) forControlEvents:UIControlEventTouchUpInside];
+    self.button = [UIImage imageNamed:@"zoomingin.png"];
+    [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
+}
+
+
+//-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+//    
+//}
+// Zoom in
+
+//  Setting Control Panel Properties
+- (void)controlPanelLoad{
+    self.panel.hidden = YES;
+    self.controlUp.hidden = NO;
+    if(self.cp.isFlightOn == NO){
+        self.flightOn.hidden = NO;
+        self.flightOff.hidden = YES;
+    }
+    else {
+        self.flightOn.hidden = YES;
+        self.flightOff.hidden = NO;
+    }
+    
+    if (self.cp.isTurbOn) {
+        self.turbOff.hidden = NO;
+        self.turbOn.hidden = YES;
+    }
+    else{
+        self.turbOff.hidden = YES;
+        self.turbOn.hidden = NO;
+    }
+}
+- (IBAction)controlPanel:(id)sender {
+    self.panel.hidden = NO;
+    self.controlUp.hidden = YES;
+    [self updateTimerLabel];
+    
+}
+- (IBAction)flightOnAction:(id)sender {
+    
+    if(self.flightOn.hidden){
+        self.cp.isFlightOn = NO;
+        self.flightOff.hidden = YES;
+        self.flightOn.hidden = NO;
+        
+        if (self.turbOn.hidden) {
+            self.turbOff.hidden = YES;
+            self.turbOn.hidden = NO;
+            self.cp.isTurbOn = NO;
+        }
+        [self.cp.stopWatchTimer invalidate];
+        self.cp.stopWatchTimer = nil;
+        [self updateTimerLabel];
+        self.cp.stoppingRec = NO;
+
+        
+    }
+    else{
+        self.cp.isFlightOn = YES;
+        self.flightOff.hidden = NO;
+        self.flightOn.hidden = YES;
+        self.cp.startDate = [NSDate date];
+        [self.cp startTimer];
+        [self updateTimerLabel];
+        [self.cp startRec];
+
+    }
+}
+
+- (IBAction)turbAction:(id)sender {
+    
+    if (self.cp.isFlightOn) {
+        if(self.turbOn.hidden){
+            self.cp.isTurbOn = NO;
+            self.turbOff.hidden = YES;
+            self.turbOn.hidden = NO;
+            self.cp.TurbFlag = YES;
+        }
+        else {
+            self.cp.isTurbOn = YES;
+            self.turbOn.hidden = YES;
+            self.turbOff.hidden = NO;
+            self.cp.TurbFlag = YES;
+        }
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Turbulence can be only activated if the flight data is being recorded, So switch on Flight Recorder first." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+-(void)updateTimerLabel{
+    self.stopWatchLBL.text = self.cp.stopwatch;//self.appDelegate.stopWatchCall;//self.appDelegate.stopwatchLabel;
+    [self performSelector:@selector(updateTimerLabel) withObject:self afterDelay:0.1];
+}
+
+- (IBAction)controlPanelDown:(id)sender {
+    self.controlUp.hidden = NO;
+    self.panel.hidden = YES;
+}
+
 @end

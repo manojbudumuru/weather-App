@@ -10,6 +10,9 @@
 #import "Metar.h"
 #import "DisplayMetars.h"
 #import "Metar+TTF.h"
+#import "ControlPanelManager.h"
+
+
 #define MERCATOR_RADIUS 85445659.44705395
 @interface Metar_View_Tab ()
 
@@ -22,12 +25,19 @@
 @property NSMutableArray * metarsWithFivePriority;
 @property NSMutableArray * metarsWithSixPriority;
 @property NSMutableArray * metarsWithSevenPriority;
+@property int trigger;
+
 
 @property BOOL mapLoaded;
 @property BOOL metarOn;
 @property BOOL annotationsAdded;
 //@property BOOL isMetar;
 
+// Zoom in Functionality
+@property MKCoordinateRegion beforeZoom;//edit2014
+@property int check;
+//Zoom in
+@property ControlPanelManager *cp;
 @end
 
 @implementation Metar_View_Tab
@@ -48,14 +58,38 @@
     
     self.displayMetar.delegate = self;
     self.displayWind.delegate = self;//Setting Delegate property so that we wont get Pins displayed on map
-    self.displayMetar.mapType = MKMapTypeStandard;// edit 2015
-    self.displayWind.mapType = MKMapTypeStandard;
+    
     //self.isMetar = YES;
     
     self.activityStatus.transform = CGAffineTransformMakeScale(2, 2);
     //self.metarOn = YES;
 
+    // Zoom in Functionality
+    self.locationManager = [[CLLocationManager alloc]init];
+    self.locationManager.delegate = self;
     
+#ifdef __IPHONE_8_0
+    if(IS_OS_8_OR_LATER) {
+        // Use one or the other, not both. Depending on what you put in info.plist
+        //[self.locationManager requestWhenInUseAuthorization];
+        [self.locationManager requestAlwaysAuthorization];
+    }
+#endif
+    [self.locationManager startUpdatingLocation];
+    self.button = [UIImage imageNamed:@"zoomingin.png"];
+    [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
+    [self.zoom addTarget:self action:@selector(zoomIn) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.displayMetar.mapType = MKMapTypeStandard;// edit 2015
+    self.displayWind.mapType = MKMapTypeStandard;
+    self.displayMetar.showsUserLocation = YES;
+    self.displayWind.showsUserLocation = YES;
+    self.check = 0;
+    //Zoom in
+    
+    //Control Panel Transperancy
+    self.cp = [ControlPanelManager sharedManager];
+    self.panel.alpha = 0.6;
     
 	// Do any additional setup after loading the view.
 }
@@ -64,6 +98,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    
+    //  Loading control Panel
+    [self controlPanelLoad];
+    
     self.view.backgroundColor = appDelegate.awcColor;
     [self.header setBarTintColor:appDelegate.awcColor];
     [self.header setBackgroundImage:appDelegate.header forBarPosition:UIBarPositionTop barMetrics:UIBarMetricsDefault];
@@ -137,6 +175,13 @@
 {
     self.mapLoaded = YES;
     [self stopStatusIndicator];
+    
+    if(self.check==0){
+        self.beforeZoom = self.displayMetar.region;// Setting the region for Map
+//        NSLog(@"LATITUDE : %f",self.displayMap.userLocation.location.coordinate.latitude);
+//        NSLog(@"Before Zoom In:          %f,%f",self.beforeZoom.span.latitudeDelta,self.beforeZoom.span.longitudeDelta);
+        self.check++;
+    }
 }
 
 //If the annotations are completely loaded, then set annotationsAdded to yes and check if the loading activity indicator needs to be stopped.
@@ -283,6 +328,9 @@
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
+    if([annotation isKindOfClass:[MKUserLocation class]])
+        return nil;//return nil to use default blue dot view
+    
     Metar * thisMetar = (Metar *)annotation;
     MKPinAnnotationView * annotView;
     NSString * metarWX;
@@ -625,4 +673,119 @@
     }
 
 }
+
+// Zoom in Functionality Code
+- (void)zoomIn{
+    //self.beforeZoom = self.displayMetar.region;// Setting the region for Map
+    //NSLog(@"METAR: Before Zoomin: %@,%@",self.beforeZoom.)
+    self.displayMetar.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(self.displayMetar.userLocation.location.coordinate.latitude,self.displayMetar.userLocation.location.coordinate.longitude), MKCoordinateSpanMake(4.347, 4.347));
+    self.displayWind.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(self.displayWind.userLocation.location.coordinate.latitude,self.displayWind.userLocation.location.coordinate.longitude), MKCoordinateSpanMake(4.347, 4.347));
+    self.button = [UIImage imageNamed:@"zoomingout.png"];
+    [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
+    [self.zoom addTarget:self action:@selector(zoomOut) forControlEvents:UIControlEventTouchUpInside];
+}
+-(void)zoomOut{
+    self.displayMetar.region = MKCoordinateRegionMake(self.beforeZoom.center, self.beforeZoom.span);
+    self.displayWind.region = MKCoordinateRegionMake(self.beforeZoom.center, self.beforeZoom.span);
+    [self.zoom addTarget:self action:@selector(zoomIn) forControlEvents:UIControlEventTouchUpInside];
+    self.button = [UIImage imageNamed:@"zoomingin.png"];
+    [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+
+}
+// Zoom in
+
+//  Setting Control Panel Properties
+- (void)controlPanelLoad{
+    self.panel.hidden = YES;
+    self.controlUp.hidden = NO;
+    if(self.cp.isFlightOn == NO){
+        self.flightOn.hidden = NO;
+        self.flightOff.hidden = YES;
+    }
+    else {
+        self.flightOn.hidden = YES;
+        self.flightOff.hidden = NO;
+    }
+    
+    if (self.cp.isTurbOn) {
+        self.turbOff.hidden = NO;
+        self.turbOn.hidden = YES;
+    }
+    else{
+        self.turbOff.hidden = YES;
+        self.turbOn.hidden = NO;
+    }
+}
+- (IBAction)controlPanel:(id)sender {
+    self.panel.hidden = NO;
+    self.controlUp.hidden = YES;
+    [self updateTimerLabel];
+    
+}
+- (IBAction)flightOnAction:(id)sender {
+    
+    if(self.flightOn.hidden){
+        self.cp.isFlightOn = NO;
+        self.flightOff.hidden = YES;
+        self.flightOn.hidden = NO;
+        
+        if (self.turbOn.hidden) {
+            self.turbOff.hidden = YES;
+            self.turbOn.hidden = NO;
+            self.cp.isTurbOn = NO;
+        }
+        [self.cp.stopWatchTimer invalidate];
+        self.cp.stopWatchTimer = nil;
+        [self updateTimerLabel];
+        self.cp.stoppingRec = NO;
+
+        
+    }
+    else{
+        self.cp.isFlightOn = YES;
+        self.flightOff.hidden = NO;
+        self.flightOn.hidden = YES;
+        self.cp.startDate = [NSDate date];
+        [self.cp startTimer];
+        [self updateTimerLabel];
+        [self.cp startRec];
+
+    }
+}
+
+- (IBAction)turbAction:(id)sender {
+    
+    if (self.cp.isFlightOn) {
+        if(self.turbOn.hidden){
+            self.cp.isTurbOn = NO;
+            self.turbOff.hidden = YES;
+            self.turbOn.hidden = NO;
+            self.cp.TurbFlag = YES;
+        }
+        else {
+            self.cp.isTurbOn = YES;
+            self.turbOn.hidden = YES;
+            self.turbOff.hidden = NO;
+            self.cp.TurbFlag = YES;
+        }
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Turbulence can be only activated if the flight data is being recorded, So switch on Flight Recorder first." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+-(void)updateTimerLabel{
+    self.stopWatchLBL.text = self.cp.stopwatch;//self.appDelegate.stopWatchCall;//self.appDelegate.stopwatchLabel;
+    [self performSelector:@selector(updateTimerLabel) withObject:self afterDelay:0.1];
+}
+
+- (IBAction)controlPanelDown:(id)sender {
+    self.controlUp.hidden = NO;
+    self.panel.hidden = YES;
+}
+
+
 @end

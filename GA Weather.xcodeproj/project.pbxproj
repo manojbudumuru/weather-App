@@ -190,6 +190,7 @@
 		A40EBBD41ACCBBCF0094F8D5 /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = A40EBBD31ACCBBCF0094F8D5 /* Grid.m */; };
 		A40EBBD71ACCBBEB0094F8D5 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = A40EBBD61ACCBBEB0094F8D5 /* GridView.m */; };
 		A40EBBD91ACCC5A10094F8D5 /* RADAR2.png in Resources */ = {isa = PBXBuildFile; fileRef = A40EBBD81ACCC5A10094F8D5 /* RADAR2.png */; };
+		A4C0DBA41AEDF71F0002788A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C0DBA31AEDF71F0002788A /* CoreMotion.framework */; };
 		BC9F31DD19EB5B7E00AA6110 /* tabBar.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9F31DC19EB5B7E00AA6110 /* tabBar.png */; };
 		CA08E95719D779A6002A098B /* AWC_Login Screen1.png in Resources */ = {isa = PBXBuildFile; fileRef = CA08E95619D779A6002A098B /* AWC_Login Screen1.png */; };
 		CA0A74A31A799FBF007491A0 /* RegExCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0A74A21A799FBF007491A0 /* RegExCategories.m */; };
@@ -435,6 +436,7 @@
 		A40EBBD51ACCBBEB0094F8D5 /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
 		A40EBBD61ACCBBEB0094F8D5 /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
 		A40EBBD81ACCC5A10094F8D5 /* RADAR2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RADAR2.png; sourceTree = "<group>"; };
+		A4C0DBA31AEDF71F0002788A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		BC9F31DC19EB5B7E00AA6110 /* tabBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabBar.png; path = AWC_App_Milestone01/tabBar.png; sourceTree = "<group>"; };
 		CA08E95619D779A6002A098B /* AWC_Login Screen1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AWC_Login Screen1.png"; sourceTree = "<group>"; };
 		CA0A74A11A799FBF007491A0 /* RegExCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegExCategories.h; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4C0DBA41AEDF71F0002788A /* CoreMotion.framework in Frameworks */,
 				75CC822F180CA5B500616A0F /* CoreLocation.framework in Frameworks */,
 				75CF441917F8D7AF00CCF4F0 /* MapKit.framework in Frameworks */,
 				75CF43EB17F8D34700CCF4F0 /* UIKit.framework in Frameworks */,
@@ -724,6 +727,7 @@
 		75CF43E917F8D34700CCF4F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4C0DBA31AEDF71F0002788A /* CoreMotion.framework */,
 				75CC822E180CA5B500616A0F /* CoreLocation.framework */,
 				75CF441817F8D7AF00CCF4F0 /* MapKit.framework */,
 				75CF43EA17F8D34700CCF4F0 /* UIKit.framework */,

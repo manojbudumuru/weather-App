@@ -352,11 +352,11 @@
                 UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Are you starting your flight now?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
                 alert.title = @"FlightOn";
                 [alert show];
-                
                 //[self presentTabs];
+                [self.cp startRec];
             }
             else{
-                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Error!!!" message:@"Boo Hoo!!! Get a valid License First.." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Error!!!" message:@"Invalid pilot info, please enter correct information to begin." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                 [alert show];
                 self.info = [[NSMutableArray alloc]init];
             }

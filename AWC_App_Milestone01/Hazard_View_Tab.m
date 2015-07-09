@@ -9,6 +9,7 @@
 //
 
 #import "Hazard_View_Tab.h"
+#import "ControlPanelManager.h"
 
 @interface Hazard_View_Tab ()
 
@@ -37,6 +38,12 @@
 @property int selectedIndex;
 @property int selectedFore;
 
+//Zoom in properties
+@property MKCoordinateRegion beforeZoom;//edit2014
+@property int check;
+@property ControlPanelManager *cp;
+@property AppDelegate* appDelegate;
+@property int trigger;
 
 @end
 
@@ -56,6 +63,8 @@
 {
     [super viewDidLoad];
     
+    self.appDelegate = [UIApplication sharedApplication].delegate;
+    
     _mapView.delegate = self;
     _mapView.mapType = MKMapTypeStandard;
     
@@ -69,6 +78,16 @@
     //Assigning targets and action
     [self.forecastsBTN setTarget:self];
     [self.forecastsBTN setAction:@selector(selectForecasts:)];
+    
+    //Zooming in
+    self.button = [UIImage imageNamed:@"zoomingin.png"];
+    [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
+    [self.zoom addTarget:self action:@selector(zoomIn) forControlEvents:UIControlEventTouchUpInside];
+    self.check = 0;
+    
+    //Control Panel Transperancy
+    self.cp = [ControlPanelManager sharedManager];
+    self.panel.alpha = 0.6;
 
 }
 
@@ -76,6 +95,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    //  Loading control Panel
+    [self controlPanelLoad];
+    
     self.view.backgroundColor = appDelegate.awcColor;
     [self.header setBarTintColor:appDelegate.awcColor];
     [self.header setBackgroundImage:appDelegate.header forBarPosition:UIBarPositionTop barMetrics:UIBarMetricsDefault];
@@ -122,6 +144,11 @@
 {
     self.mapLoaded = YES;
     [self stopStatusIndicator];
+    //Zoom level
+    if(self.check==0){
+        self.beforeZoom = self.mapView.region;// Setting the region for Map
+        self.check++;
+    }
 }
 
 //If the annotations are completely loaded, then set annotationsAdded to yes and check if the loading activity indicator needs to be stopped.
@@ -427,32 +454,119 @@
             annotView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:identifier];
             annotView.image = [UIImage imageNamed:@"RedPin.png"];
             //annotView.pinColor = ];
+            //annotView.canShowCallout = YES;
+            
         }
     annotView.annotation = annotation;
     return annotView;
 }
 
-/*
-//Display a popover when a Metar is clicked. The popover contains the details of the Metar listed in a table format.
--(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
-{
-    //if([view.annotation isKindOfClass : [Hazards class]]){
-        
-        [self.mapView deselectAnnotation:view.annotation animated:YES];
-        
-        
-        Hazards * hazardObject = (Hazards *)view.annotation;
-        if(![self.popUp isPopoverVisible])
-        {
-            DisplayMetars * myTable = [[DisplayMetars alloc]initWithStyle:UITableViewStylePlain incomingMetar:hazardObject];
-            
-            self.popUp = [[UIPopoverController alloc]initWithContentViewController:myTable];
-            self.popUp.popoverContentSize = CGSizeMake(400, 400);
-            [self.popUp presentPopoverFromRect:view.bounds inView:view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-        }
-        
-    //}
+// Zoom in Functionality Code
+- (void)zoomIn{
+    self.mapView.region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(self.appDelegate.userLocTAF.latitude,self.appDelegate.userLocTAF.longitude), MKCoordinateSpanMake(4.347, 4.347));
+    self.button = [UIImage imageNamed:@"zoomingout.png"];
+    [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
+    [self.zoom addTarget:self action:@selector(zoomOut) forControlEvents:UIControlEventTouchUpInside];
 }
-*/
+-(void)zoomOut{
+    self.mapView.region = MKCoordinateRegionMake(self.beforeZoom.center, self.beforeZoom.span);
+    [self.zoom addTarget:self action:@selector(zoomIn) forControlEvents:UIControlEventTouchUpInside];
+    self.button = [UIImage imageNamed:@"zoomingin.png"];
+    [self.zoom setBackgroundImage:self.button forState:UIControlStateNormal];
+}
+//Display a popover when a Metar is clicked. The popover contains the details of the Metar listed in a table format.
+//-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+//{
+//    
+//}
+//  Setting Control Panel Properties
+- (void)controlPanelLoad{
+    self.panel.hidden = YES;
+    self.controlUp.hidden = NO;
+    if(self.cp.isFlightOn == NO){
+        self.flightOn.hidden = NO;
+        self.flightOff.hidden = YES;
+    }
+    else {
+        self.flightOn.hidden = YES;
+        self.flightOff.hidden = NO;
+    }
+    
+    if (self.cp.isTurbOn) {
+        self.turbOff.hidden = NO;
+        self.turbOn.hidden = YES;
+    }
+    else{
+        self.turbOff.hidden = YES;
+        self.turbOn.hidden = NO;
+    }
+}
+- (IBAction)controlPanel:(id)sender {
+    self.panel.hidden = NO;
+    self.controlUp.hidden = YES;
+    [self updateTimerLabel];
+    
+}
+- (IBAction)flightOnAction:(id)sender {
+   
+    if(self.flightOn.hidden){
+        self.cp.isFlightOn = NO;
+        self.flightOff.hidden = YES;
+        self.flightOn.hidden = NO;
+        
+        if (self.turbOn.hidden) {
+            self.turbOff.hidden = YES;
+            self.turbOn.hidden = NO;
+            self.cp.isTurbOn = NO;
+        }
+        [self.cp.stopWatchTimer invalidate];
+        self.cp.stopWatchTimer = nil;
+        [self updateTimerLabel];
+        self.cp.stoppingRec = NO;
+
+        
+    }
+    else{
+        self.cp.isFlightOn = YES;
+        self.flightOff.hidden = NO;
+        self.flightOn.hidden = YES;
+        self.cp.startDate = [NSDate date];
+        [self.cp startTimer];
+        [self updateTimerLabel];
+        [self.cp startRec];
+
+    }
+}
+
+- (IBAction)turbAction:(id)sender {
+    
+    if (self.cp.isFlightOn) {
+        if(self.turbOn.hidden){
+            self.cp.isTurbOn = NO;
+            self.turbOff.hidden = YES;
+            self.turbOn.hidden = NO;
+            self.cp.TurbFlag = YES;
+        }
+        else {
+            self.cp.isTurbOn = YES;
+            self.turbOn.hidden = YES;
+            self.turbOff.hidden = NO;
+            self.cp.TurbFlag = YES;
+        }
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Turbulence can be only activated if the flight data is being recorded, So switch on Flight Recorder first." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+-(void)updateTimerLabel{
+    self.stopWatchLBL.text = self.cp.stopwatch;//self.appDelegate.stopWatchCall;//self.appDelegate.stopwatchLabel;
+    [self performSelector:@selector(updateTimerLabel) withObject:self afterDelay:0.1];
+}
+
+- (IBAction)controlPanelDown:(id)sender {
+    self.controlUp.hidden = NO;
+    self.panel.hidden = YES;
+}
 
 @end

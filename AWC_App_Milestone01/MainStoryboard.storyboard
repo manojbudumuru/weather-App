@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="MwV-zy-yQH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14C109" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="MwV-zy-yQH">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--PIREP View-->
@@ -45,6 +45,16 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hlJ-nu-1Yf">
+                                <rect key="frame" x="128" y="944" width="512" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="upSlider.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="controlPanel:" destination="2" eventType="touchUpInside" id="cRP-NZ-3cl"/>
+                                </connections>
+                            </button>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" id="Ot8-nq-fsI">
                                 <rect key="frame" x="128" y="707" width="512" height="267"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -134,16 +144,6 @@
                                 </view>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hlJ-nu-1Yf">
-                                <rect key="frame" x="128" y="944" width="512" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="upSlider.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="controlPanel:" destination="2" eventType="touchUpInside" id="cRP-NZ-3cl"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="adZ-HT-og8" userLabel="zoominButton">
                                 <rect key="frame" x="653" y="846" width="53" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -218,17 +218,131 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="InJ-E0-eCl" userLabel="zoominButton">
+                                <rect key="frame" x="653" y="846" width="53" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="   ">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="d0R-aD-VGX">
+                                <rect key="frame" x="127" y="944" width="513" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="upSlider.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="controlPanel:" destination="zHb-Cp-mOo" eventType="touchUpInside" id="Tdc-Eh-LNx"/>
+                                </connections>
+                            </button>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" id="udT-g0-cAW">
+                                <rect key="frame" x="128" y="706" width="512" height="267"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="qW2-ml-AWt">
+                                    <rect key="frame" x="0.0" y="0.0" width="512" height="267"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="a1s-Oa-Ay4">
+                                            <rect key="frame" x="-5" y="0.0" width="517" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="downSlider.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="controlPanel:" destination="zHb-Cp-mOo" eventType="touchUpInside" id="nOU-yM-fbw"/>
+                                                <action selector="controlPanelDown:" destination="zHb-Cp-mOo" eventType="touchUpInside" id="Ia8-Gj-ofZ"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="121-zv-wjO">
+                                            <rect key="frame" x="41" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="flightStart.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="flightOnAction:" destination="zHb-Cp-mOo" eventType="touchUpInside" id="cXy-0E-y2W"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uNR-Hu-xaJ">
+                                            <rect key="frame" x="155" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="turbStart.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="turbAction:" destination="zHb-Cp-mOo" eventType="touchUpInside" id="ngo-Na-Qhd"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fOm-hb-XwC">
+                                            <rect key="frame" x="273" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="settingPanel.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="N56-em-OBx" kind="modal" id="YM6-ie-RzZ"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aRd-il-tKZ">
+                                            <rect key="frame" x="392" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="helpPanel.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="vd9-7V-NKQ" kind="modal" id="VRa-E9-59T"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00.000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3XT-tG-sX4">
+                                            <rect key="frame" x="110" y="158" width="293" height="62"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="44"/>
+                                            <color key="textColor" red="0.30893905389999998" green="0.30893905389999998" blue="0.30893905389999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="13V-h5-o3a">
+                                            <rect key="frame" x="41" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="flightStopRed.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="flightOnAction:" destination="zHb-Cp-mOo" eventType="touchUpInside" id="RIZ-vX-Pw9"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WN5-mg-SQh">
+                                            <rect key="frame" x="155" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="turbStopRed.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="turbAction:" destination="zHb-Cp-mOo" eventType="touchUpInside" id="K2C-xR-MYv"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="TAFS" image="plane_4.png" id="02R-aF-ncg"/>
                     <connections>
                         <outlet property="activityStatus" destination="EhS-8G-S9y" id="pZC-b4-3of"/>
+                        <outlet property="controlUp" destination="d0R-aD-VGX" id="t9M-jf-ju7"/>
                         <outlet property="displayTAF" destination="t2O-Br-ebM" id="m7a-Hq-iuv"/>
+                        <outlet property="flightOff" destination="13V-h5-o3a" id="PMs-Ef-ayo"/>
+                        <outlet property="flightOn" destination="121-zv-wjO" id="AFO-aM-07B"/>
                         <outlet property="header" destination="40E-Ce-sAa" id="kNb-Yk-owQ"/>
                         <outlet property="lastUpdateLabel" destination="KV0-1G-MBf" id="vl5-aQ-Wd4"/>
                         <outlet property="loadingImage" destination="0sx-5D-uJx" id="FAU-e2-AaE"/>
+                        <outlet property="panel" destination="udT-g0-cAW" id="ULm-Nd-6iY"/>
                         <outlet property="presentButtons" destination="nwn-ti-yxk" id="r9z-HW-yJB"/>
+                        <outlet property="stopWatchLBL" destination="3XT-tG-sX4" id="0pj-Fj-NEA"/>
+                        <outlet property="turbOff" destination="WN5-mg-SQh" id="BNS-dX-tVF"/>
+                        <outlet property="turbOn" destination="uNR-Hu-xaJ" id="AX2-Dl-2FO"/>
+                        <outlet property="zoom" destination="InJ-E0-eCl" id="L0g-5O-EdG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zcx-Vc-loO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1009,7 +1123,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xEB-NX-de6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1384" y="-148"/>
+            <point key="canvasLocation" x="1636" y="-160"/>
         </scene>
         <!--HAZARDS-->
         <scene sceneID="0Q6-2k-szX">
@@ -1029,7 +1143,7 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="S4U-Tf-5Jb">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="S4U-Tf-5Jb">
                                 <rect key="frame" x="0.0" y="64" width="768" height="911"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
@@ -1062,18 +1176,132 @@
                                     <segment title="IFR"/>
                                 </segments>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ttt-oz-18h" userLabel="zoominButton">
+                                <rect key="frame" x="653" y="846" width="53" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="   ">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HJw-5u-57f">
+                                <rect key="frame" x="127" y="944" width="513" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="upSlider.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="controlPanel:" destination="rq7-jr-d2g" eventType="touchUpInside" id="icb-mv-IFK"/>
+                                </connections>
+                            </button>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" id="QAP-JK-2Jj">
+                                <rect key="frame" x="128" y="707" width="512" height="267"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="jXy-ny-cCp">
+                                    <rect key="frame" x="0.0" y="0.0" width="512" height="267"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8uZ-2K-5Nh">
+                                            <rect key="frame" x="-5" y="0.0" width="517" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="downSlider.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="controlPanel:" destination="rq7-jr-d2g" eventType="touchUpInside" id="s2B-ld-5vW"/>
+                                                <action selector="controlPanelDown:" destination="rq7-jr-d2g" eventType="touchUpInside" id="geQ-jG-IZH"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="x2g-AX-vUk">
+                                            <rect key="frame" x="41" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="flightStart.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="flightOnAction:" destination="rq7-jr-d2g" eventType="touchUpInside" id="Hwc-rV-f4g"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EJK-WJ-IMb">
+                                            <rect key="frame" x="155" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="turbStart.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="turbAction:" destination="rq7-jr-d2g" eventType="touchUpInside" id="5vE-yD-kjb"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YIl-PO-Qw6">
+                                            <rect key="frame" x="273" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="settingPanel.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="N56-em-OBx" kind="modal" id="umw-3G-tFS"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PNT-dO-kuc">
+                                            <rect key="frame" x="392" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="helpPanel.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="vd9-7V-NKQ" kind="modal" id="jVr-aW-Yjf"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00.000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jch-Ih-4H5">
+                                            <rect key="frame" x="110" y="158" width="293" height="62"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="44"/>
+                                            <color key="textColor" red="0.30893905389999998" green="0.30893905389999998" blue="0.30893905389999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9H5-8w-qc6">
+                                            <rect key="frame" x="41" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="flightStopRed.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="flightOnAction:" destination="rq7-jr-d2g" eventType="touchUpInside" id="ADI-kt-YNL"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ru8-i3-KAI">
+                                            <rect key="frame" x="155" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="turbStopRed.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="turbAction:" destination="rq7-jr-d2g" eventType="touchUpInside" id="KjE-hV-omc"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="HAZARDS" image="hazard.png" id="7wq-3s-4So"/>
                     <connections>
                         <outlet property="activityStatus" destination="S3L-Ek-bPV" id="FEf-ge-mkD"/>
+                        <outlet property="controlUp" destination="HJw-5u-57f" id="CYI-1J-OAy"/>
+                        <outlet property="flightOff" destination="9H5-8w-qc6" id="Cvs-Ze-ddq"/>
+                        <outlet property="flightOn" destination="x2g-AX-vUk" id="Bjd-zh-N1V"/>
                         <outlet property="forecastsBTN" destination="Y5c-4l-lhv" id="xUx-XL-HMo"/>
                         <outlet property="hazardsSegmentedControl" destination="Djm-RX-XCB" id="h10-kU-a5I"/>
                         <outlet property="header" destination="L9J-N3-H2s" id="Brb-YT-8rn"/>
                         <outlet property="lastUpdateLabel" destination="oEo-eF-mc1" id="EzR-Dz-DxN"/>
                         <outlet property="loadingImage" destination="TPM-kK-QdX" id="YpS-8L-Fl9"/>
                         <outlet property="mapView" destination="S4U-Tf-5Jb" id="DV7-ef-h7k"/>
+                        <outlet property="panel" destination="QAP-JK-2Jj" id="ey5-Jk-AlK"/>
+                        <outlet property="stopWatchLBL" destination="Jch-Ih-4H5" id="SiE-t1-RJJ"/>
+                        <outlet property="turbOff" destination="ru8-i3-KAI" id="BLA-X1-IJD"/>
+                        <outlet property="turbOn" destination="EJK-WJ-IMb" id="BQr-xe-bAj"/>
+                        <outlet property="zoom" destination="ttt-oz-18h" id="1Yg-dF-0eD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBg-H5-sKZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1088,24 +1316,164 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" id="s6X-gN-8I0">
+                                <rect key="frame" x="0.0" y="20" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Radar/Satellite" id="vV5-83-2Mt"/>
+                                </items>
+                            </navigationBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="NZE-sM-nQh">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <rect key="frame" x="0.0" y="64" width="768" height="980"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="4m0-lm-Sac" id="ZPg-bc-E3s"/>
                                 </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tdH-9Q-Sdg" userLabel="zoominButton">
+                                <rect key="frame" x="653" y="846" width="53" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="   " backgroundImage="zoomingin.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qK3-yz-agB">
+                                <rect key="frame" x="127" y="944" width="513" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="upSlider.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="controlPanel:" destination="4m0-lm-Sac" eventType="touchUpInside" id="Air-1f-7XF"/>
+                                </connections>
+                            </button>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" id="UNz-p1-svV">
+                                <rect key="frame" x="128" y="707" width="512" height="267"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="T2m-e5-C3X">
+                                    <rect key="frame" x="0.0" y="0.0" width="512" height="267"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MhN-BE-GBc">
+                                            <rect key="frame" x="-5" y="0.0" width="517" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="downSlider.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="controlPanel:" destination="F7c-XD-sgH" eventType="touchUpInside" id="gib-Iw-Bc4"/>
+                                                <action selector="controlPanel:" destination="4m0-lm-Sac" eventType="touchUpInside" id="zvp-He-Xrs"/>
+                                                <action selector="controlPanelDown:" destination="4m0-lm-Sac" eventType="touchUpInside" id="EeV-my-YZq"/>
+                                                <action selector="controlPanelDown:" destination="F7c-XD-sgH" eventType="touchUpInside" id="geD-eE-N3s"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="37k-WU-Z1B">
+                                            <rect key="frame" x="41" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="flightStart.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="flightOnAction:" destination="F7c-XD-sgH" eventType="touchUpInside" id="Y9m-ou-JrU"/>
+                                                <action selector="flightOnAction:" destination="4m0-lm-Sac" eventType="touchUpInside" id="ZhP-L9-ldR"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IgD-Ni-ejZ">
+                                            <rect key="frame" x="155" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="turbStart.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="turbAction:" destination="4m0-lm-Sac" eventType="touchUpInside" id="KXe-y1-k64"/>
+                                                <action selector="turbAction:" destination="F7c-XD-sgH" eventType="touchUpInside" id="k3q-2b-0wl"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Gmn-W9-nH2">
+                                            <rect key="frame" x="273" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="settingPanel.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="N56-em-OBx" kind="modal" id="iVU-kB-4xI"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="D7h-xA-gIv">
+                                            <rect key="frame" x="392" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="helpPanel.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="vd9-7V-NKQ" kind="modal" id="Pug-mX-8JM"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00.000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tqG-57-ZtK">
+                                            <rect key="frame" x="110" y="158" width="293" height="62"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="44"/>
+                                            <color key="textColor" red="0.30893905389999998" green="0.30893905389999998" blue="0.30893905389999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="S8v-11-y06">
+                                            <rect key="frame" x="41" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="flightStopRed.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="flightOnAction:" destination="F7c-XD-sgH" eventType="touchUpInside" id="9n6-UE-tks"/>
+                                                <action selector="flightOnAction:" destination="4m0-lm-Sac" eventType="touchUpInside" id="H0F-yO-owr"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Xw4-np-e15">
+                                            <rect key="frame" x="155" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="turbStopRed.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="turbAction:" destination="F7c-XD-sgH" eventType="touchUpInside" id="b8n-ds-aCb"/>
+                                                <action selector="turbAction:" destination="4m0-lm-Sac" eventType="touchUpInside" id="jmy-7P-8VG"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="MUp-Ee-DiZ">
+                                <rect key="frame" x="321" y="106" width="127" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Radar"/>
+                                    <segment title="Satellite"/>
+                                </segments>
+                                <connections>
+                                    <action selector="viewChange:" destination="4m0-lm-Sac" eventType="valueChanged" id="6cW-2b-zuj"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Radar View" image="RADAR2.png" id="DMe-OT-9bb"/>
                     <connections>
+                        <outlet property="controlUp" destination="qK3-yz-agB" id="Rha-pY-TFn"/>
+                        <outlet property="flightOff" destination="S8v-11-y06" id="Suo-uk-5Xj"/>
+                        <outlet property="flightOn" destination="37k-WU-Z1B" id="r7H-iS-tAi"/>
+                        <outlet property="header" destination="s6X-gN-8I0" id="gsB-vE-mxY"/>
                         <outlet property="mapView" destination="NZE-sM-nQh" id="vUH-5T-aek"/>
+                        <outlet property="panel" destination="UNz-p1-svV" id="Ma6-Ub-E1c"/>
+                        <outlet property="seg" destination="MUp-Ee-DiZ" id="I8Z-jN-ztl"/>
+                        <outlet property="stopWatchLBL" destination="tqG-57-ZtK" id="M5p-4s-vlO"/>
+                        <outlet property="turbOff" destination="Xw4-np-e15" id="eKv-Sn-PDv"/>
+                        <outlet property="turbOn" destination="IgD-Ni-ejZ" id="FWd-aW-Fvs"/>
+                        <outlet property="zoom" destination="tdH-9Q-Sdg" id="Xyk-Oj-7js"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6O-v7-NrS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1249" y="2175"/>
+            <point key="canvasLocation" x="-1250" y="2154"/>
         </scene>
         <!--METARS-->
         <scene sceneID="fYK-vn-cjp">
@@ -1164,18 +1532,132 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="R7M-ju-MIT" userLabel="zoominButton">
+                                <rect key="frame" x="653" y="846" width="53" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="   ">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qsT-Lr-4pL">
+                                <rect key="frame" x="128" y="944" width="513" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="upSlider.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="controlPanel:" destination="F7c-XD-sgH" eventType="touchUpInside" id="ZTb-pM-Mj1"/>
+                                </connections>
+                            </button>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" id="2mI-5O-afm">
+                                <rect key="frame" x="128" y="708" width="512" height="267"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="pPb-z3-gxQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="512" height="267"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Eq2-nF-ifb">
+                                            <rect key="frame" x="-5" y="0.0" width="517" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="downSlider.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="controlPanel:" destination="F7c-XD-sgH" eventType="touchUpInside" id="5Jg-Om-rav"/>
+                                                <action selector="controlPanelDown:" destination="F7c-XD-sgH" eventType="touchUpInside" id="Umv-ls-Xhi"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yWJ-hI-R6N">
+                                            <rect key="frame" x="41" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="flightStart.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="flightOnAction:" destination="F7c-XD-sgH" eventType="touchUpInside" id="pCo-U0-Q0q"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zkE-is-vcB">
+                                            <rect key="frame" x="155" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="turbStart.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="turbAction:" destination="F7c-XD-sgH" eventType="touchUpInside" id="kb5-Dy-hqD"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nov-JS-flw">
+                                            <rect key="frame" x="273" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="settingPanel.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="N56-em-OBx" kind="modal" id="L4K-BU-k39"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iZ7-nS-fA3">
+                                            <rect key="frame" x="392" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="helpPanel.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="vd9-7V-NKQ" kind="modal" id="IQZ-cs-0Kw"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00.000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3CG-rz-kOf">
+                                            <rect key="frame" x="110" y="158" width="293" height="62"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="44"/>
+                                            <color key="textColor" red="0.30893905389999998" green="0.30893905389999998" blue="0.30893905389999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GNp-Vy-vHC">
+                                            <rect key="frame" x="41" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="flightStopRed.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="flightOnAction:" destination="F7c-XD-sgH" eventType="touchUpInside" id="Ko7-es-xbn"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9e6-ev-hx0">
+                                            <rect key="frame" x="155" y="50" width="77" height="76"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="turbStopRed.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="turbAction:" destination="F7c-XD-sgH" eventType="touchUpInside" id="98z-mT-B9o"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="METARS" image="METARS.png" id="upq-yO-A3p"/>
                     <connections>
                         <outlet property="activityStatus" destination="G20-1P-5vv" id="7QS-Od-BtH"/>
+                        <outlet property="controlUp" destination="qsT-Lr-4pL" id="tiL-OT-KbY"/>
                         <outlet property="displayMetar" destination="LhL-79-dMe" id="uWK-6H-ksp"/>
                         <outlet property="displayWind" destination="417-S2-X4T" id="6VB-CA-FID"/>
+                        <outlet property="flightOff" destination="GNp-Vy-vHC" id="qIK-kT-Abb"/>
+                        <outlet property="flightOn" destination="yWJ-hI-R6N" id="J5c-Qf-rbA"/>
                         <outlet property="header" destination="eph-2z-tvt" id="z9g-Pg-9rc"/>
                         <outlet property="lastUpdate" destination="fte-l3-7d9" id="WWq-BM-2yo"/>
                         <outlet property="loadingImage" destination="7yy-kh-Yyw" id="Wz2-vm-MI8"/>
+                        <outlet property="panel" destination="2mI-5O-afm" id="FAh-AD-Mcq"/>
                         <outlet property="segmentedControl" destination="wqi-UI-BrZ" id="znP-lG-cam"/>
+                        <outlet property="stopWatchLBL" destination="3CG-rz-kOf" id="5p7-AH-U5U"/>
+                        <outlet property="turbOff" destination="9e6-ev-hx0" id="kLQ-TG-e4L"/>
+                        <outlet property="turbOn" destination="zkE-is-vcB" id="R0b-ho-65h"/>
+                        <outlet property="zoom" destination="R7M-ju-MIT" id="yUv-pB-Sg5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OQE-FF-zkp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1313,7 +1795,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nLb-hP-E5q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1321" y="-1388"/>
+            <point key="canvasLocation" x="-339" y="-1388"/>
         </scene>
         <!--User ManualVC-->
         <scene sceneID="ClM-HA-69c">
@@ -1359,7 +1841,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wje-BP-43Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="503" y="-1388"/>
+            <point key="canvasLocation" x="498" y="-1388"/>
         </scene>
     </scenes>
     <resources>
@@ -1395,6 +1877,7 @@
         <image name="turbStart.png" width="74" height="74"/>
         <image name="turbStopRed.png" width="74" height="74"/>
         <image name="upSlider.png" width="640" height="45"/>
+        <image name="zoomingin.png" width="78" height="78"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -1402,7 +1885,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="FaS-k3-7kv"/>
-        <segue reference="JuX-0P-Lga"/>
+        <segue reference="Pug-mX-8JM"/>
+        <segue reference="iVU-kB-4xI"/>
     </inferredMetricsTieBreakers>
 </document>

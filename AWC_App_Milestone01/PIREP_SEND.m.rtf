@@ -1,0 +1,1799 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1344\cocoasubrtf720
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green116\blue0;\red100\green56\blue32;\red196\green26\blue22;
+\red28\green0\blue207;\red170\green13\blue145;\red63\green110\blue116;\red92\green38\blue153;\red46\green13\blue110;
+\red38\green71\blue75;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab529
+\pard\tx529\pardeftab529\pardirnatural
+
+\f0\fs22 \cf2 \CocoaLigature0 //	This file is saved for future references\
+// 	As the PIREP SEND Tab was giving some trouble after re-alignment of buttons \
+//	for the levels.\
+//	The same code was replaced with the earlier copy of the same\
+//	Which for some strange reason was working fine.\
+//	And more importantly I don\'92t have any time to go through such huge code just to debug.\
+//	-Syed Mazhar\cf0 \
+\cf2 //  AWCSecondViewController.m\cf0 \
+\cf2 //  AWC_App_Milestone01\cf0 \
+\cf2 //\cf0 \
+\cf2 //  Created by SATISH KUMAR BASWAPURAM on 9/29/13.\cf0 \
+\cf2 //  Copyright (c) 2013 Satish Kumar Baswapuram. All rights reserved.\cf0 \
+\cf2 //\cf0 \
+\
+\cf3 #import \cf4 "PIREP_Send_Tab.h"\cf3 \
+\cf0 \
+\cf3 #define PIREP_CONFIRMATION_TAG \cf5 524\cf3 \
+\cf0 \
+\cf6 @interface\cf0  \cf7 PIREP_Send_Tab\cf0  ()\
+\
+\cf6 @property\cf0  \cf8 NSMutableArray\cf0  * flightData;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * pirepSend;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * pirepInit;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * presentPirep;\
+\cf2 //To check the Level of the Category\cf0 \
+\cf6 @property\cf0  \cf8 NSString\cf0  * chopLevel;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * turbLevel;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * mtnLevel;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * iceLevel;\
+\cf2 //Although only iceLevel is used in the code\cf0 \
+\cf6 @property\cf0  \cf8 UIAlertView\cf0  * alert;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * filePath;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * addData;\
+\cf6 @property\cf0  \cf6 int\cf0  chopPosition;\
+\cf6 @property\cf0  \cf6 int\cf0  turbPosition;\
+\cf6 @property\cf0  \cf6 int\cf0  mtnPosition;\
+\cf6 @property\cf0  \cf6 int\cf0  icePosition;\
+\cf2 //@property NSArray * iceBreak;// To Split the Ice string into two\cf0 \
+\
+\cf2 //To save the data on a server\cf0 \
+\cf6 @property\cf0  \cf8 NSString\cf0  * lisenceNum;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * timeOfReport;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * aircraftType;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * tailNumber;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * skyCondition;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * weatherCondition;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * locationLatitude;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * locationLongitude;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * pilotReport;\
+\cf6 @property\cf0  \cf8 NSString\cf0  * pageURL;\
+\
+\
+\cf6 @end\cf0 \
+\
+\cf6 @implementation\cf0  PIREP_Send_Tab\
+\
+\cf6 @synthesize\cf0  myLoc,flightData,alert,filePath,addData;\
+\
+- (\cf6 void\cf0 )viewDidLoad\
+\{\
+    [\cf6 super\cf0  \cf9 viewDidLoad\cf0 ];\
+    \
+    \
+    \
+\}\
+\
+\cf2 //Initialize the data after the view appears to enable faster switching between tabs.\cf0 \
+-(\cf6 void\cf0 )viewDidAppear:(\cf6 BOOL\cf0 )animated\
+\{\
+    [\cf6 self\cf0  \cf10 initializeData\cf0 ];\
+\}\
+\
+\cf2 //Initialize the variables used to save the PIREP Report.\cf0 \
+-(\cf6 void\cf0 )initializeData\
+\{\
+    \cf2 //[self setDefaults];\cf0 \
+    \
+    \cf6 self\cf0 .\cf7 appDelegate\cf0  = [[\cf8 UIApplication\cf0  \cf9 sharedApplication\cf0 ] \cf9 delegate\cf0 ];\
+    \
+    \cf6 self\cf0 .\cf8 view\cf0 .\cf8 backgroundColor\cf0  = \cf6 self\cf0 .\cf7 appDelegate\cf0 .\cf7 awcColor\cf0 ;\
+    [\cf6 self\cf0 .\cf7 header\cf0  \cf9 setBarTintColor\cf0 :\cf6 self\cf0 .\cf7 appDelegate\cf0 .\cf7 awcColor\cf0 ];\
+    [\cf6 self\cf0 .\cf7 header\cf0  \cf9 setBackgroundImage\cf0 :\cf6 self\cf0 .\cf7 appDelegate\cf0 .\cf7 header\cf0  \cf9 forBarPosition\cf0 :\cf9 UIBarPositionTop\cf0  \cf9 barMetrics\cf0 :\cf9 UIBarMetricsDefault\cf0 ];\
+    [\cf6 self\cf0 .\cf7 header\cf0  \cf9 setTintColor\cf0 :[\cf8 UIColor\cf0  \cf9 whiteColor\cf0 ]];\
+    \cf6 self\cf0 .\cf7 header\cf0 .\cf8 titleTextAttributes\cf0  = \cf5 @\{\cf8 NSForegroundColorAttributeName\cf0 :[\cf8 UIColor\cf0  \cf9 whiteColor\cf0 ]\cf5 \}\cf0 ;\
+    \
+    \
+    \cf6 self\cf0 .\cf7 flightData\cf0  = \cf6 self\cf0 .\cf7 appDelegate\cf0 .\cf7 flightInformation\cf0 ;\
+    \
+    \cf6 self\cf0 .\cf7 presentPirep\cf0  = \cf4 @""\cf0 ;\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 textAlignment\cf0  = \cf9 NSTextAlignmentCenter\cf0 ;\
+    \cf6 self\cf0 .\cf7 pirepData\cf0  = [[\cf8 NSMutableArray\cf0  \cf9 alloc\cf0 ]\cf9 init\cf0 ];\
+    \cf2 //self.pirepSelected.delegate = self;\cf0 \
+    \cf2 //[self.pirepSelected addTarget:self action:@selector(changePirep:) forControlEvents:UIControlEventTouchDown];\cf0 \
+    \
+    \cf6 self\cf0 .\cf7 alert\cf0 .\cf8 delegate\cf0  = \cf6 self\cf0 ;\
+    [\cf6 self\cf0 .\cf7 alert\cf0  \cf9 setTag\cf0 :\cf5 0\cf0 ];\
+    \
+    \cf2 //NSLog(@"Al T = %d",self.alert.tag);\cf0 \
+    \
+    \cf6 self\cf0 .\cf7 filePath\cf0  = \cf4 @""\cf0 ;\
+    \cf6 self\cf0 .\cf7 addData\cf0  = \cf4 @""\cf0 ;\
+    \
+    \cf6 self\cf0 .\cf7 chopPosition\cf0  = -\cf5 1\cf0 ;\
+    \cf6 self\cf0 .\cf7 turbPosition\cf0  = -\cf5 1\cf0 ;\
+    \cf6 self\cf0 .\cf7 mtnPosition\cf0  = -\cf5 1\cf0 ;\
+    \cf6 self\cf0 .\cf7 icePosition\cf0  = -\cf5 1\cf0 ;\
+    \
+    \cf2 //PIREP types initialization\cf0 \
+    \
+    \cf6 self\cf0 .\cf7 chopLevel\cf0  = \cf4 @""\cf0 ;\
+    \cf6 self\cf0 .\cf7 turbLevel\cf0  = \cf4 @""\cf0 ;\
+    \cf6 self\cf0 .\cf7 mtnLevel\cf0  = \cf4 @""\cf0 ;\
+    \cf6 self\cf0 .\cf7 iceLevel\cf0  = \cf4 @""\cf0 ;\
+    \
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf4 @""\cf0 ;\
+    \
+    \cf2 //Show heading\cf0 \
+    \
+    \cf6 self\cf0 .\cf7 titleInfo\cf0 .\cf8 hidden\cf0  = \cf6 NO\cf0 ;\
+    \
+    \cf2 //Show main categories\cf0 \
+    \
+\cf2 //    self.chop.enabled = YES;\cf0 \
+\cf2 //    self.turb.enabled = YES;\cf0 \
+\cf2 //    self.mtn.enabled = YES;\cf0 \
+\cf2 //    self.ice.enabled = YES;\cf0 \
+    \
+    \cf2 //edit2014\cf0 \
+    \cf2 //Locking Ice Levels\cf0 \
+    \cf6 self\cf0 .\cf7 lightIce\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 modIce\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 greaterIce\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 trace\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 iceTL\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 iceLM\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 iceMS\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \
+    \cf2 //Enabling Chop and Turb levels\cf0 \
+    \cf6 self\cf0 .\cf7 lightChop\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 modChop\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 greaterChop\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 noChop\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 lightTurb\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 modTurb\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 greaterTurb\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 noTurb\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 chopLM\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 chopMS\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 turbLM\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 turbMS\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf2 //edit2014 ends\cf0 \
+    \
+    \cf2 //Getting the location\cf0 \
+    \cf6 self\cf0 .\cf7 myLoc\cf0  = [[\cf8 CLLocationManager\cf0  \cf9 alloc\cf0 ]\cf9 init\cf0 ];\
+    \cf6 self\cf0 .\cf7 myLoc\cf0 .\cf8 delegate\cf0  = \cf6 self\cf0 ;\
+    \cf6 self\cf0 .\cf7 myLoc\cf0 .\cf8 desiredAccuracy\cf0  = \cf8 kCLLocationAccuracyKilometer\cf0 ;\
+    [\cf6 self\cf0 .\cf7 myLoc\cf0  \cf9 startUpdatingLocation\cf0 ];\
+    \
+    \cf2 //NSLog(@"Lat: %f, Long: %f",self.myLoc.location.coordinate.latitude,\cf0 \
+    \cf2 //self.myLoc.location.coordinate.longitude);\cf0 \
+    \
+    \
+    \
+    \cf2 //Initializing the server variables' values\cf0 \
+    \cf6 self\cf0 .\cf7 lisenceNum\cf0  = \cf6 self\cf0 .\cf7 flightData\cf0 [\cf5 3\cf0 ];\
+    \cf6 self\cf0 .\cf7 aircraftType\cf0  = \cf6 self\cf0 .\cf7 flightData\cf0 [\cf5 1\cf0 ];\
+    \cf6 self\cf0 .\cf7 tailNumber\cf0  = \cf6 self\cf0 .\cf7 flightData\cf0 [\cf5 2\cf0 ];\
+    \cf6 self\cf0 .\cf7 skyCondition\cf0  = \cf4 @"UNKNWN"\cf0 ;\
+    \cf6 self\cf0 .\cf7 weatherCondition\cf0  = \cf4 @"UNKNWN"\cf0 ;\
+    \cf6 self\cf0 .\cf7 pageURL\cf0  = \cf4 @"http://csgrad06.nwmissouri.edu/SaveDataToServer.php"\cf0 ;\
+    \
+    \
+    \cf2 //Target methods for Chop\cf0 \
+    \cf2 //[self.chop addTarget:self action:@selector(Chop) forControlEvents:UIControlEventTouchUpInside];\cf0 \
+    [\cf6 self\cf0 .\cf7 lightChop\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (lChop) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 modChop\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (mChop) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 greaterChop\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (gChop) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 noChop\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (nChop) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    \
+    \cf2 //Target methods for Turbulence\cf0 \
+    \cf2 //[self.turb addTarget:self action:@selector(Turb) forControlEvents:UIControlEventTouchUpInside];\cf0 \
+    [\cf6 self\cf0 .\cf7 lightTurb\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0  : \cf6 @selector\cf0 (lTurb) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 modTurb\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (mTurb) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 greaterTurb\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (gTurb) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 noTurb\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (nTurb) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    \
+    \cf2 //Target methods for Mtn Wave\cf0 \
+    \cf2 //[self.mtn addTarget:self action:@selector(mtnWave) forControlEvents:UIControlEventTouchUpInside];\cf0 \
+    [\cf6 self\cf0 .\cf7 lightMtn\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (lMtn) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 modMtn\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (mMtn) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 greaterMtn\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (gMtn) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 noMtn\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (nMtn) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    \
+    \cf2 //Target methods for Ice\cf0 \
+    \
+    \cf2 //[self.ice addTarget:self action:@selector(Ice) forControlEvents:UIControlEventTouchUpInside];\cf0 \
+    \
+    \
+    [\cf6 self\cf0 .\cf7 clear\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (clearIce) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 rime\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (rimeIce) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 mixed\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (mixedIce) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    \
+    \
+    [\cf6 self\cf0 .\cf7 trace\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (traceIce) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 lightIce\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (lIce) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 modIce\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (mIce) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 greaterIce\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (gIce) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 noIce\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (nIce) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    \
+    [\cf6 self\cf0 .\cf7 sendPirep\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (sendPirep:) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    \
+    \cf2 //edit2014\cf0 \
+    \cf2 //The plus/dual Level Buttons\cf0 \
+    [\cf6 self\cf0 .\cf7 chopLM\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (chopLMF) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 chopMS\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (chopMSF) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 turbLM\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (turbLMF) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 turbMS\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (turbMSF) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 mtnLM\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (mtnLMF) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 mtnMS\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (mtnMSF) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 iceTL\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (iceTLF) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 iceLM\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (iceLMF) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    [\cf6 self\cf0 .\cf7 iceMS\cf0  \cf9 addTarget\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (iceMSF) \cf9 forControlEvents\cf0 :\cf9 UIControlEventTouchUpInside\cf0 ];\
+    \cf2 //edit2014 ends\cf0 \
+  \
+    \cf2 // Do any additional setup after loading the view, typically from a nib.\cf0 \
+    \
+\}\
+\
+\cf2 //Update and return the present time to the program for including it in the PIREP.\cf0 \
+-(\cf8 NSString\cf0  *)updateTime\
+\{\
+    \cf2 //Getting system time\cf0 \
+    \
+    \cf8 NSDate\cf0  *date = [\cf8 NSDate\cf0  \cf9 date\cf0 ];\
+    \cf8 NSDateFormatter\cf0  *dateFormatter = [[\cf8 NSDateFormatter\cf0  \cf9 alloc\cf0 ]\cf9 init\cf0 ];\
+    [dateFormatter \cf9 setDateFormat\cf0 :\cf4 @"HH:mm:ss MM-dd-YYYY"\cf0 ];\
+    [dateFormatter \cf9 setTimeZone\cf0 :[\cf8 NSTimeZone\cf0  \cf9 systemTimeZone\cf0 ]];\
+    \cf8 NSString\cf0  *presentTime = [dateFormatter \cf9 stringFromDate\cf0 :date];\
+    \
+    \
+    \
+    \cf6 self\cf0 .\cf7 pirepInit\cf0  = [\cf8 NSString\cf0  \cf9 stringWithFormat\cf0 :\cf4 @"%@/TM %@/FL %@/TP %@/SK UNKN/WX UNKN/[%0.2f,%0.2f]/"\cf0 ,\
+                      [\cf6 self\cf0 .\cf7 flightData\cf0  \cf9 objectAtIndex\cf0 :\cf5 3\cf0 ], presentTime,\
+                      [\cf6 self\cf0 .\cf7 flightData\cf0  \cf9 objectAtIndex\cf0 :\cf5 2\cf0 ],\
+                      [\cf6 self\cf0 .\cf7 flightData\cf0  \cf9 objectAtIndex\cf0 :\cf5 1\cf0 ],\
+                      \cf6 self\cf0 .\cf7 myLoc\cf0 .\cf8 location\cf0 .\cf8 coordinate\cf0 .\cf8 latitude\cf0 ,\
+                      \cf6 self\cf0 .\cf7 myLoc\cf0 .\cf8 location\cf0 .\cf8 coordinate\cf0 .\cf8 longitude\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPirep\cf0 ];\
+    \cf2 //NSLog(@"********>>>>>>>>>>>>>>>>>>>>>>> %@",self.pirepInit);\cf0 \
+    \
+    \cf6 return\cf0  presentTime;\
+\}\
+\
+- (\cf6 void\cf0 )didReceiveMemoryWarning\
+\{\
+    [\cf6 super\cf0  \cf9 didReceiveMemoryWarning\cf0 ];\
+    \cf2 // Dispose of any resources that can be recreated.\cf0 \
+\}\
+\
+\cf2 //Initialize the property pirepSend\cf0 \
+-(\cf6 void\cf0 )setPirep\
+\{\
+    \cf6 self\cf0 .\cf7 pirepSend\cf0  = \cf6 self\cf0 .\cf7 pirepInit\cf0 ;\
+\}\
+\
+\cf2 //Each time the user selects a category on the screen, the presentPirep is updated which is used to display the information to the user on the screen.\cf0 \
+-(\cf6 void\cf0 )setPresentPirepData\
+\{\
+    \cf6 if\cf0 ([\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]>\cf5 0\cf0 )\
+    \{\
+        \cf6 for\cf0 (\cf6 int\cf0  i=\cf5 1\cf0 ;i<[\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ];i++)\
+        \{\
+            \cf6 self\cf0 .\cf7 presentPirep\cf0  = [\cf6 self\cf0 .\cf7 presentPirep\cf0  \cf9 stringByAppendingFormat\cf0 :\cf4 @"/%@"\cf0 ,\cf6 self\cf0 .\cf7 pirepData\cf0 [i]];\
+        \}\
+    \}\
+    \cf6 else\cf0 \
+        \cf6 self\cf0 .\cf7 presentPirep\cf0  = \cf4 @""\cf0 ;\
+\}\
+\
+\cf2 //Update report when user clicks on Chop button.\cf0 \
+\cf2 //- (void)Chop \{\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@"/CHOP"];\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //    if(![self.presentPirep isEqualToString:@""])\cf0 \
+\cf2 //    //        self.presentPirep = [self.presentPirep stringByAppendingString:@"/"];\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    self.presentPirep = [self.presentPirep stringByAppendingString:@"CHOP"];\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    if(self.chopPosition==-1)\cf0 \
+\cf2 //    \{\cf0 \
+\cf2 //        [self.pirepData addObject:@"CHOP"];\cf0 \
+\cf2 //        self.chopPosition = [self.pirepData count]-1;\cf0 \
+\cf2 //    \}\cf0 \
+\cf2 //    else\cf0 \
+\cf2 //    \{\cf0 \
+\cf2 //        [self.pirepData setObject:@"CHOP" atIndexedSubscript:self.chopPosition];\cf0 \
+\cf2 //    \}\cf0 \
+\cf2 //    [self setPresentPirepData];\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    self.pirepSelected.text = self.presentPirep;\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //[self.chop setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //self.chopLevel = @"/CHOP ";\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //self.checkChop = NO;\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //    self.chop.enabled = NO;\cf0 \
+\cf2 //    //    self.turb.enabled = NO;\cf0 \
+\cf2 //    //    self.mtn.enabled = NO;\cf0 \
+\cf2 //    //    self.ice.enabled = NO;\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    [self.lightChop setBackgroundImage:[UIImage imageNamed:@"CHOP_LGT.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    //    [self.modChop setBackgroundImage:[UIImage imageNamed:@"CHOP_MOD.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    //    [self.greaterChop setBackgroundImage:[UIImage imageNamed:@"CHOP_GRT.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    self.lightChop.enabled = YES;\cf0 \
+\cf2 //    //    self.modChop.enabled = YES;\cf0 \
+\cf2 //    //    self.greaterChop.enabled = YES;\cf0 \
+\cf2 //    //    self.noChop.enabled = YES;\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //self.sendPirep.enabled = NO;\cf0 \
+\cf2 //\}\cf0 \
+\
+\cf2 //Update report when user clicks on lightChop button.\cf0 \
+-(\cf6 void\cf0 )lChop\
+\{\
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];\cf0 \
+    \cf2 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" LGT"];\cf0 \
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 chopPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"TB LGT CHOP"\cf0 ];\
+        \cf6 self\cf0 .\cf7 chopPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"TB LGT CHOP"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 chopPosition\cf0 ];\
+    \}\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //edit2014\cf0 \
+    \cf6 self\cf0 .\cf7 lightTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 modTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf6 self\cf0 .\cf7 greaterTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 noTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf2 //self.turb.enabled = NO;\cf0 \
+    \cf2 //edit2014 ends\cf0 \
+    \cf2 //[self saveToFile:@" LGT"];\cf0 \
+    \
+    \cf2 //[self.lightChop setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \
+    \cf2 //    self.lightChop.enabled = NO;\cf0 \
+    \cf2 //    self.modChop.enabled = NO;\cf0 \
+    \cf2 //    self.greaterChop.enabled = NO;\cf0 \
+    \cf2 //    self.noChop.enabled = NO;\cf0 \
+    \
+    \cf2 //self.chopLevel = @"/CHOP LGT";\cf0 \
+    \
+    \cf2 //    //if(self.checkTurb)\cf0 \
+    \cf2 //        self.turb.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkMtn)\cf0 \
+    \cf2 //        self.mtn.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkIce)\cf0 \
+    \cf2 //        self.ice.enabled = YES;\cf0 \
+    \cf2 //    self.chop.enabled = YES;\cf0 \
+    \cf2 //    [self.chop setBackgroundImage:[UIImage imageNamed:@"GreenBack.png"] forState:UIControlStateNormal];\cf0 \
+    \
+    \cf2 //self.sendPirep.enabled = YES;\cf0 \
+\}\
+\cf2 //Update report when user selects level betwween CHOP LGT-MOD\cf0 \
+-(\cf6 void\cf0 )chopLMF\
+\{\
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 chopPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"TB LGT-MOD CHOP"\cf0 ];\
+        \cf6 self\cf0 .\cf7 chopPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"TB LGT-MOD CHOP"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 chopPosition\cf0 ];\
+    \}\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //edit2014\cf0 \
+    \cf6 self\cf0 .\cf7 lightTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 modTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf6 self\cf0 .\cf7 greaterTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 noTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 turbLM\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 turbMS\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+\}\
+\cf2 //Update report when user clicks on modChop button.\cf0 \
+-(\cf6 void\cf0 )mChop\
+\{\
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];\cf0 \
+    \cf2 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" MOD"];\cf0 \
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 chopPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"TB MOD CHOP"\cf0 ];\
+        \cf6 self\cf0 .\cf7 chopPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"TB MOD CHOP"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 chopPosition\cf0 ];\
+    \}\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //edit2014\cf0 \
+    \cf6 self\cf0 .\cf7 lightTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 modTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf6 self\cf0 .\cf7 greaterTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 noTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf2 //self.turb.enabled = NO;\cf0 \
+    \cf2 //edit2014 ends\cf0 \
+    \cf2 //[self saveToFile:@" MOD"];\cf0 \
+    \
+    \cf2 //    self.lightChop.enabled = NO;\cf0 \
+    \cf2 //    self.modChop.enabled = NO;\cf0 \
+    \cf2 //    self.greaterChop.enabled = NO;\cf0 \
+    \cf2 //    self.noChop.enabled = NO;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    [self.modChop setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //self.chopLevel = @"/CHOP MOD";\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //if(self.checkTurb)\cf0 \
+    \cf2 //        self.turb.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkMtn)\cf0 \
+    \cf2 //        self.mtn.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkIce)\cf0 \
+    \cf2 //        self.ice.enabled = YES;\cf0 \
+    \cf2 //    self.chop.enabled = YES;\cf0 \
+    \cf2 //    [self.chop setBackgroundImage:[UIImage imageNamed:@"GreenBack.png"] forState:UIControlStateNormal];\cf0 \
+    \
+    \cf2 //self.sendPirep.enabled = YES;\cf0 \
+\}\
+\
+\cf2 //Update report when user selects level betwween CHOP MOD-SEV\cf0 \
+-(\cf6 void\cf0 )chopMSF\
+\{\
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 chopPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"TB MOD-SEV CHOP"\cf0 ];\
+        \cf6 self\cf0 .\cf7 chopPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"TB MOD-SEV CHOP"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 chopPosition\cf0 ];\
+    \}\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //edit2014\cf0 \
+    \cf6 self\cf0 .\cf7 lightTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 modTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf6 self\cf0 .\cf7 greaterTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 noTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 turbLM\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 turbMS\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+\}\
+\
+\cf2 //Update report when user clicks on greatChop button.\cf0 \
+-(\cf6 void\cf0 )gChop\
+\{\
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];\cf0 \
+    \cf2 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" GRT"];\cf0 \
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 chopPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"TB SEV CHOP"\cf0 ];\
+        \cf6 self\cf0 .\cf7 chopPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"TB SEV CHOP"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 chopPosition\cf0 ];\
+    \}\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //edit2014\cf0 \
+    \cf6 self\cf0 .\cf7 lightTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 modTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf6 self\cf0 .\cf7 greaterTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 noTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf2 //self.turb.enabled = NO;\cf0 \
+    \cf2 //edit2014 ends\cf0 \
+    \cf2 //    self.lightChop.enabled = NO;\cf0 \
+    \cf2 //    self.modChop.enabled = NO;\cf0 \
+    \cf2 //    self.greaterChop.enabled = NO;\cf0 \
+    \cf2 //    self.noChop.enabled = NO;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //self.chopLevel = @"/CHOP GRT";\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    [self.greaterChop setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //if(self.checkTurb)\cf0 \
+    \cf2 //        self.turb.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkMtn)\cf0 \
+    \cf2 //        self.mtn.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkIce)\cf0 \
+    \cf2 //        self.ice.enabled = YES;\cf0 \
+    \cf2 //    self.chop.enabled = YES;\cf0 \
+    \cf2 //    [self.chop setBackgroundImage:[UIImage imageNamed:@"GreenBack.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.sendPirep.enabled = YES;\cf0 \
+    \cf2 //[self saveToFile:@" GRT"];\cf0 \
+\}\
+\
+\cf2 //Update report when user clicks on noneChop button.\cf0 \
+-(\cf6 void\cf0 )nChop\
+\{\
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 chopPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"TB NEG CHOP"\cf0 ];\
+        \cf6 self\cf0 .\cf7 chopPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"TB NEG CHOP"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 mtnPosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //edit2014\cf0 \
+    \cf6 self\cf0 .\cf7 lightTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 modTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf6 self\cf0 .\cf7 greaterTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 noTurb\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf2 //self.turb.enabled = NO;\cf0 \
+    \cf2 //edit2014 ends\cf0 \
+\cf2 //    if(self.chopPosition!=-1)\cf0 \
+\cf2 //    \{\cf0 \
+\cf2 //        if(self.turbPosition>self.chopPosition)\cf0 \
+\cf2 //            self.turbPosition--;\cf0 \
+\cf2 //        if(self.mtnPosition>self.chopPosition)\cf0 \
+\cf2 //            self.mtnPosition--;\cf0 \
+\cf2 //        if(self.icePosition>self.chopPosition)\cf0 \
+\cf2 //            self.icePosition--;\cf0 \
+\cf2 //        \cf0 \
+\cf2 //        [self.pirepData removeObjectAtIndex:self.chopPosition];\cf0 \
+\cf2 //        self.chopPosition = -1;\cf0 \
+\cf2 //        \cf0 \
+\cf2 //        [self setPresentPirepData];\cf0 \
+\cf2 //        self.pirepSelected.text = self.presentPirep;\cf0 \
+    \
+        \cf2 //        self.lightChop.enabled = NO;\cf0 \
+        \cf2 //        self.modChop.enabled = NO;\cf0 \
+        \cf2 //        self.greaterChop.enabled = NO;\cf0 \
+        \cf2 //        self.noChop.enabled = NO;\cf0 \
+        \cf2 //\cf0 \
+        \cf2 //        //if(self.checkTurb)\cf0 \
+        \cf2 //        self.turb.enabled = YES;\cf0 \
+        \cf2 //        //if(self.checkMtn)\cf0 \
+        \cf2 //        self.mtn.enabled = YES;\cf0 \
+        \cf2 //        //if(self.checkIce)\cf0 \
+        \cf2 //        self.ice.enabled = YES;\cf0 \
+        \cf2 //        self.chop.enabled = YES;\cf0 \
+        \cf2 //        [self.chop setBackgroundImage:[UIImage imageNamed:@"GreenBack.png"] forState:UIControlStateNormal];\cf0 \
+        \cf2 //\cf0 \
+        \cf2 //        self.sendPirep.enabled = YES;\cf0 \
+\cf2 //    \}\cf0 \
+\}\
+\
+\cf2 //Update report when user clicks on Turb button.\cf0 \
+\cf2 //- (void)Turb\cf0 \
+\cf2 //\{\cf0 \
+\cf2 //    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@"/TURB"];\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    if(![self.presentPirep isEqualToString:@""])\cf0 \
+\cf2 //    //        self.presentPirep = [self.presentPirep stringByAppendingString:@"/"];\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    self.presentPirep = [self.presentPirep stringByAppendingString:@"TURB"];\cf0 \
+\cf2 //    if(self.turbPosition==-1)\cf0 \
+\cf2 //    \{\cf0 \
+\cf2 //        [self.pirepData addObject:@"TURB"];\cf0 \
+\cf2 //        self.turbPosition = [self.pirepData count]-1;\cf0 \
+\cf2 //    \}\cf0 \
+\cf2 //    else\cf0 \
+\cf2 //    \{\cf0 \
+\cf2 //        [self.pirepData setObject:@"TURB" atIndexedSubscript:self.turbPosition];\cf0 \
+\cf2 //    \}\cf0 \
+\cf2 //    [self setPresentPirepData];\cf0 \
+\cf2 //    self.pirepSelected.text = self.presentPirep;\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //self.presentPirep = @"Turbulence ";\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //[self.turb setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //self.checkTurb = NO;\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //    self.turb.enabled = NO;\cf0 \
+\cf2 //    //    self.chop.enabled = NO;\cf0 \
+\cf2 //    //    self.mtn.enabled = NO;\cf0 \
+\cf2 //    //    self.ice.enabled = NO;\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    [self.lightTurb setBackgroundImage:[UIImage imageNamed:@"TURB_LGT.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    //    [self.modTurb setBackgroundImage:[UIImage imageNamed:@"TURB_MOD.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    //    [self.greaterTurb setBackgroundImage:[UIImage imageNamed:@"TURB_GRT.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    self.lightTurb.enabled = YES;\cf0 \
+\cf2 //    //    self.modTurb.enabled = YES;\cf0 \
+\cf2 //    //    self.greaterTurb.enabled = YES;\cf0 \
+\cf2 //    //    self.noTurb.enabled = YES;\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    self.sendPirep.enabled = NO;\cf0 \
+\cf2 //\}\cf0 \
+\
+\cf2 //Update report when user clicks on lightTurb button.\cf0 \
+- (\cf6 void\cf0 ) lTurb\
+\{\
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];\cf0 \
+    \cf2 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" LGT"];\cf0 \
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 turbPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"TB LGT"\cf0 ];\
+        \cf6 self\cf0 .\cf7 turbPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"TB LGT"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 turbPosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //edit2014\cf0 \
+    \cf6 self\cf0 .\cf7 lightChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 modChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf6 self\cf0 .\cf7 greaterChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 noChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf2 //edit2014 ends\cf0 \
+    \cf2 //[self saveToFile:@" LGT"];\cf0 \
+    \
+    \cf2 //    [self.lightTurb setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.lightTurb.enabled = NO;\cf0 \
+    \cf2 //    self.modTurb.enabled = NO;\cf0 \
+    \cf2 //    self.greaterTurb.enabled = NO;\cf0 \
+    \cf2 //    self.noTurb.enabled = NO;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //self.turbLevel = @"/TURB LGT";\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //if(self.checkChop)\cf0 \
+    \cf2 //        self.chop.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkMtn)\cf0 \
+    \cf2 //        self.mtn.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkIce)\cf0 \
+    \cf2 //        self.ice.enabled = YES;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.turb.enabled = YES;\cf0 \
+    \cf2 //    [self.turb setBackgroundImage:[UIImage imageNamed:@"YelloBack.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.sendPirep.enabled = YES;\cf0 \
+\}\
+\
+\cf2 //Update report when user selects level betwween TURB LGT-MOD\cf0 \
+- (\cf6 void\cf0 ) turbLMF\
+\{\
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 turbPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"TB LGT-MOD"\cf0 ];\
+        \cf6 self\cf0 .\cf7 turbPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"TB LGT-MOD"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 turbPosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //edit2014\cf0 \
+    \cf6 self\cf0 .\cf7 lightChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 modChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf6 self\cf0 .\cf7 greaterChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 noChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 chopLM\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 chopMS\cf0 .\cf8 enabled\cf0  =\cf6 NO\cf0 ;\
+\}\
+\cf2 //Update report when user clicks on modTurb button.\cf0 \
+-(\cf6 void\cf0 ) mTurb\
+\{\
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];\cf0 \
+    \cf2 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" MOD"];\cf0 \
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 turbPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"TB MOD"\cf0 ];\
+        \cf6 self\cf0 .\cf7 turbPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"TB MOD"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 turbPosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //edit2014\cf0 \
+    \cf6 self\cf0 .\cf7 lightChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 modChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf6 self\cf0 .\cf7 greaterChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 noChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf2 //edit2014 ends\cf0 \
+    \cf2 //[self saveToFile:@" MOD"];\cf0 \
+    \
+    \cf2 //    [self.modTurb setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.lightTurb.enabled = NO;\cf0 \
+    \cf2 //    self.modTurb.enabled = NO;\cf0 \
+    \cf2 //    self.greaterTurb.enabled = NO;\cf0 \
+    \cf2 //    self.noTurb.enabled = NO;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //self.turbLevel = @"/TURB MOD";\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //if(self.checkChop)\cf0 \
+    \cf2 //        self.chop.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkMtn)\cf0 \
+    \cf2 //        self.mtn.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkIce)\cf0 \
+    \cf2 //        self.ice.enabled = YES;\cf0 \
+    \cf2 //    self.turb.enabled = YES;\cf0 \
+    \cf2 //    [self.turb setBackgroundImage:[UIImage imageNamed:@"YelloBack.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.sendPirep.enabled = YES;\cf0 \
+\}\
+\
+\cf2 //Update report when user selects level betwween TURB MOD-SEV\cf0 \
+- (\cf6 void\cf0 ) turbMSF\
+\{\
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 turbPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"TB MOD-SEV"\cf0 ];\
+        \cf6 self\cf0 .\cf7 turbPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"TB MOD-SEV"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 turbPosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //edit2014\cf0 \
+    \cf6 self\cf0 .\cf7 lightChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 modChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf6 self\cf0 .\cf7 greaterChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 noChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 chopLM\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 chopMS\cf0 .\cf8 enabled\cf0  =\cf6 NO\cf0 ;\
+\}\
+\
+\cf2 //Update report when user clicks on greatTurb button.\cf0 \
+- (\cf6 void\cf0 ) gTurb\
+\{\
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];\cf0 \
+    \cf2 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" GRT"];\cf0 \
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 turbPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"TB SEV"\cf0 ];\
+        \cf6 self\cf0 .\cf7 turbPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"TB SEV"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 turbPosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //edit2014\cf0 \
+    \cf6 self\cf0 .\cf7 lightChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 modChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf6 self\cf0 .\cf7 greaterChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 noChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf2 //edit2014 ends\cf0 \
+    \cf2 //[self saveToFile:@" GRT"];\cf0 \
+    \
+    \cf2 //    [self.greaterTurb setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.lightTurb.enabled = NO;\cf0 \
+    \cf2 //    self.modTurb.enabled = NO;\cf0 \
+    \cf2 //    self.greaterTurb.enabled = NO;\cf0 \
+    \cf2 //    self.noTurb.enabled = NO;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //self.turbLevel = @"/TURB GRT";\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //if(self.checkChop)\cf0 \
+    \cf2 //        self.chop.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkMtn)\cf0 \
+    \cf2 //        self.mtn.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkIce)\cf0 \
+    \cf2 //        self.ice.enabled = YES;\cf0 \
+    \cf2 //    self.turb.enabled = YES;\cf0 \
+    \cf2 //    [self.turb setBackgroundImage:[UIImage imageNamed:@"YelloBack.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.sendPirep.enabled = YES;\cf0 \
+\}\
+\
+\cf2 //Update report when user clicks on noneTurb button.\cf0 \
+-(\cf6 void\cf0 )nTurb\
+\{\
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 turbPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"TB NEG"\cf0 ];\
+        \cf6 self\cf0 .\cf7 turbPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"TB NEG"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 mtnPosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //edit2014\cf0 \
+    \cf6 self\cf0 .\cf7 lightChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 modChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf6 self\cf0 .\cf7 greaterChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf6 self\cf0 .\cf7 noChop\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \cf2 //edit2014 ends\cf0 \
+\cf2 //    if(self.turbPosition!=-1)\cf0 \
+\cf2 //    \{\cf0 \
+\cf2 //        if(self.chopPosition>self.turbPosition)\cf0 \
+\cf2 //            self.chopPosition--;\cf0 \
+\cf2 //        if(self.mtnPosition>self.turbPosition)\cf0 \
+\cf2 //            self.mtnPosition--;\cf0 \
+\cf2 //        if(self.icePosition>self.turbPosition)\cf0 \
+\cf2 //            self.icePosition--;\cf0 \
+\cf2 //        \cf0 \
+\cf2 //        [self.pirepData removeObjectAtIndex:self.turbPosition];\cf0 \
+\cf2 //        self.turbPosition = -1;\cf0 \
+\cf2 //        \cf0 \
+\cf2 //        [self setPresentPirepData];\cf0 \
+\cf2 //        self.pirepSelected.text = self.presentPirep;\cf0 \
+    \
+        \cf2 //        self.lightTurb.enabled = NO;\cf0 \
+        \cf2 //        self.modTurb.enabled = NO;\cf0 \
+        \cf2 //        self.greaterTurb.enabled = NO;\cf0 \
+        \cf2 //        self.noTurb.enabled = NO;\cf0 \
+        \cf2 //\cf0 \
+        \cf2 //        //if(self.checkChop)\cf0 \
+        \cf2 //        self.chop.enabled = YES;\cf0 \
+        \cf2 //        //if(self.checkMtn)\cf0 \
+        \cf2 //        self.mtn.enabled = YES;\cf0 \
+        \cf2 //        //if(self.checkIce)\cf0 \
+        \cf2 //        self.ice.enabled = YES;\cf0 \
+        \cf2 //        self.turb.enabled = YES;\cf0 \
+        \cf2 //        [self.turb setBackgroundImage:[UIImage imageNamed:@"YelloBack.png"] forState:UIControlStateNormal];\cf0 \
+        \cf2 //\cf0 \
+        \cf2 //        self.sendPirep.enabled = YES;\cf0 \
+\cf2 //    \}\cf0 \
+\}\
+\
+\cf2 //Update report when user clicks on MtnWave button.\cf0 \
+\cf2 //-(void)mtnWave\cf0 \
+\cf2 //\{\cf0 \
+\cf2 //    //    if(![self.presentPirep isEqualToString:@""])\cf0 \
+\cf2 //    //        self.presentPirep = [self.presentPirep stringByAppendingString:@"/"];\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    self.presentPirep = [self.presentPirep stringByAppendingString:@"MTN WAVE"];\cf0 \
+\cf2 //    if(self.mtnPosition==-1)\cf0 \
+\cf2 //    \{\cf0 \
+\cf2 //        [self.pirepData addObject:@"RM MTNWV"];\cf0 \
+\cf2 //        self.mtnPosition = [self.pirepData count]-1;\cf0 \
+\cf2 //    \}\cf0 \
+\cf2 //    else\cf0 \
+\cf2 //    \{\cf0 \
+\cf2 //        [self.pirepData setObject:@"RM MTNWV" atIndexedSubscript:self.mtnPosition];\cf0 \
+\cf2 //    \}\cf0 \
+\cf2 //    [self setPresentPirepData];\cf0 \
+\cf2 //    self.pirepSelected.text = self.presentPirep;\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //    [self.mtn setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    //self.checkMtn = NO;\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    self.mtn.enabled = NO;\cf0 \
+\cf2 //    //    self.chop.enabled = NO;\cf0 \
+\cf2 //    //    self.turb.enabled = NO;\cf0 \
+\cf2 //    //    self.ice.enabled = NO;\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    [self.lightMtn setBackgroundImage:[UIImage imageNamed:@"MTNWV_LGT.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    //    [self.modMtn setBackgroundImage:[UIImage imageNamed:@"MTNWV_MOD.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    //    [self.greaterMtn setBackgroundImage:[UIImage imageNamed:@"MTNWV_GRT.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    self.lightMtn.enabled = YES;\cf0 \
+\cf2 //    //    self.modMtn.enabled = YES;\cf0 \
+\cf2 //    //    self.greaterMtn.enabled = YES;\cf0 \
+\cf2 //    //    self.noMtn.enabled = YES;\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    self.sendPirep.enabled = NO;\cf0 \
+\cf2 //\}\cf0 \
+\
+\cf2 //Update report when user clicks on lightMtnWave button.\cf0 \
+-(\cf6 void\cf0 )lMtn\
+\{\
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];\cf0 \
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 mtnPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"RM LGT MTNWV"\cf0 ];\
+        \cf6 self\cf0 .\cf7 mtnPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"RM LGT MTNWV"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 mtnPosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //    [self.lightMtn setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.lightMtn.enabled = NO;\cf0 \
+    \cf2 //    self.modMtn.enabled = NO;\cf0 \
+    \cf2 //    self.greaterMtn.enabled = NO;\cf0 \
+    \cf2 //    self.noMtn.enabled = NO;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //self.mtnLevel = @"/MTN WAVE LGT";\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //if(self.checkChop)\cf0 \
+    \cf2 //        self.chop.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkTurb)\cf0 \
+    \cf2 //        self.turb.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkIce)\cf0 \
+    \cf2 //        self.ice.enabled = YES;\cf0 \
+    \cf2 //    self.mtn.enabled = YES;\cf0 \
+    \cf2 //    [self.mtn setBackgroundImage:[UIImage imageNamed:@"OrangeBack.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.sendPirep.enabled = YES;\cf0 \
+\}\
+\
+\cf2 //Update report when user clicks on Dual level mtn button for LGT-MOD.\cf0 \
+-(\cf6 void\cf0 )mtnLMF\
+\{\
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 mtnPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"RM LGT-MOD MTNWV"\cf0 ];\
+        \cf6 self\cf0 .\cf7 mtnPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"RM LGT-MOD MTNWV"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 mtnPosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+\}\
+\cf2 //Update report when user clicks on modMtnWave button.\cf0 \
+-(\cf6 void\cf0 )mMtn\
+\{\
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];\cf0 \
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 mtnPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"RM MOD MTNWV"\cf0 ];\
+        \cf6 self\cf0 .\cf7 mtnPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"RM MOD MTNWV"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 mtnPosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //    [self.modMtn setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.lightMtn.enabled = NO;\cf0 \
+    \cf2 //    self.modMtn.enabled = NO;\cf0 \
+    \cf2 //    self.greaterMtn.enabled = NO;\cf0 \
+    \cf2 //    self.noMtn.enabled = NO;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //self.mtnLevel = @"/MTN WAVE MOD";\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //if(self.checkChop)\cf0 \
+    \cf2 //        self.chop.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkTurb)\cf0 \
+    \cf2 //        self.turb.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkIce)\cf0 \
+    \cf2 //        self.ice.enabled = YES;\cf0 \
+    \cf2 //    self.mtn.enabled = YES;\cf0 \
+    \cf2 //    [self.mtn setBackgroundImage:[UIImage imageNamed:@"OrangeBack.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.sendPirep.enabled = YES;\cf0 \
+\}\
+\
+\cf2 //Update report when user clicks on Dual level mtn button for LGT-MOD.\cf0 \
+-(\cf6 void\cf0 )mtnMSF\
+\{\
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 mtnPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"RM MOD-SEV MTNWV"\cf0 ];\
+        \cf6 self\cf0 .\cf7 mtnPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"RM MOD-SEV MTNWV"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 mtnPosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+\}\
+\
+\cf2 //Update report when user clicks on greatMtnWave button.\cf0 \
+-(\cf6 void\cf0 )gMtn\
+\{\
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];\cf0 \
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 mtnPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"RM SEV MTNWV"\cf0 ];\
+        \cf6 self\cf0 .\cf7 mtnPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"RM SEV MTNWV"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 mtnPosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //    [self.greaterMtn setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.lightMtn.enabled = NO;\cf0 \
+    \cf2 //    self.modMtn.enabled = NO;\cf0 \
+    \cf2 //    self.greaterMtn.enabled = NO;\cf0 \
+    \cf2 //    self.noMtn.enabled = NO;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //self.mtnLevel = @"/MTN WAVE GRT";\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //if(self.checkChop)\cf0 \
+    \cf2 //        self.chop.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkTurb)\cf0 \
+    \cf2 //        self.turb.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkIce)\cf0 \
+    \cf2 //        self.ice.enabled = YES;\cf0 \
+    \cf2 //    self.mtn.enabled = YES;\cf0 \
+    \cf2 //    [self.mtn setBackgroundImage:[UIImage imageNamed:@"OrangeBack.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.sendPirep.enabled = YES;\cf0 \
+\}\
+\
+\cf2 //Update report when user clicks on noneMtnWave button.\cf0 \
+-(\cf6 void\cf0 )nMtn\
+\{\
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 mtnPosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"RM NEG MTNWV"\cf0 ];\
+        \cf6 self\cf0 .\cf7 mtnPosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf4 @"RM NEG MTNWV"\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 mtnPosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+\cf2 //    if(self.mtnPosition!=-1)\cf0 \
+\cf2 //    \{\cf0 \
+\cf2 //        if(self.chopPosition>self.mtnPosition)\cf0 \
+\cf2 //            self.chopPosition--;\cf0 \
+\cf2 //        if(self.turbPosition>self.mtnPosition)\cf0 \
+\cf2 //            self.turbPosition--;\cf0 \
+\cf2 //        if(self.icePosition>self.mtnPosition)\cf0 \
+\cf2 //            self.icePosition--;\cf0 \
+\cf2 //        \cf0 \
+\cf2 //        [self.pirepData removeObjectAtIndex:self.mtnPosition];\cf0 \
+\cf2 //        self.mtnPosition = -1;\cf0 \
+\cf2 //        \cf0 \
+\cf2 //        [self setPresentPirepData];\cf0 \
+\cf2 //        self.pirepSelected.text = self.presentPirep;\cf0 \
+    \
+        \cf2 //        self.lightMtn.enabled = NO;\cf0 \
+        \cf2 //        self.modMtn.enabled = NO;\cf0 \
+        \cf2 //        self.greaterMtn.enabled = NO;\cf0 \
+        \cf2 //        self.noMtn.enabled = NO;\cf0 \
+        \cf2 //\cf0 \
+        \cf2 //        //if(self.checkChop)\cf0 \
+        \cf2 //        self.chop.enabled = YES;\cf0 \
+        \cf2 //        //if(self.checkTurb)\cf0 \
+        \cf2 //        self.turb.enabled = YES;\cf0 \
+        \cf2 //        //if(self.checkIce)\cf0 \
+        \cf2 //        self.ice.enabled = YES;\cf0 \
+        \cf2 //        self.mtn.enabled = YES;\cf0 \
+        \cf2 //        [self.mtn setBackgroundImage:[UIImage imageNamed:@"OrangeBack.png"] forState:UIControlStateNormal];\cf0 \
+        \cf2 //\cf0 \
+        \cf2 //        self.sendPirep.enabled = YES;\cf0 \
+\cf2 //    \}\cf0 \
+\}\
+\
+\cf2 //Update report when user clicks on Icing button.\cf0 \
+\cf2 //- (void)Ice\cf0 \
+\cf2 //\{\cf0 \
+\cf2 //    //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@"/ICE"];\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    if(![self.presentPirep isEqualToString:@""])\cf0 \
+\cf2 //    //        self.presentPirep = [self.presentPirep stringByAppendingString:@"/"];\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    self.presentPirep = [self.presentPirep stringByAppendingString:@"ICE"];\cf0 \
+\cf2 //    if(self.icePosition==-1)\cf0 \
+\cf2 //    \{\cf0 \
+\cf2 //        [self.pirepData addObject:@"ICE"];\cf0 \
+\cf2 //        self.icePosition = [self.pirepData count]-1;\cf0 \
+\cf2 //    \}\cf0 \
+\cf2 //    else\cf0 \
+\cf2 //    \{\cf0 \
+\cf2 //        [self.pirepData setObject:@"ICE" atIndexedSubscript:self.icePosition];\cf0 \
+\cf2 //    \}\cf0 \
+\cf2 //    [self setPresentPirepData];\cf0 \
+\cf2 //    self.pirepSelected.text = self.presentPirep;\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //self.presentPirep = @"Ice ";\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //    [self.ice setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    //self.checkIce = NO;\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    self.ice.enabled = NO;\cf0 \
+\cf2 //    //    self.chop.enabled = NO;\cf0 \
+\cf2 //    //    self.turb.enabled = NO;\cf0 \
+\cf2 //    //    self.mtn.enabled = NO;\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    [self.clear setBackgroundImage:[UIImage imageNamed:@"ICING_CLEAR.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    //    [self.rime setBackgroundImage:[UIImage imageNamed:@"ICING_RIME.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    //    [self.mixed setBackgroundImage:[UIImage imageNamed:@"ICING_MIXED.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    self.clear.enabled = YES;\cf0 \
+\cf2 //    //    self.rime.enabled = YES;\cf0 \
+\cf2 //    //    self.mixed.enabled = YES;\cf0 \
+\cf2 //    //    self.noIce.enabled = YES;\cf0 \
+\cf2 //    //    //    self.trace.enabled = NO;\cf0 \
+\cf2 //    //    //    self.lightIce.enabled = NO;\cf0 \
+\cf2 //    //    //    self.modIce.enabled = NO;\cf0 \
+\cf2 //    //    //    self.greaterIce.enabled = NO;\cf0 \
+\cf2 //    //\cf0 \
+\cf2 //    //    self.sendPirep.enabled = NO;\cf0 \
+\cf2 //\}\cf0 \
+\
+\cf2 //Update report when user clicks on clearIcing button.\cf0 \
+- (\cf6 void\cf0 )clearIce\
+\{\
+    \cf2 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" CLEAR"];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" CLEAR"];\cf0 \
+    \
+    \cf6 self\cf0 .\cf7 iceLevel\cf0  = \cf4 @"CLEAR"\cf0 ;\
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 icePosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"CLEAR"\cf0 ];\
+        \cf6 self\cf0 .\cf7 icePosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf6 self\cf0 .\cf7 iceLevel\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 icePosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //\cf0 \
+    \cf2 //    [self.clear setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.clear.enabled = NO;\cf0 \
+    \cf2 //    self.rime.enabled = NO;\cf0 \
+    \cf2 //    self.mixed.enabled = NO;\cf0 \
+    \cf2 //    self.trace.enabled = YES;\cf0 \
+    \cf2 //    self.lightIce.enabled = YES;\cf0 \
+    \cf2 //    self.modIce.enabled = YES;\cf0 \
+    \cf2 //    self.greaterIce.enabled = YES;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    [self.trace setBackgroundImage:[UIImage imageNamed:@"ICING_TRACE.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //    [self.lightIce setBackgroundImage:[UIImage imageNamed:@"ICING_LGT.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //    [self.modIce setBackgroundImage:[UIImage imageNamed:@"ICING_MOD.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //    [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"ICING_GRT.png"] forState:UIControlStateNormal];\cf0 \
+    \
+    \cf2 //edit2014\cf0 \
+    \cf6 self\cf0 .\cf7 lightIce\cf0 .\cf8 enabled\cf0 =\cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 modIce\cf0 .\cf8 enabled\cf0 =\cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 greaterIce\cf0 .\cf8 enabled\cf0 =\cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 trace\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 iceTL\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 iceLM\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 iceMS\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf2 //edit2014 ends\cf0 \
+\}\
+\
+\cf2 //Update report when user clicks on rimeIcing button.\cf0 \
+- (\cf6 void\cf0 )rimeIce\
+\{\
+    \cf2 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" RIME"];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" RIME"];\cf0 \
+    \cf6 self\cf0 .\cf7 iceLevel\cf0  = \cf4 @"RIME"\cf0 ;\
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 icePosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"RIME"\cf0 ];\
+        \cf6 self\cf0 .\cf7 icePosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf6 self\cf0 .\cf7 iceLevel\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 icePosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //edit2014\cf0 \
+    \cf6 self\cf0 .\cf7 lightIce\cf0 .\cf8 enabled\cf0 =\cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 modIce\cf0 .\cf8 enabled\cf0 =\cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 greaterIce\cf0 .\cf8 enabled\cf0 =\cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 trace\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 iceTL\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 iceLM\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 iceMS\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf2 //edit2014 ends\cf0 \
+    \
+    \cf2 //    [self.rime setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //self.iceLevel = @"ICE RIME";\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.clear.enabled = NO;\cf0 \
+    \cf2 //    self.rime.enabled = NO;\cf0 \
+    \cf2 //    self.mixed.enabled = NO;\cf0 \
+    \cf2 //    self.trace.enabled = YES;\cf0 \
+    \cf2 //    self.lightIce.enabled = YES;\cf0 \
+    \cf2 //    self.modIce.enabled = YES;\cf0 \
+    \cf2 //    self.greaterIce.enabled = YES;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    [self.trace setBackgroundImage:[UIImage imageNamed:@"ICING_TRACE.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //    [self.lightIce setBackgroundImage:[UIImage imageNamed:@"ICING_LGT.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //    [self.modIce setBackgroundImage:[UIImage imageNamed:@"ICING_MOD.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //    [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"ICING_GRT.png"] forState:UIControlStateNormal];\cf0 \
+    \
+    \
+\}\
+\
+\cf2 //Update report when user clicks on mixedIcing button.\cf0 \
+- (\cf6 void\cf0 )mixedIce\
+\{\
+    \cf2 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" MIXED"];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" MIXED"];\cf0 \
+    \cf6 self\cf0 .\cf7 iceLevel\cf0  = \cf4 @"MIXED"\cf0 ;\
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 icePosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :\cf4 @"MIXED"\cf0 ];\
+        \cf6 self\cf0 .\cf7 icePosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :\cf6 self\cf0 .\cf7 iceLevel\cf0  \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 icePosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //    [self.mixed setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //self.iceLevel = @"ICE MIXED";\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.clear.enabled = NO;\cf0 \
+    \cf2 //    self.rime.enabled = NO;\cf0 \
+    \cf2 //    self.mixed.enabled = NO;\cf0 \
+    \cf2 //    self.trace.enabled = YES;\cf0 \
+    \cf2 //    self.lightIce.enabled = YES;\cf0 \
+    \cf2 //    self.modIce.enabled = YES;\cf0 \
+    \cf2 //    self.greaterIce.enabled = YES;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    [self.trace setBackgroundImage:[UIImage imageNamed:@"ICING_TRACE.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //    [self.lightIce setBackgroundImage:[UIImage imageNamed:@"ICING_LGT.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //    [self.modIce setBackgroundImage:[UIImage imageNamed:@"ICING_MOD.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //    [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"ICING_GRT.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //edit2014\cf0 \
+    \cf6 self\cf0 .\cf7 lightIce\cf0 .\cf8 enabled\cf0 =\cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 modIce\cf0 .\cf8 enabled\cf0 =\cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 greaterIce\cf0 .\cf8 enabled\cf0 =\cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 trace\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 iceTL\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 iceLM\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf6 self\cf0 .\cf7 iceMS\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \cf2 //edit2014 ends\cf0 \
+    \
+\}\
+\
+\cf2 //Update report when user clicks on traceIcing button.\cf0 \
+- (\cf6 void\cf0 )traceIce\
+\{\
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" TRACE"];\cf0 \
+    \cf2 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" TRACE"];\cf0 \
+    \cf2 //    self.iceLevel = @"ICE CLEAR";\cf0 \
+    \
+    \cf8 NSString\cf0  * iceInfo = \cf6 nil\cf0 ;\
+    \
+    \cf6 if\cf0 (![\cf6 self\cf0 .\cf7 iceLevel\cf0  \cf9 isEqualToString\cf0 :\cf4 @""\cf0 ])\
+        iceInfo = [\cf8 NSString\cf0  \cf9 stringWithFormat\cf0 :\cf4 @"IC TRACE %@"\cf0 ,\cf6 self\cf0 .\cf7 iceLevel\cf0 ];\
+    \cf6 else\cf0 \
+        iceInfo = \cf4 @"ICE TRACE"\cf0 ;\
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 icePosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :iceInfo];\
+        \cf6 self\cf0 .\cf7 icePosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :iceInfo \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 icePosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //[self saveToFile:@" TRACE"];\cf0 \
+    \
+    \cf2 //    [self.trace setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 ////    self.iceLevel = [self.iceLevel stringByAppendingString:@" TRACE"];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.clear.enabled = NO;\cf0 \
+    \cf2 //    self.rime.enabled = NO;\cf0 \
+    \cf2 //    self.mixed.enabled = NO;\cf0 \
+    \cf2 //    self.trace.enabled = NO;\cf0 \
+    \cf2 //    self.lightIce.enabled = NO;\cf0 \
+    \cf2 //    self.modIce.enabled = NO;\cf0 \
+    \cf2 //    self.greaterIce.enabled = NO;\cf0 \
+    \cf2 //    self.noIce.enabled = NO;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //if(self.checkChop)\cf0 \
+    \cf2 //        self.chop.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkTurb)\cf0 \
+    \cf2 //        self.turb.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkMtn)\cf0 \
+    \cf2 //        self.mtn.enabled = YES;\cf0 \
+    \cf2 //    self.ice.enabled = YES;\cf0 \
+    \cf2 //    [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.sendPirep.enabled = YES;\cf0 \
+\}\
+\
+\cf2 //Update report when user clicks on dual/plus Level button.\cf0 \
+- (\cf6 void\cf0 )iceTLF\
+\{\
+    \cf8 NSString\cf0  * iceInfo  = [\cf8 NSString\cf0  \cf9 stringWithFormat\cf0 :\cf4 @"IC TRACE-LGT %@"\cf0 ,\cf6 self\cf0 .\cf7 iceLevel\cf0 ];\
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 icePosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :iceInfo];\
+        \cf6 self\cf0 .\cf7 icePosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :iceInfo \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 icePosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+\}\
+\
+\cf2 //Update report when user clicks on lightIcing button.\cf0 \
+- (\cf6 void\cf0 )lIce\
+\{\
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" LGT"];\cf0 \
+    \cf2 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" LGT"];\cf0 \
+    \
+    \cf8 NSString\cf0  * iceInfo = \cf6 nil\cf0 ;\
+    \
+    \cf6 if\cf0 (![\cf6 self\cf0 .\cf7 iceLevel\cf0  \cf9 isEqualToString\cf0 :\cf4 @""\cf0 ])\
+        iceInfo = [\cf8 NSString\cf0  \cf9 stringWithFormat\cf0 :\cf4 @"IC LGT %@"\cf0 ,\cf6 self\cf0 .\cf7 iceLevel\cf0 ];\
+    \cf6 else\cf0 \
+        iceInfo = \cf4 @"ICE LGT"\cf0 ;\
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 icePosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :iceInfo];\
+        \cf6 self\cf0 .\cf7 icePosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :iceInfo \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 icePosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //[self saveToFile:@" LGT"];\cf0 \
+    \
+    \cf2 //    [self.lightIce setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //self.iceLevel = [self.iceLevel stringByAppendingString:@" LGT"];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.clear.enabled = NO;\cf0 \
+    \cf2 //    self.rime.enabled = NO;\cf0 \
+    \cf2 //    self.mixed.enabled = NO;\cf0 \
+    \cf2 //    self.trace.enabled = NO;\cf0 \
+    \cf2 //    self.lightIce.enabled = NO;\cf0 \
+    \cf2 //    self.modIce.enabled = NO;\cf0 \
+    \cf2 //    self.greaterIce.enabled = NO;\cf0 \
+    \cf2 //    self.noIce.enabled = NO;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //if(self.checkChop)\cf0 \
+    \cf2 //        self.chop.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkTurb)\cf0 \
+    \cf2 //        self.turb.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkMtn)\cf0 \
+    \cf2 //        self.mtn.enabled = YES;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.ice.enabled = YES;\cf0 \
+    \cf2 //    [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.sendPirep.enabled = YES;\cf0 \
+\}\
+\
+\cf2 //Update report when user clicks on dual/plus Level button.\cf0 \
+- (\cf6 void\cf0 )iceLMF\
+\{\
+    \cf8 NSString\cf0  * iceInfo  = [\cf8 NSString\cf0  \cf9 stringWithFormat\cf0 :\cf4 @"IC LGT-MOD %@"\cf0 ,\cf6 self\cf0 .\cf7 iceLevel\cf0 ];\
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 icePosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :iceInfo];\
+        \cf6 self\cf0 .\cf7 icePosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :iceInfo \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 icePosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+\}\
+\
+\cf2 //Update report when user clicks on modIcing button.\cf0 \
+- (\cf6 void\cf0 )mIce\
+\{\
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" MOD"];\cf0 \
+    \cf2 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" MOD"];\cf0 \
+    \
+    \cf8 NSString\cf0  * iceInfo = \cf6 nil\cf0 ;\
+    \
+    \cf6 if\cf0 (![\cf6 self\cf0 .\cf7 iceLevel\cf0  \cf9 isEqualToString\cf0 :\cf4 @""\cf0 ])\
+        iceInfo = [\cf8 NSString\cf0  \cf9 stringWithFormat\cf0 :\cf4 @"IC MOD %@"\cf0 ,\cf6 self\cf0 .\cf7 iceLevel\cf0 ];\
+    \cf6 else\cf0 \
+        iceInfo = \cf4 @"ICE MOD"\cf0 ;\
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 icePosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :iceInfo];\
+        \cf6 self\cf0 .\cf7 icePosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :iceInfo \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 icePosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //[self saveToFile:@" MOD"];\cf0 \
+    \
+    \cf2 //    [self.modIce setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //self.iceLevel = [self.iceLevel stringByAppendingString:@" MOD"];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.clear.enabled = NO;\cf0 \
+    \cf2 //    self.rime.enabled = NO;\cf0 \
+    \cf2 //    self.mixed.enabled = NO;\cf0 \
+    \cf2 //    self.trace.enabled = NO;\cf0 \
+    \cf2 //    self.lightIce.enabled = NO;\cf0 \
+    \cf2 //    self.modIce.enabled = NO;\cf0 \
+    \cf2 //    self.greaterIce.enabled = NO;\cf0 \
+    \cf2 //    self.noIce.enabled = NO;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //if(self.checkChop)\cf0 \
+    \cf2 //        self.chop.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkTurb)\cf0 \
+    \cf2 //        self.turb.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkMtn)\cf0 \
+    \cf2 //        self.mtn.enabled = YES;\cf0 \
+    \cf2 //    self.ice.enabled = YES;\cf0 \
+    \cf2 //    [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.sendPirep.enabled = YES;\cf0 \
+\}\
+\
+\cf2 //Update report when user clicks on dual/plus Level button.\cf0 \
+- (\cf6 void\cf0 )iceMSF\
+\{\
+    \cf8 NSString\cf0  * iceInfo  = [\cf8 NSString\cf0  \cf9 stringWithFormat\cf0 :\cf4 @"IC MOD-SEV %@"\cf0 ,\cf6 self\cf0 .\cf7 iceLevel\cf0 ];\
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 icePosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :iceInfo];\
+        \cf6 self\cf0 .\cf7 icePosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :iceInfo \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 icePosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+\}\
+\
+\cf2 //Update report when user clicks on greatIcing button.\cf0 \
+-(\cf6 void\cf0 )gIce\
+\{\
+    \cf2 //    self.presentPirep = [self.presentPirep stringByAppendingString:@" GRT"];\cf0 \
+    \cf2 //    self.pirepSend = [self.pirepSend stringByAppendingFormat:@" GRT"];\cf0 \
+    \
+    \cf8 NSString\cf0  * iceInfo = \cf6 nil\cf0 ;\
+    \
+    \cf6 if\cf0 (![\cf6 self\cf0 .\cf7 iceLevel\cf0  \cf9 isEqualToString\cf0 :\cf4 @""\cf0 ])\
+        iceInfo = [\cf8 NSString\cf0  \cf9 stringWithFormat\cf0 :\cf4 @"IC SEV %@"\cf0 ,\cf6 self\cf0 .\cf7 iceLevel\cf0 ];\
+    \cf6 else\cf0 \
+        iceInfo = \cf4 @"ICE SEVR"\cf0 ;\
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 icePosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :iceInfo];\
+        \cf6 self\cf0 .\cf7 icePosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :iceInfo \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 icePosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \
+    \cf2 //[self saveToFile:@" GRT"];\cf0 \
+    \
+    \cf2 //    [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"SHButton.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //self.iceLevel = [self.iceLevel stringByAppendingString:@" GRT"];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.clear.enabled = NO;\cf0 \
+    \cf2 //    self.rime.enabled = NO;\cf0 \
+    \cf2 //    self.mixed.enabled = NO;\cf0 \
+    \cf2 //    self.trace.enabled = NO;\cf0 \
+    \cf2 //    self.lightIce.enabled = NO;\cf0 \
+    \cf2 //    self.modIce.enabled = NO;\cf0 \
+    \cf2 //    self.greaterIce.enabled = NO;\cf0 \
+    \cf2 //    self.noIce.enabled = NO;\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    //if(self.checkChop)\cf0 \
+    \cf2 //        self.chop.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkTurb)\cf0 \
+    \cf2 //        self.turb.enabled = YES;\cf0 \
+    \cf2 //    //if(self.checkMtn)\cf0 \
+    \cf2 //        self.mtn.enabled = YES;\cf0 \
+    \cf2 //    self.ice.enabled = YES;\cf0 \
+    \cf2 //    [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];\cf0 \
+    \cf2 //\cf0 \
+    \cf2 //    self.sendPirep.enabled = YES;\cf0 \
+\}\
+\
+\cf2 //Update report when user clicks on noneIcing button.\cf0 \
+-(\cf6 void\cf0 )nIce\
+\{\
+    \cf2 //edit2014\cf0 \
+    \cf8 NSString\cf0  * iceInfo = \cf6 nil\cf0 ;\
+    \
+    \cf6 if\cf0 (![\cf6 self\cf0 .\cf7 iceLevel\cf0  \cf9 isEqualToString\cf0 :\cf4 @""\cf0 ])\
+        iceInfo = [\cf8 NSString\cf0  \cf9 stringWithFormat\cf0 :\cf4 @"IC NEG"\cf0 ];\
+    \cf6 else\cf0 \
+        iceInfo = \cf4 @"IC NEG"\cf0 ;\
+    \
+    \cf6 if\cf0 (\cf6 self\cf0 .\cf7 icePosition\cf0 ==-\cf5 1\cf0 )\
+    \{\
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 addObject\cf0 :iceInfo];\
+        \cf6 self\cf0 .\cf7 icePosition\cf0  = [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 count\cf0 ]-\cf5 1\cf0 ;\
+    \}\
+    \cf6 else\cf0 \
+        [\cf6 self\cf0 .\cf7 pirepData\cf0  \cf9 setObject\cf0 :iceInfo \cf9 atIndexedSubscript\cf0 :\cf6 self\cf0 .\cf7 icePosition\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPresentPirepData\cf0 ];\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+    \cf2 //edit2014 ends\cf0 \
+    \
+    \cf2 /*edit2014\
+     if(self.icePosition!=-1)\
+     \{\
+     if(self.chopPosition>self.icePosition)\
+     self.chopPosition--;\
+     if(self.turbPosition>self.icePosition)\
+     self.turbPosition--;\
+     if(self.mtnPosition>self.icePosition)\
+     self.mtnPosition--;\
+     \
+     [self.pirepData removeObjectAtIndex:self.icePosition];\
+     self.icePosition = -1;\
+     self.iceLevel = @"";\
+     \
+     [self setPresentPirepData];\
+     self.pirepSelected.text = self.presentPirep;\
+     \
+     //        self.clear.enabled = NO;\
+     //        self.rime.enabled = NO;\
+     //        self.mixed.enabled = NO;\
+     //        self.trace.enabled = NO;\
+     //        self.lightIce.enabled = NO;\
+     //        self.modIce.enabled = NO;\
+     //        self.greaterIce.enabled = NO;\
+     //        self.noIce.enabled = NO;\
+     //\
+     //        //if(self.checkChop)\
+     //        self.chop.enabled = YES;\
+     //        //if(self.checkTurb)\
+     //        self.turb.enabled = YES;\
+     //        //if(self.checkMtn)\
+     //        self.mtn.enabled = YES;\
+     //        self.ice.enabled = YES;\
+     //        [self.ice setBackgroundImage:[UIImage imageNamed:@"RedBack.png"] forState:UIControlStateNormal];\
+     //        [self.clear setBackgroundImage:[UIImage imageNamed:@"ICING_CLEAR.png"] forState:UIControlStateNormal];\
+     //        [self.rime setBackgroundImage:[UIImage imageNamed:@"ICING_RIME.png"] forState:UIControlStateNormal];\
+     //        [self.mixed setBackgroundImage:[UIImage imageNamed:@"ICING_MIXED.png"] forState:UIControlStateNormal];\
+     //        [self.trace setBackgroundImage:[UIImage imageNamed:@"ICING_TRACE.png"] forState:UIControlStateNormal];\
+     //        [self.lightIce setBackgroundImage:[UIImage imageNamed:@"ICING_LGT.png"] forState:UIControlStateNormal];\
+     //        [self.modIce setBackgroundImage:[UIImage imageNamed:@"ICING_MOD.png"] forState:UIControlStateNormal];\
+     //        [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"ICING_GRT.png"] forState:UIControlStateNormal];\
+     //\
+     //        self.sendPirep.enabled = YES;\
+     \}\
+     edit2014 ends*/\cf0 \
+\}\
+\
+\cf2 //Hide keyboard if the user is editing and touches outside the textfiled\cf0 \
+- (\cf6 void\cf0 )touchesBegan:(\cf8 NSSet\cf0  *)touches withEvent:(\cf8 UIEvent\cf0  *)event \{\
+    \
+    \cf8 UITouch\cf0  *touch = [[event \cf9 allTouches\cf0 ] \cf9 anyObject\cf0 ];\
+    \
+    \cf6 if\cf0  (![[touch \cf9 view\cf0 ] \cf9 isKindOfClass\cf0 :[\cf8 UITextField\cf0  \cf9 class\cf0 ]]) \{\
+        [\cf6 self\cf0 .\cf8 view\cf0  \cf9 endEditing\cf0 :\cf6 YES\cf0 ];\
+    \}\
+    [\cf6 super\cf0  \cf9 touchesBegan\cf0 :touches \cf9 withEvent\cf0 :event];\
+\}\
+\
+\cf2 //Save the data to file if the user has a report selected. Before saving, ask for user's confirmation.\cf0 \
+-(\cf6 void\cf0 )saveToFile\
+\{\
+    \cf8 NSArray\cf0  *paths = \cf9 NSSearchPathForDirectoriesInDomains\cf0 (\cf9 NSDocumentDirectory\cf0 , \cf9 NSUserDomainMask\cf0 , \cf6 YES\cf0 );\
+    \cf8 NSString\cf0  *documentsDirectory = [paths \cf9 objectAtIndex\cf0 :\cf5 0\cf0 ];\
+    \cf7 filePath\cf0  = [documentsDirectory \cf9 stringByAppendingPathComponent\cf0 :\cf4 @"AWC_Data.txt"\cf0 ];\
+    \
+    \cf6 if\cf0 (![[\cf8 NSFileManager\cf0  \cf9 defaultManager\cf0 ] \cf9 fileExistsAtPath\cf0 :\cf7 filePath\cf0 ])\
+        [[\cf8 NSFileManager\cf0  \cf9 defaultManager\cf0 ] \cf9 createFileAtPath\cf0 :\cf7 filePath\cf0  \cf9 contents\cf0 :\cf6 nil\cf0  \cf9 attributes\cf0 :\cf6 nil\cf0 ] ;\
+    \
+    \cf8 NSString\cf0  * str = [\cf8 NSString\cf0  \cf9 stringWithContentsOfFile\cf0 :\cf7 filePath\cf0  \cf9 encoding\cf0 :\cf9 NSUTF8StringEncoding\cf0  \cf9 error\cf0 :\cf6 nil\cf0 ];\
+    \
+    \cf2 //self.pirepSend = [self.pirepSend stringByAppendingString:level];\cf0 \
+    \
+    \cf6 if\cf0 ([str \cf9 isEqualToString\cf0 :\cf4 @"(null)"\cf0 ] || [str \cf9 isEqualToString\cf0 :\cf4 @""\cf0 ])\
+    \{\
+        str = \cf4 @""\cf0 ;\
+    \}\
+    \
+    \cf7 addData\cf0  = [\cf8 NSString\cf0  \cf9 stringWithFormat\cf0 :\cf4 @"%@"\cf0 ,str];\
+    \
+    \
+    \
+    \
+    \cf7 alert\cf0  = [[\cf8 UIAlertView\cf0  \cf9 alloc\cf0 ]\cf9 initWithTitle\cf0 :\cf4 @"Send PIREP?"\cf0  \cf9 message\cf0 :\cf6 self\cf0 .\cf7 presentPirep\cf0  \cf9 delegate\cf0 :\cf6 self\cf0  \cf9 cancelButtonTitle\cf0 :\cf4 @"YES"\cf0  \cf9 otherButtonTitles\cf0 :\cf4 @"NO"\cf0 , \cf6 nil\cf0 ];\
+    [\cf7 alert\cf0  \cf9 setTag\cf0 :\cf3 PIREP_CONFIRMATION_TAG\cf0 ];\
+    [\cf7 alert\cf0  \cf9 show\cf0 ];\
+    \
+    \
+\}\
+\
+\cf2 //Cancel the present pirep and clear the pirepSelected.\cf0 \
+- (\cf6 IBAction\cf0 )cancelPirep:(\cf6 id\cf0 )sender \{\
+    [\cf6 self\cf0  \cf10 resetButtons\cf0 ];\
+\}\
+\
+\cf2 //If the app needs user's confirmation to send the report, it'll come here. If the user clicks yes, a report in the format required by database\cf0 \
+\cf2 //is generated and sent to database and saved. Else, if he clicks no, the report is cleared.\cf0 \
+-(\cf6 void\cf0 )alertView:(\cf8 UIAlertView\cf0  *)alertView clickedButtonAtIndex:(\cf8 NSInteger\cf0 )buttonIndex\
+\{\
+    \cf6 int\cf0  tag = alertView.\cf8 tag\cf0 ;\
+    \
+    \cf2 //NSLog(@"Tag = %d",tag);\cf0 \
+    \cf6 if\cf0 (tag == \cf3 PIREP_CONFIRMATION_TAG\cf0 )\
+    \{\
+        \cf6 if\cf0 (buttonIndex == \cf5 0\cf0 )\
+        \{\
+            \cf6 self\cf0 .\cf7 timeOfReport\cf0  = [\cf6 self\cf0  \cf10 updateTime\cf0 ];\
+            \cf6 self\cf0 .\cf7 pirepSend\cf0  = [\cf6 self\cf0 .\cf7 pirepInit\cf0  \cf9 stringByAppendingString\cf0 :\cf6 self\cf0 .\cf7 presentPirep\cf0 ];\
+            \cf6 self\cf0 .\cf7 locationLatitude\cf0  = [\cf8 NSString\cf0  \cf9 stringWithFormat\cf0 :\cf4 @"%.4f"\cf0 ,\cf6 self\cf0 .\cf7 myLoc\cf0 .\cf8 location\cf0 .\cf8 coordinate\cf0 .\cf8 latitude\cf0 ];\
+            \cf6 self\cf0 .\cf7 locationLongitude\cf0  =[\cf8 NSString\cf0  \cf9 stringWithFormat\cf0 :\cf4 @"%.4f"\cf0 ,\cf6 self\cf0 .\cf7 myLoc\cf0 .\cf8 location\cf0 .\cf8 coordinate\cf0 .\cf8 longitude\cf0 ];\
+            \
+            \cf7 addData\cf0  = [\cf8 NSString\cf0  \cf9 stringWithFormat\cf0 :\cf4 @"%@%@\\n"\cf0 ,\cf7 addData\cf0 ,\cf6 self\cf0 .\cf7 pirepSend\cf0 ];\
+            [\cf7 addData\cf0  \cf9 writeToFile\cf0 :\cf7 filePath\cf0  \cf9 atomically\cf0 :\cf6 NO\cf0  \cf9 encoding\cf0 :\cf9 NSUTF8StringEncoding\cf0  \cf9 error\cf0 :\cf6 nil\cf0 ];\
+            \
+            \
+            \cf6 self\cf0 .\cf7 pilotReport\cf0  = \cf6 self\cf0 .\cf7 presentPirep\cf0 ;\
+            \cf8 NSMutableString\cf0  * sendURL = [\cf8 NSMutableString\cf0  \cf9 stringWithString\cf0 :\cf6 self\cf0 .\cf7 pageURL\cf0 ];\
+            [sendURL \cf9 appendFormat\cf0 :\cf4 @"?LicenseNum=%@"\cf0 ,\cf6 self\cf0 .\cf7 lisenceNum\cf0 ];\
+            [sendURL \cf9 appendFormat\cf0 :\cf4 @"&TimeOfReport=%@"\cf0 ,\cf6 self\cf0 .\cf7 timeOfReport\cf0 ];\
+            [sendURL \cf9 appendFormat\cf0 :\cf4 @"&AircraftType=%@"\cf0 ,\cf6 self\cf0 .\cf7 aircraftType\cf0 ];\
+            [sendURL \cf9 appendFormat\cf0 :\cf4 @"&TailNumber=%@"\cf0 ,\cf6 self\cf0 .\cf7 tailNumber\cf0 ];\
+            [sendURL \cf9 appendFormat\cf0 :\cf4 @"&SkyCondition=%@"\cf0 ,\cf6 self\cf0 .\cf7 skyCondition\cf0 ];\
+            [sendURL \cf9 appendFormat\cf0 :\cf4 @"&WeatherCondition=%@"\cf0 ,\cf6 self\cf0 .\cf7 weatherCondition\cf0 ];\
+            [sendURL \cf9 appendFormat\cf0 :\cf4 @"&LocationLatitude=%@"\cf0 ,\cf6 self\cf0 .\cf7 locationLatitude\cf0 ];\
+            [sendURL \cf9 appendFormat\cf0 :\cf4 @"&LocationLongitude=%@"\cf0 ,\cf6 self\cf0 .\cf7 locationLongitude\cf0 ];\
+            [sendURL \cf9 appendFormat\cf0 :\cf4 @"&PilotReport=%@"\cf0 ,\cf6 self\cf0 .\cf7 pilotReport\cf0 ];\
+            [sendURL \cf9 setString\cf0 :[sendURL \cf9 stringByAddingPercentEscapesUsingEncoding\cf0 :\cf9 NSUTF8StringEncoding\cf0 ]];\
+            \
+            \cf8 NSMutableURLRequest\cf0  * request = [[\cf8 NSMutableURLRequest\cf0  \cf9 alloc\cf0 ]\cf9 initWithURL\cf0 :[\cf8 NSURL\cf0  \cf9 URLWithString\cf0 :sendURL]];\
+            \cf2 //NSURLConnection * connect = [[NSURLConnection alloc]initWithRequest:request delegate:self startImmediately:YES];\cf0 \
+            \
+            \cf8 NSData\cf0  * data = [\cf8 NSURLConnection\cf0  \cf9 sendSynchronousRequest\cf0 :request \cf9 returningResponse\cf0 :\cf6 nil\cf0  \cf9 error\cf0 :\cf6 nil\cf0 ];\
+            \cf8 NSString\cf0  * reply = [[\cf8 NSString\cf0  \cf9 alloc\cf0 ]\cf9 initWithBytes\cf0 :[data \cf9 bytes\cf0 ] \cf9 length\cf0 :[data \cf9 length\cf0 ] \cf9 encoding\cf0 :\cf9 NSUTF8StringEncoding\cf0 ];\
+            \cf9 NSLog\cf0 (\cf4 @"Reply: %@"\cf0 ,reply);\
+            \
+            \cf8 UIAlertView\cf0  * sentAlert = [[\cf8 UIAlertView\cf0  \cf9 alloc\cf0 ]\cf9 initWithTitle\cf0 :\cf4 @"PIREP Sent"\cf0  \cf9 message\cf0 :\cf6 self\cf0 .\cf7 presentPirep\cf0  \cf9 delegate\cf0 :\cf6 self\cf0  \cf9 cancelButtonTitle\cf0 :\cf6 nil\cf0  \cf9 otherButtonTitles\cf0 :\cf6 nil\cf0 ];\
+            [sentAlert \cf9 show\cf0 ];\
+            [\cf6 self\cf0  \cf9 performSelector\cf0 :\cf6 @selector\cf0 (remAlert:) \cf9 withObject\cf0 :sentAlert \cf9 afterDelay\cf0 :\cf5 2\cf0 ];\
+            \cf2 //edit2014\cf0 \
+            \cf2 //NSLog(@"Hit Yes!!!");\cf0 \
+            \cf2 //            PIREP_View_Tab * pirepMapVC;\cf0 \
+            \cf2 //            pirepMapVC = [[PIREP_View_Tab alloc]initWithNibName:@"Pirepmap" bundle:nil];\cf0 \
+            \cf2 //            [self presentModalViewController:pirepMapVC animated:YES];\cf0 \
+            \cf2 //[pirepMapVC release];\cf0 \
+            \
+            \
+        \}\
+        \cf6 if\cf0 (buttonIndex == \cf5 1\cf0 )\
+        \{\
+            \cf8 UIAlertView\cf0  * canclAlert = [[\cf8 UIAlertView\cf0  \cf9 alloc\cf0 ]\cf9 initWithTitle\cf0 :\cf4 @"PIREP Cancelled"\cf0  \cf9 message\cf0 :\cf4 @"PIREP Not Sent"\cf0  \cf9 delegate\cf0 :\cf6 self\cf0  \cf9 cancelButtonTitle\cf0 :\cf6 nil\cf0  \cf9 otherButtonTitles\cf0 :\cf6 nil\cf0 ];\
+            [canclAlert \cf9 show\cf0 ];\
+            [\cf6 self\cf0  \cf9 performSelector\cf0 :\cf6 @selector\cf0 (remAlert:) \cf9 withObject\cf0 :canclAlert \cf9 afterDelay\cf0 :\cf5 2\cf0 ];\
+        \}\
+        [\cf6 self\cf0  \cf10 resetButtons\cf0 ];\
+    \}\
+\}\
+\
+\cf2 //Reset all buttons once the report is sent or cancelled.\cf0 \
+-(\cf6 void\cf0 )resetButtons\
+\{\
+    \
+    \cf6 self\cf0 .\cf7 presentPirep\cf0  = \cf4 @""\cf0 ;\
+    \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  = \cf4 @""\cf0 ;\
+    \
+    \cf6 self\cf0 .\cf7 pirepData\cf0  = [[\cf8 NSMutableArray\cf0  \cf9 alloc\cf0 ]\cf9 init\cf0 ];\
+    \cf6 self\cf0 .\cf7 chopPosition\cf0  = -\cf5 1\cf0 ;\
+    \cf6 self\cf0 .\cf7 turbPosition\cf0  = -\cf5 1\cf0 ;\
+    \cf6 self\cf0 .\cf7 mtnPosition\cf0  = -\cf5 1\cf0 ;\
+    \cf6 self\cf0 .\cf7 icePosition\cf0  = -\cf5 1\cf0 ;\
+    \cf6 self\cf0 .\cf7 iceLevel\cf0  = \cf4 @""\cf0 ;\
+    \
+    \cf9 NSLog\cf0 (\cf4 @"PIREP:\\n%@"\cf0 ,\cf7 addData\cf0 );\
+    \
+    [\cf6 self\cf0  \cf10 setPirep\cf0 ];\
+    \
+    \cf2 //Set button backgrounds to actual color\cf0 \
+    \cf2 //[self setDefaults];\cf0 \
+    \
+    [\cf6 self\cf0  \cf10 initializeData\cf0 ];\
+    \
+\}\
+\
+\cf2 //Set button backgrounds to actual color. Not currently in use.\cf0 \
+-(\cf6 void\cf0 )setDefaults\
+\{\
+\cf2 //    //[self.chop setBackgroundImage:[UIImage imageNamed:@"CHOP.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.lightChop setBackgroundImage:[UIImage imageNamed:@"CHOP_LGT.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.modChop setBackgroundImage:[UIImage imageNamed:@"CHOP_MOD.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.greaterChop setBackgroundImage:[UIImage imageNamed:@"CHOP_GRT.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //[self.turb setBackgroundImage:[UIImage imageNamed:@"TURB.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.lightTurb setBackgroundImage:[UIImage imageNamed:@"TURB_LGT.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.modTurb setBackgroundImage:[UIImage imageNamed:@"TURB_MOD.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.greaterTurb setBackgroundImage:[UIImage imageNamed:@"TURB_GRT.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //[self.mtn setBackgroundImage:[UIImage imageNamed:@"MTNWV.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.lightMtn setBackgroundImage:[UIImage imageNamed:@"MTNWV_LGT.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.modMtn setBackgroundImage:[UIImage imageNamed:@"MTNWV_MOD.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.greaterMtn setBackgroundImage:[UIImage imageNamed:@"MTNWV_GRT.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    \cf0 \
+\cf2 //    //[self.ice setBackgroundImage:[UIImage imageNamed:@"ICING.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.clear setBackgroundImage:[UIImage imageNamed:@"ICING_CLEAR.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.rime setBackgroundImage:[UIImage imageNamed:@"ICING_RIME.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.mixed setBackgroundImage:[UIImage imageNamed:@"ICING_MIXED.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.trace setBackgroundImage:[UIImage imageNamed:@"ICING_TRACE.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.lightIce setBackgroundImage:[UIImage imageNamed:@"ICING_LGT.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.modIce setBackgroundImage:[UIImage imageNamed:@"ICING_MOD.png"] forState:UIControlStateNormal];\cf0 \
+\cf2 //    [self.greaterIce setBackgroundImage:[UIImage imageNamed:@"ICING_GRT.png"] forState:UIControlStateNormal];\cf0 \
+    \
+\}\
+\
+\cf2 //Remove the alert after the report is sent or cancelled.\cf0 \
+-(\cf6 void\cf0 )remAlert:(\cf8 UIAlertView\cf0  *)alertV\
+\{\
+    [alertV \cf9 dismissWithClickedButtonIndex\cf0 :-\cf5 1\cf0  \cf9 animated\cf0 :\cf6 YES\cf0 ];\
+\}\
+\
+- (\cf6 void\cf0 )viewDidUnload \{\
+    [\cf6 self\cf0  \cf10 setPirepSelected\cf0 :\cf6 nil\cf0 ];\
+    [\cf6 self\cf0  \cf10 setPirepSelected\cf0 :\cf6 nil\cf0 ];\
+    \cf2 //[self setMtn:nil];\cf0 \
+    [\cf6 self\cf0  \cf10 setLightMtn\cf0 :\cf6 nil\cf0 ];\
+    [\cf6 self\cf0  \cf10 setModMtn\cf0 :\cf6 nil\cf0 ];\
+    [\cf6 self\cf0  \cf10 setGreaterMtn\cf0 :\cf6 nil\cf0 ];\
+    [\cf6 super\cf0  \cf9 viewDidUnload\cf0 ];\
+\}\
+\
+\cf2 //Send PIREP if there is a report. Else, display an alert.\cf0 \
+- (\cf6 void\cf0 )sendPirep:(\cf6 id\cf0 )sender \{\
+    \
+    \cf2 //    self.chop.enabled = YES;\cf0 \
+    \cf2 //    self.turb.enabled = YES;\cf0 \
+    \cf2 //    self.mtn.enabled = YES;\cf0 \
+    \cf2 //    self.ice.enabled = YES;\cf0 \
+    \cf2 //    \cf0 \
+    \cf2 //    self.chopPosition = YES;\cf0 \
+    \cf2 //    self.turbPosition = YES;\cf0 \
+    \cf2 //    self.mtnPosition = YES;\cf0 \
+    \cf2 //    self.icePosition = YES;\cf0 \
+    \cf2 //    \cf0 \
+    \cf2 //NSLog(@"Present: %@\\nSelected: %@",self.presentPirep,self.pirepSelected.text);\cf0 \
+    \
+    \cf6 if\cf0 (![\cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0  \cf9 isEqualToString\cf0 :\cf4 @""\cf0 ])\
+    \{\
+        \cf6 self\cf0 .\cf7 presentPirep\cf0  = \cf6 self\cf0 .\cf7 pirepSelected\cf0 .\cf8 text\cf0 ;\
+        [\cf6 self\cf0  \cf10 saveToFile\cf0 ];\
+    \}\
+    \cf6 else\cf0 \
+    \{\
+        \cf8 UIAlertView\cf0  * alertEmptyPIREP = [[\cf8 UIAlertView\cf0  \cf9 alloc\cf0 ]\cf9 initWithTitle\cf0 :\cf4 @"NO PIREP"\cf0  \cf9 message\cf0 :\cf4 @"Please enter a PIREP"\cf0  \cf9 delegate\cf0 :\cf6 self\cf0  \cf9 cancelButtonTitle\cf0 :\cf4 @"OK"\cf0  \cf9 otherButtonTitles\cf0 :\cf6 nil\cf0 ];\
+        [alertEmptyPIREP \cf9 setTag\cf0 :\cf5 2\cf0 ];\
+        [alertEmptyPIREP \cf9 show\cf0 ];\
+        [\cf6 self\cf0  \cf10 resetButtons\cf0 ];\
+    \}\
+\}\
+\
+\cf2 //-(void)changePirep:(id)sender\cf0 \
+\cf2 //\{\cf0 \
+\cf2 //    self.presentPirep = self.pirepSelected.text;\cf0 \
+\cf2 //\}\cf0 \
+\cf6 @end\cf0 \
+}
